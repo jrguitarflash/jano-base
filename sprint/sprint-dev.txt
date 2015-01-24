@@ -1,0 +1,107 @@
+/*
+* sprint #19 - 24/01/2015 (modulo perfiles)
+*/
+
+/*
+* sprint #18 - 24/01/2015 (modulo usuario)
+*/
+
+/*
+* sprint #17 - 24/01/2015 (modulo menu)
+*/
+
+/*
+* sprint #16 - 24/01/2015 (modulo permisos)
+*/
+
+/*
+* sprint #15 - 24/01/2015 (modulo proforma)
+*/
+
+/*
+* sprint #14 - 24/01/2015 (modulo empresa)
+*/
+
+/*
+* sprint #13 - 24/01/2015 (modulo contacto)
+*/
+
+/*
+* sprint #12 - 24/01/2015 (modulo trabajador)
+*/
+
+/*
+* sprint #11 - 24/01/2015 (modulo personas)
+*/
+
+/*
+* sprint #10 - 24/01/2015 (modulo cumpleaños)
+*/
+
+/*
+* sprint #9 - 24/01/2015 (modulo vacaciones)
+*/
+
+/*
+* sprint #8 - 24/01/2015 (modulo calendario)
+*/
+
+/*
+* sprint #7 - 24/01/2015 (modulo de productos y servicios)
+*/
+
+/*
+* sprint #6 - 24/01/2015 (modulo ordenes)
+*/
+
+/*
+* sprint #5 - 24/01/2015 (modulo cotizacion)
+*/
+
+
+/*
+* sprint #4 - 24/01/2015 (modulo visitas)
+*/
+
+- lista de visitas por ing. de ventas
+- operaciones CRUD de visitas
+- reportes de visitas por responsable
+- carga de origen y destino a visita
+- carga de gastos a visita
+- carga de empresa y contactos a visita 
+
+/*
+* sprint #3 - 24/01/2015 (modulo centro de costo)
+*/
+
+- listado de centro de costos de proyectos y anuales
+- operaciones CRUD de centro de costo
+- carga de ordenes nacionales,internacionales y servicios a centros
+- carga de visitas a centros
+- carga de cotizacion(FL) a centro
+
+/*
+* sprint #2 - 24/01/2015 (modulo almacen)
+*/
+
+- linea de productos de almacen
+- inventario de almacen
+- operaciones CRUD de linea de productos
+- listar kardex de almacen por filtro
+- operaciones CRUD de kardex
+- reporte de kardex
+- consolidado de kardex
+- filtro de productos por numero de serie
+- generacion de kardex por tipo de movimiento entrante,saliente e interno
+- manejo de numeros de serie por linea de producto
+
+/*
+* sprint #1 - 24/01/2015 (modulo no conformidad)
+*/
+
+- listar no conformidades por filtro
+- operaciones CRUD de no conformidades
+- reporte de no conformidades
+- consolidado de no conformidades
+
+
