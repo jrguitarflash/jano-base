@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="527" leftMargin="34" rightMargin="34" topMargin="34" bottomMargin="34" uuid="67d20f3f-be44-43c4-a736-23aca4a14300">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="144"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="dataset1" uuid="3bc90084-25a2-4c49-a3ab-d7215f27eb84"/>
+	<parameter name="p1" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\jraulfs\\jasperReporte\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+(select kd_kardxEmp from kd_kardx where kd_kardxId=$P{p1}) as idEmp,
+(select emp_nombre from empresa where empresa_id=idEmp) as empDes,
+(select emp_ruc from empresa where empresa_id=idEmp) as empRuc,
+(select  kd_kardxFech from kd_kardx where kd_kardxId=$P{p1}) as fechMov,
+(select  kd_kardxDoc from kd_kardx where kd_kardxId=$P{p1}) as numDoc,
+(select SUBSTRING_INDEX(numDoc, '-', 1)) as numGui1,
+(select SUBSTRING_INDEX(numDoc, '-', -1)) as numGui2,
+(select  kd_tipDoc from kd_kardx where kd_kardxId=$P{p1}) as tipDoc,
+(select kd_tipDocAbrev from kd_tipDoc where kd_tipDocId=tipDoc) as tipDocDes,
+detKardx.kd_glosaDes as glosaDes,
+detKardx.itemCorre as itemCorre,
+(select  kd_desti from kd_kardx where kd_kardxId=$P{p1}) as desti,
+(select  kd_transId from kd_kardx where kd_kardxId=$P{p1}) as transId,
+(select concat(kd_transNom,' ',kd_transApe) from kd_trans where kd_transId=transId) as transDes,
+(select  kd_numFac from kd_kardx where kd_kardxId=$P{p1}) as numFacp,
+(select  kd_FacEmis from kd_kardx where kd_kardxId=$P{p1}) as facEmisp,
+(select if(facEmisp='0000-00-00','',facEmisp)) as facEmis,
+(select if(numFacp='-','',numFacp)) as numFac,
+(select emp_nombre from empresa where empresa_id=transId) as transEmp,
+(select emp_ruc from empresa where empresa_id=transId) as transRuc,
+(select emp_direccion from empresa where empresa_id=transId) as transDire,
+(select kd_almcId from kd_kardx where kd_kardxId=$P{p1}) as almcId,
+(select kd_almcUbi from kd_almcEmp where kd_almcId=almcId) as almcUbi,
+lineProd.lp_lineProdId as id,
+lineProd.lp_codLineProd as cod,
+subClasi.prod_subclasif_nombre as sub,
+cate.prod_cat_nombre as cat,
+mar.mm_nombre as mar,
+prod.prod_nombre as nomEspap,
+prod.prod_alias as nomIngle,
+prod.ubigeo_id as ubiId,
+(select ubigeo_nombre from ubigeo where ubigeo_id=ubiId ) as ori,
+prod_descrip as des,
+lineProd.lp_stockMin as stockMin,
+lineProd.lp_stockMax as stockMax,
+lineProd.lp_stockActu as stockActu,
+lineProd.lp_precioUnit as preciUnit,
+lineProd.lp_moneId as moneId,
+(select mon_sigla from moneda where moneda_id=moneId ) as mon_sigla,
+detKardx.kd_detKardxPreUni as kdxPreUni,
+detKardx.kd_detKardxCant as kdxCant,
+detKardx.kd_detKardxId as detKardxId,
+(select REPEAT('&nbsp;',50)) as marg,
+(select GROUP_CONCAT(kd_numSeri SEPARATOR ",") from
+kd_numSeri as numSeri,kd_movNumSeri as movSeri where
+numSeri.kd_prodId=id and
+numSeri.kd_numSeriId=movSeri.kd_numSeriId and
+movSeri.kd_detKardxId=detKardxId) as numSeriMov,
+(select GROUP_CONCAT(kd_numSeri SEPARATOR "\n\n") from
+kd_numSeri as numSeri,kd_movNumSeri as movSeri where
+numSeri.kd_prodId=id and
+numSeri.kd_numSeriId=movSeri.kd_numSeriId and
+movSeri.kd_detKardxId=detKardxId) as numSeriMov2,
+detKardx.kd_unid as unid,
+detKardx.kd_chkProd as chkProd,
+detKardx.kd_desProd as desProd,
+(select if(chkProd=0,nomEspap,desProd) ) as nomEspa
+from
+producto as prod
+inner join
+prod_subclasif as subClasi on prod.prod_subclasif_id=subClasi.prod_subclasif_id
+inner join
+prod_categoria as cate on prod.prod_categoria_id=cate.prod_categoria_id
+inner join
+mm as mar on prod.marca_id=mar.mm_id
+inner join
+lp_lineProd as lineProd on prod.producto_id=lineProd.lp_idProd
+inner join
+kd_detKardx as detKardx on lineProd.lp_lineProdId=detKardx.kd_detKardxProd
+where
+prod.bestado=1 and
+prod.flagLinea=1 and
+lineProd.lp_estaEli=1 and
+detKardx.kd_kardxId=$P{p1};]]>
+	</queryString>
+	<field name="idEmp" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empDes" class="java.lang.String"/>
+	<field name="empRuc" class="java.lang.String"/>
+	<field name="fechMov" class="java.sql.Date"/>
+	<field name="numDoc" class="java.lang.String"/>
+	<field name="numGui1" class="java.lang.String"/>
+	<field name="numGui2" class="java.lang.String"/>
+	<field name="tipDoc" class="java.lang.Integer"/>
+	<field name="tipDocDes" class="java.lang.String"/>
+	<field name="glosaDes" class="java.lang.String"/>
+	<field name="itemCorre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desti" class="java.lang.String"/>
+	<field name="transId" class="java.lang.Integer"/>
+	<field name="transDes" class="java.lang.String"/>
+	<field name="numFacp" class="java.lang.String"/>
+	<field name="facEmisp" class="java.sql.Date"/>
+	<field name="facEmis" class="java.lang.String"/>
+	<field name="numFac" class="java.lang.String"/>
+	<field name="transEmp" class="java.lang.String"/>
+	<field name="transRuc" class="java.lang.String"/>
+	<field name="transDire" class="java.lang.String"/>
+	<field name="almcId" class="java.lang.Integer"/>
+	<field name="almcUbi" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="cod" class="java.lang.String"/>
+	<field name="sub" class="java.lang.String"/>
+	<field name="cat" class="java.lang.String"/>
+	<field name="mar" class="java.lang.String"/>
+	<field name="nomEspap" class="java.lang.String"/>
+	<field name="nomIngle" class="java.lang.String"/>
+	<field name="ubiId" class="java.lang.Integer"/>
+	<field name="ori" class="java.lang.String"/>
+	<field name="des" class="java.lang.String"/>
+	<field name="stockMin" class="java.lang.Integer"/>
+	<field name="stockMax" class="java.lang.Integer"/>
+	<field name="stockActu" class="java.lang.Integer"/>
+	<field name="preciUnit" class="java.math.BigDecimal"/>
+	<field name="moneId" class="java.lang.Integer"/>
+	<field name="mon_sigla" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kdxPreUni" class="java.math.BigDecimal"/>
+	<field name="kdxCant" class="java.lang.Integer"/>
+	<field name="detKardxId" class="java.lang.Integer"/>
+	<field name="marg" class="java.lang.String"/>
+	<field name="numSeriMov" class="java.lang.String"/>
+	<field name="numSeriMov2" class="java.lang.String"/>
+	<field name="unid" class="java.lang.String"/>
+	<field name="chkProd" class="java.lang.Integer"/>
+	<field name="desProd" class="java.lang.String"/>
+	<field name="nomEspa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="242" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="71" y="127" width="227" height="15" uuid="5b60c2ac-35b1-4953-bdc9-dc2b5e180d1b"/>
+				<textElement>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empDes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="95" width="227" height="15" uuid="33abfbfb-fa9a-48f4-a897-3d6611bfc89c"/>
+				<textFieldExpression><![CDATA[$F{fechMov}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="116" y="143" width="182" height="15" uuid="a87dcbf5-1ebd-4cc3-901a-a75d218b319c"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desti}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="208" width="160" height="15" uuid="cc855c96-3b86-4178-8ba2-d4c2bc4bf6f9"/>
+				<textFieldExpression><![CDATA[$F{transRuc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="111" width="183" height="15" uuid="6a5554f7-d9e2-4057-9f89-e790b3e65059"/>
+				<textFieldExpression><![CDATA[$F{almcUbi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="127" width="160" height="15" uuid="50f3e9be-4bd9-46c5-bf70-36079e6b2074"/>
+				<textFieldExpression><![CDATA[$F{numFac}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="144" width="111" height="15" uuid="2c7376d1-b1d0-4676-ab38-4fe020f55b05"/>
+				<textFieldExpression><![CDATA[$F{facEmis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="191" width="160" height="15" uuid="934721b1-9dad-4ad4-be27-f8cbc8b03e9e"/>
+				<textFieldExpression><![CDATA[$F{transDire}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="174" width="160" height="15" uuid="ea6dad50-466f-4b87-852e-42cfd19e1bf2"/>
+				<textFieldExpression><![CDATA[$F{transEmp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="159" width="227" height="15" uuid="37377af9-0964-4b4e-9dd4-f4984222a0e6"/>
+				<textFieldExpression><![CDATA[$F{empRuc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="224" width="111" height="15" uuid="3d102803-b8ef-4127-bc98-cff96bf188de"/>
+				<textFieldExpression><![CDATA[$F{fechMov}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="75" width="34" height="20" uuid="8351cac6-4508-4f6a-947f-411dff76a080"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numGui1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="75" width="121" height="20" uuid="7babf854-01ed-47fb-be98-29d90e7c4f41"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numGui2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="11" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="34" y="0" width="60" height="15" uuid="5f0e664b-9a40-4c2e-9660-a0d13450a6f4"/>
+				<textFieldExpression><![CDATA[$F{kdxCant}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="161" y="0" width="366" height="15" uuid="0fcb1044-3a59-4c10-9cac-9525921064f0"/>
+				<textElement verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomEspa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="98" y="0" width="58" height="15" uuid="fce9c99d-c723-4608-8314-30b5fb9b5808"/>
+				<textFieldExpression><![CDATA[$F{unid}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="17">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="199" y="0" width="328" height="15" uuid="77592e01-520b-4791-a406-87a9d7b8c72d"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numSeriMov}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="161" y="0" width="35" height="15" uuid="36412e16-b933-4105-b02d-48494cba1d9a"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serie:]]></text>
+			</staticText>
+		</band>
+		<band height="18">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="199" y="0" width="328" height="15" uuid="967fae19-681c-4aec-8229-2e03757cecbf"/>
+				<textElement markup="html">
+					<font size="9" isBold="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="161" y="0" width="35" height="15" uuid="93c0744b-912a-41d1-abe0-e080151cd020"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca:]]></text>
+			</staticText>
+		</band>
+		<band height="19">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="161" y="0" width="366" height="15" uuid="0f85ce82-86df-4523-ac77-d3315a6f2b64"/>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{glosaDes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="44" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="27" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,41 @@
+PASOS DEL MODULO CALENDARIO
+------------------------------------
+
+1. iniciar sesion con usuario y clave
+2. acceder al modulo seleccionando en el menu superior la opcion "mi calendario"
+3. visualizar el modo semanal selecciondo la opcion "week"
+4. visualizar el modo dia seleccionando la opcion "day"
+5. visualizar el modo mensual seleccionado la opcion "month"
+6. pasos para ingresar una nueva actividad
+
+	6.1  seleccionar el dia de la actividad
+	6.2  completar los campos del formulario
+	6.3  Ingresar fecha inicial y final
+	6.4  Ingresar hora inicial y final
+	6.5  Ingresar descripcion de la actividad
+	6.6  click en añadir para confirmar la nueva actividad
+
+7. pasos para editar una actividad
+
+	7.1 seleccionar la actividad
+	7.2 confirmar el detalle visualizado 
+	7.3 modificar los campos convenientemente
+	7.4 click en editar para confirmar la edicion
+
+8. pasos para eliminar una actividad
+
+	8.1 seleccionar la actividad
+	8.2 confirmar el detalle visualizado 
+	8.4 click en eliminar para confirmar borrado
+
+9. pasos para ingresar nuevas vacaciones
+
+	9.1  seleccionar el dia de la actividad
+	9.2  ingresar fecha inicial y final
+	9.3	 marcar el check de vacaciones
+	9.4  click en añadir para confirmar las vacaciones
+
+10. visualizar actividad y vacaciones añadidas
+
+	
+

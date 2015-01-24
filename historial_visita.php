@@ -1,0 +1,149 @@
+<!-- PHP UTILS -->
+
+	<?php require("utils_func.php"); ?>
+
+<!-- JS UTILS -->
+
+	<script type="text/javascript" src="js/utils_gesti.js" ></script>
+
+<!-- ESTILOS DECORADOR AÑADIDOS -->
+
+	<link rel="stylesheet" type="text/css" href="styles/decorador.css" />
+
+<!-- JQUERY TABS AÑADIDOS -->
+
+	<link rel="stylesheet" type="text/css" href="libJquery/tabs/jquery-ui.css" />
+	<script type="text/javascript" src="libJquery/tabs/jquery-ui.js"></script>
+
+<!-- JS GESTIONADOR AÑADIDOS -->
+
+	<script type="text/javascript" src="js/gestionador.js"></script>
+
+<!-- PHP CONTROLADOR SUP -->
+
+	<?php require('clases/controlador/controladorSup.class.php'); ?>
+
+<!-- PHP CONTROLADOR INF -->
+
+	<?php require('clases/controlador/controladorInf.class.php'); ?>
+
+<!-- CSS SCRIPT -->
+
+	<style type="text/css">
+
+		.ui-datepicker-trigger 
+		{
+	    float: left;
+	    margin-top: 15px;
+		}
+
+		#filCli
+		{
+			width:150px;
+			margin:15px;
+			float:left;
+		}
+
+		.custom-combobox 
+		{
+	    position: relative;
+	    display: inline-block;
+	    float: left;
+		}
+	</style>
+
+<!-- HTML ID -->
+
+	<input type="hidden" id="vi_id" value="<?php print $_GET['id']; ?>"  >
+
+<!-- HTML VIEW -->
+
+	<input type="hidden" id="vi_view"  value="<?php print $_GET['menu']; ?>" >
+
+<!-- HTML BODY -->
+
+	<div class="box">
+		
+		<div class="heading">
+			<h1>
+				Visitas - Historial	
+			</h1>
+			<span class="botone">
+			<a href="#" ><img src="images/grabar.png" alt="grabar" width="20px"></a>
+			<a href="javascript:getGuia(1,201);" ><img src="images/ayuda.png" alt="ayuda" ></a>
+			<a href="#" id="vi_volList" ><img src="images/lista.png" alt="lista" ></a>
+			<!--<a href="reporte/reporte_visita.php" target="_blank">reporte</a>-->
+			</span>
+		</div>
+
+		<div class="content">
+			<div id="lista_199"> 
+				<div class="lista">
+				
+				<div class="panHistVisi">
+					<span class="titHistVisi"><h3>Visitas</h3></span>
+					<label class="fechHist">Fecha:</label>
+					<input id="txtFechIni" type="text" class="datepicker campo" name='txtFechIni' value="">
+					<label class="fechHist">Cliente:</label>
+					<select  name="cli" class="campo" id="combobox">
+						<option></option>
+						<?php foreach($clientes as $data){ ?>
+						<option value="<?php print $data['empresa_id']; ?>"><?php print $data['emp_nombre']; ?></option>	
+						<?php }?>		
+					</select>
+					<label class="fechHist">vendedor:</label>
+					<select name="respo" class="campo combVen" id="respo" onclick="getEmail();">
+						<option></option>
+						<?php foreach($dataTrabVende as $data){ ?>
+						<option value="<?php print $data['persona_id']; ?>"><?php print $data['vendedor']; ?></option>	
+						<?php }?>	
+					</select>
+					<!--
+					<input type="radio" name="filtro" class="filFech" value="fech" checked>
+					<label class="campFil">Fecha</label>
+					<input type="radio" name="filtro" class="campFil margFil" value="cli">
+					<label class="campFil">Cliente</label>
+					<input type="radio" name="filtro" class="campFil margFil" value="ven">
+					<label class="campFil">Vendedor</label>
+					-->
+					<input type="button" value="Reset" class="btnDetVisi aliBusRes" onclick="setResetVisi();">
+					<input type="button" value="Buscar" class="btnDetVisi aliBusHis" onclick="setBusVisi();">
+					<div id="ajaxBusVisi">
+						<ul class="listHist">
+							<?php foreach($dataVisi as $data){
+								$sql=sql::getTrabVendedorxId($data['idVendeVisita']); 
+								$idVisi=$data['tbvisi_visita_id'];	
+								$fechIni=$data['fechIniVisi'];
+								$fechFin=$data['fechFinVisi'];
+								$vend=negocio::getVal($sql,'vendedor');
+								$linkScript="Javascript:getReporVisi(".$idVisi.",'".$fechIni."','".$fechFin."','".$vend."');";					
+							?>
+								<li><a href="<?php print $linkScript; ?>" class="linkHistVisi"><?php print $data['fechIniVisi']." | ".$data['fechFinVisi']; ?></a></li>
+							<?php } ?>
+							<label>Resultados de busqueda...</label>				
+						</ul>
+					</div>
+					<form name="histVisi" target="reporVisi" action="reporte/reporte_visita.php" method="get">
+						<input type="hidden" name="id">
+						<input type="hidden" name="txtFechIni">
+						<input type="hidden" name="txtFechFin">
+						<input type="hidden" name="vend">
+					</form>
+				</div>
+				
+				<div class="panReporVisi">
+					<span class="titReporVisi"><h3>Reporte</h3></span>
+					<span id="clearFrame">
+							<iframe name="reporVisi" id="reporVisi" class="frameReporVisi">
+							</iframe>				
+					</span>
+				</div>
+
+				</div>	
+				<div class="pagination"></div>
+			</div>			
+		</div>
+
+	</div>
+
+<!-- HTML POPUP -->

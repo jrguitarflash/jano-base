@@ -1,0 +1,17 @@
+<?php
+
+//------------ CLASE AÑADIDA -----------------//
+include("../conf.php");
+require_once('../clases/sql/sql.class.php');
+require_once('../clases/negocio/negocio.class.php');
+
+$sql="select * from test-user";
+$dataUser=negocio::getData($sql,$cn2)
+
+foreach($dataUser as $data)
+{
+	echo $data['user']."</br>";
+}
+
+?>
+

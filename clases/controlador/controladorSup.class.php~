@@ -1,0 +1,526 @@
+<?php #print "hello world controlador superior"; ?>
+<?php
+
+	if(isset($_GET['menu'])) 
+	{
+		switch($_GET['menu'])
+		{
+			case 'reclamo_form':
+			
+				$sql=sql::getTipReclamo();
+				$dataTipRecla=negocio::getData($sql);
+				
+				$date = new DateTime();
+				$date->modify('-5 hour');
+				$fecha=$date->format('Y-m-d');
+				
+				$sql=sql::getTrabVendRecla();
+				$dataTrabVende=negocio::getData($sql);
+				
+				$sql=sql::getTrabxId($_SESSION['SIS'][2]);
+				$usuario=negocio::getVal($sql,'vendedor');
+				$sql=sql::getEmailxNom($usuario);
+				$email=negocio::getVal($sql,'pers_mail');
+				$email=negocio::veriEmailxNom($email);
+				
+				$sql=sql::getEmpCliente();
+				$clientes=negocio::getData($sql);			
+
+			break;
+			
+			
+			case 'reclamo_edit':
+			
+				$sql=sql::getTipReclamo();
+				$dataTipRecla=negocio::getData($sql);
+				
+				$date = new DateTime();
+				$date->modify('-5 hour');
+				$fecha=$date->format('Y-m-d');
+				
+				$sql=sql::getTrabVendRecla();
+				$dataTrabVende=negocio::getData($sql);
+				
+				$sql=sql::getTrabxId($_SESSION['SIS'][2]);
+				$usuario=negocio::getVal($sql,'vendedor');
+				$sql=sql::getEmailxNom($usuario);
+				$email=negocio::getVal($sql,'pers_mail');
+				$email=negocio::veriEmailxNom($email);
+				
+				$sql=sql::getEmpCliente();
+				$clientes=negocio::getData($sql);
+				
+				// INICIALIZADOR DE DATOS PARA EDICION
+				
+				$sql=sql::getReclaxId($_GET['id']);
+				$dataRecla=negocio::getData($sql);
+				
+				#print_r($dataRecla);
+				$idTip=$dataRecla[0]['idTipReclamo'];
+				$sql=sql::getClixContacxCli($dataRecla[0]['idEmpReclamo']);
+				$nomCli=negocio::getVal($sql,'empresa');
+				$sql=sql::getContacxId($dataRecla[0]['idContacReclamo']);
+				$nomContac=negocio::getVal($sql,'contacto');
+				$idContac=$dataRecla[0]['idContacReclamo'];
+				$sql=sql::getContacxCli($nomCli);
+				$dataContac=negocio::getData($sql);
+				$idResp=$dataRecla[0]['idRespoReclamo'];
+				$sql=sql::getEmailxId($idResp);
+				$valEmail=negocio::getVal($sql,'pers_mail');
+				$valEmail=negocio::veriEmailxNom($valEmail);
+				$sql=sql::getDatReclaxId($_GET['id'],'desReclamo');
+				$desRecla=negocio::getVal($sql,'desReclamo');		
+				$sql=sql::getDatReclaxId($_GET['id'],'acciReclamo');
+				$desAcciRecla=negocio::getVal($sql,'acciReclamo');
+				$sql=sql::getDatReclaxId($_GET['id'],'acciReliReclamo');
+				$desAcciReliRecla=negocio::getVal($sql,'acciReliReclamo');
+				$rutImgRecla=$dataRecla[0]['adjuReclamo'];
+				$rutImgRecla=negocio::veriRutImg($rutImgRecla);
+				$rutImgRecla=explode(' ',$rutImgRecla);
+				#print($idTip);
+				
+				$desReclaHist=explode("\n",$desAcciRecla);
+				
+				$desAcciReliReclaHist=explode("</br>",$desAcciReliRecla);
+
+			break;
+			
+			case 'reclamo_lista':
+				
+				if(isset($_POST['opci'])) 
+				{		
+					switch($_POST['opci']) 
+					{
+						case 'cli':
+							$sql=sql::getReclaxCli($_POST['des'],$_SESSION['SIS'][2],$_GET['filtro'],$_GET['filtro2'],$_GET['filtro3'],$_GET['filtro4'],$_GET['filtro5']);
+							$dataRecla=negocio::getData($sql);
+						break;
+						
+						case 'respo':
+							$sql=sql::getReclaxResp($_POST['des'],$_SESSION['SIS'][2],$_GET['filtro'],$_GET['filtro2'],$_GET['filtro3'],$_GET['filtro4'],$_GET['filtro5']);
+							$dataRecla=negocio::getData($sql);
+						break;
+						
+						case 'tod':
+							$sql=sql::getRecla($_SESSION['SIS'][2],$_GET['filtro'],$_GET['filtro2'],$_GET['filtro3'],$_GET['filtro4'],$_GET['filtro5']);
+							$dataRecla=negocio::getData($sql);
+						break;					
+					}
+				}
+				else
+				{
+					$sql=sql::getRecla($_SESSION['SIS'][2],$_GET['filtro'],$_GET['filtro2'],$_GET['filtro3'],$_GET['filtro4'],$_GET['filtro5']);
+					$dataRecla=negocio::getData($sql);				
+				}
+			break;
+			
+			case 'visita_reporte':
+			
+				if(is_array($_SESSION['detVisi'])) 
+				{			
+					$detVisi=$_SESSION['detVisi'];
+					$i=0;			
+					
+					foreach($detVisi as $detVisi)
+					{
+						$i++;
+						$_SESSION['detVisiFin'][$i]['indice']=$detVisi['indice'];
+						$_SESSION['detVisiFin'][$i]['empresa']=$detVisi['empresa'];
+						$_SESSION['detVisiFin'][$i]['contacto']=$detVisi['contactoConcat'];
+						$_SESSION['detVisiFin'][$i]['observacion']=$detVisi['observacion'];
+						$_SESSION['detVisiFin'][$i]['observacionPen']=$detVisi['observacionPen'];
+						$_SESSION['detVisiFin'][$i]['direccion']=$detVisi['direccion'];
+
+					}
+				}
+			
+				unset($_SESSION['detVisi']);
+				unset($_SESSION['indice']);
+				//echo "visita reporte";
+				
+				$sql=sql::getTrabVendedor();
+				$dataTrabVende=negocio::getData($sql);	
+				
+				$sql=sql::getEmpCliente();
+				$clientes=negocio::getData($sql);
+				
+				$sql=sql::getMoneda();
+				$dataMoney=negocio::getData($sql);
+				
+								
+			break;
+			
+			case 'historial_visita':
+			
+			/*
+			$sql=sql::getVisitas();
+			$dataVisi=negocio::getData($sql);
+			*/	
+			$dataVisi=array();		
+				
+			$sql=sql::getYearVisitas();
+			$dataVisiFech=negocio::getData($sql);
+			
+			$sql=sql::getEmpCliente();
+			$clientes=negocio::getData($sql);
+			
+			$sql=sql::getTrabVendedor();
+			$dataTrabVende=negocio::getData($sql);
+			
+			//print_r($dataVisiFech);
+							
+			break;
+			
+			case 'cuentax_form':
+			
+				if(is_array($_SESSION['detCuen'])) 
+				{			
+					$detCuen=$_SESSION['detCuen'];
+					$i=0;			
+					
+					foreach($detCuen as $detCuen)
+					{
+						$i++;
+						$_SESSION['detCuenFin'][$i]['indice']=$detCuen['indice'];
+						$_SESSION['detCuenFin'][$i]['cuenta']=$detCuen['cuenta'];
+						$_SESSION['detCuenFin'][$i]['fecha']=$detCuen['fecha'];
+						$_SESSION['detCuenFin'][$i]['monto']=$detCuen['monto'];
+						$_SESSION['detCuenFin'][$i]['estado']=$detCuen['estado'];
+
+					}
+				}
+			
+				unset($_SESSION['detCuen']);
+				unset($_SESSION['indice']);
+			
+				$sql=sql::getEmpCliente();
+				$clientes=negocio::getData($sql);
+				
+				$sql=sql::getMoneda();
+				$moneda=negocio::getData($sql);
+				
+				$sql=sql::getTipDoc();
+				$documentos=negocio::getData($sql);
+				
+				$sql=sql::getBancos();
+				$bancos=negocio::getData($sql);
+				
+				$sql=sql::getCuentaxId(1);
+				$cuenta=negocio::getData($sql);
+				
+				$sql=sql::getEstCuen();
+				$estados=negocio::getData($sql);
+				
+			break;
+			
+			case 'cuenta_xcobrar':
+				
+				
+				if(isset($_POST['opci'])) 
+				{		
+					switch($_POST['opci']) 
+					{
+						case 'ruc':
+							$sql=sql::getCuxCobraxRuc($_POST['des']);
+							$cuenxCobra=negocio::getData($sql);
+						break;
+						
+						case 'cli':
+							$sql=sql::getCuxCobraxCli($_POST['des']);;
+							$cuenxCobra=negocio::getData($sql);
+						break;
+						
+						case 'tod':
+							$sql=sql::getCuxCobra();
+							$cuenxCobra=negocio::getData($sql);
+						break;					
+					}
+				}
+				else
+				{
+						$sql=sql::getCuxCobra();
+						$cuenxCobra=negocio::getData($sql);				
+				}						
+				
+			break;
+			
+			case 'cuentax_edit':
+			
+				$sql=sql::getEmpCliente();
+				$clientes=negocio::getData($sql);
+				
+				$sql=sql::getMoneda();
+				$moneda=negocio::getData($sql);
+				
+				$sql=sql::getTipDoc();
+				$documentos=negocio::getData($sql);
+				
+				$sql=sql::getBancos();
+				$bancos=negocio::getData($sql);
+				
+				$sql=sql::getCuentaxId(1);
+				$cuenta=negocio::getData($sql);
+				
+				$sql=sql::getEstCuen();
+				$estados=negocio::getData($sql);
+				
+				/* inicializando parametros de cuenta a editar */
+				
+				$sql=sql::getCuxCobraxId($_GET['idCu']);
+				$cuentax=negocio::getData($sql);
+				
+				foreach($cuentax as $data)
+				{
+					$sql=sql::getClixContacxCli($data['idEmpCli']);
+					$empCli=negocio::getVal($sql,'empresa');
+					$empRuc=negocio::getVal($sql,'ruc');
+					
+					$fecha=$data['fecha'];
+					$numCompro=$data['numCompro'];
+					$idTipMon=$data['idTipMone'];
+					$idTipDoc=$data['idTipDoc'];
+					$impor=$data['impor'];
+					$descrip=$data['descrip'];
+					
+				}
+			
+				/*  inicializando parametros de detalle de cuenta a editar */
+				
+				$sql=sql::getDetCuenxId($_GET['idCu']);
+				$detCuen=negocio::getData($sql);
+			
+			break;
+			
+			case 'letra_reporte':
+			
+				if($_GET['menu_id']==71) 
+				{
+					
+					if(isset($_POST['opci'])) 
+					{	
+						switch($_POST['opci']) 
+						{
+							
+						case 'tod':											
+						$sql=sql::getCuenxPag();
+						$dataCuenxPag=negocio::getData($sql);
+						break;
+						
+						case 'fech':
+						$sql=sql::getCuenxPagxFech($_POST['fechIni'],$_POST['fechFin']);
+						$dataCuenxPag=negocio::getData($sql);
+						break;						
+										
+						}
+					}		
+					else
+					{
+						$sql=sql::getCuenxPag();
+						$dataCuenxPag=negocio::getData($sql);
+					}		
+				}
+				else 
+				{
+					$exception="ningun menu para iniciar";
+				}			
+			
+			break;
+			
+			case 'obsr_form':
+			
+				$sql=sql::getEmpCliente();
+				$clientes=negocio::getData($sql);
+				
+				$sql=sql::getTrabVendRecla();
+				$dataTrabVende=negocio::getData($sql);
+				
+				$sql=sql::getConforObs('tbobs_conforimp','desConfir','idConforImp');
+				$dataConfor=negocio::getData($sql);
+				
+				$sql=sql::getNumFormat();
+				$dataNumFormat=negocio::getData($sql);
+				
+				$sql=sql::getVerFormat();
+				$dataVerFormat=negocio::getData($sql);
+				
+				$sql=sql::getPagFormat();
+				$dataPagFormat=negocio::getData($sql);	
+			
+			break;
+			
+			case 'obsr_list':
+			
+				if(isset($_POST['opci'])) 
+				{
+					switch($_POST['opci']) 
+					{
+						case 'cod':
+							$sql=sql::getObsReclaxCod($_POST['des']);
+							$dataObsRecla=negocio::getData($sql);
+						break;
+						
+						case 'cli':
+							$sql=sql::getObsReclaxCli($_POST['des']);
+							$dataObsRecla=negocio::getData($sql);
+						break;
+						
+						case 'tod':
+							$sql=sql::getObsRecla($_POST['des']);
+							$dataObsRecla=negocio::getData($sql);
+						break;
+					}
+				}
+				else 
+				{
+						$sql=sql::getObsRecla();
+						$dataObsRecla=negocio::getData($sql);					
+				}
+			break;
+			
+			case 'obsr_edit':
+			
+				$sql=sql::getEmpCliente();
+				$clientes=negocio::getData($sql);
+				
+				$sql=sql::getTrabVendRecla();
+				$dataTrabVende=negocio::getData($sql);
+				
+				$sql=sql::getConforObs('tbobs_conforimp','desConfir','idConforImp');
+				$dataConfor=negocio::getData($sql);
+				
+				$sql=sql::getNumFormat();
+				$dataNumFormat=negocio::getData($sql);
+				
+				$sql=sql::getVerFormat();
+				$dataVerFormat=negocio::getData($sql);
+				
+				$sql=sql::getPagFormat();
+				$dataPagFormat=negocio::getData($sql);
+				
+				$sql=sql::getObsReclaxIdObs($_GET['id']);
+				$dataObsRe=negocio::getData($sql);
+				
+				$sql=sql::getClixContacxCli($dataObsRe[0]['idEmp']);
+				$cli=negocio::getVal($sql,'empresa');
+				
+				$sql=sql::getContacxCli($cli);
+				$dataContac=negocio::getData($sql);
+				
+				$idContac=$dataObsRe[0]['idContac'];
+				
+				$idRespo=$dataObsRe[0]['idRespCarg'];
+				
+				$numGene=$dataObsRe[0]['numInfor'];
+				
+				$desObserv=$dataObsRe[0]['desObserv'];
+				
+				$acciCorre=$dataObsRe[0]['acciCorre'];
+				
+				$fechContro=$dataObsRe[0]['fechContro'];
+				
+				$fechLim=$dataObsRe[0]['fechLim'];
+				
+				$fechVeri=$dataObsRe[0]['fechVeri'];
+				
+				$fechAcorVeri=$dataObsRe[0]['fechAcorVeri'];
+				
+				$fechVeriEfec=$dataObsRe[0]['fechVeriEfec'];
+				
+				$fechEfecSati=$dataObsRe[0]['fechEfecSati'];
+				
+				$eviObje=$dataObsRe[0]['eviObje'];
+				
+				$fechCie=$dataObsRe[0]['fechCie'];
+				
+				$fechSegui=$dataObsRe[0]['fechSegui'];
+				
+				$idConforImp=$dataObsRe[0]['idConforImp'];
+				
+				$idConforEfec=$dataObsRe[0]['idConforEfec'];
+				
+				$idConforAc=$dataObsRe[0]['idConforAc'];
+				
+				/*$firephp = FirePHP::getInstance(true);
+				$firephp->log($dataObsRe[0]['idEmp'], 'cli');*/
+			
+			break;
+			
+			case 'obsq_form':
+			
+				$sql=sql::getEmpCliente();
+				$clientes=negocio::getData($sql);
+				
+				$sql=sql::getTrabVendRecla();
+				$dataTrabVende=negocio::getData($sql);	
+			
+			break;
+			
+			case 'obsq_list':
+			
+				if(isset($_POST['opci'])) 
+				{
+					switch($_POST['opci']) 
+					{
+						case 'cod':
+							$sql=sql::getObsQuejaxCod($_POST['des']);
+							$dataObsQueja=negocio::getData($sql);
+						break;
+						
+						case 'cli':
+							$sql=sql::getObsQuejaxCli($_POST['des']);
+							$dataObsQueja=negocio::getData($sql);
+						break;
+						
+						case 'tod':
+							$sql=sql::getObsQueja();
+							$dataObsQueja=negocio::getData($sql);
+						break;
+					}
+				}
+				else 
+				{
+						$sql=sql::getObsQueja();
+						$dataObsQueja=negocio::getData($sql);					
+				}			
+				
+			break;
+			
+			case 'obsq_edit':
+			
+				$sql=sql::getObsQuexIdObs($_GET['id']);
+				$dataObsQueja=negocio::getData($sql);
+				
+				$fechQue=$dataObsQueja[0]['fechContro'];
+				
+				$sql=sql::getClixContacxCli($dataObsQueja[0]['idEmp']);
+				$cli=negocio::getVal($sql,'empresa');
+				
+				$sql=sql::getEmpCliente();
+				$clientes=negocio::getData($sql);
+				
+				$sql=sql::getContacxCli($cli);
+				$dataContac=negocio::getData($sql);
+				
+				$sql=sql::getTrabVendRecla();
+				$dataTrabVende=negocio::getData($sql);
+				
+				$idContac=$dataObsQueja[0]['idContac'];
+				
+				$idRespo=$dataObsQueja[0]['idRespCarg'];
+				
+				$desObserv=$dataObsQueja[0]['desObserv'];
+				
+				$soluInme=$dataObsQueja[0]['soluInme'];
+				
+				/*$firephp = FirePHP::getInstance(true);
+				$firephp->log($dataObsQueja, 'array');*/		
+			
+			break;
+			
+			
+			default:
+			break;
+		}
+	}
+
+?>

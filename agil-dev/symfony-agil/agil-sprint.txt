@@ -1,0 +1,13 @@
+/*
+ * SPRINT - PROYECTO
+ */
+
+ # ENTORNO
+
+ 	[1] CONFIGURACION
+
+ 		#1 sprint | 4/4 tasklist | 16/01/2015 | inizialited....
+
+ # MODULOS
+
+ 	[1] MODULO -> USUARIOS,PERFIL Y PERMISOS

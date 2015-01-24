@@ -1,0 +1,733 @@
+#MODULOS
+
+	/******************************************************************************/
+		#[1] NO CONFORMIDAD - BACKLOG | TASK-LIST MODULO 
+	/******************************************************************************/
+
+			|#1 sprint(task-list)
+			-------------------------
+				1. [OK] elaborar presentacion de alcance
+
+			|#2 sprint(task-list)
+			-------------------------
+				1. [OK] templates del modulo no conformidades
+				2. [OK] presentacion de workflow de templates
+
+			|#3 sprint(task-list)
+			-------------------------
+				1.[OK] modelo de datos
+				2.[OK] insercion de parametros
+				*
+				1.[OK] agregar respuesta de medida preventiva
+				2.[OK] ordenar formulario segun revision
+
+			|#4 sprint(task-list)
+			-------------------------
+				1.[OK] crear persistencia parametrica
+				2.[OK] llamar persistencia parametrica en vistas
+				*
+				1.[OK] iniciar calendar en input tipo fecha en vistas formulario
+				2.[OK] iniciar calendar y parametro en vista lista
+
+			|#5 sprint(task-list)
+			-------------------------
+				1.[OK] incluir accion nuevo en vista listado
+				2.[OK] validar busqueda de equipos previa creacion no conformidad
+
+			|#6 sprint(task-list)
+			-------------------------
+				1.[OK] campo filtro observacion en listado
+				2.[OK] campo input observacion en formulario
+				3.[OK] renombre observacion de proceso en menu
+
+			|#7 sprint(backlog)
+			--------------------------
+				1.[OK] incluir medidas preventivas
+				2.[OK] añadir filtro de observaciones
+				3.[OK] opcion de exportar observaciones
+
+			|#8 sprint(backlog)
+			--------------------------
+				1. [OK] filtro origen en list no conformidades
+				2. [OK] campo origen en form no conformidades
+				3. [OK] column origen en reporte no conformidades
+
+
+	/******************************************************************************/
+		#[2] MODULO VISITAS - BACKLOG | TASK-LIST 
+	/******************************************************************************/
+
+			|#1 sprint(task-list)
+			----------------------
+				1. [OK] añadir opcion generacion detalle pasaje - mode view
+				2. [OK] añadir items de detalle generado - mode view
+				*	
+				3. [OK] diseñar el modelo de datos detalle pasajes - mode bd
+				4. [OK] generar persistencia de datos - mode bd
+				*
+				5. [OK] integrar backend & fronted
+
+			|#2 sprint(task-list)
+			----------------------
+				1. [OK] borrar validacion de submit - js
+				2. [OK] añadir campo origen a la vista - view
+				*
+				3. [OK] añadir campo fecha de visita - view
+				4. [OK] añadir campo fecha & direccion a table - view
+				*
+				5. [OK] agregar parametros a persistencia - bd
+				6. [OK] limpiar fecha y direccion al añadir - view
+				*
+				7. [OK] agregar columns fecha y direccion a modelo -bd
+				8. [OK] agregar parametros fech,dire a query - query
+				*
+				9. [OK] generar detalle pasaje detalle dinamico - view
+				10. [OK] obtener los total de detalle pasades - view
+				*
+				11. [OK] añadir empresa a campo direccion - view
+				12. [OK] incluir campo monto al detalle del modelo - bd
+
+			|#3 sprint(task-list)
+			--------------------------
+				1. [OK] formato reporte de visitas
+				2. [OK] justificacion de letras
+				3. [OK] datos en seccion de firmas
+
+			|#4 sprint(task-list)
+			---------------------------
+				1. [OK] extension mc_table para libreria fpdf
+				2. [OK] formato adecuado de detalle pasajes
+
+			|#5 sprint(task-list)
+			----------------------------
+
+				1. [OK] requerimiento de modulo visitas actualizado
+				2. [OK] reporte de visitas modificado
+
+			|#6 sprint(task-list)
+			-----------------------------
+				1. [OK] modificaciones de mantenimiento visitas
+				2. [OK] inicio de vistas lista
+
+			|#7 sprint(task-list)
+			----------------------------
+				1. Lista de visitas
+				2. Edit & delete de visitas
+				3. filtro de visitas
+				4. create & edit detalle visitas
+
+	/******************************************************************************/
+		#[3] MODULO GESTION DE DOCUMENTOS - BACKLOG | TASK-LIST 
+	/******************************************************************************/
+
+			|#1 sprint(task-list)
+			----------------------
+				1. [OK] iniciar api de mapas google
+				2. [OK] testear api de mapas google
+
+			|#2 sprint(task-list)
+				1. [OK] workflow del modulo gestion de documentos
+				2. [OK] modelo de datos
+				3. [OK] file view
+				4. [OK] vista1 de gestion de documentos
+
+			|#3 sprint(task-list)
+				1. [OK] vista2 y vista3 de gestion de documentos
+				2. [OK] vista4 y vista5 de gestion de documentos
+				3. [OK] vista6 y vista7 de gestion de documentos
+				4. [OK] vista8 de gestion de documentos
+
+			|#4 sprint(task-list)
+				1. [OK] persistencia guardar gestion
+				2. [OK] persistencia listar gestiones con paginado
+
+			|#5 sprint(task-list)
+				1. [OK] modelo y persistencia del modulo
+				2. [OK] inicio de datos en el load de las vistas
+
+			|#6 sprint(task-list)
+			----------------------
+				1. [OK] Parametros iniciados en vistas gestion documentaria
+				2. [OK] libreria de notificaciones incluida a entorno
+
+			|#7 sprint(task-list)
+			-------------------------
+				1. [OK] paginado de gestiones
+				2. [OK] creacion de gestiones
+				3. [OK] edicion de gestiones
+
+			|#8 sprint(task-list)
+			---------------------------
+				1. [OK] borrar crear ruta de gestion
+				2. [OK] quitar asignar responsable, agregar marcar ruta como link iterado e
+				   		incluir link crear ruta
+			*
+				3. [OK] añadir link a marcar ruta
+				4. [OK] crear vista ficha ruta de gestiones
+			*
+				5. [OK] incluir icono search en detalle ruta
+				6. [OK] popup para lista de gestiones
+			*
+				7. [OK] opcion guardar rutas
+				8. [OK] popup lista de gestiones
+
+			|#9 sprint(task-list)
+			-----------------------------
+				1. [OK] persistencia de rutas para admin
+				2. [OK] requerimientos query bd
+			
+			|#10 sprint(task-list)
+			-----------------------------
+				1. [OK] criterio de busqueda de gestiones de documentarias
+				2. [OK] mensaje previo para pedir generacion de ruta
+			*
+				3. [OK] paginacion y filtrado de rutas creadas
+				4. [OK] parametros de paginado de rutas
+
+			|#11 sprint(task-list)
+			--------------------------------
+				1. [OK] actualizar ruta de gestiones
+				2. [OK] añadir detalle de gestiones en ruta
+			*
+				3. [OK] capturar detalle de ruta
+				4. [OK] eliminar detalle de ruta
+
+			|#12 sprint(task-list)
+			--------------------------------
+				1. [OK] asignar gestiones a ruta creada
+				2. [OK] deshacer gestion asignada
+			*
+				3. [OK] mostrar usuario de gestion asignada
+				4. [OK] concretar detalle de rutas por id
+			
+	/******************************************************************************/
+		#[4] MODULO CENTRO DE COSTO => FINANCIERO - BACKLOG | TASK-LIST 
+	/******************************************************************************/
+
+		SPRINT
+		------
+			|#1 sprint(task-list)
+			---------------------
+				1. [ok] elaborar template de operacion bancaria
+				2. [ok] crear modelo de datos de operacion bancaria
+				-----------------------------------------------------
+				3. [ok] ingresar data a modelo de operacion bancaria
+				4. [ok] listar data de documentos financieros en checkbox
+				5. [ok] crear tabla centro de costo y operaciones bancarias temporal
+				6. [ok] creacion de centro de costo temporal al iniciar ficha nueva
+				-------------------------------------------------------
+				7. [ok] agregar y eliminar operacion bancaria temporal
+			
+			|#2 sprint(task-list)
+			---------------------
+				8. [OK] monedas disponibles para tipos de operaciones
+				9. [OK] campos tipo fecha para operaciones
+			
+			|#3 sprint(task-list)
+			----------------------
+				10. [OK] sin moneda por defecto
+				11. [OK] permitir actualizar operacion en temporales
+			
+			|#4 sprint(task-list)
+			---------------------
+				12. [OK] grabar las operaciones temporales a operaciones almacenadas al generar centro
+				13. [ok] visualizar operaciones almacenadas en centro de costo generado
+				14. [OK] crear actualizar  y eliminar operaciones almacenadas
+			
+			|#5 sprint(task-list)
+			-------------------------
+				15. [OK] consultar al administrador ew formulas para hallar comision de interes 
+				16. [OK] elaborar algoritmo para el calculo
+				17. [OK] testear resultados en el modulo
+				18. [OK] incluir el campo tasa comision anual
+				19. [OK] opcion cacular comision
+				20. [OK] incluir campo comision resultante
+			
+			|#6 sprint(task-list)
+			-------------------------
+				21. [OK] visualizar ningun registro al iniciar nuevas operaciones
+				22. [OK] añadir columna tasa de comision a operacion temporal y operacion
+				23. [OK] parametros fecha emision,tasa y comision a persistencia
+				24. [OK] funcion persisencia para hallar comision de interes
+				25. [OK] persistencia para calcular totales de comision de interes
+			
+			|#7 sprint(task-list)
+			--------------------------
+				26. [OK] enviar confirmacion de calculo de comision
+				27. [OK] esperar confirmacion para actualizar en cc
+				28. [OK] actualizar cambios en centro de costo
+				30. [OK] renovacion de carta fianza (multiples renovaciones con mismo correlativo y numeral de renovacion)
+						- añadir columna correlativo de carta fianza a vista
+						- añadir columna a modelo de datos
+						- añadir columna version de renovacion a vista
+						- crear persistencia renovacion
+						- incluir campo version de renovacion a modelo
+						
+			|#8 sprint(task-list)
+			-----------------------------
+				29. [OK] estados de operaciones bancarias (finalizado,pendiente)
+						- evaluar estado de operacion segun estados de fechas
+				31. [OK] alertas de vencimiento de documento y entrega cliente (via email diariamente)
+				32. [OK] check de verificacion de cumplimiento de fechas entrega y vencimiento documento
+						- incluir check de fech venci y entrega en la vista
+						- incluir campo en persistencia estado vencimiento entrega
+						- persistencia estados de fechas de operacion
+						- iniciar estados al listas 
+					
+			|#9 sprint(task-list)
+			-------------------------------
+				33. [OK] configurar los servicios de cronjob de cartas fianzas
+				34. [OK] enviar email para notificar version de entregable
+				35. [OK] recepcionar observaciones de revision
+				36. [OK] elaborar plan de backlogs y tasklist
+				
+			|#10 sprint (task-list)
+			-------------------------------
+				37. [OK] notificar entregable de requirimientos financieros
+				38. [OK] revizar version de entregable 
+				39. [OK] invertir orden de listado operaciones bancarias
+				40. [OK] incluir mensaje a alerta "alertas de cartas fianzas vencidas y/o por vencer"
+				41. [OK] incluir campo N° documento editable
+			
+	/******************************************************************************/
+		#[5] MODULO ORDENES - BACKLOG | TASK-LIST 
+	/******************************************************************************/
+
+		SPRINT
+		------
+			|#1 sprint(task-list)
+			----------------------
+				1. [OK] actualizacion de fecha de orden en cada modificacion
+				
+			|#2 sprint(task-list)
+			----------------------
+				2. [OK] corregir campo de condiciones deacuerdo a formato de cotizacion
+
+			|#3 sprint(backlogs)
+			----------------------
+				3. [OK] crear correctamente proveedor y contacto al generar orden
+
+			|#4 sprint(task-list)
+			----------------------
+				4. [OK] actualizar formato de orden a entorno de produccion
+						- cambiar orientacion de formato
+
+	/******************************************************************************/
+		#[6] MODULO PRODUCTOS - BACKLOG | TASK-LIST 
+	/******************************************************************************/
+
+		SPRINT
+		------
+			|#1 sprint(task-list)
+			---------------------
+				1. [OK] order propiedades de productos segun item
+				2. [OK] mostrar precio de productos en listado
+
+	/******************************************************************************/
+		#[7] MODULO COTIZACION - BACKLOG | TASK-LIST 
+	/******************************************************************************/
+
+		SPRINT
+		------
+			|#1 sprint(task-list)
+			--------------------
+			
+				1. [OK] Filtrar el detalle de producto o servicio seleccionado
+			
+			|#2 sprint(task-list)
+			--------------------	
+				2. [OK] Ordenar lista de cotizaciones segun columna seleccionada
+				3. [OK] Actualizacion de empresa y contactos correctamente
+			
+			|#3 sprint(task-list)
+			--------------------		
+				4. [OK] Agregar empresa y tenerla disponible para seleccion
+				5. [OK] Opciones de duplicar y nueva version en orden invertido
+			
+			|#4 sprint(task-list)
+			--------------------
+				6. [OK] errores de conversion en ingreso de precios del pre-calculo
+			
+			|#5 sprint(task-list)
+			--------------------
+				7. [OK] mostrar id de productos en el detalle de cotizacion
+			
+			|#6 sprint(task-list)
+			--------------------
+				8. [OK] modificar el diseño del formato de cotizacion de eltrotec con respecto a electrowerke
+					
+			|#7 sprint(task-list)
+			---------------------
+				9. [OK] diseño del modulo proyecto de cotizaciones (responsable,campo de busqueda)
+				10. [OK] prueba de interactividad de arbol de proyectos
+			
+			|#8 sprint(task-list)
+			---------------------
+				11. [OK] crear ui de nuevo proyecto
+			
+			|#9 sprint(task-list)
+			---------------------
+				12. [OK] crear proyecto y recibir mensaje de confirmacion
+				13. [OK] listar proyecos creados
+			
+			|#10 sprint(task-list)
+			----------------------
+				14. [OK] crear cotizacion de proyecto
+				15. [OK] visualizar FL en nivel
+			
+			|#11 sprint(task-list)
+			---------------------
+				16. [OK] visualizar los datos generales de los fl
+				17. [OK] permitir generar el reporte fl y ingresar al detalle
+				
+			|#12 sprint(task-list)
+			----------------------
+				18. [OK] iniciar data de filtros en el modulo de proyecto de cotizaciones
+				19. [OK] buscar fl de proyectos segun filtros seleccionados
+			
+			|#13 sprint(task-list)
+			----------------------
+				20. [OK] añadir nuevo evento al filtro de busqueda
+				21. [OK] elaborar presentacion de modulo de proyecto
+				
+			|#14 sprint(task-list)
+			----------------------
+				22. [OK] opcion de editar proyecto creado
+				23. [OK] visualizar correctamente panel de detalle
+				
+			|#15 sprint(task-list)
+			----------------------
+				24. [OK] añadir restriccion a edicion de proyectos
+				
+			|#16 sprint(task-list)
+			----------------------
+				25. [OK] manejar filtro de estados activos
+				26. [OK] columna fls
+				
+			|#17 sprint(task-list)
+			----------------------
+				27. [OK] regreso a listado de proyectos
+				28. [OK] añadir usuarios finales a proyectos
+				29. [OK] tomar el proyecto seleccionado al crear la cotizacion
+				
+			|#18 sprint(backlog) 
+			---------------------
+				30. [OK] crear correctamente empresa y contacto al generar cotizacion
+				31. [OK] modificar orientacion de solicitud de proforma
+				32. [OK] modificar diseño de cabecera de solicitud
+
+			|#19 sprint(task-list)**
+			---------------------
+				33. [OK] actualizar formato solicitud a entorno prod
+				34. [OK] actualizar formato cotizacion a entorno prod
+
+			|#20 sprint(task-list)
+			--------------------
+				1. ordenar array checks segun seleccion
+				2. ordenar items segun el valor inicial
+
+	/******************************************************************************/
+		#[8] MODULO SEGUIMIENTO - BACKLOG | TASK-LIST 
+	/******************************************************************************/
+
+		SPRINT
+		------
+		
+			1. [OK] Añadir a linea de tiempo hitos esperados y hitos cumplidos
+
+	/******************************************************************************/
+		#[9] MODULO CENTRO DE COSTO - BACKLOG| | TASK-LIST 
+	/******************************************************************************/
+
+		SPRINT
+		------
+			|#1 sprint(task-list)
+			----------------------
+				1. [OK] Marca check opcion viaje
+
+			|#2 sprint(backlogs)
+			----------------------
+				1. [OK] Carga de proyectos
+				2. [OK] Borrado de proyectos
+				3. [OK] Borrado de ordenes
+
+			|#3 sprint(task-list) 23/12/2014
+			----------------------
+				1. vista apertura centro
+				2. persistencia apertura
+
+			|#4 sprint(task-list) 23/12/2014
+			---------------------
+				1. generacion de centro anual
+				2. limpieza de formulario apertura centro
+
+			|#5 sprint(task-list) 06/01/2014
+			---------------------
+				1. filtro de ordenes
+				2. filtro de centros
+				3. asigancion de ordenes a centro
+
+	/******************************************************************************/
+		#[10] MODULO ALMACEN - BACKLOG | TASK-LIST  
+	/******************************************************************************/
+
+		SPRINT
+		------
+		
+			1. [OK] Fabricante y transportista
+			2. [OK] Guia de remision de transportista
+			3. [OK] Que llega para stock y que llega para venta
+			4. [OK] Borrar empresas repetidas
+			5. [OK] Empresa de transportistas
+			6. [OK] Validar datos de transportistas
+			7. [OK] Por defecto guia de remision
+			8. [OK] Guia de salida va N° de factura
+			9. [OK] Para entrada no va campo de factura
+			10. [OK] Validar filtro por fabricante
+			11. [OK] Salida solo con guia
+			12. [OK] Reemplaza fabricante por cliente
+			13. [OK] Cambiar ubicacion por almacen
+			14. [OK] orden de campos almacen,cliente y destino
+			15. [OK] N° de guia autogenerado
+			16. [OK] Formato de guia en mayuscula
+			17. [OK] Facturar gasto hasta tener toda la conformidad
+			18. [OK] Nota de salida para identificar que producto y cantidades deben salir(gerencia general - almacen)
+			19. [OK] Linea de productos en mayusculas
+			20. [OK] Desabihilitar eliminar y editar para ciertos usuarios
+			21. [OK] Odriel,Juan Pablo,Rodolfo Lucumi,Daniel Pastrana solo almacen
+			22. [OK] Quitar, eliminar y editar
+			23. [OK] Las salidas solo contengan numero de guia
+			24. [OK] Item de #numero de serie empezar en 1
+			25. [OK] En linea de productos manejar estados con stock y sin stock
+			26. [OK] Reemplazar fabricante por empresa 
+			27. [OK] Transportista xxxx
+			28. [OK] Direccion origen (Maestro),Direccion Destino (Editable)
+			29. [OK] Sr. xxxx
+			30. [OK] Datos de transportista(nombre y apellido,documento identidad,fecha emision,ruc)
+			31. [OK] Factura#,Fecha emision Factura#
+			32. [OK] Cantidad,Unidad y Descripcion
+			33. [OK] Nadie tenga acceso a nuevo
+			34. [OK] Generar Guia de remision segun formato y medidas
+			35. [OK] Adecuar modulo para manejar multiples almacenes
+			36. [OK] Opcion para deshacer movimiento generado
+			37. [OK] Numeros de serie especificando su estado actual
+			-------------------------------------------------------
+			38. [OK] Quitar clasi,categoria,nombre en ingles.solo dejar marco,nombre y descripcion
+			39. [OK] Nuevo producto - quitar nombre en ingles
+			40. [OK] No permitir eliminar los que tengan movimiento
+			41. [OK] Label numero serie empezar en 1
+			42. [OK] Incluir Dua en lugar de guia de remision
+			43. [OK] Ninguna informacion de items productos, por defecto vacio
+			44. [OK] Cerrar ventana al añadir items en movimientos
+			45. [OK] Generar documento del movimiento
+			----------------------------------------------------------
+			46. [OK] Orden alfabetico de marcas
+			47. [OK] Editar productos creados
+			48. [OK] Permanecer filtros de productos
+			49. [OK] Adecuar nueva estructura de productos
+			50. [OK] Limpiar campos al añadir niveles de productos
+			---------------------------------------------------------------
+			51. [OK] Pedir numero de serie al añadir validando la cantidad solicitada o requerida
+			52. [OK] Suprimir numero de factura,numero de boleta,descripcion y moneda en campos generales
+			53. [OK] Suprimir monto en detalle de movimiento
+			54. [OK] Limpiar campos de numeros de serie al añadir
+			-----------------------------------------------------
+			55. [OK] Suprimir opcion de reporte
+			-------------------------------------------------------
+			|#6 sprint:
+			-----------
+				56. [OK] Validacion (si el numero de serie del item del producto ya existe mostrar mensaje)
+			
+			--------------------------------------------------------
+			|#7 sprint:
+			------------
+				57. [OK] Visualizar notas de pedido pendientes en movimiento de salida
+				58. [OK] Visualizar detalle de nota de pedido elegido
+			
+			|#8 sprint:
+			-----------
+				59. [OK] Filtro de empresa casapalca en movimiento
+				60. [OK] Restriccion (si no se ha especificado cliente no añadir detalle)
+				61. [OK] Restriccion (si se creo un movimiento no permitir modificarlo)
+			
+			|#9 sprint:
+			------------
+				64. [OK] Modificar numeros de serie del item 14 del movimiento MOV-00034 (E110010,E110011)
+			
+			|#10 sprint(task-list):
+			------------
+				65. [OK] Visualizar trabajadores del area de servicios
+				66. [OK] Opcion de filtrar trabajadores de servicios
+				67. [OK] Opcion de editar correo de trabajadores
+			
+			|#11 sprint(task-list):
+			------------
+				68. [OK] Visualizar fecha de creacion en historial
+				69. [OK] Visualizar fecha programada en historial
+			
+			|#12 sprint(task-list)
+			------------
+				70. [OK] Actualizar presentacion de requerimieto nota de pedido y confirmar
+			
+			|#13 sprint(backlogs)
+			------------
+				71. [OK] Crear usuarios para el modulo almacen
+				72. [OK] Crear campo de responsable
+			
+			|#14 sprint(task-list)
+			----------------------
+				1. [OK] Marcas que se repiten (SGC,RITZ,INAEL,TRENCH) *
+						- Validar el ingreso de marcas que existan
+						- Borrar marcas repetidas
+				2. [OK] EW tomen los items en los movimientos de almacen
+				3. [OK] Observacion por item de productos *
+						- Añadir el campo de observacion por item
+						- Añadir parametro a persistencia
+						- Obtener parametro de persistencia
+				4. [OK] EW por grupo de movimientos
+				5. [OK] Permitir generar nuevo movimiento sin guardar
+						- Direccionar a ficha nueva del movimiento
+						- Guardar datos de ficha de movimiento por primera vez
+						- Confirmar ingreso detalle en movimiento generado
+				6. [OK] Filtrar item a partir de una EW en movimiento *
+						- Crear campo linea de producto en detalle de orden
+						- Test de obtencion de datos EW-2013-0087-1
+						- Obtener linea de detalle ew
+				7. [OK] Herramientas y equipos en obra por responsable
+				8. [OK] calibracion y vigencia,equipos dañados, control de herramientas
+					  de pruebas, estados de herramientas
+				9. [OK] Iniciar items de EW seleccionada
+				10. [OK] Generar reporte de movimientos en excel
+				11. [OK] Generar reporte de inventario en excel
+			
+			|#15 sprint(task-list)
+			----------------------
+				12. [OK] testear campo observacion de items en version produccion
+				23. [OK] actualizar ficha de movimiento nuevo sin generar en version produccion
+				14. [OK] actualizar generacion de stock de linea de productos en formato excel
+			
+			|#16 sprint(task-list)
+			----------------------
+				15. [OK] generacion de reporte de almacen
+
+			|#17 sprint(task-list)
+			----------------------
+				1. [OK] añadir filtro de series
+				2. [OK] añadir datos de productos
+				3. [OK] añadir datos de historial de serie
+	
+	/******************************************************************************/
+		#[11] MODULO CALENDARIO - BACKLOG | TASK-LIST
+	/******************************************************************************/
+
+		SPRINT
+		------
+			1. [OK] Validar ingreso de actividad con vacaciones existentes
+			2. [OK] Maximizar color del relleno de vacaciones
+		
+	/*----------------------------------------------------------------------------*/
+		#[12] MODULO DE CUMPLEAÑOS - BACKLOG | TASKLIST
+	/*----------------------------------------------------------------------------*/
+
+		SPRINT
+		------
+			1. [OK] trabajadores y fechas de cumpleaños
+			2. [OK] opcion para evaluar cumpleaños
+			3. [OK] cronjob diario para evaluar cumpleaños
+
+#OTROS
+
+	/******************************************************************************/
+		# RESPALDO - BACKLOG | TASKLIST 
+	/******************************************************************************/
+
+			|#1 sprint
+			----------
+				1. [OK] Generar respaldo de bd dev y prod
+				
+			|#2 sprint
+			----------
+				2. [OK] Sacar backup de bd de entorno dev y prod
+			
+			|#3 sprint
+			----------
+				3. [OK] Sacar respaldo de bd de entorno dev y prod
+			
+			|#4 sprint
+			----------
+				4. [OK] generar respaldo de bd entorno dev y prod
+
+	/******************************************************************************/
+		# SEGURIDAD - BACKLOG | TASK-LIST 
+	/******************************************************************************/
+
+			|#1 sprint:
+			-----------
+				62. [OK] Filtrar cotizaciones de vendedor
+				63. [OK] Crear evento para validar
+			 	
+	/******************************************************************************/
+		# ACTIVIDADES - BACKLOG | TASK-LIST 
+	/******************************************************************************/
+
+		SPRINT
+		------
+			|#1 sprint(task-list)
+			---------------------
+				1. [OK] testear debugging del proyecto jano en entorno local
+				
+			|#2 sprint(task-list)
+			---------------------
+				2. [OK] actualizar tipo de cambio requerido
+
+	/******************************************************************************/
+		# CUBO OLAP & BUSSINESS INTELEGENT - BACKLOG | TASK-LIST 
+	/******************************************************************************/
+
+		SPRINT
+		------
+			|#1 sprint(task-list)
+			----------------------
+				1. [] ejecutar el schema workbench
+				2. [] crear el cubo y añadirle un nombre
+				3. [] crear una tabla en el cubo, asignarle la tupla en el name(sales) y ingresarle un alias(ventas)
+				*
+				4. [] agregar una dimension, incluir la dimension en el name(canales_DIM) y el foreign key (channel_id)
+				5. [] crear un hierarchy en la dimension (canales_dim)
+				6. [] crear una tupla (channels) en el hierrarchy, asinarle una tupla en el name(channels) y un alias
+					  (canales)
+				7. [] al hierrarchy asignarle un name (Canales_jer), un allMemberName(Canales) y un primary key (CHANNEL_ID)
+				8. [] agregarle un nivel(Clase) en el hierrarchy (canales_jer) e ingresar un name(clase), en column un campo
+					  (channel_class_id), en nameColumn(channel_class), un tipo (string), un levelType(regular),
+					  hideMemberIf(never)
+				9. [] agregar un nivel (Codigo) en el hierrarchy (canales_jer) e ingresar un name(Codigo),
+						un column(channel_id), un namecolumn (channel_desc), un type(string), en levelType(regular),
+						en hideMemberIf(never)
+				*
+				10. [] agregar dimension productos_dim, asignarle el atributo name(Productos_dim), en el foreignkey(prod_id)
+				11. [] añadirle un hierrarchy en la dimension (productos_dim)
+				12. [] agregarle un tupla (productos) al hierrarchy, en el name (products), en el alias (productos)
+				13. [] en el hierrarchy asignarle name(productos_jer), en allMemberName (Productos), en primary key (prod_id)
+				14. [] añadir un nivel (categoria) en el hierrarchy (productos_jer), asignarle en name (Categoria),
+						en el column(prod_category_id), en nameColumn(prod_category), en type (string), en levelType(Regular)
+						hideMemberIf(Never)
+				15. [] agregar un nivel (subCategoria) en el hierrarchy (productos_jer). asignar en el name(SubCategoria),
+						en column(prod_subcategory_id), en nameColumn (prod_subcategory), en type (string), en levelType(regular)
+						hideMemberIf(Never)
+				16. [] agregar un nivel (Codigo) en el hierrarchy (productos_jer). en name(codigo),en column (prod_id), en
+						nameColumn(prod_name), en type(string), en levelType(regular), en hideMemberIf(Never)
+
+	/******************************************************************************/
+		# PORTAL WEB - BACKLOG | TASK-LIST
+	/******************************************************************************/
+
+		SPRINT
+		------
+			1. [OK] Retocar imagen con banco en portal
+			2. [OK] Retocar imagen con escalera
+			3. [OK] Retocar imagen de formato pdf
+			4. [OK] Logos de index con mejor resolucion
+			5. [OK] Completar el contenido de valores
+			6. [OK] Completar marco en los logotipos del catalogo
+		
+	   

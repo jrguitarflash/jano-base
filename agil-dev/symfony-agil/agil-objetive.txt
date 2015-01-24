@@ -1,0 +1,20 @@
+/*
+ * OBJETIVE PROYECTO
+ */
+
+ # ENTORNO
+
+ 	[1] CONFIGURACION
+
+ 		Objetive: instalacion y configuracion de dependencias symfony
+ 		Entorno: desarrollo
+ 		Inizialited: d1: 15/01/2015 [**started**]
+ 					 d2: 16/01/2015 [4 tasklist | sprint #1]
+
+ # MODULOS
+
+ 	[1] MODULO -> USUARIOS,PERFIL Y PERMISOS
+
+ 		objetive: view logeo con css
+ 		module: usuarios
+ 		Inizialited: d1: 19/01/2015 [**started**] 

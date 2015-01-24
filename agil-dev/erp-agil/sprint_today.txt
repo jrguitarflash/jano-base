@@ -1,0 +1,207 @@
+#MODULOS
+
+	/******************************************************************************/
+		#[1] MODULO NO CONFORMIDAD - SPRINT
+	/******************************************************************************/
+
+		#1 | SPRINT | 27-11-2014 | 1/1 task-list -> finalized
+		#2 | SPRINT | 28-11-2014 | 2/2 task-list -> finalized
+		#3 | SPRINT | 01-11-2014 | 4/4 task-list -> finalized
+		#4 | SPRINT | 02-11-2014 | 4/4 task-list -> finalized
+		#5 | SPRINT | 04-11-2014 | 2/2 task-list -> finalized
+		#6 | SPRINT | 26-12-2014 | 3/3 task-list -> finalized
+		#7 | SPRINT | 14-01-2015 | 3/3 backlog -> finalized
+		#8 | SPRINT | 15-01-2015 | 3/3 task--list -> finalized
+
+	/******************************************************************************/
+		#[2] MODULO VISITAS - SPRINT
+	/******************************************************************************/
+
+		#1 | SPRINT | 13-11-2014 | 5/5 task-list -> finalized
+		#2 | SPRINT | 14-11-2014 | 12/12 task-list -> finalized
+		#3 | SPRINT | 17-11-2014 | 3/3 task-list -> finalized
+		#4 | SPRINT | 17-11-2014 | 2/2 task-list -> finalized
+		#5 | SPRINT | 18-11-2014 | 2/2 task-list -> finalized
+		#6 | SPRINT | 19-11-2014 | 2/2 task-list -> finalized
+		#7 | SPRINT | 17-12-2014 | 4/4 task-list -> finalized
+
+	/******************************************************************************/
+		#[3] MODULO GESTION DE DOCUMENTOS - SPRINT
+	/******************************************************************************/
+
+		#1 | SPRINT | 10-11-2014 |  2/2 task-list -> finalized
+		#2 | SPRINT | 11-11-2014 | 4/4 task-list -> finalized
+		#3 | SPRINT | 12-11-2014 | 4/4 task-list -> finalized
+		#4 | SPRINT | 17-11-2014 | 2/2 task-list -> finalized
+		#5 | SPRINT | 18-11-2014 | 2/2 task-list -> finalized
+		#6 | SPRINT | 19-11-2014 | 2/2 task-list -> finalized
+		#7 | SPRINT | 20-11-2014 | 3/3 task-list -> finalized
+		#8 | SPRINT | 24-11-2014 | 8/8 task-list -> finalized
+		#9 | SPRINT | 25-11-2014 | 2/2 task-list -> finalized
+		#10 | SPRINT | 26-11-2014 | 4/4 task-list -> finalized
+		#11 | SPRINT | 27-11-2014 | 4/4 task-list -> finalized
+		#12 | SPRINT | 27-11-2014 | 4/4 task-list -> finalized
+
+	/******************************************************************************/
+		#[4] MODULO CENTRO DE COSTO => FINANZAS - SPRINT
+	/******************************************************************************/
+
+		#1 | SPRINT | 22-10-2014 | 2/2 task-list -> finalized
+					| 23-10-2014 | 4/4 task-list -> finalized
+					| 24-10-2014 | 1/1 task-list -> finalized
+		#2 | SPRINT | 24-10-2014 | 2/2 task-list -> finalized
+		#3 | SPRINT	| 24-10-2014 | 2/2 task-list -> finalized
+		#4 | SPRINT | 24-10-2014 | 3/3 task-list -> finalized
+		#5 | SPRINT | 27-10-2014 | 3/3 task-list -> finalized 
+		#6 | SPRINT | 28-10-2014 | 5/5 task-list -> finalized
+		#7 | SPRINT | 29-10-2014 | 3/3 task-list -> finalized
+		#8 | SPRINT | 30-10-2014 | 3/3 task-list -> finalized
+		#9 | SPRINT | 31-10-2014 | 4/4 task-list -> finalized
+		#10 | SPRINT | 3-11-2014 | 5/5 task-list -> finalized
+
+	/******************************************************************************/
+		#[5] MODULO ORDENES - SPRINT
+	/******************************************************************************/
+
+		#1 | SPRINT | 29-09-2014 | 1/1 backlogs -> finalized
+		#2 | SPRINT | 29-09-2014 | 1/1 backlogs -> finalized
+		#3 | SPRINT | 06-11-2014 | 1/1 backlogs -> finalized
+		#4 | SPRINT | 06-11-2014 | 1/1 task-list -> finalized
+		#5 | SPRINT | 05-12-2014 | 0/0 task-list -> finalized
+
+	/******************************************************************************/
+		#[6] MODULO PRODUCTOS - SPRINT
+	/******************************************************************************/
+
+		#1 | SPRINT | 26-09-2014 | 2/2 backlogs -> finalized
+
+	/******************************************************************************/
+		#[7] MODULO COTIZACION - SPRINT
+	/******************************************************************************/
+
+		#1 | SPRINT | 01-09-2014 | 1/1 backlogs -> finalized
+		#2 | SPRINT | 26-09-2014 | 2/2 backlogs -> finalized
+		#3 | SPRINT | 26-09-2014 | 2/2 backlogs -> finalized
+		#4 | SPRINT | 29-09-2014 | 1/1 backlogs -> finalized
+		#5 | SPRINT | 29-09-2014 | 1/1 backlogs -> finalized
+		#6 | SPRINT | 30-09-2014 | 1/1 backlogs -> finalized
+		#7 | SPRINT | 30-09-2014 | 1/1 task-list -> finalized
+		#8 | SPRINT | 30-09-2014 | 1/1 task-list -> finalized
+		#9 | SPRINT | 01-10-2014 | 2/2 task-list -> finalized
+		#10 | SPRINT | 01-10-2014 | 2/2 task-list -> finalized
+		#11 | SPRINT | 02-10-2014 | 2/2 task-list -> finalized
+		#12 | SPRINT | 02-10-2014 | 2/2 task-list -> finalized
+		#13 | SPRINT | 02-10-2014 | 2/2 task-list -> finalized
+		#14 | SPRINT | 03-10-2014 | 2/2 task-list -> finalized
+		#15 | SPRINT | 03-10-2014 | 1/1 task-list -> finalized
+		#16 | SPRINT | 03-10-2014 | 2/2 task-list -> finalized 
+		#17 | SPRINT | 06-10-2014 | 3/3 task-list -> finalized
+		#18 | SPRINT | 05-10-2014 | 3/3 task-list -> finalized
+		#19 | SPRINT | 08-10-2014 | 3/3 task-list -> finalized
+		#20 | SPRINT | 08-10-2014 | 2/2 task-list -> finalized
+
+	/******************************************************************************/
+		#[8] MODULO DE SEGUIMIENTO - SPRINT
+	/******************************************************************************/
+
+		SPRINT
+		------
+		#1 | SPRINT | 13-08-2014 | 0/0 backlogs -> finalized
+		#2 | SPRINT | 13-08-2014 | 0/0 backlogs -> finalized
+		#3 | SPRINT | 13-08-2014 | 0/0 backlogs -> finalized
+		#4 | SPRINT | 13-08-2014 | 2/2 backlogs -> finalized
+
+	/******************************************************************************/
+		#[9] MODULO CENTRO DE COSTO - SPRINT
+	/******************************************************************************/
+
+		SPRINT
+		------
+		
+		#1 | SPRINT | 20-08-2014 | 1 backlogs -> finalized
+		#2 | SPRINT | 18-12-2014 | 3 backlogs -> finalized
+		#3 | SPRINT | 22-12-2014 | 2/2 backlogs -> finalized
+		#4 | SPRINT | 23-12-2014 | 2/2 task-list -> finalized
+		#5 | SPRINT | 06-01-2014 | 3/3 task-list -> finalized
+
+	/******************************************************************************/
+		#[10] MODULO DE ALMACEN - SPRINT
+	/******************************************************************************/
+		SPRINT
+		------
+		#1 | SPRINT | 13-08-2014 | 10/10 backlogs -> finalized
+		#2 | SPRINT | 20-08-2014 | 8/8 backlogs -> finalized
+		#3 | SPRINT | 25-08-2014 | 4/4 backlogs -> finalized
+		#4 | SPRINT | 01-09-2014 | 15/15 backlogs -> finalized
+		#5 | SPRINT | 08-09-2014 | 18/18 backlogs -> finalized
+		#6 | SPRINT | 18-09-2014 | 1/1 backlogs -> finalized
+		#7 | SPRINT | 18-09-2014 | 2/2 bakclogs -> finalized
+		#8 | SPRINT | 18-09-2014 | 2/2 backlogs -> finalized
+		#9 | SPRINT | 19-09-2014 | 1/1 task-list -> finalized
+		#10 | SPRINT | 25-09-2014 | 3/3 task-list -> finalized
+		#11 | SPRINT | 25-09-2014 | 2/2 task-list -> finalized
+		#12 | SPRINT | 26-09-2014 | 1/1 task-list -> finalized
+		#13 | SPRINT | 30-09-2014 | 2/2 backlogs -> finalized
+		#14 | SPRINT | 14-10-2014 | 8/8 task-list -> finalized
+		#15 | SPRINT | 20-10-2014 | 3/3 task-list -> finalized
+		#16 | SPRINT | 27-10-2014 | 1/1 task-list -> finalized
+		#17 | SPRINT | 30-12-2014 | 3/3 task-list -> finalized
+
+	/******************************************************************************/
+		#[11] MODULO DE CALENDARIO - SPRINT
+	/******************************************************************************/
+	
+		SPRINT
+		------
+		#1 | SPRINT | 13-08-2014 | 0/0 backlogs -> finalized
+		#2 | SPRINT | 13-08-2014 | 0/0 backlogs -> finalized
+		#3 | SPRINT | 13-08-2014 | 0/0 backlogs -> finalized
+		#4 | SPRINT | 26-08-2014 | 2/2 backlogs -> finalized
+
+	/*----------------------------------------------------------------------------*/
+		#[12] MODULO DE CUMPLEAÑOS - SPRINT
+	/*----------------------------------------------------------------------------*/
+
+		SPRINT
+		------
+		#1 | SPRINT | 19-01-2014 | 3/3 tasklist -> finalized
+
+#OTROS
+
+	/******************************************************************************/
+		#[1] ACTIVIDADES - SPRINT
+	/******************************************************************************/
+		
+		#1 | SPRINT | 22-10-2014 | 1/1 backlogs -> finalized
+		#2 | SPRINT | 17-10-2014 | 1/1 task-list -> finalized
+
+	/******************************************************************************/
+		#[2] PORTAL WEB - SPRINT
+	/******************************************************************************/
+
+		#1 | SPRINT | 04-09-2014 | 3/3 backlogs -> finalized
+		#2 | SPRINT | 05-09-2014 | 3/3 backlogs -> finalized
+		
+	/******************************************************************************/
+		#[3] SEGURIDAD - SPRINT
+	/******************************************************************************/
+
+		SPRINT
+		------
+		#1 | SPRINT | 18-09-2014 | 2/2 backlogs -> finalized
+		
+	/******************************************************************************/
+		#[4] RESPALDO - SPRINT
+	/******************************************************************************/
+
+		SPRINT
+		------
+		#1 | SPRINT | 19-09-2014 | 1/1 task-list -> finalized
+		#2 | SPRINT | 25-09-2014 | 1/1 task-list -> finalized
+		#3 | SPRINT | 27-10-2014 | 1/1 task-list -> finalized
+
+	/******************************************************************************/
+		#[5] CUBO OLAP & BUSSINESS INTELEGENT - SPRINT
+	/******************************************************************************/
+
+		#1 | SPRINT | 06-11-2014 | 0/16 task-list -> pending

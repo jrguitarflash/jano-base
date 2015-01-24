@@ -1,0 +1,219 @@
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="styles/decorador.css">
+
+<!-- JS UTILS -->
+
+<!-- JS -->
+<script  type="text/javascript" src="js/nc_gesti.js" ></script>
+
+<!-- <h1>Form de no conformidades</h1> -->
+
+<!-- VIEW -->
+<input type="hidden" id="nc_view" value="nc_noConform_frm" >
+
+<!-- THEME  -->
+<div class="box" >
+
+	<div class="heading" >
+		<h1>No conformidad - Formulario</h1>
+	</div>
+
+	<div class="content" >
+
+		<div id="tabs" >
+			
+			<ul>
+				<li><a href="#tabs-1">Proyecto</a></li>
+				<li><a href="#tabs-2">No Conformidad</a></li>
+				<li><a href="#tabs-3">Medidas correctivas</a></li>
+				<li><a href="#tabs-4">Adjuntos</a></li>
+				<li><a href="#tabs-5">Medida Preventiva</a></li>
+			</ul>
+
+			<div id="tabs-1" >
+
+				<span class="nc_level" >Proyecto</span>
+
+				<label class="nc_lbl" >CC</label>
+				<input type="text" class="nc_input" >
+				<label class="nc_lbl" >Proyecto</label>
+				<textarea class="nc_input" ></textarea>
+				<label class="nc_lbl" >Proveedor</label>
+				<textarea class="nc_input" ></textarea>
+				<label class="nc_lbl" >Cliente</label>
+				<textarea class="nc_input" ></textarea>
+				<label class="nc_lbl" >Ing. proyecto</label>
+				<input type="text" class="nc_input" >
+
+				<span class="nc_level" >Detalle equipos</span>
+
+				<a href="#" class="nc_lbl" id="nc_nuevEquip_pop" >Buscar</a>
+
+				<table class="list" >
+					<thead>
+						<tr>
+							<td>Item</td>
+							<td>Equipo</td>
+							<td align="center" >Accion</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>---</td>
+							<td>---</td>
+							<td align="center" >
+								<a href="#">eliminar</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div id="tabs-2" >
+				<span class="nc_level" >No Conformidad</span>
+
+				<label class="nc_lbl" >N°</label>
+				<span class="nc_input" >----</span>
+				<label class="nc_lbl" >Deteccion</label>
+				<select class="nc_input" ></select>
+				<label class="nc_lbl">Proceso afectado</label>
+				<select class="nc_input" ></select>
+				<label class="nc_lbl">Tipo de observacion</label>
+				<select class="nc_input" ></select>
+				<label class="nc_lbl" >Tipo no conformidad</label>
+				<select class="nc_input" ></select>
+				<label class="nc_lbl" >Estado</label>
+				<select class="nc_input" ></select>
+				<label class="nc_lbl" >Fecha de recepcion</label>
+				<input type="text" class="nc_input" >
+				<label class="nc_lbl" >Descripcion</label>
+				<textarea class="nc_input" ></textarea>
+				<label class="nc_lbl" >Respuesta inmediata</label>
+				<textarea class="nc_input" ></textarea>
+				<label class="nc_lbl" >Fecha cierre</label>
+				<input type="text" class="nc_input" >
+			</div>
+
+			<div id="tabs-3" >
+
+				<span class="nc_level" >Medida Correctiva</span>
+
+				<a href="#" id="nc_nuevMed_pop" class="nc_lbl" >Nuevo</a>
+
+				<table class="list" >
+					<thead>
+						<tr>
+							<td>item</td>
+							<td>medida</td>
+							<td>Respuesta</td>
+							<td>Ing. asignados</td>
+							<td>fecha</td>
+							<td align="center" >Accion</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>item</td>
+							<td>medida</td>
+							<td>resultado</td>
+							<td>Ing. asignados</td>
+							<td>fecha</td>
+							<td align="center" >
+								<a href="#" >Editar</a> | <a href="#" >Eliminar</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div id="tabs-4" >
+				<span class="nc_level" >Adjuntos</span>
+
+				<label class="nc_lbl" >Adjunto</label>
+				<input type="file" class="nc_input">
+				<label class="nc_lbl" >Descripcion</label>
+				<textarea class="nc_input" ></textarea>
+				<label class="nc_lbl" ></label>
+				<button class="nc_input" >Añadir</button>
+
+				<table class="list" >
+					<thead>
+						<tr>
+							<td>Item</td>
+							<td>Adjunto</td>
+							<td>Descripcion</td>
+							<td align="center" >Accion</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+							<td align="center" >
+								<a href="#">eliminar</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div id="tabs-5" >
+
+				<label class="nc_lbl" >Medida preventiva</label>
+				<textarea class="nc_input nc_medPrev" ></textarea>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<!-- POPUP -->
+
+<div id="nc_medCorre_pop" title="Medida correctiva" >
+
+	<span class="nc_level" >Medida correctiva</span>
+
+	<label class="nc_lbl" >N°</label>
+	<span class="nc_input" >----</span>
+	<label class="nc_lbl" >Medida correctiva</label>
+	<textarea class="nc_input" ></textarea>
+	<label class="nc_lbl" >Respuesta</label>
+	<textarea class="nc_input" ></textarea>
+	<label class="nc_lbl" >Fecha</label>
+	<input type="text" class="nc_input" >
+
+	<label class="nc_lbl" >Ing. asignado</label>
+	<select class="nc_input" multiple ></select>
+
+	<label class="nc_lbl" ></label>
+	<a href="#" class="nc_input" >Guardar</a>
+	
+</div>
+
+<div id="nc_equiProye_pop" title="Equipos de proyecto" >
+
+	<span class="nc_level" >Equipos de proyecto</span>
+
+	<a href="#" class="nc_lbl" >Añadir</a>
+
+	<table class="list" >
+		<thead>
+			<tr>
+				<td></td>
+				<td>Item</td>
+				<td>Equipo</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td align="center" ><input type="checkbox" ></td>
+				<td>---</td>
+				<td>---</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

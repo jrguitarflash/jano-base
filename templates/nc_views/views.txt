@@ -1,0 +1,60 @@
+/**************
+	Views
+***************/
+
+	/* form de no conformidades */
+
+		1. nc_noConform_frm.php -> OK
+
+	/* lista de no conformidades */
+
+		2. nc_noConform_lst.php -> OK
+
+	/* porcentaje de no conformidades */
+
+		3. nc_noConform_prc.php ->
+
+
+/*****************
+	Files News
+******************/
+
+	/* gestionador js */
+		
+		1. js/nc_gesti.js -> OK
+
+	/* json carga php */
+		
+		1. json/nc_json.php -> OK
+
+	/* ajax carga php */
+
+		1. ajax/nc_ajax.php -> OK
+
+	/* iframe carga form */
+
+		1. iframe/nc_iframe.php -> OK
+
+	/* raiz adjuntos */
+
+		1. adjuntos/nc_adju/ -> OK
+
+	/* reporte detallado */
+
+		1. reporte/nc_repDet.php -> OK
+
+	/* reporte porcentual */
+
+		1. reporte/nc_repPorce.php -> OK
+
+
+/******************
+	Files Changes
+*******************/
+
+	1. clases/sql/sql.class.php -> OK
+	2. controlador/controladorSup.class.php -> OK
+	3. controlador/controladorInf.class.php -> OK
+
+
+

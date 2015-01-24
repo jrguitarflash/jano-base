@@ -1,0 +1,5 @@
+Orden de compra
+- generar revisiones "nro" + rev #
+- desglosar tipo de precio
+- reporte de compras mensual
+- texto note automatico

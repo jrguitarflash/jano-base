@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2_1" language="groovy" pageWidth="396" pageHeight="170" orientation="Landscape" columnWidth="356" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63fef321-7c93-4b07-bee8-5f13b4e8067d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p2" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+kd_kardxNro as kardxNro,
+kd_tipMov as tipMov,
+(select kd_tipMovDes from kd_tipMov where kd_tipMovId=tipMov) as tipMovDes,
+kd_kardxEmp as empId,
+(select emp_nombre from empresa where empresa_id=empId) as empDes,
+(select emp_ruc from empresa where empresa_id=empId) as empRuc,
+kd_kardxFech as fechMov,
+kd_tipDoc as tipDoc,
+(select kd_tipDocAbrev from kd_tipDoc where kd_tipDocId=tipDoc) as tipDocDes,
+kd_kardxDoc as numDoc,
+kd_kardxDes as desMov,
+kd_kardxMone as moneMov
+from kd_kardx where kd_kardxId=$P{p2};]]>
+	</queryString>
+	<field name="kardxNro" class="java.lang.String"/>
+	<field name="tipMov" class="java.lang.Integer"/>
+	<field name="tipMovDes" class="java.lang.String"/>
+	<field name="empId" class="java.lang.Integer"/>
+	<field name="empDes" class="java.lang.String"/>
+	<field name="empRuc" class="java.lang.String"/>
+	<field name="fechMov" class="java.sql.Date"/>
+	<field name="tipDoc" class="java.lang.Integer"/>
+	<field name="tipDocDes" class="java.lang.String"/>
+	<field name="numDoc" class="java.lang.String"/>
+	<field name="desMov" class="java.lang.String"/>
+	<field name="moneMov" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="86" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="17" width="100" height="20" uuid="05f854a9-f421-4a94-9008-5e3a9ab617aa"/>
+				<textFieldExpression><![CDATA[$F{empDes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="52" width="100" height="20" uuid="5f4304c3-b61d-4b3b-9db5-0652dac81701"/>
+				<textFieldExpression><![CDATA[$F{empRuc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="17" width="24" height="20" uuid="006a9560-1060-4374-9c7c-e2dcef96b8f1"/>
+				<textFieldExpression><![CDATA[$F{tipDocDes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="17" width="100" height="20" uuid="77f2924c-7f29-42dd-ae2b-7feb4f62630c"/>
+				<textFieldExpression><![CDATA[$F{numDoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="52" width="124" height="20" uuid="f6fbc1c7-4566-4611-ae14-11dbed0144d7"/>
+				<textFieldExpression><![CDATA[$F{fechMov}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

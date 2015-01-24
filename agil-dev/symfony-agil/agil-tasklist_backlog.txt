@@ -1,0 +1,18 @@
+/*
+ * TASKLIST | BACKLOG - PROYECTO
+ */
+
+# ENTORNO
+
+	[1] CONFIGURACION
+
+		#1 sprint(tasklist)
+
+			1. [OK] instalacion de dependencias symfony
+			2. [OK] permisos en entornos desarrollo y produccion
+			3. [OK] limpieza de cache y permisos
+			4. [OK] creacion de bundle del proyecto
+
+# MODULOS
+
+	[1] MODULO -> USUARIOS,PERFIL Y PERMISOS

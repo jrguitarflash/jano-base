@@ -1,0 +1,1213 @@
+/*----------------------------------------------------------------------------*/
+	# LISTA DE ACTIVIDADES EW (30/12/2014)
+/*----------------------------------------------------------------------------*/
+
+	status: filtro series::modulo almacen
+	task-list: 3 task-list(modulo almacen)
+	backlogs:
+
+/*----------------------------------------------------------------------------*/
+	# LISTA DE ACTIVIDADES EW (29/12/2014)
+/*----------------------------------------------------------------------------*/
+
+	status: modulo almacen->filtro de equipo x numero de serie
+	task-list:
+	backlogs:
+
+/*----------------------------------------------------------------------------*/
+	# LISTA DE ACTIVIDADES EW (26/12/2014)
+/*----------------------------------------------------------------------------*/
+
+	status: no conformidades
+	task-list: 3 task-list(no conformidades)
+	backlogs:
+
+/*----------------------------------------------------------------------------*/
+	# LISTA DE ACTIVIDADES EW (22/12/2014)
+/*----------------------------------------------------------------------------*/
+
+	status: centros anuales
+	task-list:2 task-list(modulo centro de costo)
+	backlogs:
+
+/*----------------------------------------------------------------------------*/
+	# LISTA DE ACTIVIDADES EW (19/12/2014)
+/*----------------------------------------------------------------------------*/
+
+	task-list: 
+	backlogs: 3 backlogs(modulo centro de costos)
+
+/*----------------------------------------------------------------------------*/
+	# LISTA DE ACTIVIDADES EW (17/12/2014)
+/*----------------------------------------------------------------------------*/
+
+	task-list: 4 task-list(modulo visitas) 
+	backlogs:
+
+/*----------------------------------------------------------------------------*/
+	# LISTA DE ACTIVIDADES EW (16/11/2014)
+/*----------------------------------------------------------------------------*/
+
+	task-list: 2 task-list(modulo visitas)
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (12/11/2014)
+/******************************************************************************/
+
+	tassk-list:-----
+	backlogs:-------
+
+/******************************************************************************/
+	# LISTA DE ACTIVDADES EW (05/11/2014)
+/******************************************************************************/
+
+	task-list:----
+	backlogs:-----
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (03/11/2014)
+/******************************************************************************/
+
+	task-list:---
+	backlogs:---
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (02/11/2014)
+/******************************************************************************/
+
+	task-list: 4 task-list
+	backlogs: ---
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (01/11/2014)
+/******************************************************************************/
+
+	task-list: 4 task-list
+	backlogs: 0 backlogs
+
+/*----------------------------------------------------------------------------*/
+	# LISTA DE ACTIVIDADES EW (28/11/2014)
+/*----------------------------------------------------------------------------*/
+
+	task-list: 2 task-list
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (27/11/2014)
+/******************************************************************************/
+
+	task-list: 4 task-list | 1 task-list
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (26/11/2014)
+/******************************************************************************/
+
+	task-list: 4 task-list
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (25/11/2014)
+/******************************************************************************/
+
+	task-list: 4 task-list
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (24/11/2014)
+/******************************************************************************/
+
+	task-list: 2 task-list
+
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (21/11/2014)
+/******************************************************************************/
+
+	task-list: 8 task-list
+
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (20/11/2014)
+/******************************************************************************/
+
+	task-list: 3 task-list
+
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (19/11/2014)
+/******************************************************************************/
+
+	task-list: 2 task-list
+
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (18/11/2014)
+/******************************************************************************/
+
+	task-list: 2 task-list (10:48 am)
+			   2 task-list (7:06 pm)
+
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (17/11/2014)
+/******************************************************************************/
+
+	task-list: 3 task-list (12:02 pm)
+		       2 task-list (05:42 pm)
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (14/11/2014)
+/******************************************************************************/
+
+	task-list: 12 task-list
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (13/11/2014)
+/******************************************************************************/
+
+	task-list: 5 task-list
+	backlogs:
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (12/11/2014)
+/******************************************************************************/
+
+	activities 8:00 am - 6:30 pm :
+
+		task-list: 4 task-list
+		backlogs:
+
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (11/11/2014)
+/******************************************************************************/
+
+	activities 8:00 am - 6:30 pm :
+
+		task-list: 4 task-list
+		backlogs:
+
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (06/11/2014)
+/******************************************************************************/
+
+	1. 8:00 am - 10:00 am ...
+	2. 10:00 am - 12:00 pm ... 1 backlogs
+	3. 12:00 am - 1:00 pm ... 1 backlogs
+	4. 1:00 pm - 2:00 pm ...
+	5. 2:00 pm - 4:00 pm ... 1 task-list
+	6. 4:00 pm - 6:00 pm ...
+	7. 6:00 pm - 6:30 pm ...
+
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (05/11/2014)
+/******************************************************************************/
+
+	1. 8:00 am - 10:00 am ...
+	2. 10:00 am - 12:00 pm ...
+	3. 12:00 am - 1:00 pm ...
+	4. 1:00 pm - 2:00 pm ... 1 task-list
+	5. 2:00 pm - 4:00 pm ...
+	6. 4:00 pm - 6:00 pm .. 
+	7. 6:00 pm - 6:30 pm .. 2 task-list
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (03/11/2014)
+/******************************************************************************/
+
+	------------
+	*
+	*
+	*
+	------------
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (30/10/2014)
+/******************************************************************************/
+
+	3 task-list
+	.
+	.
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (29/10/2014)
+/******************************************************************************/
+
+	1. 8:00 am - 10:00 am  | 
+	2. 10:00 am - 12:00 am |
+	3. 12:00 pm - 2:00 pm  | 3 task-list
+	4. 4:00 pm - 6:00 pm   |
+							-------------
+							3 task-list
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (28/10/2014)
+/******************************************************************************/
+
+	1. 8:00 am - 10:00 am  |
+	2. 10:00 am - 12:00 am |
+	3. 12:00 pm - 2:00 pm  |
+	4. 2:00 pm - 4:00 pm   |
+	5. 4:00 pm - 6:00 pm   | 5 task-list
+							-------------
+							 5 task-list
+	
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (27/10/2014)
+/******************************************************************************/
+
+	1. 8:00 am - 10:00 am -> 1 task-list
+	2. 10:00 am - 12:00 am
+	3. 12:00 pm - 2:00 pm -> 1 task-list
+	4. 2:00 pm - 4:00 pm ->  1 task-list
+	5. 4:00 pm - 6:00 pm ->  3 task-list
+							-----------
+							6 task-list
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (24/10/2014)
+/******************************************************************************/
+
+	1. 8:45 am - 9:50 am -> 1 task-list
+	2. 9:50 am - 11:24 am -> 2 task-list
+	3. 11:24 am - 3:13 pm -> 2 task-list
+	4. 3:13 pm -
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (23/10/2014)
+/******************************************************************************/
+
+	1. 8:00 am - 10 am ->  1 task-list
+	2. 10:00 am - 12 am -> 1 task-list
+	3. 12:00 am - 1:00 pm -> ---
+	---------------------
+	3. 2:00 pm - 4:00 pm -> ---
+	4. 4:00 pm - 6:00 pm -> 2 task-list
+	5. 6:00 pm - 6:30 pm ->
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (22/10/2014)
+/******************************************************************************/
+
+	1. 8:45 - 7:01 pm -> 2 task-list [OK]
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (20/10/2014)
+/******************************************************************************/
+
+	1. 8:30 am - 6:30 pm -> 3 task-list [OK]
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (17/10/2014)
+/******************************************************************************/
+
+	1. 8:20 am - 8:40 am -> 1 task-list [OK]
+	2. 8:40 am - 1:14 pm -> 1 task-list [OK]
+	3. 1:14 pm - 4:57 pm -> 1 task-list [OK]
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (16/10/2014)
+/******************************************************************************/
+
+	1. 8:30 am - 11:00 am -> 1 task-list [OK]
+	2. 11:00 am - 3:30 pm -> 1 task-list [OK]
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (15/10/2014)
+/******************************************************************************/
+
+	1. 8:30 am -  1:15 pm -> 1 task-list [OK]
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (14/10/2014)
+/******************************************************************************/
+
+	1. 1:00 pm - 6:48 pm -> 1 task-list [OK]
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (06/10/2014)
+/******************************************************************************/
+
+	1. 8:00 am - 12:35 pm -> 3 task-list [OK] 
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (03/10/2014)
+/******************************************************************************/
+
+	1. 8:00 am - 12:19 pm -> 2 task-list [OK]
+	2. 12:19 pm - 4:30 pm -> 1 task-list [OK]
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (02/10/2014)
+/******************************************************************************/
+
+	1. 8:00 am - 9:00 am -> 2 task-list [OK]
+	2. 9:00 am - 11:30 am -> 2 task-list [OK]
+	3. 11:30 am - 05:40 pm -> 2 task-list [OK]
+	4. 5:40 am - 6:30 pm -> 2 task-list [OK]
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (01/10/2014)
+/******************************************************************************/
+
+	1. 9:00 am - 9:15 am -> 1 task-list [OK]
+	2. 9:15 am - 5:30 pm -> 2 task-list [OK]
+	
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (30/09/2014)
+/******************************************************************************/
+
+	1. 12:10 am -> 2 backlogs [OK]
+	2. 11:46 am -> 1 backlogs [OK]
+	3. 5:01  am -> 2 task-list [OK]
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (29/09/2014)
+/******************************************************************************/
+
+	1. 10:30 am -> 2 task-list [OK]
+	2. 11:22 am -> 1 task-list [OK]
+	3. 12:00 pm -> 1 task-list [OK]
+	4. 1:40  pm -> 1 task-list [OK]
+	5. 3:22  pm -> 1 task-list [OK] 
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (26/09/2014)
+/******************************************************************************/
+
+	1. 10:24 am -> 1 task-list [OK]
+	2. 12:12 am -> 2 task-list [OK]
+	3. 1:35 pm -> 2 task-list [OK]
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (25/09/2014)
+/******************************************************************************/
+
+	1. 9:00 am -> 1 task-list [OK]
+	2. 4:40 pm -> 3 task-list [OK]
+	3. 6:15 pm -> 2 task-list [OK]
+	
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (19/09/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	--------------
+	
+		|#8 sprint:
+		------------
+		59. [OK] Filtro de empresa casapalca en movimiento
+		60. [] Restriccion (si no se ha especificado cliente no añadir detalle)
+		61. [] Restriccion (si se creo un movimiento no permitir modificarlo)
+	
+	SEGURIDAD
+	---------
+	
+		|#9 sprint:
+		-----------
+		62. [OK] Filtrar cotizaciones de vendedor
+		63. [] Crear evento para validar
+	
+	RESPALDO:
+	--------
+	
+		|#1 sprint
+		-----------
+		1. [] Generar respaldo de bd dev y prod 
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (18/09/2014)
+/******************************************************************************/
+
+	|#6 sprint
+	------------
+	56. [OK] Validacion (si el numero de serie del item del producto ya existe mostrar mensaje)
+	--------------------------------------------------------
+	
+	|#7 sprint:
+	------------
+	57. [OK] Visualizar notas de pedido pendientes en movimiento de salida
+	58. [OK] Visualizar detalle de nota de pedido elegido
+	
+	|#8 sprint:
+	------------
+	59. [OK] Filtro de empresa casapalca en movimiento
+	60. [] Restriccion (si no se ha especificado cliente no añadir detalle)
+	61. [] Restriccion (si se creo un movimiento no permitir modificarlo)
+	
+	|#9 sprint:
+	-----------
+	62. [OK] Filtrar cotizaciones de vendedor
+	63. [] Crear evento para validar
+		
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (17/09/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	--------------
+	
+		Nota de Pedido
+		--------------
+		1. [OK] Añadir nuevo item de detalle a nota de pedido
+		2. [OK] Eliminar item del detalle de la nota
+		3. [OK] Eliminar nota de pedido
+		4. [OK] Generar reporte de movimiento
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (16/09/2014)
+/******************************************************************************/
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (15/09/2014)
+/******************************************************************************/
+	
+	1.[OK] Generar backup de bd-prod
+	2.[OK] Generar backup de bd-dev
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (12/09/2014)
+/******************************************************************************/
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (11/09/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	--------------
+	1. [OK] solicitar direcciones de almacenes
+	2. [OK] revisar error presentado del modulo de almacen
+	3. [OK] corregir error y confirmar error
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (10/09/2014)
+/******************************************************************************/
+
+	MODULO CENTRO DE COSTO
+	----------------------
+		
+		#1 SPRINT
+		---------
+		1.[] Corregir sprint de centro de costo
+				 Marca check opcion viaje 
+
+	MODULO DE ALMACEN
+	------------------
+			
+		1. [OK] Elaborar Presentacion de modulo almacen 
+		2. [OK] Confirmar presentacion de modulo
+		
+		#4 SPRINT
+		---------
+		
+		1. [OK] Las salidas solo contengan numero de guia 
+		2. [OK] Item de numero de serie empezar en 1 
+		3. [OK] En linea de productos manejar estados con stock y sin stock 
+		4. [OK] Reemplazar campo empresa por fabricante 
+		5. [OK] Incluir campo Transportista 
+		6. [OK] Direccion origen (Maestro),Direccion Destino (Editable)
+		7. [OK] Sr. o Razon social,Fecha de emision,Ruc
+		8. [OK] Datos de transportista(nombre y apellido,documento identidad,ruc)
+		9. [OK] Numero Factura,Fecha emision Factura  
+		10.[OK] Cantidad,Unidad y Descripcion
+		11.[OK] Incluir el almacen de reservas 
+		12.[OK] Tomar en cuenta fecha de ingreso con numero de serie
+		13.[OK] Crear filtro por almacenes en linea
+		14.[OK] Visualizar numeros de serie con stock
+		15.[OK] Confirmar guardar para almacenar los cambios
+		16.[OK] Permitir editar las marcas ingresadas
+		17.[OK] Nadie tenga acceso a nuevo
+		18.[OK] Odriel,Juan Pablo,Rodolfo Lucumi,Daniel Pastrana solo almacen
+		19.[OK] Desabihilitar eliminar y editar para ciertos usuarios
+		20.[OK] Quitar, eliminar y editar
+		21.[OK] Ajustar campos de guia a formato real
+		
+		#5 SPRINT
+		---------
+		
+		1. [OK] Fabricante y transportista
+		2. [OK] Guia de remision de transportista
+		3. [OK] Que llega para stock y que llega para venta
+		4. [OK] Borrar empresas repetidas
+		5. [OK] Empresa de transportistas
+		6. [OK] Validar datos de transportistas
+		7. [OK] Por defecto guia de remision
+		8. [OK] Guia de salida va N° de factura
+		9. [OK] Para entrada no va campo de factura
+		10.[OK] Validar filtro por fabricante
+		11.[OK] Salida solo con guia
+		12.[OK] Reemplaza fabricante por cliente
+		13.[OK] Cambiar ubicacion por almacen
+		14.[OK] orden de campos almacen,cliente y destino
+		15.[OK] N° de guia autogenerado
+		16.[OK] Formato de guia en mayuscula
+		17.[OK] Facturar gasto hasta tener toda la conformidad
+		18.[OK] Nota de salida para identificar que producto y cantidades deben salir
+				(gerencia general - almacen)
+		19.[OK] Linea de productos en mayusculas
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (08/09/2014)
+/******************************************************************************/
+
+	MODULO CENTRO DE COSTO
+	----------------------
+		
+		#1 SPRINT PRO
+		--------------
+		1.[] Corregir sprint de centro de costo
+				 Marca check opcion viaje 
+
+	MODULO DE ALMACEN
+	------------------
+
+		- Formulario con campos necesarios para cada tipo de movimiento
+		- Campo de empresa transportista
+		- Perfil
+
+		SPRINT DEM
+		----------
+		
+		1. [OK] Elaborar Presentacion de modulo almacen 
+		2. [OK] Confirmar presentacion de modulo
+		
+		#4 SPRINT
+		---------
+		
+		1. [OK] Las salidas solo contengan numero de guia 
+		2. [OK] Item de numero de serie empezar en 1 
+		3. [OK] En linea de productos manejar estados con stock y sin stock 
+		4. [OK] Reemplazar campo empresa por fabricante 
+		5. [OK] Incluir campo Transportista 
+		6. [OK] Direccion origen (Maestro),Direccion Destino (Editable)
+		7. [OK] Sr. o Razon social,Fecha de emision,Ruc
+		8. [OK] Datos de transportista(nombre y apellido,documento identidad,ruc)
+		9. [OK] Numero Factura,Fecha emision Factura  
+		10.[OK] Cantidad,Unidad y Descripcion
+		11.[OK] Incluir el almacen de reservas 
+		12.[OK] Tomar en cuenta fecha de ingreso con numero de serie
+		13.[OK] Crear filtro por almacenes en linea
+		14.[OK] Visualizar numeros de serie con stock
+		15.[  ] Confirmar guardar para almacenar los cambios
+		16.[  ] Permitir editar las marcas ingresadas
+		17.[  ] Nadie tenga acceso a nuevo
+		18.[  ] Odriel,Juan Pablo,Rodolfo Lucumi,Daniel Pastrana solo almacen
+		19.[  ] Desabihilitar eliminar y editar para ciertos usuarios
+		20.[  ] Quitar, eliminar y editar
+		21.[  ] Ajustar campos de guia a formato real
+		
+		#5 SPRINT PRO
+		-------------
+		
+		1. [] Fabricante y transportista
+		2. [] Guia de remision de transportista
+		3. [] Que llega para stock y que llega para venta
+		4. [] Borrar empresas repetidas
+		5. [] Empresa de transportistas
+		6. [] Validar datos de transportistas
+		7. [] Por defecto guia de remision
+		8. [] Guia de salida va N° de factura
+		9. [] Para entrada no va campo de factura
+		10.[] Validar filtro por fabricante
+		11.[] Salida solo con guia
+		12.[] Reemplaza fabricante por cliente
+		13.[] Cambiar ubicacion por almacen
+		14.[] orden de campos almacen,cliente y destino
+		15.[] N° de guia autogenerado
+		16.[] Formato de guia en mayuscula
+		17.[] Facturar gasto hasta tener toda la conformidad
+		18.[] Nota de salida para identificar que producto y cantidades deben salir
+			(gerencia general - almacen)
+		19.[] Linea de productos en mayusculas
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (05/09/2014)
+/******************************************************************************/
+
+	PORTAL WEB
+	----------
+
+		1. [OK] Logos de index con mejor resolucion
+		2. [OK] Completar el contenido de valores
+		3. [OK] Completar marco en los logotipos del catalogo
+		
+		1. [OK] Retocar imagen con banco en portal
+		2. [OK] Retocar imagen con escalera
+		3. [OK] Retocar imagen de formato pdf
+		
+
+	MODULO CENTRO DE COSTO
+	----------------------
+		
+		1. [] Corregir sprint de centro de costo
+			1.1 Marca check opcion viaje 
+			
+	MODULO DE ALMACEN
+	------------------
+		
+		1. [OK] Elaborar Presentacion de modulo almacen 
+		2. [OK] Confirmar presentacion de modulo 
+		
+		3. [OK] Las salidas solo contengan numero de guia 
+		4. [OK] Item de numero de serie empezar en 1 
+		5. [OK] En linea de productos manejar estados con stock y sin stock 
+		7. [OK] Reemplazar campo empresa por fabricante 
+		8. [OK] Incluir campo Transportista 
+		9. [OK] Direccion origen (Maestro),Direccion Destino (Editable)
+		10.[OK] Sr. o Razon social,Fecha de emision,Ruc
+		11.[OK] Datos de transportista(nombre y apellido,documento identidad,ruc)
+		12.[OK] Numero Factura,Fecha emision Factura  
+		14.[OK] Cantidad,Unidad y Descripcion
+		15.[OK] Incluir el almacen de reservas 
+		16.[OK] Tomar en cuenta fecha de ingreso con numero de serie
+		17.[OK] Crear filtro por almacenes en linea
+		18.[  ] Visualizar numeros de serie con stock
+		19.[  ] Confirmar guardar para almacenar los cambios
+		20.[  ] Permitir editar las marcas ingresadas
+		21.[  ] Nadie tenga acceso a nuevo
+		22.[  ] Odriel,Juan Pablo,Rodolfo Lucumi,Daniel Pastrana solo almacen
+		23.[  ] Desabihilitar eliminar y editar para ciertos usuarios
+		24.[  ] Quitar, eliminar y editar
+		25.[  ] Ajustar campos de guia a formato real
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (04/09/2014)
+/******************************************************************************/
+
+		PORTAL WEB
+		----------
+		1. [OK] Logos de index con mejor resolucion
+		2. [OK] Completar el contenido de valores
+		3. [OK] Completar marco en los logotipos del catalogo
+
+		MODULO CENTRO DE COSTO
+		----------------------
+		
+		1. [] Corregir sprint de centro de costo
+			1.1 Marca check opcion viaje 
+			
+		MODULO DE ALMACEN
+		------------------
+		
+		1. [OK] Elaborar Presentacion de modulo almacen 
+		2. [OK] Confirmar presentacion de modulo 
+		
+		3. [OK] Las salidas solo contengan numero de guia 
+		4. [OK] Item de numero de serie empezar en 1 
+		5. [OK] En linea de productos manejar estados con stock y sin stock 
+		7. [OK] Reemplazar campo empresa por fabricante 
+		8. [OK] Incluir campo Transportista 
+		9. [OK] Direccion origen (Maestro),Direccion Destino (Editable)
+		10.[OK] Sr. o Razon social,Fecha de emision,Ruc
+		11.[OK] Datos de transportista(nombre y apellido,documento identidad,ruc)
+		12.[OK] Numero Factura,Fecha emision Factura  
+		14.[OK] Cantidad,Unidad y Descripcion
+		15.[OK] Incluir el almacen de reservas 
+		15.[  ] Permitir editar las marcas ingresadas
+		16.[  ] Tomar en cuenta fecha de ingreso con numero de serie
+		17.[  ] Crear filtro por almacenes en linea
+		18.[  ] Nadie tenga acceso a nuevo
+		19.[  ] Odriel,Juan Pablo,Rodolfo Lucumi,Daniel Pastrana solo almacen
+		20.[  ] Desabihilitar eliminar y editar para ciertos usuarios
+		21.[  ] Quitar, eliminar y editar
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (03/09/2014)
+/******************************************************************************/
+
+		PORTAL WEB
+		----------
+		1. [OK] Logos de index con mejor resolucion
+		2. [OK] Completar el contenido de valores
+		3. [OK] Completar marco en los logotipos del catalogo
+
+		MODULO CENTRO DE COSTO
+		----------------------
+		
+		1. [] Corregir sprint de centro de costo
+			1.1 Marca check opcion viaje 
+			
+		MODULO DE ALMACEN
+		------------------
+		
+		1. [OK] Elaborar Presentacion de modulo almacen 
+		2. [OK] Confirmar presentacion de modulo 
+		
+		3. [OK] Las salidas solo contengan numero de guia 
+		4. [OK] Item de numero de serie empezar en 1 
+		5. [OK] En linea de productos manejar estados con stock y sin stock 
+		7. [OK] Reemplazar campo empresa por fabricante 
+		8. [OK] Incluir campo Transportista 
+		9. [OK] Direccion origen (Maestro),Direccion Destino (Editable)
+		10.[OK] Sr. o Razon social,Fecha de emision,Ruc
+		11.[OK] Datos de transportista(nombre y apellido,documento identidad,ruc)
+		12.[OK] Numero Factura,Fecha emision Factura  
+		14.[OK] Cantidad,Unidad y Descripcion
+		15.[OK] Incluir el almacen de reservas 
+		15.[  ] Permitir editar las marcas ingresadas
+		16.[  ] Tomar en cuenta fecha de ingreso con numero de serie
+		17.[  ] Crear filtro por almacenes en linea
+		18.[  ] Nadie tenga acceso a nuevo
+		19.[  ] Odriel,Juan Pablo,Rodolfo Lucumi,Daniel Pastrana solo almacen
+		20.[  ] Desabihilitar eliminar y editar para ciertos usuarios
+		21.[  ] Quitar, eliminar y editar
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (02/09/2014)
+/******************************************************************************/
+
+	MODULO CENTRO DE COSTO
+	----------------------
+	
+	1. [] Corregir sprint de centro de costo
+		1.1 !|* Marca check opcion viaje 
+		
+	MODULO DE ALMACEN
+	------------------
+	
+	1. [OK] Elaborar Presentacion de modulo almacen 
+	2. [OK] Confirmar presentacion de modulo 
+	3. [OK] Las salidas solo contengan numero de guia 
+	4. [OK] Item de numero de serie empezar en 1 
+	5. [OK] En linea de productos manejar estados con stock y sin stock 
+	7. [OK] Reemplazar campo empresa por fabricante 
+	8. []  Incluir campo Transportista 
+	9. []  Direccion origen (Maestro),Direccion Destino (Editable)
+	10.[]  Sr. o Razon social,Fecha de emision,Ruc
+	11.[]  Datos de transportista(nombre y apellido,documento identidad,ruc)
+	12.[]  Numero Factura,Fecha emision Factura  
+	14.[]  Cantidad,Unidad y Descripcion
+	15.[]  Nadie tenga acceso a nuevo
+	16.[]  Odriel,Juan Pablo,Rodolfo Lucumi,Daniel Pastrana solo almacen
+	17.[]  Desabihilitar eliminar y editar para ciertos usuarios
+	18.[]  Quitar, eliminar y editar
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (01/09/2014)
+/******************************************************************************/
+
+	MODULO CENTRO DE COSTO
+	----------------------
+	
+	1. [] Corregir sprint de centro de costo
+		1.1 !|* Marca check opcion viaje 
+		
+		
+	MODULO DE ALMACEN
+	------------------
+	
+	1. [OK] Elaborar Presentacion de modulo almacen 
+	2. [OK] Confirmar presentacion de modulo 
+	3. [OK] Las salidas solo contengan numero de guia 
+	4. [OK] Item de numero de serie empezar en 1 
+	5. [] En linea de productos manejar estados con stock y sin stock 
+	7. [] Reemplazar campo empresa por fabricante 
+	8. [] Incluir campo Transportista 
+	9. [] Direccion origen (Maestro),Direccion Destino (Editable)
+	10.[] Sr. o Razon social,Fecha de emision,Ruc
+	11.[] Datos de transportista(nombre y apellido,documento identidad,ruc)
+	12.[] Numero Factura,Fecha emision Factura  
+	14.[] Cantidad,Unidad y Descripcion
+	15.[] Nadie tenga acceso a nuevo
+	16.[] Odriel,Juan Pablo,Rodolfo Lucumi,Daniel Pastrana solo almacen
+	17.[] Desabihilitar eliminar y editar para ciertos usuarios
+	18.[] Quitar, eliminar y editar
+	
+	BACKUP ERP
+	----------
+	
+	1. [OK] Generar backup bd 
+	
+	MODULO CALENDARIO
+	------------------
+	
+	1. [OK] Actualizar cambios del modulo a produccion  
+	2. [OK] Confirmar actualizacion de calendario 
+	
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (27/08/2014)
+/******************************************************************************/
+
+	MODULO CENTRO DE COSTO
+	----------------------
+	
+		1. [] Corregir sprint de centro de costo
+			1.1 Marca check opcion viaje
+		
+	MODULO DE ALMACEN
+	-----------------
+		
+		1. [OK] Opcion para deshacer movimiento generado
+		2. [OK] Adecuar modulo para manejar multiples almacenes
+		3. [OK] Añadir detalle de ubicacion a cada item de linea
+		4. [OK] Generar Guia de remision segun formato y medidas
+		5. [OK] Numeros de serie especificando su estado actual
+		
+	GENERAR BACKUP ERP
+	------------------
+	
+		1. [OK] Generar backup bd dev
+		
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (27/08/2014)
+/******************************************************************************/
+
+	MODULO CENTRO DE COSTO
+	----------------------
+	
+		1. [] Corregir sprint de centro de costo
+			1.1 Marca check opcion viaje
+		
+	MODULO DE ALMACEN
+	-----------------
+		
+		1. [OK] Opcion para deshacer movimiento generado
+		2. [OK] Adecuar modulo para manejar multiples almacenes
+		3. [] Numeros de serie especificando su estado actual
+		4. [] Generar Guia de remision segun formato y medidas
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (26/08/2014)
+/******************************************************************************/
+
+	MODULO CALENDARIO
+	-----------------
+	
+		1. [OK] Maximizar color del relleno de vacaciones
+		2. [OK] Validar ingreso de actividad con vacaciones existentes
+
+	MODULO CENTRO DE COSTO
+	----------------------
+	
+		1. [] Corregir sprint de centro de costo
+			1.1 Marca check opcion viaje
+		
+	MODULO DE ALMACEN
+	-----------------
+		
+		1. [OK] Opcion para deshacer movimiento generado
+		2. [] Numeros de serie especificando su estado actual
+		3. [] Adecuar modulo para manejar multiples almacenes
+		4. [] Generar Guia de remision segun formato y medidas
+	
+	BACKUP ERP JANO
+	---------------
+	
+		1. [OK] Generar Backup BD ERP
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (25/08/2014)
+/******************************************************************************/
+
+	MODULO CENTRO DE COSTO
+	----------------------
+	
+	1. [] Corregir sprint de centro de costo
+		1.1 Marca check opcion viaje
+		
+	MODULO DE ALMACEN
+	-----------------
+	
+	1. [] Generar Guia de remision segun formato y medidas
+	2. [] Adecuar modulo para manejar multiples almacenes
+	3. [] Opcion para deshacer movimiento generado
+	4. [] Numeros de serie especificando su estado actual
+	
+	BACKUP ERP
+	----------
+	
+	1. [OK] Generar backup de bd
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (22/08/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	----------------
+	1. [OK] Agregar modulo almacen en el Jano
+		1.1 Estructura de datos
+		1.2 Persistencia
+		1.3 Backend
+		1.4 Frontend
+		
+	2. [OK] Confirmar modulo disponible
+	
+	MODULO CENTRO DE COSTO
+	----------------------
+	
+	1. [] Corregir sprint de centro de costo
+		1.1 Marca check opcion viaje
+	
+	BACKUP ERP
+	----------
+	
+	1. [OK] Generar backup bd de erp
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (21/08/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	---------------
+	
+	1.[OK] Corregir "SPRINT" de almacen
+		1.1 Quitar clasi,categoria,nombre en ingles. solo dejar marco,nombre y descripcion
+		1.2 Nuevo producto - quitar nombre en ingles
+		1.3 No permitir eliminar los que tengan movimiento
+		1.4 Label numero serie empezar en 1
+		1.5 Incluir Dua en lugar de guia de remision
+		1.6 Ninguna informacion de items productos, por defecto vacio
+		1.7 Cerrar ventana al añadir items en movimientos
+		1.8 Generar documento del movimiento
+		1.9 Direccionar kardex a vista principal a guardar
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (20/08/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	----------------
+	1.[OK] Presentacion de modulo almacen
+	2 [OK] Reportes del modulo almacen
+		2.1 reporte de movimiento entrantes
+		2.2 reporte de movimientos salientes
+		2.3 reporte de inventario
+	
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (19/08/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	---------------
+	1. [OK] Corregir observaciondes de kardex
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (18/08/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	--------------
+	1. [] Corregir observaciondes de kardex
+ 
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (15/08/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	---------------
+	
+	1. [OK] Corregir observaciones de linea de productos
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (14/08/2014)
+/******************************************************************************/
+
+	MODULO DE ALMACEN
+	-----------------
+	1. [OK] Mostrar marca de productos
+	2. [OK] Añadir nuevos productos a linea
+	3. [OK] Limpiar campos al añadir en nuevos productos
+	4. [OK] Cargar ajax correctamente en nuevo productos 
+
+	BACKUP ERP
+	------------
+	1. [OK] Generar backup de bd
+	
+	PORTAL WEB
+	----------
+	1. [OK] Habilitar el acceso a el correo corporativo
+	2. [OK] Habilitar el acceso a el erp instuticional
+	3. [OK] Logos de empresas que roten con hipervinculo a su web
+	4. [OK] Titulo de contactenos en español
+	5. [OK] Descripcion de la post-venta debe ser calidad
+	6. [OK] Fondo blanco en catalogo de productos  
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (13/08/2014)
+/******************************************************************************/
+
+	MODULO DE RECLAMOS
+	------------------
+	
+	1. [OK] Actualizar ultima version de cambios
+	
+	MODULO DE ALMACEN
+	-----------------
+	
+	1. [OK] Presentacion de modulo de almacen hasta la version actual
+	
+	BACKUP ERP
+	----------
+	
+	1. [OK] Generar backup de BD
+
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (12/08/2014)
+/******************************************************************************/
+	
+	MODULO ALMACEN
+	--------------
+	1. [OK] Visualizar numeros de serie en reporte de inventario
+	2. [OK] Visualizar numeros de serie en reporte de movimiento
+	
+	MODULO RECLAMOS
+	---------------
+	1. [OK] Añadir tipo de observacion (externo,interno)
+	2. [OK] Añadir tipo externo (queja,reclamo)
+	3. [OK] Añadir tipo interna (inspeccion,auditoria,reporte)
+	
+	MODULO SEGUIMIENTO
+	-------------------
+	1. [OK] Proporcionar lista de hitos del modulo seguimiento
+	
+	PORTAL WEB
+	----------
+	1. [OK] Corregir catalogo condensadores CGC x SAMWHA
+	2. [OK] Corregir reguladores HI
+	
+/******************************************************************************/
+	# LISTA DE ACTIVIDADES EW (11/08/2014)
+/******************************************************************************/
+
+	BACKUP ERP
+	-----------
+	1.[OK] Generar backup de bd
+	
+	MODULO ALMACEN
+	--------------
+	1. [OK] Generar reporte inventario por marca
+	2. [OK] Generar reporte inventario por modelo
+	3. [OK] Generar reporte de todos los movimientos
+	4. [] Visualizar numeros de serie de stock disponible y stock en movimiento
+	
+	MODULO RECLAMOS
+	---------------
+	1. [] Añadir tipo de observacion (externo,interno)
+	2. [] Añadir tipo externo (queja,reclamo)
+	3. [] Añadir tipo interna (inspeccion,auditoria,reporte)
+	
+/******************************************************************************/
+	LISTA DE ACTIVIDADES EW (08/08/2014)
+/******************************************************************************/
+
+	MAPA MENTAL DE MODULOS
+	----------------------
+	
+	1. [OK] Actualizar flujos de modulos recientes
+	
+	BACKUP DE ERP
+	-------------
+	
+	1. [OK] Generar backup de base de datos
+	
+	MODULO SEGUIMIENTO
+	------------------
+	
+	1. [OK] Añadir plazo de transito interno y internacional
+	2. [OK] Añadir tipos de hitos restantes
+
+/******************************************************************************/
+	LISTA DE ACTIVIDADES EW (07/08/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	--------------
+
+	1. [OK] Persistencia reporte inventario
+	2. [OK] Funcional reporte inventario
+	3. [OK] Persistencia reporte movimiento
+	4. [OK] Funcional reporte movimiento
+	
+	MODULO CALENDARIO
+	-----------------
+	
+	1. [OK] Mejorar instructivo de modulo mas detallado
+	
+	MODULO CENTRO COSTO
+	---------------------
+	
+	1. [OK] Añadir Fl multiple en centro de costo
+			
+/******************************************************************************/
+	LISTA DE ACTIVIDADES EW (06/08/2014)
+/******************************************************************************/
+
+	MODULO ALMACEN
+	--------------
+
+	1. [] Persistencia reporte inventario
+	2. [] Persistencia reporte movimiento
+	3. [] Funcional reporte inventario
+	4. [] Funcional reporte movimiento
+
+/******************************************************************************/
+	LISTA DE ACTIVIDADES EW (05/08/2014)
+/******************************************************************************/
+
+	MODULO MOVIMIENTO DE CALENDARIO
+	--------------------------------
+
+	1. [OK] Actualizar el Modulo calendario en el ERP 
+	2. [OK] Actualizar las vacaciones proporcionadas del area de servicios
+	3. [OK] Elaborar el instructivo del modulo de movimiento 
+
+	MODULO ALMACEN
+	--------------
+
+	1. [] Persistencia reporte inventario
+	2. [] Persistencia reporte movimiento
+	3. [] Funcional reporte inventario
+	4. [] Funcional reporte movimiento
+
+/******************************************************************************/
+	# 01/07/2014
+/******************************************************************************/
+
+	[OK] guardar plazo adicional de proyecto 
+	[OK] array de colores mas visibles 
+	[OK] visualizar plazo adicionales en linea de tiempo 
+
+/******************************************************************************/
+	# 02/07/2014
+/******************************************************************************/
+
+	[OK] interfaz para asignar numero de serie de productos de la orden
+	[OK] modelo de datos para asignar numeros de serie
+
+/******************************************************************************/
+	# 03/07/2014
+/******************************************************************************/
+
+	[OK] titulo de formulario   
+	[OK] check de vacaciones 
+	[OK] validacion de horarios 
+
+/******************************************************************************/
+	# 04/07/2014
+/******************************************************************************/
+
+/******************************************************************************/
+	# 07/07/2014
+/******************************************************************************/
+
+/******************************************************************************/
+	# 14/07/2014
+/******************************************************************************/
+
+/******************************************************************************/
+	# 04/08/2014
+/******************************************************************************/
+
+
+
+

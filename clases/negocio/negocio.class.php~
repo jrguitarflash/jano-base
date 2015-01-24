@@ -1,0 +1,268 @@
+<?php
+class negocio
+{
+
+	public function getData($sql)
+	{
+		$data=array();
+		#$conex=mysql_connect('localhost','root','');
+		#mysql_select_db('planilla',$conex) or die('error'.mysql_error());
+		$result=mysql_query($sql);
+		$cont=mysql_num_rows($result);
+		while($x=mysql_fetch_array($result))
+		{
+			$data[]=$x;
+		}
+		return $data;
+	}
+
+	public function getVal($sql,$val)
+	{
+		$valor;
+		$result=mysql_query($sql);
+		$cont=mysql_num_rows($result);
+		if($cont==0) {
+			$valor='';
+		}else {
+			while($x=mysql_fetch_array($result)) {
+				$valor=$x[$val];			
+			}
+		}
+			
+		return $valor;
+	} 
+	
+	public function setData($sql)
+	{
+		$result=mysql_query($sql);
+		$cont=mysql_affected_rows();	
+		return $cont;
+	}
+
+	public function getInsertId()
+	{
+		$idInsert=mysql_insert_id();
+		return $idInsert;
+	}
+
+	public function subirImagen($ficheroName,$ficheroTmp,$ficheroSize,$ficheroType)
+	{
+		  if(is_uploaded_file($ficheroTmp)) 
+		  { 
+		  				// verifica haya sido cargado el archivo 
+				if(move_uploaded_file($ficheroTmp,  "adjuntos/".$ficheroName)) 
+				{ 
+						// se coloca en su lugar final 
+						//echo "<b>Upload exitoso!. Datos:</b><br>"; 
+						//echo "Nombre: <i><a href=\"".$ficheroName."\">".$ficheroName."</a></i><br>"; 
+						$ruta= "adjuntos/".$ficheroName;
+						//echo "Tipo MIME: <i>".$ficheroType."</i><br>"; 
+						//echo "Peso: <i>".$ficheroSize." bytes</i><br>"; 
+						//echo "<br><hr><br>"; 
+				}
+		  }
+		  else
+		  {
+				$ruta=null;
+		  }
+		  return $ruta;
+	}
+
+	public function veriEmailxNom($nomPer)
+	{
+		if($nomPer=='') 
+		{
+			$val="no existe";		
+		}
+		else
+		{
+			$val=$nomPer;		
+		}	
+		return $val;
+	}
+
+	public function veriEnvio($paraEnvio)
+	{
+		if($paraEnvio==1) 
+		{
+			$msj="mensaje enviado";
+		}
+		else
+		{
+			$msj="mensaje no enviado";
+		}
+		return $msj;
+	}
+
+	public function veriRutImg($rutImg)
+	{
+		if(is_null($rutImg)) 
+		{
+			$msj="Ningun archivo adjuntado actualmente";
+		}
+		else
+		{
+			$msj=$rutImg;
+		}
+		return $msj;
+	}
+
+	public function veriSubiImg($valAdju,$valFijo)
+	{
+		if(is_null($valAdju)) 
+		{
+			$valRut=$valFijo;
+		}
+		else 
+		{
+			$valRut=$valAdju;
+		}
+		return $valRut;
+	}
+
+	public function getFechActual()
+	{
+		$date = new DateTime();
+		$date->modify('-5 hour');
+		$fecha=$date->format('Y-m-d');
+		return $fecha;	
+	}
+
+	public function concatVect($vecData)
+	{
+		$cade="";
+		for ($i=0;$i<count($vecData);$i++)    
+		{     
+			if($cade=="") 
+			{
+				$cade=$cade.$vecData[$i];
+			}
+			else 
+			{
+				$cade=$cade." ".$vecData[$i];
+			}    
+		}
+		return $cade; 			
+	}
+
+
+	public function calcuPorCuxCob($impor,$sumCan)
+	{
+			$porcen=($sumCan*100)/$impor;
+			
+			return $porcen;
+	}
+
+	public function mosEstaCuxCob($porcen)
+	{
+		if($porcen<100) 
+		{
+			$esta="<label class='roj'>pendiente</label>";			
+		}
+		else 
+		{
+			$esta="<label class='ver'>cancelado</label>";
+		}
+		return $esta;
+	}
+
+	public function valFinSumCuxCob($sumCu)
+	{
+			if($sumCu==null) 
+			{
+				$sumCu=number_format(0,2);
+			}
+			else
+			{
+				$sumCu=$sumCu;			
+			}
+			return $sumCu;
+	}
+
+	public function tareGenCuenxPag()
+	{
+		if(isset($_POST['opci'])) 
+		{
+			$tare=$_POST['opci'];
+			$param1=$_POST['fechIni'];
+			$param2=$_POST['fechFin'];			
+		}
+		else 
+		{
+			$tare='tod';
+			$param1='';
+			$param2='';		
+		}
+		$funTare="Javascript:geneExcelGroupxPag('".$tare."','".$param1."','".$param2."')";
+		return $funTare;
+	}
+	
+	public function reorAcci($acci) 
+	{
+		$acciArr=Array();
+		$acciArr=explode("\n",$acci);
+		$cad="";
+		for($i=0;$i<count($acciArr);$i++) 
+		{
+			if($i==count($acciArr)-1) 
+			{
+				$cad=$cad."\n".date("g:i:s-a-d/m/Y")." ".$acciArr[$i];
+			}
+			else 
+			{
+				$cad=$cad."\n".$acciArr[$i];
+			}
+		}
+		return $cad;
+	}
+
+	public function reorAcci2($acci,$acci2) 
+	{
+		if($acci2!='') 
+		{
+			$acci=$acci."\n\n".$acci2;		
+		}
+		$acciArr=Array();
+		$acciArr=explode("\n",$acci);
+		$cad="";
+		for($i=0;$i<count($acciArr);$i++) 
+		{
+			if($i==count($acciArr)-1 and $acci2!='') 
+			{
+				$cad=$cad."\n".date("g:i:s-a-d/m/Y")." ".$acciArr[$i];
+			}
+			else 
+			{
+				$cad=$cad."\n".$acciArr[$i];
+			}
+		}
+		return $cad;
+	}
+
+	public function evaAcciDet($acci) 
+	{
+		$acciArr=Array();
+		$acciArr=explode("\n",$acci);
+		$cad="";
+		for($i=0;$i<count($acciArr);$i++) 
+		{
+			if($i==count($acciArr)-1) 
+			{
+				$cad=$cad."<br/>"."<label style='color:red'>".$acciArr[$i]."</label>";
+			}
+			else 
+			{
+				$cad=$cad."<br/>"."<label style='color:silver'>".$acciArr[$i]."</label>";
+			}
+		}
+		return $cad;
+	}
+
+/*--------------------------------------------------*/
+// REGLA DE NEGOCIO PARA MODULO OBSERVACION 
+/*---------------------------------------------------*/
+
+
+}
+
+?>

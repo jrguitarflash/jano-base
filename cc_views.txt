@@ -1,0 +1,25 @@
+/******************
+	# Views
+*******************/
+
+	/* aperturar centro anual */
+
+		1. cc_centAnu_ape -> OK
+
+	/* asignacion de ordenes a centro */
+
+		1. cc_ordCent_asig -> OK
+
+/******************
+	# Files News
+*******************/
+
+/*******************
+	# Files Changes
+********************/
+
+	1. utils_func.php
+	2. clases/controlador/controladorSup.class.php
+	3. clases/sql/sql.class.php
+	4. js/cc_gesti.js
+	5. json/cc_json.php

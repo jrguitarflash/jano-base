@@ -1,0 +1,21 @@
+/*-------------------------------------*/
+	# UPGRADE MODULO VISITAS
+/*-------------------------------------*/
+
+v 1.0
+
+v 1.1
+
+	. iniciando upgrade............[OK] 
+	. creando menu del modulo ........[OK]
+	. asignando permisos del modulo .....[OK]
+	. creando vistas del modulo .........[OK]
+	. actualizando js gestionador .......[OK]
+	. creando persistencia en el modelo ......[OK]
+	. actualizando peticiones sql ......... [OK]
+	. actualizando controlador sup .......... [OK]
+	. actualizacion controlador inf .......... [OK]
+	. actualizando visitas ...........[OK]
+	. creando ajax gestionador .........[OK]
+	. actualizando json gestionador ............[OK]
+	. finalizando upgrade.................[OK]

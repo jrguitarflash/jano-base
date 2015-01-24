@@ -1,0 +1,385 @@
+<?php #print "hello world controlador inferior"; ?>
+<?php
+
+	if( (isset($_GET['menu'])) and (isset($_POST['accion'])) ) 
+	{
+		switch($_GET['menu'])
+		{
+			case 'reclamo_form':
+				if($_POST['accion']=='enviar') 
+				{
+					ini_set('max_execution_time', 300);
+					$sql=sql::getIdxCli($_POST['filCli']);
+					$idCli=negocio::getVal($sql,'empresa_id');
+					$sql=sql::getTipReclamoxId($_POST['tip']);
+					$tip=negocio::getVal($sql,'desTipReclamo');
+					$sql=sql::getContacxClixId($_POST['filCli'],$_POST['contac'][0]);
+					$contac=negocio::getVal($sql,'contacto');
+					$sql=sql::getTrabVendedorxId($_POST['respo']);
+					$sr=negocio::getVal($sql,'vendedor');	
+					$valAdju=negocio::subirImagen($_FILES['adjunt']['name'],$_FILES['adjunt']['tmp_name'],$_FILES['adjunt']['size'],$_FILES['adjunt']['type']);
+					$valAdju=$valAdju." ".negocio::subirImagen($_FILES['adjunt2']['name'],$_FILES['adjunt2']['tmp_name'],$_FILES['adjunt2']['size'],$_FILES['adjunt2']['type']);
+					$valAdju=$valAdju." ".negocio::subirImagen($_FILES['adjunt3']['name'],$_FILES['adjunt3']['tmp_name'],$_FILES['adjunt3']['size'],$_FILES['adjunt3']['type']);
+					$valAdjuArr=Array();
+					$valAdjuArr=explode(' ',$valAdju);
+					$correPor=$_POST['emailRecep']." ".$_POST['emailRespo'];
+						#$acci=$_POST['acci']." ".strftime("%H:%M:%S", time())." ".date('d-m-Y');
+						#$acci=$_POST['acci']." ".strftime("%I:%M:%S", time())." ".date('d-m-Y');
+						#$acci=$_POST['acci']." ".date("h:i:s", time())." ".date('d-m-Y');
+						#$acci=$_POST['acci']." ".date("g:i:s-a-d/m/Y");
+					$acci=$_POST['acci'];
+					$acci=negocio::reorAcci($acci);
+					$sql=sql::insertRecla($_POST['tip'],$_POST['fech'],$_POST['contac'][0],$_SESSION['SIS'][2],$_POST['respo'],$_POST['desRecla'],$acci,$_POST['acciReli'],$valAdju,1,$idCli,$correPor);
+					$filAfecIn=negocio::setData($sql);	
+					$idConfir=negocio::getInsertId();
+					$respEmail=setEmail($_POST['desRecla'],$acci,$_POST['acciReli'],$idConfir,$tip,$_POST['fech'],$_POST['filCli'],$contac,$sr,$_POST['emailRecep'],$_POST['emailRespo'],$valAdjuArr);
+					$sql=sql::updateReclaxId($_POST['tip'],$_POST['fech'],$_POST['contac'][0],$_SESSION['SIS'][2],$_POST['respo'],$_POST['desRecla'],$acci,$_POST['acciReli'],$valAdju,$respEmail,$idCli,$idConfir,$correPor);
+					$filAfecAct=negocio::setData($sql);
+					$respEmail=negocio::veriEnvio($respEmail);
+					$msjNoti=$filAfecIn." Reclamo añadido y ".$respEmail." al responsable asignado";
+					print msjNotifi($msjNoti);
+					#print "recep:".$_POST['emailRecep']." / resp:".$_POST['emailRespo'];
+				}
+				else if($_POST['accion']=='enviar2') 
+				{
+					print_r($_FILES['adjunt']['tmp_name']);
+					print_r($_FILES['adjunt']['name']);
+					print_r($_FILES['adjunt']['type']);
+					print_r($_FILES['adjunt']['size']);
+					$valAdju=negocio::subirImagen($_FILES['adjunt']['name'],$_FILES['adjunt']['tmp_name'],$_FILES['adjunt']['size'],$_FILES['adjunt']['type']);
+				}
+				else 
+				{
+					$excep= "email no enviado";
+				}
+
+			break;
+			
+			case 'reclamo_edit':
+			
+				if($_POST['accion']=='enviar') 
+				{
+					ini_set('max_execution_time', 300);
+					$sql=sql::getIdxCli($_POST['filCli']);
+					$idCli=negocio::getVal($sql,'empresa_id');
+					$idConfir=negocio::getInsertId();
+					$sql=sql::getTipReclamoxId($_POST['tip']);
+					$tip=negocio::getVal($sql,'desTipReclamo');
+					$sql=sql::getContacxClixId($_POST['filCli'],$_POST['contac'][0]);
+					$contac=negocio::getVal($sql,'contacto');
+					$sql=sql::getTrabVendedorxId($_POST['respo']);
+					$sr=negocio::getVal($sql,'vendedor');	
+					$valAdju=negocio::subirImagen($_FILES['adjunt']['name'],$_FILES['adjunt']['tmp_name'],$_FILES['adjunt']['size'],$_FILES['adjunt']['type']);
+					$valAdju2=negocio::subirImagen($_FILES['adjunt2']['name'],$_FILES['adjunt2']['tmp_name'],$_FILES['adjunt2']['size'],$_FILES['adjunt2']['type']);
+					$valAdju3=negocio::subirImagen($_FILES['adjunt3']['name'],$_FILES['adjunt3']['tmp_name'],$_FILES['adjunt3']['size'],$_FILES['adjunt3']['type']);	
+					$valAdju=negocio::veriSubiImg($valAdju,$_POST['rutaImgRecla']);
+					$valAdju2=negocio::veriSubiImg($valAdju2,$_POST['rutaImgRecla2']);
+					$valAdju3=negocio::veriSubiImg($valAdju3,$_POST['rutaImgRecla3']);
+					$valAdju=$valAdju.' '.$valAdju2.' '.$valAdju3;
+					$correPor=$_POST['emailRecep']." ".$_POST['emailRespo'];
+					$valAdjuArr=Array();
+					$valAdjuArr=explode(' ',$valAdju);
+					$acci=negocio::reorAcci($_POST['acci'],$_POST['acci2']);
+					$respEmail=setEmail($_POST['desRecla'],$acci,$_POST['acciReli'],$_GET['id'],$tip,$_POST['fech'],$_POST['filCli'],$contac,$sr,$_POST['emailRecep'],$_POST['emailRespo'],$valAdjuArr);
+					$sql=sql::updateReclaxId($_POST['tip'],$_POST['fech'],$_POST['contac'][0],$_SESSION['SIS'][2],$_POST['respo'],$_POST['desRecla'],$acci,$_POST['acciReli'],$valAdju,$respEmail,$idCli,$_GET['id'],$correPor);
+					$filAfec=negocio::setData($sql);
+					$respEmail=negocio::veriEnvio($respEmail);
+					$msjNoti=$filAfec." Reclamo añadido y ".$respEmail." al responsable asignado";
+					print msjNotifi($msjNoti);
+					#print "recep:".$_POST['emailRecep']." / resp:".$_POST['emailRespo'];
+				}
+				else if($_POST['accion']=='enviar2') 
+				{
+					print $_FILES['adjunt']['name'];
+				}
+				else
+				{
+					$excep= "email no enviado";
+				}
+			
+			break;
+			
+			case 'visita_reporte':
+				if($_POST['accion']=='enviar') 
+				{
+					$sql=sql::insertVisi($_POST['vend'],$_POST['txtFechIni'],$_POST['txtFechFin']);
+					$contVisi=negocio::setData($sql);
+					
+					$idVisi=negocio::getInsertId();
+					
+					// nuevo requerimiento solicitado de gastos
+					
+					$sql=sql::updateVisiGastos(
+						$idVisi,$_POST['sltMone'],
+						$_POST['txtPasa'],$_POST['txtHospe'],
+						$_POST['txtAli'],
+						$_POST['txtTrans']
+						);
+						
+					$contGast=negocio::setData($sql);
+					
+					$arrayVisi=sizeof($_SESSION['detVisiFin']);
+					$contVisi=0;
+					
+					
+					for($i=1;$i<=$arrayVisi;$i++) 
+					{
+						$sql=sql::getIdxCli($_SESSION['detVisiFin'][$i]['empresa']);
+						$idCli=negocio::getVal($sql,'empresa_id');						
+						
+						$sql=sql::insertDetVisi(
+								$idVisi,$_SESSION['detVisiFin'][$i]['contacto'],
+								$_SESSION['detVisiFin'][$i]['observacion'],
+								$idCli,$_SESSION['detVisiFin'][$i]['observacionPen'],
+								$_SESSION['detVisiFin'][$i]['direccion']
+								);
+								
+						$contVisi=$contVisi+negocio::setData($sql);
+					}
+				
+					$msjNoti=$contVisi." visitas añadidas correctamente";
+					print msjNotifi($msjNoti);
+					
+					#$arrayDetVisi=sizeof($_SESSION['detVisiFin']);
+					#print_r($_SESSION['detVisiFin']);
+					unset($_SESSION['detVisiFin']);
+					
+					$sql=sql::getTrabVendedorxId($_POST['vend']);
+					$valTrab=negocio::getVal($sql,'vendedor');
+					
+					print "<script type='text/javascript'>
+								setReporVisi(".$idVisi.",'".$_POST['txtFechIni']."','".$_POST['txtFechFin']."','".$valTrab."');
+							</script>";			
+					
+				}
+				else 
+				{
+					$excep= 'visitas no añadidas';
+				}
+			break;
+			
+			case 'cuentax_form':
+					
+					if($_POST['accion']=='enviar') 
+					{
+						
+						$sql=sql::getIdxCli($_POST['filCli']);
+						$idCli=negocio::getVal($sql,'empresa_id');							
+							
+						$sql=sql::insertCuxCobra($idCli,$_POST['txtCompro'],$_POST['slcMone'],$_POST['slcDoc'],$_POST['txtImpor'],$_POST['txaDes'],$_POST['txtFechCu']);
+						$cueAfect=negocio::setData($sql);
+						
+						$idCuen=negocio::getInsertId();
+						
+						$arrayCuen=sizeof($_SESSION['detCuenFin']);
+						$cuenDetAfect=0;
+					
+					
+						for($i=1;$i<=$arrayCuen;$i++) 
+						{						
+							
+							$sql=sql::insertDetCuen($idCuen,$_SESSION['detCuenFin'][$i]['fecha'],$_SESSION['detCuenFin'][$i]['monto'],$_SESSION['detCuenFin'][$i]['cuenta'],$_SESSION['detCuenFin'][$i]['estado']);
+							$cuenDetAfect=$cuenDetAfect+negocio::setData($sql);
+						}
+					
+						unset($_SESSION['detCuenFin']);
+						
+						$cueAfect=$cueAfect." cuenta por cobrar añadida correctamente";
+						print msjNotifi($cueAfect);
+					}
+					else 
+					{
+						$excep= 'cuenta no añadidas';
+					}					
+					
+			break;
+			
+			case 'cuentax_edit':
+			
+					if($_POST['accion']=='enviar') 
+					{
+						
+						$sql=sql::getIdxCli($_POST['filCli']);
+						$idCli=negocio::getVal($sql,'empresa_id');							
+							
+						$sql=sql::updateCuxCobra($idCli,$_POST['txtCompro'],$_POST['slcMone'],$_POST['slcDoc'],$_POST['txtImpor'],$_POST['txaDes'],$_POST['txtFechCu'],$_GET['idCu']);
+						$cueAfect=negocio::setData($sql);
+						
+						$cueAfect=$cueAfect." cuenta por cobrar editada correctamente";
+						print msjNotifi($cueAfect);
+									
+					}
+					else 
+					{
+						$excep= 'cuenta no editadas';
+					}		
+			
+			break;
+			
+			case 'obsr_form':
+					if($_POST['accion']=='enviar') 
+					{
+						$sql=sql::getIdxCli($_POST['filCli']);	
+						$idEmp=negocio::getVal($sql,'empresa_id');		
+						
+						$sql=sql::insertObs(
+									1,
+									$_POST['slcResp'],
+									$_POST['rdImpSati'],
+									$_POST['rdEfecSati'],
+									$_POST['rdAc'],
+									$_SESSION['SIS'][2],
+									$idEmp,
+									$_POST['contac'][0],
+									$_POST['slcNumFormat'],
+									$_POST['slcVerFormat'],
+									$_POST['slcPagFormat'],
+									$_POST['txtFechContro'],
+									$_POST['txaEviCorre'],
+									$_POST['txtFechLi'],
+									$_POST['txtFechVeriImp'],
+									$_POST['txtFechAcor'],
+									$_POST['txtFechVeriEfec'],
+									$_POST['txtFecEfecSatis'],
+									$_POST['txaEviObje'],
+									$_POST['txtFechNoConf'],
+									$_POST['txtFechSegAud'],
+									$_POST['txaDesObs']);
+									
+						$obsAfect=negocio::setData($sql);
+						$idInsert=negocio::getInsertId();
+						
+						$idGene="CA-".str_pad($idInsert,5,'0',STR_PAD_LEFT);
+						
+						$sql=sql::updateObs($idInsert,$idGene);
+						$obsActAfect=negocio::setData($sql);
+									
+						$obsAfect=$obsAfect." formato de control añadido correctamente";
+						print msjNotifi($obsAfect);						
+						
+						/*$firephp = FirePHP::getInstance(true);
+					   $firephp->log($idGene, 'id');*/
+
+					}
+					else 
+					{
+						$excep= 'cuenta no añadidas';
+					}
+			break;
+			
+			case 'obsr_edit':
+			
+					if($_POST['accion']=='enviar') 
+					{
+						$sql=sql::getIdxCli($_POST['filCli']);	
+						$idEmp=negocio::getVal($sql,'empresa_id');		
+						
+						$sql=sql::updateObsReclaxId(
+									$_GET['id'],
+									1,
+									$_POST['slcResp'],
+									$_POST['rdImpSati'],
+									$_POST['rdEfecSati'],
+									$_POST['rdAc'],
+									$_SESSION['SIS'][2],
+									$idEmp,
+									$_POST['contac'][0],
+									$_POST['slcNumFormat'],
+									$_POST['slcVerFormat'],
+									$_POST['slcPagFormat'],
+									$_POST['txtFechContro'],
+									$_POST['txaEviCorre'],
+									$_POST['txtFechLi'],
+									$_POST['txtFechVeriImp'],
+									$_POST['txtFechAcor'],
+									$_POST['txtFechVeriEfec'],
+									$_POST['txtFecEfecSatis'],
+									$_POST['txaEviObje'],
+									$_POST['txtFechNoConf'],
+									$_POST['txtFechSegAud'],
+									$_POST['txaDesObs']);
+									
+						$obsAfect=negocio::setData($sql);
+						
+						$obsAfect=$obsAfect." formato de control actualizado correctamente";
+						print msjNotifi($obsAfect);
+					}
+					else 
+					{
+						$excep= 'cuenta no editadas';
+					}		
+			
+			break;
+			
+			case 'obsq_form':
+			
+					if($_POST['accion']=='enviar') 
+					{
+						$sql=sql::getIdxCli($_POST['filCli']);	
+						$idEmp=negocio::getVal($sql,'empresa_id');
+						
+						$sql=sql::insertObsQue(2,
+													  $_POST['slcResp'],
+													  $_SESSION['SIS'][2],
+													  $idEmp,
+													  $_POST['contac'][0],
+													  $_POST['txtFechContro'],
+													  $_POST['txaDesObs'],
+													  $_POST['txaSoluInme']);
+													  
+						$QueAfec=negocio::setData($sql);
+						$idInsert=negocio::getInsertId();
+						
+						$idGene="QUE-".str_pad($idInsert,5,'0',STR_PAD_LEFT);
+						
+						$sql=sql::updateObs($idInsert,$idGene);
+						$QueAfec=negocio::setData($sql);
+						
+						$QueAfec=$QueAfec." Queja añadida correctamente";
+						print msjNotifi($QueAfec);
+					}
+					else 
+					{
+						$excep= 'reclamo no editado';
+					}
+				
+			break;
+			
+			case 'obsq_edit':
+			
+					if($_POST['accion']=='enviar') 
+					{
+						
+						$sql=sql::getIdxCli($_POST['filCli']);	
+						$idEmp=negocio::getVal($sql,'empresa_id');
+						
+						$sql=sql::updateObsQue(
+													  $_GET['id'],
+													  2,
+													  $_POST['slcResp'],
+													  $_SESSION['SIS'][2],
+													  $idEmp,
+													  $_POST['contac'][0],
+													  $_POST['txtFechContro'],
+													  $_POST['txaDesObs'],
+													  $_POST['txaSoluInme']);
+													  
+						$QueAfec=negocio::setData($sql);
+						
+						$QueAfec=$QueAfec." Queja editada correctamente";
+						print msjNotifi($QueAfec);
+						
+					}
+					else 
+					{
+						$excep= 'queja no editada';
+					}		
+			
+			break;
+			
+			default:
+			break;
+		}
+	}
+
+?>

@@ -1,0 +1,33 @@
+/*-----------------------------------------*/
+	# UPGRADE MODULO CENTRO DE COSTOS
+/*-----------------------------------------*/
+
+v 1.0
+
+v 1.1
+
+v 1.2
+
+	.inizialited....[OK]
+	.creando menu y permisos.....[OK]
+	.creando views en modulo..........[OK]
+	.creando persistencia en modelo.....[OK]
+	.creando calls y select en sql.......[OK]
+	.actualizando controller up................[OK]
+	.actualizando utils php...................[OK]
+	.actualizando js gestionador................[OK]
+	.actualizando json gesti........................[OK]
+	.finalized...................[OK]
+
+v 1.3
+
+	.inizialited.....[OK]
+	.creando menu y permisos.......[OK]
+	.creando views en modulo...........[OK]
+	.creando persistencia en modelo............[OK]
+	.actualizando calls & select en sql............[OK]
+	.actualizando json gesti...................[OK]
+	.actualizando ajax gesti...................[OK]
+	.actualizando js utils.....................[OK]
+	.actualizando js gesti.....................[OK]
+	.finalized.............................[OK]

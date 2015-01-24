@@ -1,0 +1,123 @@
+<?php
+
+	$id=$_GET['id'];
+	$tbl_id=$_GET['tbl_id'];
+	$accion=($_GET['a']>'')?$_GET['a']:$_POST['accion'];
+
+	if($_POST['accion']>'')
+	{
+	    $id=tabla::tbl_edit_tbl($tbl_id,$_POST['id'],$_POST['accion']);
+	    // Id|Mensaje|jscript
+	    $return=explode("|", $id);
+	    $id=($return[0]>0)?$return[0]:$_POST['id'];
+	    
+	    if($accion=='I' || $accion=='C')
+	    {        
+	        $tabla=tabla::edit('S',$tbl_id);
+	        $campo_pk=$tabla['tbl_col_pk'];//.'='.$id;
+	        //$_REQUEST[$pk]=$id;        
+	        echo '<script>Javascript:window.location.href="index.php?'.Redirect($campo_pk, $id).'";</script>'; 
+	    }
+	
+	    $accion=($id>0 && ($_POST['accion']=='I' || $_POST['accion']=='C'))?'U':$accion;
+	       
+	    if($return[2]>'')
+	    {
+	        echo '<script>Javascript:'.$return[2].'</script>';
+	    }
+	    
+	    $msj=($return[1]>'')?$return[1]:'001';
+	}
+?>
+
+<script language="javascript">
+	$(document).ready(function()
+	{
+		$("#form1").validate();
+		$("#btnSave").click(function()
+		{
+			$("#form1").submit();
+		});
+	   $("#btnDuplicar").click(function()
+	   {
+          if(confirm('¿Desea duplicar este registro?.'))
+          {
+              $("#accion").val('C');
+              $("#form1").submit();
+          }         
+		});
+	   setTimeout(function(){ $("#notificacion").fadeOut() }, 3000);	        
+	});
+</script>
+
+
+<?php 
+	if( (isset($_REQUEST['flag'])) and ($_SESSION['SIS'][2]==46) )
+	{ 
+		#print $_REQUEST['flag']."-".$_SESSION['SIS'][2];
+		#print $_POST['valor_cliente_id'];
+		$sql=sql::updateCoti($_POST['cot_fec_adj'],$_POST['imp_tipo_costo_id'],$_POST['moneda_id'],$_POST['cot_estado_id'],$_POST['cot_prioridad_id'],$_POST['cot_descrip'],$_POST['cot_fec_emis'],$_POST['cot_fec_venc'],$_POST['cot_referencia'],$_POST['contacto_id'],$_GET['cli_id'],$_GET['cotizacion_id'],$_POST['cot_cc_id'],$_POST['cot_cond_precios'],$_POST['cot_cond_plazo_ent'],$_POST['cot_cond_forma_pago'],$_POST['cot_cond_lugar_ent'],$_POST['cot_cond_garantia'],$_POST['cot_cond_validez'],$_POST['cot_cond_penalidad'],$_POST['cot_cond_carta_fianza']);
+		$contAfec=negocio::setData($sql);
+		$sql=sql::updateCotiProye($_GET['cotizacion_id'],$_POST['frm_proy_nombre']);
+		$contAfec=negocio::setData($sql);
+		#$contAfec=1;
+		print msjNotifi($contAfec." "."Cotizaci&oacuten modificada por el supervisor de ventas");
+	}
+	else
+	{
+		echo erp_notificacion($msj,$return[3]);
+	}
+?>
+
+<div class="box">    
+    <div class="heading">
+        <?=tbl_form_cab('F',$tbl_id,$id)?>
+   <div class="buttons">
+        <? echo tbl_form_opcion($tbl_id)?>
+        <?php if($_GET['menu_id']==41){ 
+				$repoProf="reporte/reporte_proforma.php?id=".$_GET['imp_proforma_id'];        
+	        ?> 
+	        	<a href="<?php print $repoProf; ?>" target="_blank" ><img src="images/proform.png" width="20px"></a>
+        <?php } ?>
+	</div>
+   </div>
+   <div class="content">
+			<?=tbl_form($tbl_id,$id,$accion)?>
+			<?php print $reg['imp_proforma_id']; ?>
+   </div>
+</div>
+
+<script language="javascript">
+
+	$('#ui-tabs').tabs({
+	    selected:  $("#tab").val(),
+	    select: function(event, ui){       
+	       $("#tab").val(ui.index);
+	    }   
+	}); 
+	
+	function col_form(sw,accion,id,tabla_id)
+	{
+		switch(sw){
+			case 1:
+				$('#dialog').remove();
+				$('#content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="tabla_col_form.php?a='+accion+'&id='+id+'&tabla_id='+tabla_id+'" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
+				$('#dialog').dialog({
+				title: 'Columna',
+				bgiframe: false,
+				width: 600,
+				height: 450,
+				resizable: false,
+				close: function (event, ui) {
+	                            window.location.reload();
+				},
+				modal: false
+		});
+				break;
+			case 0:
+				$('#dialog').dialog('close');
+				break;
+		}
+		
+	};
+</script>

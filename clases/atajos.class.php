@@ -1,0 +1,23 @@
+<?php
+class atajos{
+    function edit($accion,$id){
+        switch($accion){
+            case 'S':
+                $sql="SELECT*FROM atajos where bestado='1' and operador_id=".(int)$id;
+                $result=mysql_query($sql) or Msg_error($sql);
+                while($row=mysql_fetch_array($result,1)){$prg[]=$row;}
+                return $prg;
+                break;
+            case 'I':
+                $sql="select tec_atajos('I','','".$_SESSION['SIS'][2]."','','0','".$id."','','');";
+                $result=mysql_query($sql);                
+                break;           
+            case 'D':
+                $sql="update atajos set bestado='0' where atajo_id=".(int)$id;
+                $result=mysql_query($sql);
+                break;           
+        }
+
+    }
+}
+?>

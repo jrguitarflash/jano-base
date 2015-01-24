@@ -1,0 +1,1046 @@
+<?php 
+class sql
+{
+
+//------------------------------------//
+//-----------SQL OPERACIONES----------// 
+//------------------------------------//
+
+public function tbl_trabajador()
+{
+	$sql="select * from trabajador";
+	return $sql;
+}
+
+public function getPerfil($id)
+{
+	$sql="select perfil_nombre from perfil where perfil_id='".$id."'";
+	return $sql;
+}
+
+public function getTipReclamo()
+{
+	$sql="select idTipReclamo,desTipReclamo from tbrecla_tipo_reclamo";
+	return $sql;
+}
+
+public function getTrabVendedor()
+{
+	$sql="select concat(per.pers_nombres,' ',per.pers_apepat,' ',per.pers_apemat) as vendedor,per.persona_id 
+			from persona as per,trabajador as trab,perfil as perf where per.persona_id=trab.persona_id and
+			trab.perfil_id = perf.perfil_id and (perf.perfil_id=6 or perf.perfil_id=2) and trab.empresa_id=1 and per.bestado=1";
+	return $sql;
+}
+
+public function getTrabVendRecla()
+{
+	$sql="select concat(per.pers_nombres,' ',per.pers_apepat,' ',per.pers_apemat) as vendedor,per.persona_id 
+			from persona as per,trabajador as trab,perfil as perf where per.persona_id=trab.persona_id and
+			trab.perfil_id = perf.perfil_id and perf.perfil_id!=6 and trab.empresa_id=1";
+	return $sql;
+}
+
+public function getTrabxId($id)
+{
+	$sql="select concat(per.pers_nombres,' ',per.pers_apepat,' ',per.pers_apemat) as vendedor
+			from persona as per,trabajador as trab,perfil as perf where per.persona_id=trab.persona_id and
+			trab.perfil_id = perf.perfil_id and trab.trabajador_id='".$id."'";
+	return $sql;
+}
+
+public function getEmpCliente()
+{
+	$sql="select distinct emp.emp_nombre,emp.empresa_id from empresa as emp,empresa_perfil as perf,anfi_empresa as anf
+			where anf.empresa_id=emp.empresa_id and anf.emp_perfil_id=perf.empresa_perfil_id and anf.emp_perfil_id=1";
+	return $sql;
+}
+
+public function getContacxCli($cli)
+{
+	$sql="select concat(per.pers_nombres,' ',per.pers_apepat,' ',per.pers_apemat) as contacto,per.persona_id
+			from persona as per,contacto as contac,empresa as emp where contac.persona_id=per.persona_id and 
+			contac.empresa_id=emp.empresa_id and emp.emp_nombre='".$cli."'";
+	return $sql;
+}
+
+public function getEmailxId($id)
+{
+	$sql="select pers_mail from persona where persona_id='".$id."'";
+	return $sql;
+}
+
+public function insertRecla($tip,$fech,$contac,$recep,$respon,$des,$acci,$acciReli,$adjuRecla,$esta,$idEmp,$correPor)
+{
+	$sql="insert into tbrecla_reclamo(idTipReclamo,fechReclamo,idContacReclamo,idPersoReclamo,idRespoReclamo,desReclamo,acciReclamo,
+			acciReliReclamo,adjuReclamo,idEstaReclamo,idEmpReclamo,correPor) values ('".$tip."','".$fech."','".$contac."','".$recep."','".$respon."',
+			'".$des."','".$acci."','".$acciReli."','".$adjuRecla."','".$esta."','".$idEmp."','".$correPor."')";
+	return $sql;
+}
+
+public function getTipReclamoxId($id)
+{
+	$sql="select idTipReclamo,desTipReclamo from tbrecla_tipo_reclamo where idTipReclamo='".$id."'";
+	return $sql;
+}
+
+public function getContacxClixId($cli,$id)
+{
+	$sql="select concat(per.pers_nombres,' ',per.pers_apepat,' ',per.pers_apemat) as contacto,per.persona_id
+			from persona as per,contacto as contac,empresa as emp where contac.persona_id=per.persona_id and 
+			contac.empresa_id=emp.empresa_id and contac.empresa_id and emp.emp_nombre='".$cli."' and 
+			contac.persona_id='".$id."'";
+	return $sql;
+}
+
+public function getTrabVendedorxId($id)
+{
+	$sql="select concat(per.pers_nombres,' ',per.pers_apepat,' ',per.pers_apemat) as vendedor,per.persona_id 
+			from persona as per,trabajador as trab,perfil as perf where per.persona_id=trab.persona_id and
+			trab.perfil_id = perf.perfil_id and (perf.perfil_id!=6 or perf.perfil_id=6 )  and trab.empresa_id=1 and trab.persona_id='".$id."'";
+	return $sql;
+}
+
+public function ActEmailResp($id,$email)
+{
+	$sql="update persona set pers_mail='".$email."' where persona_id='".$id."'";
+	return $sql;
+}
+
+public function ActEstaReclaAcep($id)
+{
+	$sql="update tbrecla_reclamo set idEstaReclamo=2  where tbrecla_reclamo_id='".$id."'" ;
+	return $sql;
+}
+
+public function ActEstaReclaRecha($id)
+{
+	$sql="update tbrecla_reclamo set idEstaReclamo=3 where tbrecla_reclamo_id='".$id."'" ;
+	return $sql;
+}
+
+public function ActEstaReclaSolu($id,$acciReli)
+{
+	$sql="update tbrecla_reclamo set idEstaReclamo=4,acciReliReclamo=concat(acciReliReclamo,'\n','".$acciReli."') where tbrecla_reclamo_id='".$id."'" ;
+	return $sql;
+}
+
+public function ActCerrarRecla($id)
+{
+	$sql="update tbrecla_reclamo set idEstaReclamo=5 where tbrecla_reclamo_id='".$id."'" ;
+	return $sql;
+}
+
+public function getRecla($id,$filtro,$filtro2,$filtro3,$filtro4,$filtro5)
+{
+	$sql="select * from tbrecla_reclamo 
+			where (idPersoReclamo='".$id."' or '".$id."'=46 ) and 
+			(idEstaReclamo='".$filtro."' or 
+			idEstaReclamo='".$filtro2."' or 
+			idEstaReclamo='".$filtro3."' or
+			idEstaReclamo='".$filtro4."' or 
+			idEstaReclamo='".$filtro5."') order by fechReclamo";
+	return $sql;
+}
+
+public function getReclaTod($id)
+{
+	$sql="select * from tbrecla_reclamo 
+			where (idPersoReclamo='".$id."' or '".$id."'=46 ) and 
+			(idEstaReclamo=1 or 
+			idEstaReclamo=6 or 
+			idEstaReclamo=2 or
+			idEstaReclamo=3 or 
+			idEstaReclamo=4) order by fechReclamo";
+	return $sql;
+}
+
+public function getReclaxCli($cli,$id,$filtro,$filtro2,$filtro3,$filtro4,$filtro5)
+{
+	$sql="select distinct recla.tbrecla_reclamo_id,
+			recla.idTipReclamo,
+			recla.idPersoReclamo,
+			recla.idRespoReclamo,
+			recla.idEstaReclamo,
+			recla.idContacReclamo,
+			recla.idProceReclamo,
+			recla.idEmpReclamo,
+			recla.desReclamo,
+			recla.acciReclamo,
+			recla.fechReclamo,
+			recla.bestado 
+			from 
+			tbrecla_reclamo as recla 
+			inner join contacto as contac on recla.idContacReclamo=contac.persona_id
+			inner join empresa as emp on contac.empresa_id=emp.empresa_id 
+			where 
+			emp.emp_nombre like '%".$cli."%' and
+			(recla.idPersoReclamo='".$id."' or '".$id."'=46 ) and 
+			(recla.idEstaReclamo='".$filtro."' or recla.idEstaReclamo='".$filtro2."' or recla.idEstaReclamo='".$filtro3."'
+			or recla.idEstaReclamo='".$filtro4."' or recla.idEstaReclamo='".$filtro5."') 
+			order by fechReclamo";
+	return $sql;
+}
+
+public function getReclaxResp($resp,$id,$filtro,$filtro2,$filtro3,$filtro4,$filtro5)
+{
+	$sql="select * 
+			from 
+			tbrecla_reclamo as recla 
+			inner join persona as per on recla.idRespoReclamo=per.persona_id 
+			where 
+			concat(per.pers_nombres,' ',per.pers_apepat,' ',per.pers_apemat) like '%".$resp."%' and 
+			(recla.idPersoReclamo='".$id."'  or '".$id."'=46 ) and 
+			(recla.idEstaReclamo='".$filtro."' or 
+			recla.idEstaReclamo='".$filtro2."' or 
+			recla.idEstaReclamo='".$filtro3."' or
+			recla.idEstaReclamo='".$filtro4."' or 
+			recla.idEstaReclamo='".$filtro5."') order by fechReclamo";
+	return $sql;
+}
+
+public function getContacxId($id)
+{
+	$sql="select concat(per.pers_nombres,' ',per.pers_apepat,' ',per.pers_apemat) as contacto,per.persona_id
+			from persona as per where per.persona_id='".$id."'";
+	return $sql;
+}
+
+public function getEstaRecla($id)
+{
+	$sql="select desEstaReclamo from tbrecla_estado_reclamo where idEstaReclamo='".$id."'";
+	return $sql;
+}
+
+public function getIdxCli($cli)
+{
+	$sql="select empresa_id from empresa where emp_nombre='".$cli."'";
+	return $sql;
+}
+
+public function getClixContacxCli($idCli)
+{
+	$sql="select emp.emp_nombre as empresa,emp.emp_ruc as ruc from empresa as emp where emp.empresa_id='".$idCli."'";
+	return $sql;
+}
+
+public function getDatReclaxId($id,$dat)
+{
+	$sql="select ". $dat ." from tbrecla_reclamo where tbrecla_reclamo_id='".$id."'";
+	return $sql;
+}
+
+public function insertVisi($idVende,$fechIni,$fechFin)
+{
+	$sql="insert into tbvisi_visita(idVendeVisita,fechIniVisi,fechFinVisi) values ('".$idVende."','".$fechIni."','".$fechFin."')";
+	return $sql;
+}
+
+public function insertDetVisi($idVisi,$idContac,$obs,$idCli,$obsPen,$dire)
+{
+	$sql="insert into tbvisi_detalle_visita(tbvisi_visita_id,idContacVisita,obsVisita,idEmpVisita,obsPenVisita,direVisi) values 
+			('".$idVisi."','".$idContac."','".$obs."','".$idCli."','".$obsPen."','".$dire."')";
+	return $sql;
+}
+
+public function getDetVisixId($id)
+{
+	$sql="select * from tbvisi_detalle_visita where tbvisi_visita_id='".$id."'";
+	return $sql;
+}
+
+public function getVisitas()
+{
+	$sql="select * from tbvisi_visita";
+	return $sql;
+}
+
+public function getVisitasxId($idVisi)
+{
+	$sql="select * from tbvisi_visita where tbvisi_visita_id='".$idVisi."'";
+	return $sql;
+}
+
+public function getVisitasxFechxCli($fech,$cli)
+{
+	$sql="select distinct
+			visi.tbvisi_visita_id,
+			visi.idVendeVisita,
+			visi.fechIniVisi,
+			visi.fechFinVisi 
+			from tbvisi_visita as visi,tbvisi_detalle_visita as detVisi,empresa as emp where  
+			visi.tbvisi_visita_id=detVisi.tbvisi_visita_id and detVisi.idEmpVisita=emp.empresa_id and 
+			emp.emp_nombre='".$cli."' and ('".$fech."' between visi.fechIniVisi and visi.fechFinVisi)";
+	return $sql;
+}
+
+public function getVisitasxFechxVen($fech,$ven)
+{
+	$sql="select distinct
+			visi.tbvisi_visita_id,
+			visi.idVendeVisita,
+			visi.fechIniVisi,
+			visi.fechFinVisi 
+			from tbvisi_visita as visi,tbvisi_detalle_visita as detVisi,persona as per where  
+			visi.idVendeVisita=per.persona_id and visi.tbvisi_visita_id=detVisi.tbvisi_visita_id
+			and ('".$fech."' between visi.fechIniVisi and visi.fechFinVisi) and visi.idVendeVisita='".$ven."'";
+	return $sql;
+}
+
+public function getVisitasxFechxClixVen($fech,$cli,$ven)
+{
+	$sql="select distinct
+			visi.tbvisi_visita_id,
+			visi.idVendeVisita,
+			visi.fechIniVisi,
+			visi.fechFinVisi 
+			from tbvisi_visita as visi,tbvisi_detalle_visita as detVisi,empresa as emp,persona as per where  
+			visi.idVendeVisita=per.persona_id and visi.tbvisi_visita_id=detVisi.tbvisi_visita_id and 
+			detVisi.idEmpVisita=emp.empresa_id and emp.emp_nombre='".$cli."' and ('".$fech."' between 
+			visi.fechIniVisi and visi.fechFinVisi) and visi.idVendeVisita='".$ven."'";
+	return $sql;
+}
+
+public function getVisitasxFech($fech)
+{
+	$sql="select * from tbvisi_visita where '".$fech."' between fechIniVisi and fechFinVisi";
+	return $sql;
+}
+
+public function getVisitasxCli($cli)
+{
+	$sql="select distinct
+			visi.tbvisi_visita_id,
+			visi.idVendeVisita,
+			visi.fechIniVisi,
+			visi.fechFinVisi 
+			from tbvisi_visita as visi,tbvisi_detalle_visita as detVisi,empresa as emp where  
+			visi.tbvisi_visita_id=detVisi.tbvisi_visita_id and detVisi.idEmpVisita=emp.empresa_id and 
+			emp.emp_nombre='".$cli."'";
+	return $sql;
+}
+
+public function getVisitasxVen($ven)
+{
+	$sql="select distinct
+		 	visi.tbvisi_visita_id,
+			visi.idVendeVisita,
+			visi.fechIniVisi,
+			visi.fechFinVisi
+			from tbvisi_visita as visi inner join persona as per on visi.idVendeVisita=per.persona_id where 
+			visi.idVendeVisita='".$ven."'";
+	return $sql;
+}
+
+public function getYearVisitas()
+{
+	$sql="select distinct year(fechIniVisi) as fechaIni from tbvisi_visita";
+	return $sql;
+}
+
+public function insertPersona($nom,$ap1,$ap2,$tel,$email)
+{
+	$sql="insert into persona (pers_nombres,pers_apepat,pers_apemat,pers_telefono,pers_mail,pers_nacionalidad,
+			pers_sexo_id,pers_dir_ubigeo) values ('".$nom."','".$ap1."','".$ap2."','".$tel."','".$email."',0,0,0)";
+	return $sql;
+}
+
+public function insertContac($idPer,$idCli)
+{
+	$sql="insert into contacto (persona_id,empresa_id) values ('".$idPer."','".$idCli."')";
+	return $sql;
+}
+
+public function getEmailxNom($nomPer)
+{
+	$sql="select pers_mail from persona where concat(pers_nombres,' ',pers_apepat,' ',pers_apemat)='".$nomPer."'";
+	return $sql;
+}
+
+public function updateEmailxPer($nomPer,$email)
+{
+	$sql="update persona set pers_mail='".$email."' where concat(pers_nombres,' ',pers_apepat,' ',pers_apemat)='".$nomPer."'";
+	return $sql;
+}
+
+public function updateCoti($fechAdju,$impTipId,$idMone,$cotEst,$cotPri,$cotDes,$cotFechEmi,$cotFechVen,$cotRefe,$idContac,$idCli,$idCoti,$cotCond,$condPre,$condPlaz,$condPag,$condLug,$condGara,$condVali,$condPena,$condFian)
+{
+	$sql="update cotizacion set cliente_id='".$idCli."',contacto_id='".$idContac."',cot_referencia='".$cotRefe."',
+			cot_fec_emis='".$cotFechEmi."',cot_fec_venc='".$cotFechVen."',cot_descrip='".$cotDes."',cot_prioridad_id='".$cotPri."',
+			cot_estado_id='".$cotEst."',moneda_id='".$idMone."',imp_tipo_costo_id='".$impTipId."',cot_fec_adj='".$fechAdju."',
+			cot_cc_id='".$cotCond."',cot_cond_precios='".$condPre."',cot_cond_plazo_ent='".$condPlaz."',cot_cond_forma_pago='".$condPag."',
+			cot_cond_lugar_ent='".$condLug."',cot_cond_garantia='".$condGara."',cot_cond_validez='".$condVali."',cot_cond_penalidad='".$condPena."',
+			cot_cond_carta_fianza='".$condFian."' where cotizacion_id='".$idCoti."'";
+	return $sql;
+}
+
+public function updateCotiProye($idCoti,$nomProye)
+{
+	$sql="update cotizacion as coti,proyecto as proye set proye.proy_nombre='".$nomProye."' where coti.proyecto_id=proye.proyecto_id and 
+			coti.cotizacion_id='".$idCoti."'";
+	return $sql;
+}
+
+public function getReclaxId($id)
+{
+	$sql="select * from tbrecla_reclamo where tbrecla_reclamo_id='".$id."'";
+	return $sql;
+}
+
+public function updateReclaxId($tip,$fech,$contac,$recep,$respon,$des,$acci,$acciReli,$adjuRecla,$esta,$idEmp,$idRecla,$correPor)
+{ 
+	$sql="update tbrecla_reclamo set idTipReclamo='".$tip."',fechReclamo='".$fech."',idContacReclamo='".$contac."',
+			idPersoReclamo='".$recep."',idRespoReclamo='".$respon."',desReclamo='".$des."',acciReclamo='".$acci."',
+			acciReliReclamo='".$acciReli."',adjuReclamo='".$adjuRecla."',idEstaReclamo='".$esta."',idEmpReclamo='".$idEmp."',
+			correPor='".$correPor."' where tbrecla_reclamo_id='".$idRecla."'";
+	return $sql;
+}
+
+public function getMoneda()
+{
+	$sql="select * from moneda";
+	return $sql;
+}
+
+public function updateVisiGastos($idVisi,$moneId,$monPasa,$monHospe,$monAli,$monTrans)
+{
+	$sql="update tbvisi_visita set moneda_id='".$moneId."',pasaVisi='".$monPasa."',hospeVisi='".$monHospe."',alimeVisi='".$monAli."',
+			transInterVisi='".$monTrans."' where tbvisi_visita_id='".$idVisi."'";
+	return $sql;
+}
+
+public function insertEmp($ruc,$emp,$email,$web,$dire,$tel)
+{
+	$sql="insert into empresa (emp_ruc,emp_nombre,emp_email,emp_web,emp_direccion,emp_telef) values ('".$ruc."',
+			'".$emp."','".$email."','".$web."','".$dire."','".$tel."')";
+	return $sql;	
+}
+
+public function insertAnfEmp($idEmp)
+{
+	$sql="insert into anfi_empresa (empresa_id_padre,empresa_id,emp_perfil_id,bestado) values ('1','".$idEmp."','1','1')";
+	return $sql;
+}
+
+public function getMonedaxId($idEmp)
+{
+	$sql="select mon.mon_sigla from moneda as mon,tbvisi_visita as visi where mon.moneda_id=visi.moneda_id 
+			and tbvisi_visita_id='".$idEmp."'";
+	return $sql;
+}
+
+public function deleteDetVisixId($idVisi)
+{
+	$sql="delete from tbvisi_detalle_visita where tbvisi_visita_id='".$idVisi."'";
+	return $sql;
+}
+
+public function deleteVisixId($idVisi)
+{
+	$sql="delete from tbvisi_visita where tbvisi_visita_id='".$idVisi."'";
+	return $sql;
+}
+
+public function getRucCli($cli)
+{
+	$sql="select emp_ruc from empresa where emp_nombre='".$cli."'";
+	return $sql;
+}
+
+public function getTipDoc()
+{
+	$sql="select * from tbcu_tipdoc";
+	return $sql;
+}
+
+public function getBancos()
+{
+	$sql="select distinct ban.banco_nombre,ban.banco_id from banco as ban inner join cuenta as cuen on ban.banco_id=cuen.banco_id 
+			where cuen.bestado=1";
+	return $sql;
+}
+
+public function getCuentaxId($idBanco)
+{
+	$sql="select cuenta_id,cuenta_nro from v_cuenta where banco_id='".$idBanco."'";
+	return $sql;
+}
+
+public function getEstCuen()
+{
+	$sql="select * from  tbcu_esta";
+	return $sql;
+}
+
+public function insertCuxCobra($idCli,$numCom,$idMone,$tipDoc,$impor,$des,$fecha)
+{
+	$sql="INSERT INTO `tbcu_cuxcobra`(`idEmpCli`, `numCompro`, `idTipMone`, `idTipDoc`, `impor`, `descrip`, `fecha`) 
+			VALUES ('".$idCli."','".$numCom."','".$idMone."','".$tipDoc."','".$impor."','".$des."','".$fecha."')";
+	return $sql;
+}
+
+public function updateCuxCobra($idCli,$numCom,$idMone,$tipDoc,$impor,$des,$fecha,$idCu)
+{
+	$sql="UPDATE `tbcu_cuxcobra` set `idEmpCli`='".$idCli."', `numCompro`='".$numCom."', `idTipMone`='".$idMone."', 
+			`idTipDoc`='".$tipDoc."',`impor`='".$impor."',`descrip`='".$des."', `fecha`='".$fecha."' where idCuxCobra='".$idCu."'";
+	return $sql;
+}
+
+public function insertDetCuen($idCu,$fech,$mon,$idBan,$idEst)
+{
+	$sql="INSERT INTO `tbcu_det_cuxcobra`(`idCuxCobra`, `fecha`, `monto`, `idCuBanco`, `idCuEstado`) VALUES 
+			('".$idCu."','".$fech."','".$mon."','".$idBan."','".$idEst."')";
+	return $sql;
+}
+
+public function updateDetCuen($idCu,$fech,$mon,$idBan,$idEst,$idDet)
+{
+	$sql="UPDATE `tbcu_det_cuxcobra` set `idCuxCobra`='".$idCu."', `fecha`='".$fech."', `monto`='".$mon."', 
+			`idCuBanco`='".$idBan."', `idCuEstado`='".$idEst."' where idDetxCobra='".$idDet."'";
+	return $sql;
+}
+
+public function getEstCuxId($idEst)
+{
+	$sql="select descrip from tbcu_esta where idCuEstado='".$idEst."'";
+	return $sql;
+}
+
+public function getBancoxId($idCu)
+{
+	$sql="select ban.banco_nombre,cuen.cuenta_nro from banco as ban,v_cuenta cuen where 
+			ban.banco_id=cuen.banco_id and cuen.cuenta_id='".$idCu."'";
+	return $sql;
+}
+
+public function getCuxCobra()
+{
+	$sql="SELECT * FROM `tbcu_cuxcobra`";
+	return $sql;
+}
+
+public function getCuxCobraxRuc($ruc)
+{
+	$sql="SELECT cuen.`idCuxCobra`, cuen.`idEmpCli`, cuen.`numCompro`, cuen.`idTipMone`, cuen.`idTipDoc`, cuen.`impor`, 
+			cuen.`descrip`, cuen.`fecha` FROM `tbcu_cuxcobra` as cuen,empresa as emp WHERE cuen.idEmpCli=emp.empresa_id
+			and emp.emp_ruc='".$ruc."'";
+	return $sql;
+}
+
+public function getCuxCobraxCli($cli)
+{
+	$sql="SELECT cuen.`idCuxCobra`, cuen.`idEmpCli`, cuen.`numCompro`, cuen.`idTipMone`, cuen.`idTipDoc`, cuen.`impor`, 
+			cuen.`descrip`, cuen.`fecha` FROM `tbcu_cuxcobra` as cuen,empresa as emp WHERE cuen.idEmpCli=emp.empresa_id
+			and emp.emp_nombre like '%".$cli."%'";
+	return $sql;
+}
+
+public function getCuxCobraxId($idCu)
+{
+	$sql="SELECT * FROM `tbcu_cuxcobra` where idCuxCobra='".$idCu."'";
+	return $sql;
+}
+
+public function getDocCuxId($idTip)
+{
+	$sql="SELECT * FROM `tbcu_tipdoc` where idTipDoc='".$idTip."'";
+	return $sql;
+}
+
+public function getMonxId($idMon)
+{
+	$sql="select mon.mon_sigla from moneda as mon where mon.moneda_id='".$idMon."'";
+	return $sql;
+}
+
+public function getCuentaxIdBan($idBan)
+{
+	$sql="select distinct cuen.cuenta_nro,cuen.cuenta_id from v_cuenta as cuen,tbcu_det_cuxcobra as detxcobra, 
+			banco as ban where cuen.banco_id=ban.banco_id and cuen.banco_id='".$idBan."' and cuen.bestado=1";
+	return $sql;
+}
+
+public function getDetCuenxId($idCu)
+{
+	$sql="SELECT detCu.idDetxCobra,detCu.idCuxCobra, detCu.fecha, detCu.monto, detCu.idCuBanco, detCu.idCuEstado
+			FROM tbcu_det_cuxcobra AS detCu INNER JOIN tbcu_cuxcobra AS cu ON detCu.idCuxCobra = cu.idCuxCobra
+			WHERE cu.idCuxCobra='".$idCu."'";
+	return $sql;
+}
+
+public function eliDetCuxCob($idDet)
+{
+	$sql="delete from tbcu_det_cuxcobra where idDetxCobra='".$idDet."'";
+	return $sql;
+}
+
+public function getDetCuxId($idDet)
+{
+	$sql="SELECT * FROM `tbcu_det_cuxcobra` WHERE idDetxCobra='".$idDet."'";
+	return $sql;
+}
+
+public function getIdBanxIdCu($idDet)
+{
+	$sql="select cuen.banco_id from v_cuenta as cuen,tbcu_det_cuxcobra as cuxcob where cuxcob.idCuBanco=cuen.cuenta_id
+			and cuxcob.idDetxCobra='".$idDet."'";
+	return $sql;
+}
+
+public function getSumCuCance($idCu)
+{
+	$sql="select sum(detCu.monto) as sumCance from tbcu_cuxcobra as cuen inner join tbcu_det_cuxcobra as detCu
+			on cuen.idCuxCobra=detCu.idCuxCobra where cuen.idCuxCobra='".$idCu."' and detCu.idCuEstado=2";
+	return $sql;
+}
+
+public function getCuenxPagxFech($fechIni,$fechFin)
+{
+	$sql="select let.letra_monto as mont,mone.mon_sigla as mone,let.letra_id as letId,emp.emp_nombre as empre,
+			DATE_FORMAT(let.letra_fec_ini,'%d-%m-%y') as fechEmi,DATE_FORMAT(let.letra_fec_ini,'%y') as fechEmiYear 
+			from letra as let inner join empresa as emp on emp.empresa_id=let.proveedor_id inner join moneda as mone 
+			on mone.moneda_id=let.moneda_id where let.letra_tipo_id=2 and (let.letra_fec_ini between '".$fechIni."' 
+			and '".$fechFin."') and let.bestado=1";
+	return $sql;
+}
+
+public function getCuenxPag()
+{
+	$sql="select let.letra_monto as mont,mone.mon_sigla as mone,let.letra_id as letId,emp.emp_nombre as empre,
+			DATE_FORMAT(let.letra_fec_ini,'%d-%m-%y') as fechEmi,DATE_FORMAT(let.letra_fec_ini,'%y') as fechEmiYear 
+			from letra as let inner join empresa as emp on emp.empresa_id=let.proveedor_id inner join moneda as mone 
+			on mone.moneda_id=let.moneda_id where let.letra_tipo_id=2 and let.bestado=1";
+	return $sql;
+}
+
+public function getDetProf($id)
+{
+	$sql="select prof.imp_prof_nro as codProf,mone.mon_sigla as moneda,prod.prod_nombre as nomProd,profDet.prod_cantidad as cantProf,profDet.precio_fin as preUni,
+			profDet.prod_almacen_valor as gasAlmacen,profDet.prod_fob_valor,profDet.prod_cif_valor,profDet.prod_nac_valor 
+			from imp_proforma_detalle as profDet,producto as prod,moneda as mone,imp_proforma as prof where 
+			profDet.imp_proforma_id='".$id."' and prod.producto_id=profDet.producto_id and mone.moneda_id=prof.moneda_id and 
+			profDet.imp_proforma_id=prof.imp_proforma_id";
+	return $sql;
+}
+
+public function getDetGast($id)
+{
+	$sql="select imp_prof_gasto_nombre as gasto,imp_prof_gasto_valor as gastoVal from
+			imp_prof_gasto as gast,imp_proforma_detalle as detProf where detProf.imp_proforma_id='".$id."' 
+			and detProf.imp_prof_det_id=gast.imp_prof_det_id and gast.bestado=1";
+	return $sql;
+}
+ 
+public function getGeneProf2($id)
+{
+	$sql="select distinct
+			proye.proy_nombre as titProye,
+			emp.emp_nombre as clien,
+			proye.proy_nombre as proyec, 
+			concat(per.pers_nombres,' ',per.pers_apepat,' ',per.pers_apemat) as vende, 
+			cotiz.cot_nro as numCoti 
+			from 
+			proyecto as proye,
+			empresa as emp,
+			persona as per,
+			imp_proforma as prof,
+			trabajador as trab,
+			cotizacion as cotiz 
+			where 
+			cotiz.cotizacion_id='".$id."' and
+			prof.cotizacion_id=cotiz.cotizacion_id and 
+			cotiz.proyecto_id=proye.proyecto_id and 
+			prof.cliente_id=emp.empresa_id and
+			prof.operador_id_atiende=trab.trabajador_id and
+			trab.persona_id=per.persona_id";
+	return $sql;
+}
+
+public function getDetProf2($idCoti)
+{
+	#round((cotiz.cot_margen/100)*(profDet.precio_fin*profDet.prod_cantidad),2) as marVen, # redondear decimales
+	$sql="select distinct
+			prod.prod_nombre as proNom,
+			'n' as exwork,
+			'n' as fob,
+			'n' as cif,
+			'n' as ddp, 
+			'n' as gasAdi,
+			cotDet.pro_precio_compra*cotDet.pro_cantidad as cosTot,
+			cotDet.pro_precio_compra as cosUni,
+			cotDet.cot_det_margen as marVenPor,
+			cotDet.pro_precio_venta as preUni,
+			cotDet.pro_precio_venta*cotDet.pro_cantidad as preTot,
+			cotiz.cot_cond_plazo_ent as plazEnt,
+			cotiz.cot_cond_forma_pago as formPag
+			from
+			imp_proforma as prof,
+			cotizacion as cotiz,
+			cot_detalle as cotDet,
+			producto as prod
+			where
+			cotiz.cotizacion_id='".$idCoti."' and
+			cotiz.cotizacion_id=cotDet.cotizacion_id and
+			cotiz.cotizacion_id=prof.cotizacion_id and
+			prod.producto_id=cotDet.producto_id and
+		   cotiz.bestado=1 and cotDet.bestado=1 
+		   GROUP BY cotDet.pro_precio_venta";
+	return $sql;
+}
+
+
+public function getDetProf3($idCoti)
+{
+	$sql="select
+			prof.imp_proforma_id as profId,
+			sum(profDet.prod_ew_valor) as exwork,
+			sum(profDet.prod_fob_valor) as fob,
+			sum(profDet.prod_cif_valor) as cif,
+			sum(profDet.prod_cif_valor+profDet.prod_nac_valor) as ddp
+			from
+			imp_proforma_detalle as profDet,
+			imp_proforma as prof,
+			cotizacion as cotiz
+			where
+			cotiz.cotizacion_id='".$idCoti."' and
+			cotiz.cotizacion_id=prof.cotizacion_id and
+			prof.imp_proforma_id=profDet.imp_proforma_id and
+		   cotiz.bestado=1 and profDet.bestado=1
+		   GROUP BY prof.imp_proforma_id";
+	return $sql;
+}
+
+
+
+public function getDetProf4($idProf)
+{
+	$sql="select
+			sum(profGast.imp_prof_gasto_valor) as gasAdi
+			from
+			imp_proforma as prof,
+			imp_proforma_detalle as profDet,
+			imp_prof_gasto as profGast
+			where
+			prof.imp_proforma_id='".$idProf."' and
+			prof.imp_proforma_id=profDet.imp_proforma_id and
+		   (profDet.imp_prof_det_id=profGast.imp_prof_det_id 
+		   or profGast.imp_prof_gasto_valor=0) and
+		   profGast.bestado=1 GROUP BY prof.imp_proforma_id";
+	return $sql;
+}
+
+public function getDirexEmp($emp)
+{
+	$sql="select emp_direccion as dire from empresa where emp_nombre='".$emp."'";
+	return $sql;
+}
+
+public function getEmpxRucDes($emp)
+{
+	$sql="select empresa_id as idEmp where concat(emp_ruc,' - ',emp_nombre)='".$emp."'";
+	return $sql;
+}
+
+/*---------------------------------------------*/
+// QUERY SQL PARA EL MODULO DE OBSERVACION
+/*---------------------------------------------*/
+
+public function getConforObs($tab,$val,$clav)
+{
+	$sql="select ".$val." as valConfor,".$clav." as idConfor from ".$tab;
+	return $sql; 
+}
+
+public function getNumFormat()
+{
+	$sql="select * from tbobs_format";
+	return $sql;
+}
+
+public function getVerFormat()
+{
+	$sql="select * from tbobs_versi";
+	return $sql;
+}
+
+public function getPagFormat()
+{
+	$sql="select * from tbobs_pag";
+	return $sql;
+}
+
+public function insertObs(	$idTipObs,$idRespCarg,$idConforImp,$idConforEfec,$idConforAc,
+									$idUsuSesi,$idEmp,$idContac,$idCodFormat,$idCodVersi,$idCodPag,$fechContro,
+									$acciCorre,$fechLim,$fechVeri,$fechAcorVeri,$fechVeriEfec,$fechEfecSati,
+									$eviObje,$fechCie,$fechSegui,$desObser)
+{
+	$sql="INSERT INTO `tbobs_observ`(`idTipObs`, `idRespCarg`, `idConforImp`, `idConforEfec`, 
+			`idConforAc`, `idUsuSesi`, `idEmp`, `idContac`, `idCodFormat`, `idCodVersi`, `idCodPag`, `fechContro`, `acciCorre`, 
+			`fechLim`, `fechVeri`, `fechAcorVeri`, `fechVeriEfec`, `fechEfecSati`, `eviObje`, `fechCie`, `fechSegui`,
+			`desObserv`) VALUES 
+			('".$idTipObs."','".$idRespCarg."','".$idConforImp."','".$idConforEfec."','".$idConforAc."',
+			'".$idUsuSesi."','".$idEmp."','".$idContac."','".$idCodFormat."','".$idCodVersi."','".$idCodPag."','".$fechContro."',
+			'".$acciCorre."','".$fechLim."','".$fechVeri."','".$fechAcorVeri."','".$fechVeriEfec."','".$fechEfecSati."',
+			'".$eviObje."','".$fechCie."','".$fechSegui."','".$desObser."')";
+			
+	return $sql;
+}
+
+public function updateObs($idInsert,$idGene)
+{
+	$sql="update tbobs_observ set numInfor='".$idGene."' where idObserv='".$idInsert."'";
+	return $sql;
+}
+
+public function getObsRecla()
+{
+	$sql="SELECT 
+			obsRecla.idObserv AS idObs,
+			obsRecla.numInfor AS codNum, 
+			obsRecla.desObserv AS desSitu, 
+			obsRecla.acciCorre AS correc, 
+			cli.emp_nombre AS cliEmp, 
+			concat( per.pers_nombres, ' ', per.pers_apepat ) AS contac, 
+			concat( per2.pers_nombres, ' ', per2.pers_apepat ) AS respo, 
+			versi.desVersi AS regis, 
+			'-' AS docAsoc, 
+			obsRecla.fechContro AS controFre, '-' AS acci
+			FROM tbobs_observ AS obsRecla
+			INNER JOIN empresa AS cli ON cli.empresa_id = obsRecla.idEmp
+			INNER JOIN persona AS per ON per.persona_id = obsRecla.idContac
+			INNER JOIN persona AS per2 ON per2.persona_id = obsRecla.idRespCarg
+			inner join tbobs_versi as versi on versi.idCodVersi=obsRecla.idCodVersi
+			WHERE obsRecla.idTipObs =1";
+	return $sql;
+}
+
+public function getObsReclaxCod($cod)
+{
+	$sql="SELECT
+			obsRecla.idObserv AS idObs, 
+			obsRecla.numInfor AS codNum, 
+			obsRecla.desObserv AS desSitu, 
+			obsRecla.acciCorre AS correc, 
+			cli.emp_nombre AS cliEmp, 
+			concat( per.pers_nombres, ' ', per.pers_apepat ) AS contac, 
+			concat( per2.pers_nombres, ' ', per2.pers_apepat ) AS respo, 
+			versi.desVersi AS regis, 
+			'-' AS docAsoc, 
+			obsRecla.fechContro AS controFre, '-' AS acci
+			FROM tbobs_observ AS obsRecla
+			INNER JOIN empresa AS cli ON cli.empresa_id = obsRecla.idEmp
+			INNER JOIN persona AS per ON per.persona_id = obsRecla.idContac
+			INNER JOIN persona AS per2 ON per2.persona_id = obsRecla.idRespCarg
+			inner join tbobs_versi as versi on versi.idCodVersi=obsRecla.idCodVersi
+			WHERE obsRecla.idTipObs =1 and obsRecla.numInfor='".$cod."'";
+	return $sql;
+}
+
+public function getObsReclaxCli($cli)
+{
+	$sql="SELECT 
+			obsRecla.idObserv AS idObs,
+			obsRecla.numInfor AS codNum, 
+			obsRecla.desObserv AS desSitu, 
+			obsRecla.acciCorre AS correc, 
+			cli.emp_nombre AS cliEmp, 
+			concat( per.pers_nombres, ' ', per.pers_apepat ) AS contac, 
+			concat( per2.pers_nombres, ' ', per2.pers_apepat ) AS respo, 
+			versi.desVersi AS regis, 
+			'-' AS docAsoc, 
+			obsRecla.fechContro AS controFre, '-' AS acci
+			FROM tbobs_observ AS obsRecla
+			INNER JOIN empresa AS cli ON cli.empresa_id = obsRecla.idEmp
+			INNER JOIN persona AS per ON per.persona_id = obsRecla.idContac
+			INNER JOIN persona AS per2 ON per2.persona_id = obsRecla.idRespCarg
+			inner join tbobs_versi as versi on versi.idCodVersi=obsRecla.idCodVersi
+			WHERE obsRecla.idTipObs =1 and cli.emp_nombre like '%".$cli."%'";
+	return $sql;
+}
+
+public function deleteObsReclaxId($id)
+{
+	$sql="delete from tbobs_observ where idObserv='".$id."'";
+	return $sql;
+}
+
+public function getObsReclaxIdObs($idObs)
+{
+	$sql="select * 
+			from tbobs_observ as obsRecla
+			WHERE 
+			obsRecla.idTipObs=1 and 
+			obsRecla.idObserv='".$idObs."'";
+	return $sql;
+}
+
+public function updateObsReclaxId($idObs,$idTipObs,$idRespCarg,$idConforImp,$idConforEfec,$idConforAc,
+											$idUsuSesi,$idEmp,$idContac,$idCodFormat,$idCodVersi,$idCodPag,$fechContro,
+											$acciCorre,$fechLim,$fechVeri,$fechAcorVeri,$fechVeriEfec,$fechEfecSati,
+											$eviObje,$fechCie,$fechSegui,$desObser)
+{
+	$sql="update tbobs_observ 
+			set 
+			idTipObs='".$idTipObs."',
+			idRespCarg='".$idRespCarg."',
+			idConforImp='".$idConforImp."', 
+			idConforEfec='".$idConforEfec."',
+			idConforAc='".$idConforAc."', 
+			idUsuSesi='".$idUsuSesi."', 
+			idEmp='".$idEmp."', 
+			idContac='".$idContac."',
+			idCodFormat='".$idCodFormat."', 
+			idCodVersi='".$idCodVersi."',
+			idCodPag='".$idCodPag."', 
+			fechContro='".$fechContro."',
+			acciCorre='".$acciCorre."',
+			fechLim='".$fechLim."', 
+			fechVeri='".$fechVeri."', 
+			fechAcorVeri='".$fechAcorVeri."',
+			fechVeriEfec='".$fechVeriEfec."',
+			fechEfecSati='".$fechEfecSati."', 
+			eviObje='".$eviObje."',
+			fechCie='".$fechCie."',
+			fechSegui='".$fechSegui."',
+			desObserv='".$desObser."' 
+			where 
+			idObserv='".$idObs."'";
+	return $sql;
+}
+
+public function geneReporObsRecla($idObs)
+{
+	$sql="SELECT 
+			obsRecla.idObserv AS idObs,
+			obsRecla.numInfor AS codNum, 
+			obsRecla.desObserv AS desSitu, 
+			obsRecla.acciCorre AS correc,
+			obsRecla.eviObje as eviObje,
+			cli.emp_nombre AS cliEmp, 
+			concat( per.pers_nombres, ' ', per.pers_apepat ) AS contac, 
+			concat( per2.pers_nombres, ' ', per2.pers_apepat ) AS respo, 
+			versi.desVersi AS regis, 
+			'-' AS docAsoc, 
+			obsRecla.fechContro AS controFre, '-' AS acci,
+			obsRecla.fechLim as fechLim,
+			obsRecla.fechVeri as fechVeri,
+			obsRecla.fechAcorVeri as fechAcorVeri,
+			obsRecla.fechVeriEfec as fechVeriEfec,
+			obsRecla.fechEfecSati as fechEfecSati,
+			obsRecla.fechCie as fechCie,
+			obsRecla.fechSegui as fechSegui,
+			conforImp.desConfir as desConforImp,
+			conforImp2.desConfir as desConforEfec,
+			conforImp3.desConfir as desConforAc 
+			FROM tbobs_observ AS obsRecla
+			INNER JOIN empresa AS cli ON cli.empresa_id = obsRecla.idEmp
+			INNER JOIN persona AS per ON per.persona_id = obsRecla.idContac
+			INNER JOIN persona AS per2 ON per2.persona_id = obsRecla.idRespCarg
+			inner join tbobs_versi as versi on versi.idCodVersi=obsRecla.idCodVersi
+			inner join tbobs_conforimp as conforImp on obsRecla.idConforImp=conforImp.idConforImp
+			inner join tbobs_conforimp as conforimp2 on obsRecla.idConforEfec=conforimp2.idConforImp
+			inner join tbobs_conforimp as conforimp3 on obsRecla.idConforAc=conforimp3.idConforImp
+			WHERE obsRecla.idTipObs =1 and obsRecla.idObserv='".$idObs."'";
+	return $sql;
+}
+
+public function insertObsQue($idTipObs,$idRespCarg,$idUsuSesi,$idEmp,$idContac,$fechContro,
+									  $desObserv,$soluInme)
+{
+	$sql="INSERT INTO `tbobs_observ`(`idTipObs`,`idRespCarg`,`idUsuSesi`,`idEmp`, 
+			`idContac`,`fechContro`,`desObserv`,`soluInme`) 
+			VALUES 
+			('".$idTipObs."','".$idRespCarg."','".$idUsuSesi."','".$idEmp."','".$idContac."','".$fechContro."',
+			'".$desObserv."','".$soluInme."')";
+	return $sql;
+}
+
+public function getObsQueja()
+{
+	$sql="SELECT 
+			obsRecla.idObserv AS idObs,
+			obsRecla.numInfor AS codNum, 
+			obsRecla.desObserv AS desSitu, 
+			obsRecla.soluInme AS soluInme,
+			cli.emp_nombre AS cliEmp, 
+			concat( per.pers_nombres, ' ', per.pers_apepat ) AS contac, 
+			concat( per2.pers_nombres, ' ', per2.pers_apepat ) AS respo, 
+			'-' AS docAsoc, 
+			obsRecla.fechContro AS controFre, 
+			'-' AS acci
+			FROM tbobs_observ AS obsRecla
+			INNER JOIN empresa AS cli ON cli.empresa_id = obsRecla.idEmp
+			INNER JOIN persona AS per ON per.persona_id = obsRecla.idContac
+			INNER JOIN persona AS per2 ON per2.persona_id = obsRecla.idRespCarg
+			WHERE obsRecla.idTipObs =2";
+	return $sql;
+}
+
+public function getObsQuejaxCod($cod)
+{
+	$sql="SELECT 
+			obsRecla.idObserv AS idObs,
+			obsRecla.numInfor AS codNum, 
+			obsRecla.desObserv AS desSitu, 
+			obsRecla.soluInme AS soluInme,
+			cli.emp_nombre AS cliEmp, 
+			concat( per.pers_nombres, ' ', per.pers_apepat ) AS contac, 
+			concat( per2.pers_nombres, ' ', per2.pers_apepat ) AS respo, 
+			'-' AS docAsoc, 
+			obsRecla.fechContro AS controFre, 
+			'-' AS acci
+			FROM tbobs_observ AS obsRecla
+			INNER JOIN empresa AS cli ON cli.empresa_id = obsRecla.idEmp
+			INNER JOIN persona AS per ON per.persona_id = obsRecla.idContac
+			INNER JOIN persona AS per2 ON per2.persona_id = obsRecla.idRespCarg
+			WHERE obsRecla.idTipObs=2 and obsRecla.numInfor='".$cod."'";
+	return $sql;
+}
+
+public function getObsQuejaxCli($cli)
+{
+	$sql="SELECT 
+			obsRecla.idObserv AS idObs,
+			obsRecla.numInfor AS codNum, 
+			obsRecla.desObserv AS desSitu, 
+			obsRecla.soluInme AS soluInme,
+			cli.emp_nombre AS cliEmp, 
+			concat( per.pers_nombres, ' ', per.pers_apepat ) AS contac, 
+			concat( per2.pers_nombres, ' ', per2.pers_apepat ) AS respo, 
+			'-' AS docAsoc, 
+			obsRecla.fechContro AS controFre, 
+			'-' AS acci
+			FROM tbobs_observ AS obsRecla
+			INNER JOIN empresa AS cli ON cli.empresa_id = obsRecla.idEmp
+			INNER JOIN persona AS per ON per.persona_id = obsRecla.idContac
+			INNER JOIN persona AS per2 ON per2.persona_id = obsRecla.idRespCarg
+			WHERE obsRecla.idTipObs=2 and cli.emp_nombre like '%".$cli."%'";
+	return $sql;
+}
+
+public function getObsQuexIdObs($idObs)
+{
+	$sql="select * from tbobs_observ as obsRecla
+			WHERE 
+			obsRecla.idTipObs=2 and 
+			obsRecla.idObserv='".$idObs."'";
+	return $sql;
+}
+
+public function updateObsQue($idObserv,$idTipObs,$idRespCarg,$idUsuSesi,$idEmp,$idContac,$fechContro,
+									  $desObserv,$soluInme)
+{
+	$sql="UPDATE INTO tbobs_observ set
+			`idTipObs`='".$idTipObs."',
+			`idRespCarg`='".$idRespCarg."',
+			`idUsuSesi`='".$idUsuSesi."',
+			`idEmp`='".$idEmp."', 
+			`idContac`='".$idContac."',
+			`fechContro`='".$fechContro."',
+			`desObserv`='".$desObserv."',
+			`soluInme`='".$soluInme."' 
+			 where idObserv='".$idObserv."'";
+	return $sql;
+}
+
+}
+?>

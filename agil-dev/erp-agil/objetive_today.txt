@@ -1,0 +1,221 @@
+/******************************************************************************/
+	# OBJETIVO EW - ERP JANO :]
+/******************************************************************************/
+
+	#MODULOS
+
+		/*--------------------------------------*/
+		#[1] MODULO NO CONFORMIDADES - OBJETIVE
+		/*--------------------------------------*/
+
+			1.  Objetive: modulo no conformidad
+			    Modulo: NO CONFORMIDAD
+			    Inizialited: d1: 27/11/2014 [**started**]
+				   		    d2: 28/11/2014 [2 task-list]
+				   		    d3: 01/12/2014 [4 task-list]
+				   		    d4: 02/12/2014 [4 task-list]
+				   		    d5: 03/12/2014 [4 task-list]
+				   		    d6: 04/12/2014 [2 task-list]
+				   		    d7: 05/12/2014
+				   		    d8: 06/12/2014
+				   		    d9: 07/12/2014
+				   		    d10: 08/12/2014
+				   		    d11: 09/12/2014
+				   		    d12: 10/12/2014
+				   		    d13: 11/12/2014
+				   		    d14: 12/12/2014 [**finalized**]
+
+			2.  Objetive: observacion de proceso en no conformidad
+			    Module: NO CONFORMIDAD
+				Inizialited: d1: 23/12/2014 [**started**]
+								 26/12/2014 [3 task-list]
+										    [**finalized**]
+
+			3. Objetive: medidas preventivas en no conformidades
+		   	   Module: NO CONFORMIDAD 
+		   	   User: **cnicho**
+		   	   Inizialited: d1: 08/01/2015 [**started**]
+		   	   				d2: 12/01/2015
+		   	   				d3: 14/01/2015 [3 backlog | sprint #7]
+
+		   	4. Objetive: campo y filtro origen
+		   	   Module: NO CONFORMIDAD
+		   	   User:**cnicho**
+		   	   Inizialited: d1: 14/01/2015 [**started**]
+		   	   			    d2: 15/01/2015 [3 task-list | sprint #8]
+		   	   			    			   [**finalized**]
+
+		/*--------------------------------------*/
+		#[2] MODULO VISITAS - OBJETIVE
+		/*--------------------------------------*/
+
+			1. Objetive: Añadir detalle de pasajes a modulo visitas
+			   Modulo: VISITAS
+			   Inizialited: d1: 13/11/2014 [**started**] [5 task-list]
+			   		   		d2: 14/11/2014 [12 task-list]
+			   		   		d3: 17/11/2014 [5 task-list]
+			   		  		d4: 18/11/2014 [2 task-list]
+			   		   				 		 [2 task-list]
+			   		   		d5: 19/11/2014 [2 task-list]
+			   		   		d6: 20/11/2014 [3 task-list]
+			   		   		d7: 21/11/2014 [8 task-list]
+			   		   		d8: 24/11/2014 [**finalized**]
+
+			2. Objetive: añadir observaciones de usuarios modulo visita
+		       Modulo: VISITA
+			   Inizialited: d1: 15/12/2014 [**started**]
+					        d2: 16/12/2014 [2 task-list]
+					        d3: 17/12/2014 [4 task-list]
+					        			   [**finalized**]							    
+
+		/*--------------------------------------*/
+		#[3] MODULO GESTION DOCUMENTOS - OBJETIVE
+		/*--------------------------------------*/
+
+			1. Objetive: Modulo gestion de documentos
+		   Module: GESTION DOCUMENTOS
+		   Inizialited: d1: 10/11/2014 [**started**] [2 task-list]
+		   		   		d2: 11/11/2014 [4 task-list]
+		   		   		d3: 12/11/2014 [4 task-list]
+		   		   		d4: 24/11/2014 [2 task-list]
+		   		   		d5: 25/11/2014 [4 task-list]
+		   		   		d6: 26/11/2014 [4 task-list]
+		   		   		d7: 27/11/2014 [4 task-list] [**stop**]
+
+		/*--------------------------------------*/
+		#[4] MODULO CENTRO COSTO => FINANZAS - OBJETIVE
+		/*--------------------------------------*/
+
+		/*--------------------------------------*/
+		#[5] MODULO ORDENES - OBJETIVE
+		/*--------------------------------------*/
+
+		/*--------------------------------------*/
+		#[6] MODULO PRODUCTOS - OBJETIVE
+		/*--------------------------------------*/
+
+		/*----------------------------------------*/
+		#[7] MODULO COTIZACION - OBJETIVE
+		/*---------------------------------------*/
+
+			1. Objetive: Incluir notas de pedidos
+			   Module: MODULO COTIZACION
+			   User:---
+			   Initialized: d1: 20/09/2014 [**started**]
+					   		d2: 21/09/2014
+					   		d3: 22/09/2014
+					   		d4: 23/09/2014
+					   		d5: 24/09/2014 [sprint]
+					   		d6: 25/09/2014
+					   		d7: 26/09/2014 [sprint]
+					   		d8: 29/09/2014
+					   		d9: 30/09/2014 [**finalized**]
+			
+			2. Objetive: Modulo Cotizaciones de Proyectos
+			   Module: MODULO COTIZACION
+			   User:---
+			   Initialized: d1: 30/09/2014 [**started**]
+					   		d2: 01/10/2014
+					   		d3: 02/10/2014 [sprint]
+					   		d4: 03/10/2014
+					  		d5: 06/10/2014
+					   		d6: 14/10/2014 [**finalized**]
+
+			3. Objetive: Modificar formatos de ordenes,cotizaciones y solicitudes
+		   			 	 ademas verificar seleccion de empresas al guardar
+			   Module: COTIZACION
+			   User:----
+			   Inizialited: d1: 5/11/2014 [**started**] [3 task-list]
+			   		   		d2: 6/11/2014 [**finalized**]
+
+			4. Objetive: verificar impresion de reporte solicitud cotizacion
+		   	   Modulo: COTIZACION
+		   	   User:----
+		       Inizialited: d1: 24/11/2014 [**started**] []
+		   		   		    d2: 25/11/2014 [**finalized**]
+
+		   	5. Objetive: Ordenar items desde valor indicado
+		   	   Module: COTIZACION
+		   	   User: **Roner**
+		   	   Inizialited: d1: 07/01/2015 [**started**]
+		   	   				d2: 08/01/2015 [sprint 20 => 2 task-list]
+		   	   							   [**finalized**]
+
+		/*--------------------------------------*/
+		#[8] MODULO SEGUIMIENTO - OBJETIVE
+		/*--------------------------------------*/
+
+		/*--------------------------------------*/
+		#[9] MODULO CENTRO COSTO - OBJETIVE
+		/*--------------------------------------*/
+		   
+			1. Objetive: Cartas & Fianzas & Centro de costo
+			   Module: CENTRO COSTO
+			   Initialized: d1: 22/10/2014 [**started**]
+					  		d2: 23/10/2014	
+					   		d3: 24/10/2014
+					   		d4: 27/10/2014 [6 task-list]
+					   		d5: 28/10/2014 [5 task-list]
+					   		d6: 29/10/2014 [3 task-list] 
+					   		d7: 30/10/2014 [3 task-list]
+						    d8: 31/10/2014
+						    d9: 03/11/2014
+						    d10: 04/11/2014 [5 task-list]
+						    d11: 05/11/2014
+
+			2. Objetive: carga y manipulacion de centro de costos
+			   Module: CENTRO COSTO
+			   Inizialited: d1: 18/12/2014 [**started**]
+										   [3 backlogs]
+										   [**finalized**]
+
+			3. Objetive: apertura de centro de costos anuales
+			   Module: CENTRO COSTO
+			   Inizialited: d1: 22/12/2014 [**started**]
+										   [2 task-list]
+							d2: 23/12/2014 [2 task-list]
+										   [**finalized**]
+
+			17. Objetive: asignar ordenes a centros
+				Module: CENTRO DE COSTO
+				Inicio: d1: 05/01/2014 [**started**]
+						    06/01/2015 [ 3 task-list - sprint 5 ]
+
+		/*---------------------------------------*/	   		   		
+		#[10] MODULO ALMACEN - OBJETIVE
+		/*--------------------------------------*/
+				   
+			1. Objetive: Desarrollo de requerimientos del Modulo Almacen
+			   Module: MODULO ALMACEN
+			   Initialized: d1: 14/10/2014 [**started**]
+					   		d2: 15/10/2014
+					   		d3: 16/10/2014
+					   		d4: 17/10/2014
+					   		d5: 20/10/2014 [**finalized**]
+
+			2. Objetive: filtrar referencia de equipos por numero de serie
+			    Module: ALMACEN
+				Inizialited: d1: 29/12/2014 [**started**]
+								30/12/2014 [3 task-list]
+										   [**finalized**]
+
+		/*--------------------------------------*/
+		#[11] MODULO CALENDARIO - OBJETIVE
+		/*--------------------------------------*/
+
+		/*--------------------------------------*/
+		#[12] MODULO CUMPLEAÑOS - OBJETIVE
+		/*--------------------------------------*/
+
+			1. Objetive: Evaluar cumpleaños de trabajadores y enviar email
+			   Module: Cumpleaños
+			   Inizialited: d1: 16/01/2015 [**started**]
+			   				d2: 19/01/2015 [3 tasklist - sprint #1]
+			   							   [**finalized**]
+
+	# OTROS
+
+		1. Objetive: Actividades - OTROS
+		   Module: OTROS
+		   Initialized: d1: 22/10/2014 [**started**]
+				   		d2: 23/10/2014 [**finalized**]

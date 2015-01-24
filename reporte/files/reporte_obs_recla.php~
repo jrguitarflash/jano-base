@@ -1,0 +1,331 @@
+<?php
+
+session_start();
+
+header("Content-Type: text/html;charset=utf-8");
+
+require('../clases/fpdf/fpdf.php');
+require('../conf.php');
+require_once('../clases/sql/sql.class.php');
+require_once('../clases/negocio/negocio.class.php');
+
+
+class PDF extends FPDF
+{
+	
+//pie del reporte
+function footer()
+{
+	//posicion a 1,5 cm del inferior
+	$this->SetY(-15);
+	//fuente arial italic 8
+	$this->SetFont('Arial','I',8);
+	//numero de pagina
+	$this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+}
+
+function hora()
+{
+	$date = new DateTime();
+	$date->modify('-5 hour');
+	$fecha=$date->format('Y-m-d');
+	$hora=$date->format('H');
+	if($hora>12) 
+	{
+	$date->modify('-12 hour');
+	}
+	$hora=$date->format('H:i:s');
+	return $hora;
+
+}
+
+function fecha()
+{
+	$date = new DateTime();
+	$date->modify('-5 hour');
+	$fecha=$date->format('Y-m-d');
+	$hora=$date->format('H');
+	if($hora>12) 
+	{
+	$date->modify('-12 hour');
+	}
+	$hora=$date->format('H:i:s');
+	return $fecha;
+}
+	
+//cabecera de pagina
+function header()
+{
+	#$fecha=strftime( "%Y/%m/%d", time());
+	#$hora=strftime( "%H:%M:%S", time());
+	$date = new DateTime();
+	$date->modify('-5 hour');
+	$fecha=$date->format('Y-m-d');
+	$hora=$date->format('H');
+	if($hora>12) 
+	{
+		$date->modify('-12 hour');
+	}
+	$hora=$date->format('H:i:s');
+	$this->SetFont('Arial','',10);
+	$this->Ln(5);
+	$this->Image('../images/logo1.png',10,10,40);
+	$this->SetFont('Arial','B',12);
+	$this->Cell(50);
+	$this->Cell(120,10,'CONTROL DE ACCIONES CORRECTIVAS Y PREVENTIVAS',0,1,'L');
+	$this->Cell(120);
+	$this->Ln(15);
+}
+
+// Load data
+function LoadData($file)
+{
+    // Read file lines
+    $lines = file($file);
+    $data = array();
+    foreach($lines as $line)
+        $data[] = explode(';',trim($line));
+    return $data;
+}
+
+// Simple table
+function BasicTable($header, $data)
+{
+    // Header
+    foreach($header as $col)
+        $this->Cell(80,7,$col,1);
+    $this->Ln();
+    // Data
+    foreach($data as $row)
+    {
+        foreach($row as $col)
+            $this->Cell(80,6,$col,1);
+        $this->Ln();
+    }
+}
+
+// Better table
+function ImprovedTable($header, $data)
+{
+   // Column widths
+	$w = array(10,80,50,55);
+	$this->SetFont('Arial','',8);
+    // Header
+    for($i=0;$i<count($header);$i++)
+        $this->Cell($w[$i],7,mb_strtoupper($header[$i]),1,0,'C');
+    $this->Ln();
+    // Data
+    foreach($data as $row)
+    {
+    	
+    	$this->Cell($w[0],6,$row['id'],'LR',0,'L');
+    	$this->Cell($w[1],6,$row['empresa'],'LR',0,'L');
+    	$this->Cell($w[2],6,$row['contacto'],'LR',0,'L');
+    	$this->Cell($w[3],6,$row['observacion'],'LR',0,'L');
+     
+     $this->Ln();
+
+        
+    }
+    // Closing line
+    $this->Cell(array_sum($w),0,'','T');
+}
+
+// Colored table
+function FancyTable($header, $data)
+{
+    // Colors, line width and bold font
+    $this->SetFillColor(255,0,0);
+    $this->SetTextColor(255);
+    $this->SetDrawColor(128,0,0);
+    $this->SetLineWidth(.3);
+    $this->SetFont('','B');
+    // Header
+    #$w = array(40, 35, 40, 45);
+	$w = array(40,40,40);
+    for($i=0;$i<count($header);$i++)
+        $this->Cell($w[$i],7,$header[$i],1,0,'C',true);
+    $this->Ln();
+    // Color and font restoration
+    $this->SetFillColor(224,235,255);
+    $this->SetTextColor(0);
+    $this->SetFont('');
+    // Data
+    $fill = false;
+    foreach($data as $row)
+    {
+		$this->Cell($w[0],6,$row['idProducto'],'LR',0,'L',$fill);
+      $this->Cell($w[1],6,$row['desMarca'],'LR',0,'L',$fill);
+		$this->Cell($w[2],6,$row['desModel'],'LR',0,'L',$fill);
+	
+     $this->Ln();
+     $fill = !$fill;
+    }
+    // Closing line
+    $this->Cell(array_sum($w),0,'','T');
+}
+
+//funcion evaluar - _
+function evaCaracter($caract)
+{
+
+	if($caract=='_' || $caract=='-' ) 
+	{
+		$caractf=" ";
+	}
+	else
+	{
+		$caractf=ucfirst($caract);
+	}
+	return $caractf;
+}
+
+}
+
+
+//------------------------------------INICIO DE ESTRUCTURA DE REPORTE--------------------------------------------------------//
+
+
+		$pdf = new PDF();
+		$pdf->AliasNbPages();
+		
+		$pdf->SetFont('Arial','',14);
+		
+		
+		#$pdf->AddPage('Landscape','A4');
+		$pdf->AddPage('Portrait','A4');
+		
+
+//---------------------------------------------------HEADER DATOS---------------------------------------------//
+
+			$sql=sql::geneReporObsRecla($_GET['id']);
+			$dataObsRecla=negocio::getData($sql);
+
+
+			$pdf->Line(200,$pdf->GetY(),$pdf-> GetX(),$pdf-> GetY());
+			$pdf->Ln(3);
+			$pdf->SetDrawColor(0,0,0);
+		   $pdf->SetLineWidth(.3);
+		   $pdf->SetFont('Arial','B',10);
+		   $pdf->Cell(75,7,'Codigo N°: SGC-FOR-007',0,0,'L');
+			$pdf->Cell(75,7,'Version N°: 1 ',0,0,'L');		
+		   $pdf->Cell(75,7,'Pagina: 1',0,1,'L');
+			$pdf->Ln(3);
+			$pdf->Line(200,$pdf->GetY(),$pdf-> GetX(),$pdf-> GetY());
+			$pdf->Ln(5);
+	
+
+			$pdf->Cell(80,7,'Informe N°: '.$dataObsRecla[0]['codNum'],0,1,'L');
+			$pdf->Cell(270,7,'Fecha: '.$dataObsRecla[0]['controFre'],0,1,'L');
+			$pdf->Cell(20,7,'Cliente: '.$dataObsRecla[0]['cliEmp'],0,1,'L');
+			$pdf->Cell(20,7,'Contacto: '.$dataObsRecla[0]['contac'],0,1,'L');
+			$pdf->Ln(3);
+			$pdf->Line(200,$pdf->GetY(),$pdf-> GetX(),$pdf-> GetY());
+			$pdf->Ln(5);	
+
+//-----------------------------------------ESTRUCTURA DETALLE PROFORMA------------------------------------------------//
+
+	$pdf->SetFont('Arial','B',10);
+	$pdf->Cell(75,7,'1. Descripcion de la observacion',0,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','',10);
+	$pdf->MultiCell(190,7,"- ".$dataObsRecla[0]['desSitu'],1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','B',10);
+	$pdf->Cell(75,7,'2. Acciones correctivas / preventivas que deben efectuarse',0,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','',10);
+	$pdf->MultiCell(190,7,"- ".$dataObsRecla[0]['correc'],1,'L');
+	$pdf->SetFont('Arial','B',10);
+	$pdf->Cell(75,7,'3. Responsable a cargo de la ejecucion de las acciones correctivas o preventivas',0,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','',10);
+	$pdf->MultiCell(190,7,"- Sr./Sra. ".$dataObsRecla[0]['contac'],1,'L');
+	$pdf->SetFont('Arial','B',10);
+	$pdf->Cell(75,7,'4. Fecha limite para completar la accion correctiva / preventiva',0,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','',10);
+	$pdf->MultiCell(190,7,"- ".$dataObsRecla[0]['fechLim'],1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','B',10);
+	$pdf->Cell(75,7,'5. Verificacion de Implementacion por el Representante de la Gerencia ',0,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','',10);
+	$pdf->MultiCell(190,7,
+						"- Fecha verificacion implementacion: ".$dataObsRecla[0]['fechVeri']."\n".
+						"a. Implementacion satisfactoria: ".$dataObsRecla[0]['desConforImp']."\n".
+						"b. Fecha acordada para verificacion de efectividad: ".$dataObsRecla[0]['fechVeriEfec']
+						,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','B',10);
+	$pdf->Cell(75,7,'6.Verificacion de efectividad por el representante de la gerencia  ',0,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','',10);
+	$pdf->MultiCell(190,7,
+						"- Fecha verificacion efectividad: ".$dataObsRecla[0]['fechVeriEfec']."\n".
+						"a. Efectividad satisfactoria: ".$dataObsRecla[0]['desConforEfec']." - ".$dataObsRecla[0]['fechEfecSati']
+						,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','B',10);
+	$pdf->Cell(75,7,'7. Evidencia objetiva de la efectividad de la accion correctiva / preventiva',0,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','',10);
+	$pdf->MultiCell(190,7,"- ".$dataObsRecla[0]['eviObje'],1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','B',10);
+	$pdf->Cell(75,7,'8. Se cierra la no conformidad',0,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','',10);
+	$pdf->MultiCell(190,7,"- Fecha de cierre: ".$dataObsRecla[0]['fechCie'],1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','B',10);
+	$pdf->Cell(75,7,'9. Seguimiento en Auditoria Interna: (Follow-up) ',0,1,'L');
+	$pdf->Ln(2);
+	$pdf->SetFont('Arial','',10);
+	$pdf->MultiCell(190,7,
+								"- Fecha de seguimiento: ".$dataObsRecla[0]['fechSegui']."\n".
+								"- AC efectiva: ".$dataObsRecla[0]['desConforAc']
+								,1,'L');
+	$pdf->Ln(2);
+	
+	$pdf->SetFont('Arial','B',10);
+	
+	/*
+	$pdf->Cell(25,10,'EXWORK',1,0,'C');
+	$pdf->Cell(25,10,'FOB',1,0,'C');
+	$pdf->Cell(25,10,'CIF',1,0,'C');
+	$pdf->Cell(25,10,'DDP',1,0,'C');
+	$pdf->Cell(30,10,'Gasto Ad.',1,0,'C');
+	$pdf->Cell(25,10,'Costo Tot.',1,0,'C');
+	$pdf->Cell(30,10,'Costo Unid.',1,0,'C');
+	$pdf->Cell(30,10,'Margen Vent.',1,0,'C');
+	$pdf->Cell(25,10,'Precio Unid.',1,0,'C');
+	$pdf->Cell(30,10,'Precio Tot.',1,1,'C');	
+	*/
+
+	$pdf->SetFont('Arial','',10);
+	
+	$pdf->Ln(10);
+	
+//-------------------------------------------------DATOS DE CIERRE-------------------------------------------------------------//
+
+
+//-----------------------------------------------------------------------------------------------------------------------------//
+
+	if($pdf->GetY()>=165) 
+	{
+		$pdf->AddPage('Portrait','A4');	
+	}
+	$pdf->Ln(15);
+	$ubiY=$pdf-> GetY();
+	$pdf->Line(15,$ubiY,65,$ubiY);
+	$pdf->Line(85,$ubiY,$pdf->GetX()+115,$ubiY);
+	$pdf->Line(150,$ubiY,$pdf->GetX()+185,$ubiY);
+	$pdf->Ln(5);
+	$pdf->Cell(65,5,'Ejecutivo de Ventas',1,0,'C');
+	$pdf->Cell(65,5,'Gerente Comercial',1,0,'C');
+	$pdf->Cell(65,5,'Gerente General',1,0,'C');
+
+	$pdf->Output();
+
+?>
