@@ -1,4 +1,27 @@
 /*
+* modulos
+*/
+- modulo perfiles
+- modulo usuario
+- modulo menu
+- modulo permisos
+- modulo proforma
+- modulo empresa
+- modulo contacto
+- modulo trabajador
+- modulo personas
+- modulo cumpleaños
+- modulo vacaciones
+- modulo calendario
+- modulo productos y servicios
+- modulo ordenes
+- modulo cotizacion
+- modulo visitas
+- modulo centro de costo
+- modulo almacen
+- modulo no conformidades
+
+/*
 * sprint #19 - 24/01/2015 (modulo perfiles)
 */
 
