@@ -2272,6 +2272,64 @@
 
 			/*-----------------------------------------------------------------------------------------*/
 
+			/*----------------------------------------------------------------------------------------*/
+				# CONTROLADOR OPERACIONES BANCARIAS
+			/*----------------------------------------------------------------------------------------*/
+
+				case 'finan_frmOpe':
+
+					/**********************************************************/
+			 			# MODULO FINANZAS & CENTRO DE COSTO - CONTROLADOR SUP
+			 		/**********************************************************/
+
+				 		$opeBanca=file_get_contents('templateFinanzas/finan_opeBanca.html');
+
+				 		$sql=sql::finan_docFinan_list();
+				 		$dataDocFinan=negocio::getData($sql);
+				 		$html_docFinan="";
+
+				 		//iterar documentos bancarios
+				 		foreach ($dataDocFinan as $data) 
+				 		{
+				 			desconectar();
+				 			conectar();
+
+				 			$sql=sql::finan_tipDoc_list($data['docId']);
+				 			$dataTipDoc=negocio::getData($sql);
+				 			$tipDoc_html="";
+
+				 			foreach($dataTipDoc as $data2)
+				 			{
+				 				$tipDoc_html.="<li>
+				 									<input type='checkbox' name='finan_tipDoc[]' id='finan_tipDoc' value='".$data2['tipDoc']."' >".$data2['tipDocAlias']."
+				 								</li>";
+				 			}
+
+				 			$docFinan_html.="<li>
+											".$data['docDes']."
+											<ul>
+												".$tipDoc_html."
+											</ul>
+										</li>";
+				 		}
+
+				 		//iniciar centro de costo temporal
+				 		desconectar();
+				 		conectar();
+				 		$sql=sql::finan_cenCost_cre();
+				 		$centroId=negocio::getVal($sql,'response');
+
+				 		//renderizado
+				 		$search=array('[DOCUMENTOS]','[CENTRO]');
+				 		$replace=array($docFinan_html,$centroId);
+				 		$opeBanca=str_replace($search,$replace,$opeBanca);
+
+			 		/*-------------------------------o---------------------------------*/
+
+				break;
+
+			/*----------------------------------------------------------------------------------------*/
+
 			default:
 			break;
 		}

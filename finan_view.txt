@@ -1,0 +1,31 @@
+/*
+* requiments
+*/
+
+/*
+* views
+*/
+
+	//lista de operaciones
+
+		finan_lstOpe.php [OK]
+
+	//formulario de operaciones
+ 
+		finan_frmOpe.php [OK]
+
+/*
+* reports
+*/
+
+/*
+* change files
+*/
+
+/*
+* new files
+*/
+
+	//gestionador js
+
+		finan_gesti.js [OK]

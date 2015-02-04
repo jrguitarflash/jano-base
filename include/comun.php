@@ -460,12 +460,16 @@ function tbl_contenido($id){
 	$cpo_orden=($_REQUEST['order']>'')?$_REQUEST['order']:$t['lst_cpo_orden'];
         $sort=($t['lst_cpo_sort']>'')?$t['lst_cpo_sort']:'ASC';
 	$flow=($_SESSION['operador']['flow']=='ASC')?'DESC':'ASC';
+
+    /*
 	if($_SESSION['operador']['order']==$_REQUEST['order']){
             $order="ORDER BY DATE_FORMAT(".$cpo_orden.",'%m-%y') ".$flow;
             #$order="ORDER BY cot_fec_adj ".$flow;
 	}else{
             $order="ORDER BY DATE_FORMAT(".$cpo_orden.",'%m-%y') ".$sort;
 	}
+    */
+
 	$_SESSION['operador']['order']=$cpo_orden;
 	$_SESSION['operador']['flow']=$flow;
         
@@ -5634,6 +5638,13 @@ function msjNotifi($notifi)
 			"</label>
 			</div>";
 	return $msjNotifi;
+}
+
+//Tablero de control
+
+function operaciones_bancarias()
+{
+    return "operaciones bancarias";
 }
 
 ?>
