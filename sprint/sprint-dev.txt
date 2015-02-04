@@ -30,6 +30,12 @@
 - vista formulario de operaciones bancarias,proyecto y adjuntos
 
 /*
+* sprint #20 - 28-01-2015
+/
+
+- prueba de commits en repositorio
+
+/*
 * sprint #19 - 24/01/2015 (modulo perfiles)
 */
 
