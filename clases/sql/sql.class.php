@@ -4676,6 +4676,13 @@ class sql
 		return $sql;
 	}
 
+	#New [...]
+
+	public function finan_obteCentCost()
+	{
+		$sql="CALL finan_obteCentCost()";
+		return $sql;
+	}
 	//Function
 
 	public function finan_cenCost_cre()

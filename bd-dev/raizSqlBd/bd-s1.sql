@@ -9082,96 +9082,152 @@
 			alter table finan_tipDoc
 			add constraint finan_docId_fk foreign key (finan_docId) references finan_doc(finan_docId);
 
+		# table operacion bancaria proyecto -> [finan_opeProye] [...OK]
+
+			create table finan_opeProye
+			(
+				finan_opeProyeId int(11) primary key auto_increment,
+				finan_opeProyeCorre char(25),
+				cc_centCostId int(11)
+			);
+
+
 	/* PERSISTENCIAS */
 
 		#[PROCEDURE]
 
 			# listar documentos financieros [finan_docFinan_list] -> [OK]
 
-			DELIMITER $$
-			create procedure finan_docFinan_list()
-			COMMENT 'listar documentos financieros'
-			BEGIN
-				#code
-				select
-				finan_docId as docId,
-			    finan_docAlias as docAlias,
-			    finan_docDes as docDes
-			    from finan_doc;
-			end;
+				DELIMITER $$
+				create procedure finan_docFinan_list()
+				COMMENT 'listar documentos financieros'
+				BEGIN
+					#code
+					select
+					finan_docId as docId,
+				    finan_docAlias as docAlias,
+				    finan_docDes as docDes
+				    from finan_doc;
+				end;
 
 			# listar tipo de documentos financieros [finan_tipDoc_list] -> [OK]
 
-			DELIMITER $$
-			create procedure finan_tipDoc_list($docId int(11))
-			COMMENT 'listar tipo de documentos financieros'
-			BEGIN
-				#code
-				select 
-				finan_tipDoc as tipDoc,
-				finan_tipDocAlias as tipDocAlias
-				from finan_tipDoc
-				where finan_docId=$docId;
-			end;
+				DELIMITER $$
+				create procedure finan_tipDoc_list($docId int(11))
+				COMMENT 'listar tipo de documentos financieros'
+				BEGIN
+					#code
+					select 
+					finan_tipDoc as tipDoc,
+					finan_tipDocAlias as tipDocAlias
+					from finan_tipDoc
+					where finan_docId=$docId;
+				end;
 
 			# obtener operacion bancaria temporal [finan_opeBanTem_obte] -> [OK]
 
-			DELIMITER $$
-			create procedure finan_opeBanTem_obte($centTemp int(11),$tipCent int(11))
-			COMMENT 'obtener operacion bancaria temporal'
-			BEGIN
-				#code
-				if $tipCent=1 then
+				DELIMITER $$
+				create procedure finan_opeBanTem_obte($centTemp int(11),$tipCent int(11))
+				COMMENT 'obtener operacion bancaria temporal'
+				BEGIN
+					#code
+					if $tipCent=1 then
 
-					select
-					finan_opeBancaId as opeBancaId,
-					finan_docId as docId,
-					(select finan_docDes from finan_doc where finan_docId=docId) as docDes,
-					finan_tipDoc as tipDoc,
-					(select finan_tipDocAlias from finan_tipDoc where finan_tipDoc=tipDoc) as tipDocDes,
-					finan_mone as mone,
-					finan_monto as monto,
-					finan_fechVenCli as fechVenCli,
-					finan_fechVenDoc as fechVenDoc,
-					finan_comisInte as comisInte,
-					finan_correOpe as correOpe
-					from
-					finan_opeBanca_tmp
-					where cc_centCostId=$centTemp order by finan_correOpe;
+						select
+						finan_opeBancaId as opeBancaId,
+						finan_docId as docId,
+						(select finan_docDes from finan_doc where finan_docId=docId) as docDes,
+						finan_tipDoc as tipDoc,
+						(select finan_tipDocAlias from finan_tipDoc where finan_tipDoc=tipDoc) as tipDocDes,
+						finan_mone as mone,
+						finan_monto as monto,
+						finan_fechVenCli as fechVenCli,
+						finan_fechVenDoc as fechVenDoc,
+						finan_comisInte as comisInte,
+						finan_correOpe as correOpe
+						from
+						finan_opeBanca_tmp
+						where cc_centCostId=$centTemp order by finan_correOpe;
 
-				else if $tipCent=2 then
+					else if $tipCent=2 then
 
-					select
-					finan_opeBancaId as opeBancaId,
-					finan_docId as docId,
-					(select finan_docDes from finan_doc where finan_docId=docId) as docDes,
-					finan_tipDoc as tipDoc,
-					(select finan_tipDocAlias from finan_tipDoc where finan_tipDoc=tipDoc) as tipDocDes,
-					finan_mone as mone,
-					finan_monto as monto,
-					finan_fechVenCli as fechVenCli,
-					finan_fechVenDoc as fechVenDoc,
-					finan_comisInte as comisInte
-					from
-					finan_opeBanca
-					where cc_centCostId=$centTemp order by finan_correOpe;
+						select
+						finan_opeBancaId as opeBancaId,
+						finan_docId as docId,
+						(select finan_docDes from finan_doc where finan_docId=docId) as docDes,
+						finan_tipDoc as tipDoc,
+						(select finan_tipDocAlias from finan_tipDoc where finan_tipDoc=tipDoc) as tipDocDes,
+						finan_mone as mone,
+						finan_monto as monto,
+						finan_fechVenCli as fechVenCli,
+						finan_fechVenDoc as fechVenDoc,
+						finan_comisInte as comisInte
+						from
+						finan_opeBanca
+						where cc_centCostId=$centTemp order by finan_correOpe;
 
-				end if;
-			end;
+					end if;
+				end;
 
 			# obtener monedas para operaciones bancarias [finan_moneOpe_obte] -> [OK]
 
-			DELIMITER $$
-			create procedure finan_moneOpe_obte()
-			COMMENT 'obtener monedas para operaciones bancarias'
-			BEGIN
-				#code
-				select 
-				moneda_id as moneId,
-				mon_sigla as monSigla
-				from
-				moneda;
-			end;
+				DELIMITER $$
+				create procedure finan_moneOpe_obte()
+				COMMENT 'obtener monedas para operaciones bancarias'
+				BEGIN
+					#code
+					select 
+					moneda_id as moneId,
+					mon_sigla as monSigla
+					from
+					moneda;
+				end;
+
+			# obtener centro de costos [finan_obteCentCost] -> [...OK]
+
+				DELIMITER $$
+				create procedure finan_obteCentCost()
+				COMMENT 'obtener centro de costos'
+				BEGIN
+					select nc_centCost_obte();
+				end;
+
+			# obtener datos centro por id [finan_datCentxId] -> [...]
+
+				DELIMITER $$
+				create procedure finan_datCentxId($centId int(11))
+				COMMENT 'obtener datos centro por id'
+				BEGIN
+
+					select
+					(select distinct proy_nombre from proyecto where proyecto_id=cent.cc_idProye ) as nc_proye,
+					(select group_concat(proveedor_id separator ',') from compras where pc_id=cent.cc_centCostId group by pc_Id ) as nc_proveId,
+					(select group_concat(emp_nombre) from empresa where empresa_id in (nc_proveId) ) as nc_proveDes,
+					(select distinct emp_nombre from empresa where empresa_id=cent.cc_idCliEmp) as nc_cli,
+					(select distinct cot.operador_id from cotizacion as cot where cotizacion_id=cent.cc_cotiFlId ) as ingRespId,
+					(select concat('Ing. ',pers_completo) from v_trabajador where trabajador_id=ingRespId) as ingRespDes,
+					(select count(*) from compras where pc_id=cent.cc_centCostId) as cantProv,
+					(select mon_sigla from moneda where moneda_id=cent.cc_moneId) as moneDes,
+					cent.cc_montCoti as montCoti
+					from cc_centcost as cent where cent.cc_centCostId=$centId;
+
+				end;
+
+			# obtener operacion de proyecto por id [finan_opeProyexId_obte] -> [...]
+
+				DELIMITER $$
+				create procedure finan_opeProye_obte($opeId int(11))
+				COMMENT 'obtener operacion de proyecto'
+				BEGIN
+
+					/* vars */
+
+					/* opeProye por id */
+					select * from finan_opeProye where finan_opeProyeId=$opeId;
+
+				end;
+
+
 
 		# [FUNCTION]
 
@@ -9189,7 +9245,7 @@
 					return $id;
 				end;
 
-			# crear operacion bancaria temporal [finan_openBanTem_cre] -> OK
+			# crear operacion bancaria temporal [finan_openBanTem_cre] -> [OK]
 
 				DELIMITER $$
 				create function finan_openBanTem_cre($tipDocId int(11),$centTemp int(11))
@@ -9210,7 +9266,7 @@
 					return $rowAfect;
 				end;
 
-			# eliminar operacion bancaria temporal [finan_opeBanTem_eli] -> OK
+			# eliminar operacion bancaria temporal [finan_opeBanTem_eli] -> [OK]
 
 				DELIMITER $$
 				create function finan_opeBanTem_eli($opeBancaId int(11))
@@ -9225,7 +9281,7 @@
 					return $rowAfect;
 				end;
 
-			# actualizar operacion bancaria temporal [finan_opeBanTem_actu] -> OK
+			# actualizar operacion bancaria temporal [finan_opeBanTem_actu] -> [OK]
 
 				DELIMITER $$
 				create function finan_opeBanTem_actu($moneId int(11),$monto decimal(10,2),$fechCli date,$fechDoc date,$opeIdBan int(11),$fechIni date,
@@ -9255,7 +9311,7 @@
 					return $rowAfect;
 				end;
 
-			# grabar operacion temporal a operacion real [finan_opeTemReal_grab] -> OK
+			# grabar operacion temporal a operacion real [finan_opeTemReal_grab] -> [OK]
 
 				DELIMITER $$
 				create function finan_opeTemReal_grab($cenTemp int(11),$cenReal int(11))
@@ -9292,7 +9348,7 @@
 					return $rowAfect;
 				end;
 
-			# calcular comision de interes [finan_comisInte_calcu]
+			# calcular comision de interes [finan_comisInte_calcu] -> [OK]
 
 				DELIMITER $$
 				create function finan_comisInte_calcu($opeBancaId int(11),$tipCent int(11))
@@ -9338,7 +9394,7 @@
 					return $rowAfect;								
 				end;
 
-			# calcular totales de comision de interes [finan_totComi_calcu]
+			# calcular totales de comision de interes [finan_totComi_calcu] -> [OK]
 
 				DELIMITER $$
 				create procedure finan_totComi_calcu($idCent int(11),$tipCent int(11))
@@ -9364,7 +9420,7 @@
 
 				end;
 
-			# renovar operacion bancaria [finan_opeBan_reno]
+			# renovar operacion bancaria [finan_opeBan_reno] -> [OK]
 
 				DELIMITER $$
 				create function finan_opeBan_reno($idOpeBan int(11),$tipCent int(11))
@@ -9437,7 +9493,7 @@
 
 				end;
 
-			# capturar valor renovacion maxima de operacion [finan_renoMax_cap]
+			# capturar valor renovacion maxima de operacion [finan_renoMax_cap] -> [OK]
 
 				DELIMITER $$
 				create function finan_renoMax_cap($idOpeBan int(11),$tipCent int(11))
@@ -9467,7 +9523,7 @@
 					return $versiReno;
 				end;
 
-			# obtener centro de costos con cartas de fianza pendientes [finan_centCart_obte] [..]
+			# obtener centro de costos con cartas de fianza pendientes [finan_centCart_obte] [OK]
 
 				DELIMITER $$
 				create procedure finan_centCart_obte()
@@ -9481,7 +9537,7 @@
 					(isnull(finan_estaEntre) or finan_estaEntre=0);
 				end; 
 
-			# capturar carta de fianzas pendientes de centro de costo [finan_carFianCent_captu] [..]
+			# capturar carta de fianzas pendientes de centro de costo [finan_carFianCent_captu] [OK]
 
 				DELIMITER $$
 				create procedure finan_carFianCent_captu()
@@ -9490,7 +9546,7 @@
 					#code
 				end;
 
-			# alertar las cartas fianzas que vencen en 7 dias [finan_cartVenc_alert]
+			# alertar las cartas fianzas que vencen en 7 dias [finan_cartVenc_alert] -> [OK]
 
 				DELIMITER $$
 				create procedure finan_cartVenc_alert()
@@ -9527,6 +9583,39 @@
 					DATEDIFF(finan_fechVenCli,now())<=7)
 					and
 					finan_correOpe is not null;
+				end;
+
+			# crear operacion de proyecto [finan_opeProye_crear] -> [...]
+
+				DELIMITER $$
+				create function finan_opeProye_crear($centId int(11))
+				COMMENT 'crear operacion de proyecto'
+				RETURNS int(11)
+				BEGIN
+
+					/*vars*/
+					declare $idAfect int(11);
+					declare $rowAfect int(11);
+					declare $correOpe char(25);
+
+					/*nueva operacion*/
+					insert into finan_opeProye(cc_centCostId) values($centId);
+
+					/*id afect*/
+					set $idAfect=(select LAST_INSERT_ID());
+
+					/*nuevo correlativo*/
+					set $correOpe=nc_correNoConfor_cre($idAfect,'OPE');  
+
+					/*update operacion*/
+					update finan_opeProye set finan_opeProyeCorre=$correOpe where finan_opeProyeId=$idAfect;
+
+					/*row afect*/
+					$rowAfect=(select ROW_COUNT());
+
+					/*return*/
+					return $rowAfect;
+
 				end;
 
 /*----------------------------------[*]------------------------------------------------------------------*/

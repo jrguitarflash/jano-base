@@ -21,6 +21,10 @@ window.onload=function()
 
 		case 'finan_frmOpe':
 
+			//load
+
+			scc_dataComp_ini('finan_obteCentCost','finan_json','nc_ccId','nc_ccDes');
+
 
 			//inicio de tabs
 				$(function() 

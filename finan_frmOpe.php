@@ -44,6 +44,7 @@
 		
 		<h1>Formulario Operaciones Bancarias</h1>
 		<div class="buttons" >
+			<a href="#">Guardar</a>
 			<a href="#" id="finan_opeVol" >volver</a>
 		</div>
 	
@@ -64,14 +65,20 @@
 					<label id="lbl" >N° Operacion:</label>
 
 					<span class="campo" >----</span>
+					<input type="hidden" value="" >
 
 					<label id="lbl" >CC:</label>
 
-					<input type="text" class="campo" >
+					<input type="text" class="campo" id="nc_ccDes" >
+					<input type="hidden" value="" id="nc_ccId" >
 
 					<label id="lbl" >Proyecto:</label>
 
 					<span class="campo" >----</span>
+
+					<label id="lbl" >Responsable:</label>
+
+					<span class="campo" >-----</span>
 
 					<label id="lbl" >Cliente:</label>
 

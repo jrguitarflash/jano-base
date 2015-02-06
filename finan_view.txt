@@ -1,7 +1,9 @@
 /*
 * requiments
 */
-
+	- operacion bancaria con respecto al proyecto
+	- detalle operaciones bancarias
+	- adjuntos de operaciones bancarias
 /*
 * views
 */
@@ -29,3 +31,11 @@
 	//gestionador js
 
 		finan_gesti.js [OK]
+
+	//json gesti
+
+		finan_gesti.php [OK]
+
+	// ajax gesti
+
+		finan_ajax.php

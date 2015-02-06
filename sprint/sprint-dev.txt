@@ -23,6 +23,16 @@
 - modulo finanzas
 
 /*
+* sprint #21 - 05/02/2015 (modulo finanzas)
+*/
+
+- persistencia para generar operacion del proyecto
+- persistencia para iniciar centro de costos
+- persistencia para iniciar datos de centro de costos
+- modelo de datos de operacion bancaria
+- persistencia para iniciar operacion del proyecto
+
+/*
 * sprint #20 - 04/01/2015 (modulo finanzas)
 */
 
