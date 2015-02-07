@@ -1,0 +1,87 @@
+
+<!-- template operaciones bancarias -->
+
+<label id="lbl" >Operaciones Bancarias</label>
+<ul class="campo" >
+	<!--
+	<li>
+		<input type="checkbox" >Carta Fianzas
+		<ul>
+			<li><input type="checkbox" >FC</li>
+			<li><input type="checkbox" >FA</li>
+			<li><input type="checkbox" >FMD</li>
+		</ul>
+	</li>
+	<li><input type="checkbox" >Carta de Credito</li>
+	<li><input type="checkbox" >Pagare</li>
+	-->
+	[DOCUMENTOS]
+</ul>
+
+<label id="lbl" ></label>
+<a class="campo" id="finan_creadOpe" >Crear</a>
+<a class="campo" id="finan_calComis" >Calcular</a>
+<a class="campo" id="finan_renoOpe">Renovar</a>
+<a class="campo" id="finan_cargAlerta">Alerta</a>
+
+<!-- lista operaciones bancarias -->
+
+<table class="list finan_tabOpe" >
+	<thead>
+		<tr>
+			<td><input type="checkbox" id='finan_chkOpe' name='finan_chkOpe[]' ></td>
+			<td>Item</td>
+			<td>N° Doc.</td>
+			<td>Renov.</td>
+			<td>Doc.</td>
+			<td>Tipo</td>
+			<td>Moneda</td>
+			<td>Monto</td>
+			<td>Fecha Emision</td>
+			<td>Fecha Venc. Doc</td>
+			<td>Fecha Entrega cliente</td>
+			<td>Tasa Anual</td>
+			<td>Comision de interes</td>
+			<td>Estado</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody id="finan_detOpe" >
+		<!--
+		<tr>
+			<td><input type='checkbox' ></td>
+			<td>Item</td>
+			<td>Doc.</td>
+			<td>Tipo</td>
+			<td>Moneda</td>
+			<td>Monto</td>
+			<td>Fecha Emision</td>
+			<td>Fecha Venc. Doc</td>
+			<td>Fecha Entrega cliente</td>
+			<td>Tasa Anual</td>
+			<td>Comision de interes</td>
+			<td><a href="#" >eliminar</a></td>
+		</tr>
+		-->
+	</tbody>
+	<!--
+	<tfoot>
+		<tr>
+			<td colspan="10" align='right' >Total(S/.)</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td colspan="10" align='right' >Total($)</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td colspan="10" align='right' >Total(€)</td>
+			<td></td>
+		</tr>
+	</tfoot>
+	-->
+</table>
+
+<!-- centro de costo temporal -->
+<input type="hidden" value="[CENTRO]" id="finan_centTemp" name="finan_centTemp" class="campo" >
+

@@ -390,6 +390,7 @@ function finan_estaCheck(id)
 	}
 	return val;
 }
+
 //-----------------o--------------------
 
 //funciones

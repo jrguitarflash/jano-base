@@ -17,6 +17,14 @@
 		finan_frmOpe.php [OK]
 
 /*
+* themes
+*/
+
+	//theme operaciones bancarias
+
+		finan_opeBanca.html [OK]
+
+/*
 * reports
 */
 
@@ -24,18 +32,22 @@
 * change files
 */
 
+	controller up
+
+		clases/controlador/controladorSup.class.php [OK]
+
 /*
 * new files
 */
 
 	//gestionador js
 
-		finan_gesti.js [OK]
+		js/finan_gesti.js [OK]
 
-	//json gesti
+	//json file
 
-		finan_gesti.php [OK]
+		finan_json.php [OK]
 
-	// ajax gesti
+	// ajax file
 
-		finan_ajax.php
+		finan_ajax.php [OK]

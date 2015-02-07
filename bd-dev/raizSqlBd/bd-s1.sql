@@ -9091,6 +9091,16 @@
 				cc_centCostId int(11)
 			);
 
+		# table adjuntos de operaciones -> [finan_adjuOpe] [...]
+
+			create table finan_adjuOpe
+			(
+				finan_adjuOpeId int(11) primary key auto_increment not null,
+				finan_opeProyeId int(11),
+				finan_numDocAdju char(25),
+				finan_adjuDes varchar(200),
+				finan_adjuDoc varchar(1200)
+			);
 
 	/* PERSISTENCIAS */
 
@@ -9183,7 +9193,7 @@
 					moneda;
 				end;
 
-			# obtener centro de costos [finan_obteCentCost] -> [...OK]
+			# obtener centro de costos [finan_obteCentCost] -> [... - OK]
 
 				DELIMITER $$
 				create procedure finan_obteCentCost()
@@ -9192,7 +9202,7 @@
 					select nc_centCost_obte();
 				end;
 
-			# obtener datos centro por id [finan_datCentxId] -> [...]
+			# obtener datos centro por id [finan_datCentxId] -> [... - OK]
 
 				DELIMITER $$
 				create procedure finan_datCentxId($centId int(11))
@@ -9208,26 +9218,50 @@
 					(select concat('Ing. ',pers_completo) from v_trabajador where trabajador_id=ingRespId) as ingRespDes,
 					(select count(*) from compras where pc_id=cent.cc_centCostId) as cantProv,
 					(select mon_sigla from moneda where moneda_id=cent.cc_moneId) as moneDes,
-					cent.cc_montCoti as montCoti
+					cent.cc_montCoti as montCoti,
+					cent.cc_ocFechCli as fechCli
 					from cc_centcost as cent where cent.cc_centCostId=$centId;
 
 				end;
 
-			# obtener operacion de proyecto por id [finan_opeProyexId_obte] -> [...]
+			# obtener operacion de proyecto por id [finan_opeProyexId_obte] -> [... - OK]
 
 				DELIMITER $$
-				create procedure finan_opeProye_obte($opeId int(11))
+				create procedure finan_opeProyexId_obte($opeId int(11))
 				COMMENT 'obtener operacion de proyecto'
 				BEGIN
 
 					/* vars */
 
 					/* opeProye por id */
-					select * from finan_opeProye where finan_opeProyeId=$opeId;
+					select 
+					*,
+					(select cc_idProye from cc_centcost where cc_centCostId=opeProye.cc_centCostId ) as proyId,
+					(select proy_nombre from proyecto where proyecto_id=proyId ) as proyDes,
+					(select cc_correCenCost from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as cc_des,
+					(select concat(cc_des,' - ',proyDes)) as centDes 
+					 from finan_opeProye as opeProye where finan_opeProyeId=$opeId;
 
 				end;
 
+			# obtener operaciones de proyecto [finan_opeProye_obte] -> [... - Ok]
 
+				DELIMITER $$
+				create procedure finan_opeProye_obte()
+				COMMENT 'obtener operaciones de proyecto'
+				BEGIN
+
+					/*operaciones bancarias*/
+					SELECT *,
+					(select cc_correCenCost from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as cc_des,
+					(select cc_idProye from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as cc_idProye,
+					(select proy_nombre from proyecto where proyecto_id=cc_idProye) as proye_nom,
+					(select cc_idCliEmp from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as cc_cliId,
+					(select emp_nombre from empresa where empresa_id=cc_cliId) as cli_des,
+					(select count(*) from finan_opeBanca where cc_centCostId=opeProye.cc_centCostId) as cant_ope
+					FROM `finan_opeProye` as opeProye;
+
+				end;
 
 		# [FUNCTION]
 
@@ -9585,12 +9619,12 @@
 					finan_correOpe is not null;
 				end;
 
-			# crear operacion de proyecto [finan_opeProye_crear] -> [...]
+			# crear operacion de proyecto [finan_opeProye_crear] -> [... - OK]
 
 				DELIMITER $$
 				create function finan_opeProye_crear($centId int(11))
-				COMMENT 'crear operacion de proyecto'
 				RETURNS int(11)
+				COMMENT 'crear operacion de proyecto'
 				BEGIN
 
 					/*vars*/
@@ -9611,10 +9645,67 @@
 					update finan_opeProye set finan_opeProyeCorre=$correOpe where finan_opeProyeId=$idAfect;
 
 					/*row afect*/
-					$rowAfect=(select ROW_COUNT());
+					set $rowAfect=(select ROW_COUNT());
+
+					/* evalua row afect */
+					if $rowAfect>0 then
+
+						set $rowAfect=$idAfect;
+
+					end if;
 
 					/*return*/
 					return $rowAfect;
+
+				end;
+
+			# actualizar operacion de proyecto [finan_opeProye_actu] -> [...]
+
+				DELIMITER $$
+				create function finan_opeProye_actu($idOpeProye int(11),$centId int(11))
+				RETURNS int(11)
+				COMMENT 'actualizar operacion de proyecto'
+				BEGIN
+
+					/* vars */
+					declare $rowAfect int(11);
+
+					/* actu ope proye */
+					update finan_opeProye set cc_centCostId=$centId 
+					where finan_opeProyeId=$idOpeProye;
+
+					/* rowfect */
+					set $rowAfect=(select ROW_COUNT());
+
+					/* return */
+					return $rowAfect;
+
+				end;
+
+			# adjuntar documento de operacion [finan_docOpe_adju] -> [...]
+
+				DELIMITER $$
+				create function finan_docOpe_adju($opeProyeId int(11),numDocAdju char(25),
+				$adjuDes varchar(200),
+				$adjuDoc varchar(1200))
+				RETURNS int(11)
+				COMMENT 'adjuntar documento de operacion'
+				BEGIN
+
+					/* vars */
+					declare rowAfect int(11);
+
+					/* adjuntar doc */ 
+					insert into finan_adjuOpe 
+					(finan_opeProyeId,
+					finan_numDocAdju,
+					finan_adjuDes,
+					finan_adjuDoc) 
+					values
+					($opeProyeId,
+					numDocAdju,
+					$adjuDes,
+					$adjuDoc);
 
 				end;
 

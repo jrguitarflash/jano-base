@@ -4683,6 +4683,25 @@ class sql
 		$sql="CALL finan_obteCentCost()";
 		return $sql;
 	}
+
+	public function finan_datCentxId($centId)
+	{
+		$sql="CALL finan_datCentxId('".$centId."')";
+		return $sql;
+	}
+
+	public function finan_opeProye_obte()
+	{
+		$sql="CALL finan_opeProye_obte()";
+		return $sql;
+	}
+
+	public function finan_opeProyexId_obte($opeId)
+	{
+		$sql="CALL finan_opeProyexId_obte('".$opeId."')";
+		return $sql;
+	}
+
 	//Function
 
 	public function finan_cenCost_cre()
@@ -4736,6 +4755,14 @@ class sql
 	public function finan_renoMax_cap($idOpeBan,$tipCent)
 	{
 		$sql="select finan_renoMax_cap('".$idOpeBan."','".$tipCent."') as response";
+		return $sql;
+	}
+
+	#new [...]
+
+	public function finan_opeProye_crear($centId)
+	{
+		$sql="select finan_opeProye_crear('".$centId."') as response";
 		return $sql;
 	}
 

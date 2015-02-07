@@ -23,6 +23,16 @@
 - modulo finanzas
 
 /*
+* sprint #22 - 06/02/2015
+*/
+
+- generar operacion de proyecto
+- iniciar operacion de proyecto
+- persistencia crear y editar cartas fianzas
+- persistencia adjuntar documentos de operacion
+- persistencia editar operacion de proyecto
+
+/*
 * sprint #21 - 05/02/2015 (modulo finanzas)
 */
 

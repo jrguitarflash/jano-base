@@ -2282,7 +2282,7 @@
 			 			# MODULO FINANZAS & CENTRO DE COSTO - CONTROLADOR SUP
 			 		/**********************************************************/
 
-				 		$opeBanca=file_get_contents('templateFinanzas/finan_opeBanca.html');
+				 		$opeBanca=file_get_contents('finan_opeBanca.html');
 
 				 		$sql=sql::finan_docFinan_list();
 				 		$dataDocFinan=negocio::getData($sql);

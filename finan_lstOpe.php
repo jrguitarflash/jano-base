@@ -30,7 +30,7 @@
 
 <!-- HTML ID -->
 
-	<input type="hidden" id="finan_id" value="<?php print $_GET['id']; ?>" >
+	<input type="hidden" id="finan_opeId" value="<?php print $_GET['id']; ?>" >
 
 <!-- HTML NOTIFI -->
 
@@ -59,18 +59,18 @@
 					<td>CC</td>
 					<td>Proyecto</td>
 					<td>Cliente</td>
-					<td>N° Operaciones</td>
+					<td align="center" >N° Operaciones</td>
 					<td align="center" >Accion</td>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="finan_opeProye" >
 				<tr>
 					<td align="center" >Item</td>
 					<td>N° Operacion</td>
 					<td>CC</td>
 					<td>Proyecto</td>
 					<td>Cliente</td>
-					<td>N° Operaciones</td>
+					<td align="center" >N° Operaciones</td>
 					<td align="center" >
 						<a href="#">Editar</a> | 
 						<a href="#">Eliminar</a>

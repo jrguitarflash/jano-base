@@ -30,7 +30,7 @@
 
 <!-- HTML ID -->
 
-	<input type="hidden" id="finan_id" value="<?php print $_GET['id']; ?>" >
+	<input type="hidden" id="finan_opeId" value="<?php print $_GET['id']; ?>" >
 
 <!-- HTML NOTIFI -->
 
@@ -44,7 +44,7 @@
 		
 		<h1>Formulario Operaciones Bancarias</h1>
 		<div class="buttons" >
-			<a href="#">Guardar</a>
+			<a href="#" id="finan_saveOpe" >Guardar</a>
 			<a href="#" id="finan_opeVol" >volver</a>
 		</div>
 	
@@ -64,8 +64,7 @@
 
 					<label id="lbl" >N° Operacion:</label>
 
-					<span class="campo" >----</span>
-					<input type="hidden" value="" >
+					<span class="campo" id="finan_numOpe" >----</span>
 
 					<label id="lbl" >CC:</label>
 
@@ -74,31 +73,33 @@
 
 					<label id="lbl" >Proyecto:</label>
 
-					<span class="campo" >----</span>
+					<span class="campo" id="finan_proye" >----</span>
 
 					<label id="lbl" >Responsable:</label>
 
-					<span class="campo" >-----</span>
+					<span class="campo" id="finan_respo" >-----</span>
 
 					<label id="lbl" >Cliente:</label>
 
-					<span class="campo" >----</span>
+					<span class="campo" id="finan_cli" >----</span>
 
 					<label id="lbl" >Moneda</label>
 
-					<span class="campo" >----</span>
+					<span class="campo" id="finan_mone" >----</span>
 
 					<label id="lbl" >Monto</label>
 
-					<span class="campo" >----</span>
+					<span class="campo" id="finan_mont" >----</span>
 
 					<label id="lbl" >Fecha</label>
 
-					<span class="campo" >----</span>
+					<span class="campo" id="finan_fech" >----</span>
 
 				</div>
 				
 				<div id="tabs-2" >
+
+					<form name="frmAsigPro" id="frmAsigPro" >
 
 					<!-- *********************************** -->	
 					<!-- MODULO FINANCIERO & CENTRO DE COSTO -->
@@ -107,6 +108,8 @@
 					<?php print $opeBanca; ?>
 
 					<!-- ********************************** -->
+
+					</form>
 
 				</div>
 				
