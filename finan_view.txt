@@ -25,6 +25,12 @@
 		finan_opeBanca.html [OK]
 
 /*
+* iframe
+*/
+
+	iframe/finan_iframe.php
+
+/*
 * reports
 */
 
@@ -35,6 +41,10 @@
 	controller up
 
 		clases/controlador/controladorSup.class.php [OK]
+
+	utils
+
+		utils_gesti.js
 
 /*
 * new files

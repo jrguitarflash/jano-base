@@ -50,6 +50,14 @@ window.onload=function()
 
 			//eventos
 
+					//evento adjuntor documento de operacion
+
+						$('#finan_adjuOpe').click(function(mievento)
+						{
+							//console.log("adjuntando documentos de operacion....!");
+							finan_opeDoc_adju();
+						});
+
 					//evento volver a lista de operaciones
 
 						$('#finan_opeVol').click(function(mievento)
@@ -470,6 +478,40 @@ window.onload=function()
 					}
 
 					//-----------------o--------------------
+
+					function finan_notiAdju(flag,ruta)
+					{
+						if(flag>0 && ruta!="")
+						{
+							$(".elem-gd").notify("formato adjunto correctamente","success");
+
+							//iniciar archivos adjuntos
+							nc_infoAdju_obte();
+						}
+						else
+						{
+							$(".elem-gd").notify("formato no adjunto","error");
+						}
+					}
+
+					function finan_opeDoc_adju()
+					{
+							opeId=document.getElementById('finan_opeId').value;
+
+							if(opeId>0)
+							{
+								document.finan_frmAdju.method='post';
+								document.finan_frmAdju.target='finan_iframe';
+								document.finan_frmAdju.action='iframe/finan_iframe.php';
+								document.finan_frmAdju.finan_iframe_peti.value="finan_opeProy_adju";
+								document.finan_frmAdju.finan_opeId_adju.value=opeId;
+								document.finan_frmAdju.submit();
+							}
+							else
+							{
+								alert("Guardar operacion de proyecto antes de continuar...!");
+							}
+					}
 
 				//JSON
 

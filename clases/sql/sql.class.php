@@ -4784,6 +4784,18 @@ class sql
 		return $sql;
 	}
 
+	public function finan_docOpe_adju($opeProyeId,
+										$numDocAdju,
+										$adjuDes,
+										$adjuDoc)
+	{
+		$sql="select finan_docOpe_adju('".$opeProyeId."',
+										'".$numDocAdju."',
+										'".$adjuDes."',
+										'".$adjuDoc."') as response";
+		return $sql;
+	}
+
 /*--------------------------------------[*]------------------------------------------------*/
 
 /*-----------------------------------------------------------------------------------------*/

@@ -9113,7 +9113,7 @@
 				cc_centCostId int(11)
 			);
 
-		# table adjuntos de operaciones -> [finan_adjuOpe] [...]
+		# table adjuntos de operaciones -> [finan_adjuOpe] [... Ok]
 
 			create table finan_adjuOpe
 			(
@@ -9284,6 +9284,24 @@
 					(select cc_ocFechCli from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as ocFechCli
 					FROM `finan_opeProye` as opeProye;
 
+				end;
+
+			# obtener adjuntos de operacion bancaria [finan_adjuOpeXId_obte] [...]
+
+				DELIMITER $$	
+				create procedure finan_adjuOpeXId_obte($opeId int(11))
+				COMMENT 'obtener adjuntos de operacion bancaria'
+				BEGIN
+
+					/*vars*/
+
+					/*obte adju*/
+					select
+						finan_adjuOpeId as adjuOpeId,
+						finan_numDocAdju as numDocAdju,
+						finan_adjuDes as adjuDes,
+						finan_adjuDoc as adjuDoc
+						where finan_opeProyeId=$opeId;
 				end;
 
 		# [FUNCTION]
@@ -9708,7 +9726,7 @@
 			# adjuntar documento de operacion [finan_docOpe_adju] -> [...]
 
 				DELIMITER $$
-				create function finan_docOpe_adju($opeProyeId int(11),numDocAdju char(25),
+				create function finan_docOpe_adju($opeProyeId int(11),$numDocAdju char(25),
 				$adjuDes varchar(200),
 				$adjuDoc varchar(1200))
 				RETURNS int(11)
@@ -9716,7 +9734,7 @@
 				BEGIN
 
 					/* vars */
-					declare rowAfect int(11);
+					declare $rowAfect int(11);
 
 					/* adjuntar doc */ 
 					insert into finan_adjuOpe 
@@ -9726,9 +9744,15 @@
 					finan_adjuDoc) 
 					values
 					($opeProyeId,
-					numDocAdju,
+					$numDocAdju,
 					$adjuDes,
 					$adjuDoc);
+
+					/* row afect */
+					set $rowAfect=(select ROW_COUNT());
+
+					/*return*/
+					return $rowAfect;
 
 				end;
 
@@ -9770,6 +9794,28 @@
 
 					/*return*/
 					return $rowAfect;
+
+				end;
+
+			# eliminar adjuntos de operacion [finan_adjuOpe_eli] -> [....]
+
+				DELIMITER $$
+				create function finan_adjuOpe_eli($adjuOpeId int(11))
+				RETURNS int(11)
+				COMMENT 'eliminar adjuntos de operacion'
+				BEGIN
+
+					/* vars */
+					declare $rowAfect int(11);
+
+					/* eli ope */
+					delete from finan_adjuOpe_eli where finan_adjuOpeId=$adjuOpeId;
+
+					/* row afect */
+					set $rowAfect=(select ROW_COUNT());
+
+					/* return */
+					return $rowAfect; 
 
 				end;
 

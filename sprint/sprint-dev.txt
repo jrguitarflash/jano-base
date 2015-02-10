@@ -23,6 +23,14 @@
 - modulo finanzas
 
 /*
+* sprint #24 - 10/02/2015 (modulo finanzas)
+*/
+
+- adjuntar documento de operacion
+- persistencia mostrar adjuntos
+- persistencia eliminar adjunto
+
+/*
 * sprint #23 - 10/02/2015 (modulo finanzas)
 */
 

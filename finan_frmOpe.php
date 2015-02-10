@@ -91,7 +91,7 @@
 
 					<span class="campo" id="finan_mont" >----</span>
 
-					<label id="lbl" >Fecha Recepción</label>
+					<label id="lbl" >Fecha</label>
 
 					<span class="campo" id="finan_fech" >----</span>
 
@@ -115,17 +115,28 @@
 				
 				<div id="tabs-3" >
 
-					<label id="lbl" >N° Doc.</label>
+					<form id="finan_frmAdju" name="finan_frmAdju" enctype="multipart/form-data" >
 
-					<input type="text" class="campo" >
+						<input name="finan_opeId_adju" type="hidden" value="" />
+						<input name="finan_iframe_peti" type="hidden" value="" />
 
-					<label id="lbl" >Descripcion</label>
+						<label id="lbl" >N° Doc.</label>
 
-					<textarea class="campo" ></textarea>
+						<input type="text" class="campo" name="finan_numDoc" >
 
-					<label id="lbl" ></label>
+						<label id="lbl" >Descripcion</label>
 
-					<button class="campo" >Adjuntar</button>
+						<textarea class="campo" name="finan_des" ></textarea>
+
+						<label id="lbl" >Adjuntar</label>
+
+						<input type="file" name="finan_adjuFile" class="campo" >
+
+						<label id="lbl" ></label>
+
+						<button class="campo" id="finan_adjuOpe" >Adjuntar</button>
+
+					</form>
 
 					<table class="list" >
 						
@@ -165,3 +176,7 @@
 </div>
 
 <!-- HTML POPUP -->
+
+<!-- HTML IFRAME -->
+
+<iframe src="" name="finan_iframe" id="finan_iframe"  style="display:none" ></iframe>
