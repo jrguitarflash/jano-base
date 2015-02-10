@@ -59,6 +59,7 @@
 					<td>CC</td>
 					<td>Proyecto</td>
 					<td>Cliente</td>
+					<td>Fecha de recepcion</td>
 					<td align="center" >N° Operaciones</td>
 					<td align="center" >Accion</td>
 				</tr>
@@ -70,6 +71,7 @@
 					<td>CC</td>
 					<td>Proyecto</td>
 					<td>Cliente</td>
+					<td>Fecha de recepcion</td>
 					<td align="center" >N° Operaciones</td>
 					<td align="center" >
 						<a href="#">Editar</a> | 

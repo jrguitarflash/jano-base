@@ -23,7 +23,15 @@
 - modulo finanzas
 
 /*
-* sprint #22 - 06/02/2015
+* sprint #23 - 10/02/2015 (modulo finanzas)
+*/
+
+- editar proyeto de operacion 
+- eliminar proyecto de operacion
+- validar proyecto repetidos
+
+/*
+* sprint #22 - 06/02/2015 (modulo finanzas)
 */
 
 - generar operacion de proyecto

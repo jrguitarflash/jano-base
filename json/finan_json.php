@@ -26,11 +26,25 @@ switch ($_REQUEST['json'])
 
 	case 'finan_opeProye_crear':
 
-		$sql=sql::finan_opeProye_crear($_GET['centId']);
-		$filAfect=negocio::getVal($sql,'response');
+		$sql=sql::finan_centProye_eva($centId);
+		$flagEva=negocio::getVal($sql,'response');
 
 		$data=Array();
-		$data[0]=$filAfect;
+
+		if($flagEva==0)
+		{
+			desconectar();
+			conectar();
+			
+			$sql=sql::finan_opeProye_crear($_GET['centId']);
+			$filAfect=negocio::getVal($sql,'response');
+
+			$data[0]=$filAfect;
+		}
+		else
+		{
+			$data[0]='ya existe';
+		}
 
 		print json_encode($data);
 
@@ -42,6 +56,45 @@ switch ($_REQUEST['json'])
 		$data=negocio::getData($sql);
 
 		print json_encode($data);		
+
+	break;
+
+	case 'finan_opeProye_actu':
+
+		$sql=sql::finan_centProye_eva($_GET['centId']);
+		$flagEva=negocio::getVal($sql,'response');
+
+		$data=Array();
+
+		if($flagEva==0)
+		{
+			desconectar();
+			conectar();
+
+			$sql=sql::finan_opeProye_actu($_GET['idOpeProye'],$_GET['centId']);
+			$filAfect=negocio::getVal($sql,'response');
+
+			$data=Array();
+			$data[0]=$filAfect;
+		}
+		else
+		{
+			$data[0]='ya existe';
+		}
+
+		print json_encode($data);
+
+	break;
+
+	case 'finan_opeProye_eli':
+
+		$sql=sql::finan_opeProye_eli($_GET['opeId']);
+		$filAfect=negocio::getVal($sql,'response');
+
+		$data=Array();
+		$data[0]=$filAfect;
+
+		print json_encode($data);
 
 	break;
 

@@ -504,17 +504,23 @@ window.onload=function()
 						//console.log("creando operacion proyecto");
 
 						//vars
-						json="finan_opeProye_crear";
+						idOpeProye=document.getElementById('finan_opeId').value;
+						json=gd_peti2Json_ele(idOpeProye,"finan_opeProye_crear","finan_opeProye_actu");
 						centId=document.getElementById('nc_ccId').value;
 
 						//params
 						param="json="+json;
 						param+="&centId="+centId;
+						param+="&idOpeProye="+idOpeProye;
 
 						//peticion json
 						$.getJSON('json/finan_json.php?'+param,{format: "json"}, function(data) 
 						{
-							if(data[0]>0)
+							if(data[0]=='ya existe')
+							{
+								$(".elem-gd").notify("Operacion de proyecto ya existe...!","error");
+							}
+							else if(data[0]>0 && json=="finan_opeProye_crear")
 							{
 								$(".elem-gd").notify("Operacion de proyecto generada correctamente...!","success");
 
@@ -523,6 +529,10 @@ window.onload=function()
 								param+="&menu=finan_frmOpe";
 								param+="&id="+data[0];
 								gd_direPagParam(url,param);	
+							}
+							else if(data[0]>0 && json=="finan_opeProye_actu")
+							{
+								$(".elem-gd").notify("Operacion de proyecto actualizada correctamente...!","success");
 							}
 							else
 							{
@@ -551,6 +561,32 @@ window.onload=function()
 								document.getElementById('nc_ccId').value=data[0]['cc_centCostId'];
 							}
 						});
+					}
+
+					function finan_opeProye_eli(opeId)
+					{
+						/* vars */
+						opeId=opeId;
+						json="finan_opeProye_eli";
+
+						/* params */
+						param="json="+json;
+						param+="&opeId="+opeId;
+
+						/* peticion json */
+						$.getJSON('json/finan_json.php?'+param,{format: "json"}, function(data) 
+						{
+							if(data[0]==1)
+							{
+								$(".elem-gd").notify("Operacion de proyecto eliminada","success");
+								finan_opeProye_obte();
+							}
+							else
+							{
+								$(".elem-gd").notify("Operacion de proyecto contiene operaciones","error");
+							}
+						});
+
 					}
 
 				//AJAX				

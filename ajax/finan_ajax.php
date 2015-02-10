@@ -27,10 +27,11 @@ switch ($_REQUEST['ajax'])
 						<td>".$data['cc_des']."</td>
 						<td>".$data['proye_nom']."</td>
 						<td>".$data['cli_des']."</td>
+						<td>".$data['ocFechCli']."</td>
 						<td align='center' class='finan_cantOpe' >".$data['cant_ope']."</td>
 						<td align='center' >
 							<a href='Javascript:finan_dirEdit(".$data['finan_opeProyeId'].")'>Editar</a> | 
-							<a href='#'>Eliminar</a>
+							<a href='Javascript:finan_opeProye_eli(".$data['finan_opeProyeId'].")'>Eliminar</a>
 						</td>
 					</tr>";
 		}

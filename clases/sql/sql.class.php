@@ -4766,6 +4766,24 @@ class sql
 		return $sql;
 	}
 
+	public function finan_opeProye_actu($idOpeProye,$centId)
+	{
+		$sql="select finan_opeProye_actu('".$idOpeProye."','".$centId."') as response";
+		return $sql;
+	}
+
+	public function finan_centProye_eva($centId)
+	{
+		$sql="select finan_centProye_eva('".$centId."') as response";
+		return $sql;
+	}
+
+	public function finan_opeProye_eli($opeId)
+	{
+		$sql="select finan_opeProye_eli('".$opeId."') as response";
+		return $sql;
+	}
+
 /*--------------------------------------[*]------------------------------------------------*/
 
 /*-----------------------------------------------------------------------------------------*/

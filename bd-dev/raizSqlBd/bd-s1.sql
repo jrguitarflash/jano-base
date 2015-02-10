@@ -8432,6 +8432,28 @@
 					return $rowAfect;
 				end;
 
+				# obtener ew o refencia serie [lp_ewRefxSeri_obte]
+
+				DELIMITER $$
+				create procedure lp_ewRefxSeri_obte($numSeri char(50))
+				COMMENT 'obtener ew o refencia serie'
+				BEGIN
+				select
+				(select comp_nro from compras where compras_id=kd.kd_ewCompId) as nro,
+				kd.kd_refEw as ref,
+				kd.kd_kardxNro,
+				(select if(kd.kd_ewCompId>0,nro,ref)) as ewRef
+				from kd_kardx as kd,
+				kd_detKardx as detKdx,
+				kd_movNumSeri as movSeri,
+				kd_numSeri as numSeri
+				where
+				numSeri.kd_numSeri=$numSeri and
+				numSeri.kd_numSeriId=movSeri.kd_numSeriId and
+				movSeri.kd_detKardxId=detKdx.kd_detKardxId and
+				detKdx.kd_kardxId=kd.kd_kardxId order by kd.kd_kardxNro DESC limit 0,1;
+				end;
+
 				/*-----------------------------| MODULO ALMACEN (kd_) - 16/10/2014 |----------------------------------------*/
 
 				# obtener linea de productos de detalle ew [lp_lineProdxEw_obte]
@@ -9258,7 +9280,8 @@
 					(select proy_nombre from proyecto where proyecto_id=cc_idProye) as proye_nom,
 					(select cc_idCliEmp from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as cc_cliId,
 					(select emp_nombre from empresa where empresa_id=cc_cliId) as cli_des,
-					(select count(*) from finan_opeBanca where cc_centCostId=opeProye.cc_centCostId) as cant_ope
+					(select count(*) from finan_opeBanca where cc_centCostId=opeProye.cc_centCostId) as cant_ope,
+					(select cc_ocFechCli from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as ocFechCli
 					FROM `finan_opeProye` as opeProye;
 
 				end;
@@ -9659,7 +9682,7 @@
 
 				end;
 
-			# actualizar operacion de proyecto [finan_opeProye_actu] -> [...]
+			# actualizar operacion de proyecto [finan_opeProye_actu] -> [... - OK]
 
 				DELIMITER $$
 				create function finan_opeProye_actu($idOpeProye int(11),$centId int(11))
@@ -9708,6 +9731,48 @@
 					$adjuDoc);
 
 				end;
+
+			# evaluar existencia de centro de proyecto [finan_centProye_eva] -> [... - OK]
+
+				DELIMITER $$
+				create function finan_centProye_eva($centId int(11))
+				RETURNS int(11)
+				COMMENT 'evaluar existencia de centro de proyecto'
+				BEGIN
+
+					/*vars*/
+					declare $flagEva int(11);
+
+					/*eva cent*/
+					set $flagEva=(select count(*) from finan_opeProye where cc_centCostId=$centId);
+
+					/*return*/
+					return $flagEva;
+
+				end;
+
+			# eliminar operacion de proyecto [finan_opeProye_eli] -> [... - OK]
+
+				DELIMITER $$
+				create function finan_opeProye_eli($opeId int(11))
+				RETURNS int(11)
+				COMMENT 'eliminar operacion de proyecto'
+				BEGIN
+
+					/*vars*/
+					declare $rowAfect int(11);
+
+					/*eli ope proye*/
+					delete from finan_opeProye where finan_opeProyeId=$opeId;
+
+					/*row Afect*/
+					set $rowAfect=(select ROW_COUNT());
+
+					/*return*/
+					return $rowAfect;
+
+				end;
+
 
 /*----------------------------------[*]------------------------------------------------------------------*/
 

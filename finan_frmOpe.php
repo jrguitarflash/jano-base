@@ -91,7 +91,7 @@
 
 					<span class="campo" id="finan_mont" >----</span>
 
-					<label id="lbl" >Fecha</label>
+					<label id="lbl" >Fecha Recepción</label>
 
 					<span class="campo" id="finan_fech" >----</span>
 
