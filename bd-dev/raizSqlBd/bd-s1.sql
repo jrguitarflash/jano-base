@@ -9104,14 +9104,20 @@
 			alter table finan_tipDoc
 			add constraint finan_docId_fk foreign key (finan_docId) references finan_doc(finan_docId);
 
-		# table operacion bancaria proyecto -> [finan_opeProye] [...OK]
+		# table operacion bancaria proyecto -> [finan_opeProye] [... OK]
 
 			create table finan_opeProye
 			(
 				finan_opeProyeId int(11) primary key auto_increment,
 				finan_opeProyeCorre char(25),
-				cc_centCostId int(11)
+				cc_centCostId int(11),
+				finan_estaId int(11)
 			);
+
+			/* MODIFICACION */
+
+			alter table finan_opeProye
+			add finan_estaId int(11) after cc_centCostId;
 
 		# table adjuntos de operaciones -> [finan_adjuOpe] [... Ok]
 
@@ -9123,6 +9129,23 @@
 				finan_adjuDes varchar(200),
 				finan_adjuDoc varchar(1200)
 			);
+
+		# table estado de operacion proyecto -> [finan_estaOpe] [... OK ]
+
+			create table finan_estaOpe
+			(
+				finan_estaId int(11) primary key auto_increment not null,
+				finan_estaDes varchar(50),
+				finan_estaImg varchar(200)
+			);
+
+			/* 
+				CONSTANTES 
+					- abierto
+					- cerrado
+			*/
+
+
 
 	/* PERSISTENCIAS */
 
@@ -9261,7 +9284,8 @@
 					(select cc_idProye from cc_centcost where cc_centCostId=opeProye.cc_centCostId ) as proyId,
 					(select proy_nombre from proyecto where proyecto_id=proyId ) as proyDes,
 					(select cc_correCenCost from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as cc_des,
-					(select concat(cc_des,' - ',proyDes)) as centDes 
+					(select concat(cc_des,' - ',proyDes)) as centDes,
+					(select finan_estaImg from finan_estaOpe where finan_estaId=opeProye.finan_estaId) as estaImg
 					 from finan_opeProye as opeProye where finan_opeProyeId=$opeId;
 
 				end;
@@ -9269,7 +9293,7 @@
 			# obtener operaciones de proyecto [finan_opeProye_obte] -> [... - Ok]
 
 				DELIMITER $$
-				create procedure finan_opeProye_obte()
+				create procedure finan_opeProye_obte($periOpe varchar(10),$estaOpe int(11))
 				COMMENT 'obtener operaciones de proyecto'
 				BEGIN
 
@@ -9281,12 +9305,15 @@
 					(select cc_idCliEmp from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as cc_cliId,
 					(select emp_nombre from empresa where empresa_id=cc_cliId) as cli_des,
 					(select count(*) from finan_opeBanca where cc_centCostId=opeProye.cc_centCostId) as cant_ope,
-					(select cc_ocFechCli from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as ocFechCli
-					FROM `finan_opeProye` as opeProye;
+					(select cc_ocFechCli from cc_centcost where cc_centCostId=opeProye.cc_centCostId) as ocFechCli,
+					(select finan_estaImg from finan_estaOpe where finan_estaId=opeProye.finan_estaId) as estaImg
+					FROM `finan_opeProye` as opeProye
+					where date_format((select cc_ocFechCli from cc_centcost where cc_centCostId=opeProye.cc_centCostId),'%Y')=$periOpe and
+					finan_estaId=$estaOpe;
 
 				end;
 
-			# obtener adjuntos de operacion bancaria [finan_adjuOpeXId_obte] [...]
+			# obtener adjuntos de operacion bancaria [finan_adjuOpeXId_obte] [... - OK]
 
 				DELIMITER $$	
 				create procedure finan_adjuOpeXId_obte($opeId int(11))
@@ -9301,8 +9328,49 @@
 						finan_numDocAdju as numDocAdju,
 						finan_adjuDes as adjuDes,
 						finan_adjuDoc as adjuDoc
+						from finan_adjuOpe
 						where finan_opeProyeId=$opeId;
 				end;
+
+			# obtener periodos de operacion de proyecto [finan_periOpe_obte] [... - OK]
+
+				DELIMITER $$
+				create procedure finan_periOpe_obte()
+				COMMENT 'obtener periodos de operacion de proyecto'
+				BEGIN
+
+					/*vars*/
+
+					/*obtener periodos*/
+					select distinct
+					date_format(cc_ocFechCli,'%Y') as periOpe
+					from
+					finan_opeProye as opeProye,
+					cc_centcost as centCost
+					where
+					centCost.cc_centCostId=opeProye.cc_centCostId;
+
+					/*return*/
+
+				end;
+
+			# obtener estado de operacion de proyecto [finan_estaOpe_obte] [... - OK ]
+
+				DELIMITER $$
+				create procedure finan_estaOpe_obte()
+				COMMENT 'obtener estado de operacion de proyecto'
+				BEGIN
+
+					/*obte esta ope*/
+					select
+					finan_estaId as estaId,
+					finan_estaDes as estaDes
+					from
+					finan_estaOpe;
+
+				end;
+
+
 
 		# [FUNCTION]
 
@@ -9797,7 +9865,7 @@
 
 				end;
 
-			# eliminar adjuntos de operacion [finan_adjuOpe_eli] -> [....]
+			# eliminar adjuntos de operacion [finan_adjuOpe_eli] -> [.... - OK]
 
 				DELIMITER $$
 				create function finan_adjuOpe_eli($adjuOpeId int(11))
@@ -9809,7 +9877,7 @@
 					declare $rowAfect int(11);
 
 					/* eli ope */
-					delete from finan_adjuOpe_eli where finan_adjuOpeId=$adjuOpeId;
+					delete from finan_adjuOpe where finan_adjuOpeId=$adjuOpeId;
 
 					/* row afect */
 					set $rowAfect=(select ROW_COUNT());
@@ -9819,6 +9887,49 @@
 
 				end;
 
+			# cerrar operacion de proyecto [finan_opeProye_cerrar] -> [... - OK]
+
+				DELIMITER $$
+				create function finan_opeProye_cerrar($opeId int(11))
+				RETURNS int(11)
+				COMMENT 'cerrar operacion de proyecto'
+				BEGIN
+
+					/*vars*/
+					declare $rowAfect int(11);
+
+					/*cerrar ope*/
+					update finan_opeProye set finan_estaId=2 where finan_opeProyeId=$opeId;
+
+					/*row afect*/
+					set $rowAfect=(select ROW_COUNT());
+
+					/*return*/
+					return $rowAfect;
+
+				end;
+
+			# abrir operacion de proyecto [finan_opeProye_ope] -> [... - OK]
+
+				DELIMITER $$
+				create function finan_opeProye_ope($opeId int(11))
+				RETURNS int(11)
+				COMMENT 'abrir operacion de proyecto'
+				BEGIN
+
+					/*vars*/
+					declare $rowAfect int(11);
+
+					/*ope proye*/
+					update finan_opeProye set finan_estaId=1 where finan_opeProyeId=$opeId;
+
+					/*row Afect*/
+					set $rowAfect=(select ROW_COUNT());
+
+					/*return*/
+					return $rowAfect;
+
+				end;
 
 /*----------------------------------[*]------------------------------------------------------------------*/
 
@@ -11954,6 +12065,11 @@
 	/*Ejemplo: reinicar auto_increment*/
 
 		alter table nc_noConfor auto_increment=1;
+
+	/*Ejemplo: incrementar tamaño por defecto de group_concat*/
+
+	SET SESSION group_concat_max_len = 100000;
+	SET GLOBAL group_concat_max_len=100000;
 
 /*---------------------------------------------[*]-------------------------------------------------------*/
 				

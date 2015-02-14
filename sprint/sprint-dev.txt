@@ -20,10 +20,23 @@
 - modulo centro de costo
 - modulo almacen
 - modulo no conformidad
-- modulo finanzas
+- modulo finanzas-operacion bancaria
 
 /*
-* sprint #24 - 10/02/2015 (modulo finanzas)
+************************************
+* modulo finanzas-operacion bancaria
+************************************
+*/
+
+/*
+* sprint #7 - 14/02/2015 (operacion bancaria)
+*/
+
+- estados de operaciones del proyecto
+- apertura y cierre de operacion del proyecto
+
+/*
+* sprint #6 - 10/02/2015
 */
 
 - adjuntar documento de operacion
@@ -31,15 +44,15 @@
 - persistencia eliminar adjunto
 
 /*
-* sprint #23 - 10/02/2015 (modulo finanzas)
+* sprint #5 - 10/02/2015
 */
 
-- editar proyeto de operacion 
+- editar proyecto de operacion 
 - eliminar proyecto de operacion
 - validar proyecto repetidos
 
 /*
-* sprint #22 - 06/02/2015 (modulo finanzas)
+* sprint #4 - 06/02/2015
 */
 
 - generar operacion de proyecto
@@ -49,7 +62,7 @@
 - persistencia editar operacion de proyecto
 
 /*
-* sprint #21 - 05/02/2015 (modulo finanzas)
+* sprint #3 - 05/02/2015
 */
 
 - persistencia para generar operacion del proyecto
@@ -59,81 +72,228 @@
 - persistencia para iniciar operacion del proyecto
 
 /*
-* sprint #20 - 04/01/2015 (modulo finanzas)
+* sprint #2 - 04/01/2015
 */
 
 - vista lista de operaciones bancarias
 - vista formulario de operaciones bancarias,proyecto y adjuntos
 
 /*
-* sprint #20 - 28-01-2015
-/
+* sprint #1 - 28-01-2015
+*/
 
 - prueba de commits en repositorio
 
 /*
-* sprint #19 - 24/01/2015 (modulo perfiles)
+******************
+* modulo perfiles
+******************
 */
 
 /*
-* sprint #18 - 24/01/2015 (modulo usuario)
+* sprint #1 - 24/01/2015 (modulo perfiles)
+*/
+
+- perfiles de usuarios
+- operaciones CRUD de perfiles
+- asignacion de perfil a usuario
+
+/*
+******************
+* modulo usuario
+******************
 */
 
 /*
-* sprint #17 - 24/01/2015 (modulo menu)
+* sprint #1 - 24/01/2015 (modulo usuario)
+*/
+
+- usuarios del sistema
+- operaciones CRUD de usuarios
+- asignacion de usuario a persona
+
+/*
+***************
+* modulo menu
+***************
 */
 
 /*
-* sprint #16 - 24/01/2015 (modulo permisos)
+* sprint #1 - 24/01/2015 (modulo menu)
+*/
+
+- rutas de acceso del menu
+- operaciones CRUD de menu
+
+/*
+*****************
+* modulo permisos
+*****************
 */
 
 /*
-* sprint #15 - 24/01/2015 (modulo proforma)
+* sprint #1 - 24/01/2015 (modulo permisos)
+*/
+
+- permisos de accesos de empresa y perfiles
+- permisos de acceso a tableros y accesos
+
+/*
+******************
+* modulo proforma
+******************
 */
 
 /*
-* sprint #14 - 24/01/2015 (modulo empresa)
+* sprint #1 - 24/01/2015 (modulo proforma)
+*/
+
+- proforma de cotizacion con precalculo
+
+/*
+**********************
+* modulo empresa
+**********************
 */
 
 /*
-* sprint #13 - 24/01/2015 (modulo contacto)
+* sprint #1 - 24/01/2015 (modulo empresa)
+*/
+
+- empresas proveedores,clientes,transportista
+- operaciones CRUD de empresas
+
+/*
+*****************
+* modulo contacto
+*****************
 */
 
 /*
-* sprint #12 - 24/01/2015 (modulo trabajador)
+* sprint #1 - 24/01/2015 (modulo contacto)
+*/
+
+- contactos de empresas
+- operaciones CRUD de contactos
+
+/*
+*******************
+* modulo trabajador
+*******************
 */
 
 /*
-* sprint #11 - 24/01/2015 (modulo personas)
+* sprint #1 - 24/01/2015 (modulo trabajador)
+*/
+
+- persona con un usuario y perfil asignado de la empresa del negocio
+- operaciones CRUD del trabajador
+
+/*
+*****************
+* modulo personas
+*****************
 */
 
 /*
-* sprint #10 - 24/01/2015 (modulo cumpleaños)
+* sprint #1 - 24/01/2015 (modulo personas)
+*/
+
+- personas indipendientes y de empresas
+- operaciones CRUD de personas
+
+/*
+*******************
+* modulo cumpleaños
+*******************
 */
 
 /*
-* sprint #9 - 24/01/2015 (modulo vacaciones)
+* sprint #1 - 24/01/2015 (modulo cumpleaños)
+*/
+
+- trabajadores de empresa del negocio
+- fecha de cumpleaños de trabajadores
+
+/*
+********************
+* modulo vacaciones
+********************
 */
 
 /*
-* sprint #8 - 24/01/2015 (modulo calendario)
+* sprint #1 - 24/01/2015 (modulo vacaciones)
+*/
+
+- vacaciones del trabajador
+- vacaciones por periodo del trabajador
+- vacaciones por dias habiles y no habiles
+
+/*
+********************
+* modulo calendario
+********************
 */
 
 /*
-* sprint #7 - 24/01/2015 (modulo de productos y servicios)
+* sprint #1 - 24/01/2015 (modulo calendario)
+*/
+
+- calendario de eventos por area del trabajador
+- calendario modo mes,dia y agenda
+
+/*
+*********************************
+* modulo de productos y servicios
+*********************************
 */
 
 /*
-* sprint #6 - 24/01/2015 (modulo ordenes)
+* sprint #1 - 24/01/2015 (modulo de productos y servicios)
+*/
+
+- productos y servicios de la empresa negocio
+- descripcion,categorias,clasificaciones y subclasificaciones
+- unidades de medidas del productos o servicio
+
+/*
+*****************
+* modulo ordenes
+*****************
 */
 
 /*
-* sprint #5 - 24/01/2015 (modulo cotizacion)
+* sprint #1 - 24/01/2015 (modulo ordenes)
 */
+
+- ordenes locales,internacionales y servicios
+- operaciones CRUD de ordenes
+- formato por tipo de  orden
+
+/*
+*********************
+* modulo cotizacion
+*********************
+*/
+
+/*
+* sprint #1 - 24/01/2015 (modulo cotizacion)
+*/
+
+- cotizaciones de proyectos
+- formato de cotizaciones
+- operaciones CRUD de cotizacion
+- cotizaciones por estado activas,referenciales,adjudicadas,canceladas
 
 
 /*
-* sprint #4 - 24/01/2015 (modulo visitas)
+******************
+* modulo visitas
+*****************
+*/
+
+/*
+* sprint #1 - 24/01/2015 (modulo visitas)
 */
 
 - lista de visitas por ing. de ventas
@@ -144,7 +304,13 @@
 - carga de empresa y contactos a visita 
 
 /*
-* sprint #3 - 24/01/2015 (modulo centro de costo)
+*************************
+* modulo centro de costo
+*************************
+*/
+
+/*
+* sprint #1 - 24/01/2015 (modulo centro de costo)
 */
 
 - listado de centro de costos de proyectos y anuales
@@ -154,7 +320,13 @@
 - carga de cotizacion(FL) a centro
 
 /*
-* sprint #2 - 24/01/2015 (modulo almacen)
+****************
+* modulo almacen
+****************
+*/
+
+/*
+* sprint #1 - 24/01/2015 (modulo almacen)
 */
 
 - linea de productos de almacen
@@ -167,6 +339,12 @@
 - filtro de productos por numero de serie
 - generacion de kardex por tipo de movimiento entrante,saliente e interno
 - manejo de numeros de serie por linea de producto
+
+/*
+************************
+* modulo no conformidad
+************************
+*/
 
 /*
 * sprint #1 - 24/01/2015 (modulo no conformidad)

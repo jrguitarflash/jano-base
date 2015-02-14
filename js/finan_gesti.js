@@ -10,7 +10,14 @@ window.onload=function()
 
 			//load
 
-				finan_opeProye_obte();
+				//periodos de operacion proyectos
+				finan_periOpe_obte();
+
+				//obtener estados de operacion de proyecto
+				finan_estaOpe_obte();
+
+				//obtener operaciones de proyecto
+				setTimeout('finan_opeProye_obte()',1200);
 
 			//eventos
 
@@ -22,6 +29,30 @@ window.onload=function()
 						param="menu_id=162";
 						param+="&menu=finan_frmOpe";
 						gd_direPagParam(url,param);	
+					});
+
+					//evento filtrar operaciones por periodo
+
+					$('#finan_periOpe').click(function(mievento)
+					{
+						finan_opeProye_obte();
+					});
+
+					//evento filtrar operaciones por estado
+
+					$('#finan_estaOpe').click(function(mievento)
+					{
+						finan_opeProye_obte();
+					});
+
+					//evento aperturar operaciones del proyecto
+
+					$('#finan_opeApe').click(function(mievento)
+					{
+						if(confirm("¿ Confirma aperturar operaciones seleccinadas ?"))
+						{
+							finan_opeProye_ope();
+						}
 					});
 
 		break;
@@ -47,6 +78,10 @@ window.onload=function()
 				setTimeout('finan_opeBanTem_obte()',1200);
 
 				//------------------------o---------------------
+
+				//iniciar adjuntos de operacion
+
+				finan_adjuOpeXId_obte();
 
 			//eventos
 
@@ -83,6 +118,18 @@ window.onload=function()
 							finan_opeProye_crear();
 						});
 		
+					//evento cerrar operacion de proyecto
+
+						$("#finan_closeOpe").click(function()
+						{
+							//console.log("Cerrando operacion de proyecto...!");
+							if(confirm("¿ Cerrar operaciones del proyecto ?"))
+							{
+								finan_opeProye_cerrar();
+							}
+						});
+
+
 					//*****************************
 					//Eventos Modulo Financiero
 					//*****************************
@@ -151,6 +198,41 @@ window.onload=function()
 
 				//JSON
 
+					function finan_opeProye_ope()
+					{
+						/*vars*/
+						json="finan_opeProye_ope";
+						opeId=new Array();
+						insFrm=document.finan_opeProye_frm.finan_opeProyeId;
+						opeId=gd_checkData(insFrm);
+						console.log(opeId);
+
+						/*peticion json*/
+						$.ajax({
+					    type:"POST",
+					    url: 'json/finan_json.php',
+					    data:{json:json,opeId:opeId},
+					    dataType: 'json',
+					    success: function(data) 
+					    {
+					    	//console.log(data[0]);
+					    	if(data[0]>0)
+					    	{
+					    		$(".elem-gd").notify(data[0]+" operacion de proyectos aperturadas correctamente","success");
+
+					    		//obtener operaciones de proyecto
+								setTimeout('finan_opeProye_obte()',1200);
+					    	}
+					    	else
+					    	{
+					    		$(".elem-gd").notify("operacion de proyectos no aperturadas","error");
+					    	}
+						}
+
+					    });
+
+					}
+
 				//AJAX
 
 					function finan_opeProye_obte()
@@ -158,7 +240,38 @@ window.onload=function()
 
 						//vars
 						ajax="finan_opeProye_obte";
+						periOpe=kd_obteValComb('finan_periOpe');
+						estaOpe=kd_obteValComb('finan_estaOpe');
 
+						//console.log(periOpe);
+						//console.log(estaOpe);
+
+						//peticion ajax
+						var request = $.ajax(
+						{
+							url: "ajax/finan_ajax.php",
+							type: "POST",
+							data: {ajax:ajax,periOpe:periOpe,estaOpe:estaOpe},
+							dataType: "html"
+						});
+						
+						request.done(function(msg) 
+						{
+							//console.log(msg);
+							$("#finan_opeProye").html(msg);
+						});
+						
+						request.fail(function(jqXHR, textStatus) 
+						{
+							alert( "Request failed: " + textStatus );
+						});
+
+					}
+
+					function finan_periOpe_obte()
+					{
+						//vars
+						ajax="finan_periOpe_obte";
 
 						//peticion ajax
 						var request = $.ajax(
@@ -172,15 +285,40 @@ window.onload=function()
 						request.done(function(msg) 
 						{
 							//console.log(msg);
-							$("#finan_opeProye").html( msg );
+							$("#finan_periOpe").html( msg );
 						});
 						
 						request.fail(function(jqXHR, textStatus) 
 						{
 							alert( "Request failed: " + textStatus );
 						});
-
 					}
+
+					function finan_estaOpe_obte()
+					{
+						//vars
+						ajax="finan_estaOpe_obte";
+
+						//peticion ajax
+						var request = $.ajax(
+						{
+							url: "ajax/finan_ajax.php",
+							type: "POST",
+							data: {ajax:ajax},
+							dataType: "html"
+						});
+						
+						request.done(function(msg) 
+						{
+							//console.log(msg);
+							$("#finan_estaOpe").html( msg );
+						});
+						
+						request.fail(function(jqXHR, textStatus) 
+						{
+							alert( "Request failed: " + textStatus );
+						});
+					}	
 
 			//popups
 
@@ -486,7 +624,13 @@ window.onload=function()
 							$(".elem-gd").notify("formato adjunto correctamente","success");
 
 							//iniciar archivos adjuntos
-							nc_infoAdju_obte();
+								//nc_infoAdju_obte();
+								finan_adjuOpeXId_obte();
+
+							//limpiar formulario
+							document.finan_frmAdju.finan_numDoc.value="";
+							document.finan_frmAdju.finan_des.value="";
+							document.finan_frmAdju.finan_adjuFile.value="";
 						}
 						else
 						{
@@ -512,6 +656,7 @@ window.onload=function()
 								alert("Guardar operacion de proyecto antes de continuar...!");
 							}
 					}
+
 
 				//JSON
 
@@ -601,6 +746,7 @@ window.onload=function()
 								document.getElementById('finan_numOpe').innerHTML=data[0]['finan_opeProyeCorre'];
 								document.getElementById('nc_ccDes').value=data[0]['centDes'];
 								document.getElementById('nc_ccId').value=data[0]['cc_centCostId'];
+								document.getElementById('finan_estaImg').innerHTML="<img src="+data[0]['estaImg']+" >";
 							}
 						});
 					}
@@ -628,10 +774,92 @@ window.onload=function()
 								$(".elem-gd").notify("Operacion de proyecto contiene operaciones","error");
 							}
 						});
-
 					}
 
-				//AJAX				
+					function finan_adjuOpe_eli(adjuId)
+					{
+						//test
+						console.log("Eliminando adjunto con id: "+adjuId);
+
+						//vars
+						adjuId=adjuId;
+						json="finan_adjuOpe_eli";
+
+						//params
+						param="adjuId="+adjuId;
+						param+="&json="+json;											
+
+						//peticion  json
+						$.getJSON('json/finan_json.php?'+param,{format: "json"}, function(data) 
+						{
+							if(data[0]>0)
+							{
+								$(".elem-gd").notify("Adjunto eliminado correctamente","success");
+								finan_adjuOpeXId_obte();
+							}
+							else
+							{
+								$(".elem-gd").notify("Adjunto no eliminado","error ");	
+							}
+						});
+					}
+
+					function finan_opeProye_cerrar()
+					{
+						/*vars*/
+						json="finan_opeProye_cerrar";
+						opeId=document.getElementById('finan_opeId').value;
+
+						/*params*/
+						param="json="+json;
+						param+="&opeId="+opeId;
+
+						/*peticion json*/
+						$.getJSON('json/finan_json.php?'+param,{format: "json"}, function(data) 
+						{
+							if(data[0]>0)
+							{
+								$(".elem-gd").notify("Operacion de proyecto cerrado correctamente...!","success");
+								finan_opeProyexId_obte();
+								setTimeout('finan_datCentxId()',1200);
+							}
+							else
+							{
+								$(".elem-gd").notify("Operacion de proyecto no cerrado...!","error ");
+							}
+						});
+					}
+
+
+				//AJAX
+
+					function finan_adjuOpeXId_obte()
+					{
+
+						/* vars */
+						ajax="finan_adjuOpeXId_obte";
+						opeId=document.getElementById('finan_opeId').value;
+
+						//peticion ajax
+							var request = $.ajax(
+							{
+								url: "ajax/finan_ajax.php",
+								type: "POST",
+								data: {ajax:ajax,opeId:opeId},
+								dataType: "html"
+							});
+							
+							request.done(function(msg) 
+							{
+								//console.log(msg);
+								$("#finan_adjuTab").html( msg );
+							});
+							
+							request.fail(function(jqXHR, textStatus) 
+							{
+								alert( "Request failed: " + textStatus );
+							});
+					}			
 
 			//popups
 

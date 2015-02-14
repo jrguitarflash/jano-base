@@ -45,6 +45,7 @@
 		<h1>Formulario Operaciones Bancarias</h1>
 		<div class="buttons" >
 			<a href="#" id="finan_saveOpe" >Guardar</a>
+			<a href="#" id="finan_closeOpe" >Cerrar</a>
 			<a href="#" id="finan_opeVol" >volver</a>
 		</div>
 	
@@ -65,6 +66,10 @@
 					<label id="lbl" >N° Operacion:</label>
 
 					<span class="campo" id="finan_numOpe" >----</span>
+
+					<label id="lbl" >Estado</label>
+
+					<span class="campo" id="finan_estaImg" >----</span>
 
 					<label id="lbl" >CC:</label>
 
@@ -91,7 +96,7 @@
 
 					<span class="campo" id="finan_mont" >----</span>
 
-					<label id="lbl" >Fecha</label>
+					<label id="lbl" >Fecha de recepcion</label>
 
 					<span class="campo" id="finan_fech" >----</span>
 
@@ -152,7 +157,7 @@
 						
 						</thead>
 
-						<tbody>
+						<tbody id="finan_adjuTab" >
 
 							<tr>
 								<td>Item</td>

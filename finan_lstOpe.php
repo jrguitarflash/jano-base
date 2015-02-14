@@ -45,15 +45,30 @@
 		<h1>Lista de Operaciones Bancarias</h1>
 		<div class="buttons" >
 			<a href="#" id="finan_opeNuev" >Nuevo</a>
+			<a href="#" id="finan_opeApe" >Aperturar</a>
+			<a href="#">Exportar</a>
 		</div>
 	
 	</div>
 
 	<div class="content" >
 
+		<form id="finan_opeProye_frm" name="finan_opeProye_frm" >
+
+		<label>Periodo</label>
+		<select id="finan_periOpe" >
+			<option value="" ></option>
+		</select>
+
+		<label>Estado</label>
+		<select id="finan_estaOpe" >
+			<option></option>
+		</select>
+
 		<table class="list" >
 			<thead>
 				<tr>
+					<td><input type='checkbox' name='finan_opeProyeId[]' id='finan_opeProyeId' style="display:none" value="" ></td>
 					<td align="center" >Item</td>
 					<td>N° Operacion</td>
 					<td>CC</td>
@@ -61,6 +76,7 @@
 					<td>Cliente</td>
 					<td>Fecha de recepcion</td>
 					<td align="center" >N° Operaciones</td>
+					<td>Estado</td>
 					<td align="center" >Accion</td>
 				</tr>
 			</thead>
@@ -73,6 +89,7 @@
 					<td>Cliente</td>
 					<td>Fecha de recepcion</td>
 					<td align="center" >N° Operaciones</td>
+					<td></td>
 					<td align="center" >
 						<a href="#">Editar</a> | 
 						<a href="#">Eliminar</a>
@@ -80,6 +97,8 @@
 				</tr>
 			</tbody>
 		</table>
+
+		</form>
 
 	</div>
 

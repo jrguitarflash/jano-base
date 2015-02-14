@@ -98,6 +98,49 @@ switch ($_REQUEST['json'])
 
 	break;
 
+	case 'finan_adjuOpe_eli':
+
+		$sql=sql::finan_adjuOpe_eli($_GET['adjuId']);
+		$filAfect=negocio::getVal($sql,'response');
+
+		$data=Array();
+		$data[0]=$filAfect;
+
+		print json_encode($data);
+
+	break;
+
+	case 'finan_opeProye_cerrar':
+
+		$sql=sql::finan_opeProye_cerrar($_GET['opeId']);
+		$filAfect=negocio::getVal($sql,'response');
+
+		$data=Array();
+		$data[0]=$filAfect;
+
+		print json_encode($data);
+
+	break;
+
+	case 'finan_opeProye_ope':
+
+		$filAfect=0;
+
+		for($i=0;$i<count($_POST['opeId']);$i++)
+		{
+			desconectar();
+			conectar();
+			$sql=sql::finan_opeProye_ope($_POST['opeId'][$i]);
+			$filAfect=negocio::getVal($sql,'response');
+		}
+
+		$data=Array();
+		$data[0]=$filAfect;
+
+		print json_encode($data);
+
+	break;
+
 	/*******************************************/
 		// MODULO FINANZAS & CENTRO DE COSTOS
 	/*******************************************/

@@ -4690,15 +4690,33 @@ class sql
 		return $sql;
 	}
 
-	public function finan_opeProye_obte()
+	public function finan_opeProye_obte($periOpe,$estaOpe)
 	{
-		$sql="CALL finan_opeProye_obte()";
+		$sql="CALL finan_opeProye_obte(".$periOpe.",".$estaOpe.")";
 		return $sql;
 	}
 
 	public function finan_opeProyexId_obte($opeId)
 	{
 		$sql="CALL finan_opeProyexId_obte('".$opeId."')";
+		return $sql;
+	}
+
+	public function finan_adjuOpeXId_obte($opeId)
+	{
+		$sql="CALL finan_adjuOpeXId_obte('".$opeId."')";
+		return $sql;
+	}
+
+	public function finan_periOpe_obte()
+	{
+		$sql="CALL finan_periOpe_obte()";
+		return $sql;
+	}
+
+	public function finan_estaOpe_obte()
+	{
+		$sql="CALL finan_estaOpe_obte()";
 		return $sql;
 	}
 
@@ -4758,7 +4776,7 @@ class sql
 		return $sql;
 	}
 
-	#new [...]
+	#new 11/02/2015 - open
 
 	public function finan_opeProye_crear($centId)
 	{
@@ -4795,6 +4813,30 @@ class sql
 										'".$adjuDoc."') as response";
 		return $sql;
 	}
+
+	#new 11/02/2015 - open
+	#	 12/02/2015
+	#    13/02/2015
+
+	public function finan_adjuOpe_eli($adjuOpeId)
+	{
+		$sql="select finan_adjuOpe_eli('".$adjuOpeId."') as response";
+		return $sql;
+	}
+
+	public function finan_opeProye_cerrar($opeId)
+	{
+		$sql="select finan_opeProye_cerrar('".$opeId."') as response";
+		return $sql;
+	}
+
+	public function finan_opeProye_ope($opeId)
+	{
+		$sql="select finan_opeProye_ope('".$opeId."') as response";
+		return $sql;
+	}
+
+
 
 /*--------------------------------------[*]------------------------------------------------*/
 

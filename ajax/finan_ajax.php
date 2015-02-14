@@ -13,7 +13,7 @@ switch ($_REQUEST['ajax'])
 {
 	case 'finan_opeProye_obte':
 
-		$sql=sql::finan_opeProye_obte();
+		$sql=sql::finan_opeProye_obte($_POST['periOpe'],$_POST['estaOpe']);
 		$dataOpe=negocio::getData($sql);
 		$html=""; //data render
 		$ind=1; //data indice
@@ -22,6 +22,9 @@ switch ($_REQUEST['ajax'])
 		{
 
 			$html.="<tr>
+						<td align='center' >
+							<input type='checkbox' name='finan_opeProyeId[]' id='finan_opeProyeId' value='".$data['finan_opeProyeId']."' >
+						</td>
 						<td align='center' >".$ind++."</td>
 						<td>".$data['finan_opeProyeCorre']."</td>
 						<td>".$data['cc_des']."</td>
@@ -29,11 +32,68 @@ switch ($_REQUEST['ajax'])
 						<td>".$data['cli_des']."</td>
 						<td>".$data['ocFechCli']."</td>
 						<td align='center' class='finan_cantOpe' >".$data['cant_ope']."</td>
+						<td><img src=".$data['estaImg']."></td>
 						<td align='center' >
 							<a href='Javascript:finan_dirEdit(".$data['finan_opeProyeId'].")'>Editar</a> | 
 							<a href='Javascript:finan_opeProye_eli(".$data['finan_opeProyeId'].")'>Eliminar</a>
 						</td>
 					</tr>";
+		}
+
+		print $html;
+
+	break;
+
+	case 'finan_adjuOpeXId_obte':
+
+		$sql=sql::finan_adjuOpeXId_obte($_POST['opeId']);
+		$dataAdju=negocio::getData($sql);
+		$html="";
+		$ind=1;
+
+		foreach($dataAdju as $data)
+		{
+			$html.="<tr>
+					<td>".$ind++."</td>
+					<td>".$data['numDocAdju']."</td>
+					<td>".$data['adjuDes']."</td>
+					<td>
+						<a href='".$data['adjuDoc']."' target='_blank' >".$data['adjuDoc']."</a>
+					</td>
+					<td>
+						<a href='Javascript:finan_adjuOpe_eli(".$data['adjuOpeId'].")' >eliminar</a>
+					</td>
+				</tr>";
+		}
+
+		print $html;
+
+	break;
+
+	case 'finan_periOpe_obte':
+
+		$sql=sql::finan_periOpe_obte();
+		$dataPeri=negocio::getData($sql);
+		$html="";
+
+		foreach($dataPeri as $data)
+		{
+			$html.="<option value='".$data['periOpe']."' >".$data['periOpe']."</option>";
+		}
+
+		print $html;
+
+	break;
+
+	case 'finan_estaOpe_obte':
+
+		$sql=sql::finan_estaOpe_obte();
+		$dataEstaOpe=negocio::getData($sql);
+		$html="";
+
+		foreach($dataEstaOpe as $data)
+		{
+			$html.="<option value='".$data['estaId']."' >".$data['estaDes']."</option>";
 		}
 
 		print $html;
