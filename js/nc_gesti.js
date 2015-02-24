@@ -68,6 +68,14 @@
 
 			break;
 
+			case 'nc_grafiPorce':
+
+				console.log(view);
+				Calendario3('nc_fechIni');
+				Calendario3('nc_fechFin');
+
+			break;
+
 			default:
 			break;
 		}

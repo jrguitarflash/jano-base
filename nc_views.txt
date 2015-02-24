@@ -14,6 +14,21 @@
 
 		3. nc_noConform_prc.php -> OK
 
+	/* graficos de porcentajes */
+
+		4. nc_grafiPorce.php -> OK
+
+	/* iframe graficos porcentaje */
+
+		5. nc_grafIframe.php -> OK
+
+/***************
+	library
+****************/
+
+	/* library jplot */
+
+		1. libJquery/jplot/
 
 /**************
 	Report

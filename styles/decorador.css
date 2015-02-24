@@ -2199,6 +2199,17 @@
 		background-color: white;
 	}
 
+	/* new 16/02/2015 - open */
+
+	#nc_grafIframe
+	{
+		width:100%;
+		float: left;
+		clear: left;
+		margin-top: 10px;
+		height: 450px;
+	}
+
 
 
 /*-------------------------[*]-------------------------------------------*/

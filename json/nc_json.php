@@ -264,6 +264,179 @@ switch ($_REQUEST['json'])
 
 	break;
 
+	//New 23/02/2015
+
+	case 'nc_grafTip':
+
+		$arrIterar=Array();
+		$ind=0;
+
+		if($_GET['nc_tipObs']==1)
+		{
+
+		    desconectar();
+			conectar();
+			$sql=sql::nc_obs_obte();
+			$dataObs=negocio::getData($sql);
+
+			foreach($dataObs as $data)
+			{
+				//nc_obsId
+				desconectar();
+				conectar();
+				
+				$sql=sql::nc_porcexTip_obte(6,$data['nc_obsId'],$_GET['nc_fechIni'],$_GET['nc_fechFin']);
+				$porceConfor=negocio::getVal($sql,'response');
+
+				$arrIterar[$ind]['obsDes']=$data['nc_obsDes'];
+				$arrIterar[$ind]['obsPor']=$porceConfor;
+				$ind++;
+			}
+
+		}
+		else if($_GET['nc_tipObs']==2)
+		{
+			desconectar();
+			conectar();
+			$sql=sql::nc_tipConfxId_obte(1);
+			$dataTipConf=negocio::getData($sql);
+
+			foreach($dataTipConf as $data) 
+			{
+				//nc_tipConfVal
+
+				desconectar();
+				conectar();
+				$sql=sql::nc_porcexTip_obte(4,$data['nc_tipNoConforId'],$_GET['nc_fechIni'],$_GET['nc_fechFin']);
+				$porceConfor=negocio::getVal($sql,'response');
+
+				$arrIterar[$ind]['obsDes']=$data['nc_des'];
+				$arrIterar[$ind]['obsPor']=$porceConfor;
+				$ind++;
+			}
+		}
+
+		else if($_GET['nc_tipObs']==3)
+		{
+			desconectar();
+			conectar();
+			$sql=sql::nc_tipConfxId_obte(2);
+			$dataTipConf=negocio::getData($sql);
+			$iterar="";
+
+			foreach($dataTipConf as $data) 
+			{
+				//nc_tipConfVal
+
+				desconectar();
+				conectar();
+				$sql=sql::nc_porcexTip_obte(4,$data['nc_tipNoConforId'],$_GET['nc_fechIni'],$_GET['nc_fechFin']);
+				$porceConfor=negocio::getVal($sql,'response');
+
+				$arrIterar[$ind]['obsDes']=$data['nc_des'];
+				$arrIterar[$ind]['obsPor']=$porceConfor;
+				$ind++;
+			}
+		}
+
+		else if($_GET['nc_tipObs']==4)
+		{
+			$sql=sql::nc_detec_obte();
+			$dataDetec=negocio::getData($sql);
+			$iterar="";
+
+			foreach($dataDetec as $data) 
+			{
+				//nc_detecVal
+
+				desconectar();
+				conectar();
+				$sql=sql::nc_porcexTip_obte(1,$data['nc_detecVal'],$_GET['nc_fechIni'],$_GET['nc_fechFin']);
+				$porceDetec=negocio::getVal($sql,'response');
+
+				$arrIterar[$ind]['obsDes']=$data['nc_detecDes'];
+				$arrIterar[$ind]['obsPor']=$porceDetec;
+				$ind++;
+			}
+		}
+
+		else if($_GET['nc_tipObs']==5)
+		{
+			desconectar();
+			conectar();
+			$sql=sql::nc_procAfect_obte();
+			$dataProc=negocio::getData($sql);
+			$iterar="";
+
+			foreach($dataProc as $data)
+			{
+				//nc_proceVal
+
+				desconectar();
+				conectar();
+				$sql=sql::nc_porcexTip_obte(2,$data['nc_proceVal'],$_GET['nc_fechIni'],$_GET['nc_fechFin']);
+				$porceProce=negocio::getVal($sql,'response');
+
+				$arrIterar[$ind]['obsDes']=$data['nc_proceDes'];
+				$arrIterar[$ind]['obsPor']=$porceProce;
+				$ind++;
+
+			}
+		}
+
+		else if($_GET['nc_tipObs']==6)
+		{
+			desconectar();
+			conectar();
+			$sql=sql::nc_tipObs_obte();
+			$dataObs=negocio::getData($sql);
+			$iterar="";
+
+			foreach($dataObs as $data) 
+			{
+
+				//nc_obsVal
+
+				desconectar();
+				conectar();
+				$sql=sql::nc_porcexTip_obte(3,$data['nc_obsVal'],$_GET['nc_fechIni'],$_GET['nc_fechFin']);
+				$porceObs=negocio::getVal($sql,'response');
+
+				$arrIterar[$ind]['obsDes']=$data['nc_obsDes'];
+				$arrIterar[$ind]['obsPor']=$porceObs;
+				$ind++;
+
+			}
+		}
+
+		else if($_GET['nc_tipObs']==7)
+		{
+			desconectar();
+			conectar();
+			$sql=sql::nc_estaConfor_obte();
+			$dataEstaConfor=negocio::getData($sql);
+			$iterar="";
+
+			foreach($dataEstaConfor as $data)
+			{
+				//nc_estaConforVal
+
+				desconectar();
+				conectar();
+				$sql=sql::nc_porcexTip_obte(5,$data['nc_estaConforVal'],$_GET['nc_fechIni'],$_GET['nc_fechFin']);
+				$porceEsta=negocio::getVal($sql,'response');
+
+				$arrIterar[$ind]['obsDes']=$data['nc_estaConforDes'];
+				$arrIterar[$ind]['obsPor']=$porceEsta;
+				$ind++;
+			}
+		}
+
+
+		print json_encode($arrIterar);
+
+	break;
+
 	default:
 	break;
 }

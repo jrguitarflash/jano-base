@@ -285,6 +285,11 @@
 - operaciones CRUD de cotizacion
 - cotizaciones por estado activas,referenciales,adjudicadas,canceladas
 
+/*
+* sprint #2 - 24/02/2015 (modulo cotizacion)
+*/
+
+- precalculo editable de cotizaciones
 
 /*
 ******************
@@ -301,7 +306,8 @@
 - reportes de visitas por responsable
 - carga de origen y destino a visita
 - carga de gastos a visita
-- carga de empresa y contactos a visita 
+- carga de empresa y contactos a visita
+ 
 
 /*
 *************************
@@ -355,4 +361,8 @@
 - reporte de no conformidades
 - consolidado de no conformidades
 
+/*
+* sprint #2 - 24/02/2015 (modulo no conformidad)
+*/
 
+- generacion de graficos de observaciones

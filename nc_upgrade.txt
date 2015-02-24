@@ -86,4 +86,10 @@ v 1.5
 . actualizando js gesti..........................................ok
 . actualizando js evento filtro.........................ok
 . actualizando reporte exportar no conformidades........................ok
-. actualizando constantes estados...........................  
+. actualizando constantes estados...........................
+
+v 1.6
+
+. iniciando upgrade.................................................ok
+. creando menu graficos.................................ok
+. iniciando vistas......................................... 

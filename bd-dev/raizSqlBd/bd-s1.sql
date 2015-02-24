@@ -2913,7 +2913,6 @@
 
 /*--------------------------------[*]---------------------------------------------------------------------*/
 
-
 /*-------------------------------------------------------------------------------------------------------*/
 	# MODULO DE COTIZACIONES DE EQUIPOS
 /*-------------------------------------------------------------------------------------------------------*/
@@ -3132,7 +3131,7 @@
 		Proveedor
 		Cliente
 		Equipo/Servicio
-		Monto CC
+ 		Monto CC
 		Monto Ordenes
 		Incoterm
 		Plazo de entrega
@@ -5538,6 +5537,9 @@
 
 				alter table kd_kardx
 				add kd_fechGen datetime default '2014-09-19 17:00:00' after kd_almcId; new!
+
+				alter table kd_kardx
+				add kd_ewMulti varchar(2000) after kd_refEw;
 
 				--------------------------------------------------------------------------------------------------------
 
@@ -8613,13 +8615,182 @@
 				#U
 				#D
 
+		/*****************************************
+		* new 19/02/2015 - Reporte de Inventario
+		******************************************
+		*/
+
+
+		/****************************
+		* Iniciar Linea de producto
+		*****************************
+		*/
+
+			# obtener productos de linea de productos [kd_prodLine_obte] -> OK
+
+				DELIMITER $$
+				create procedure kd_prodLine_obte()
+				COMMENT 'obtener productos de linea de productos'
+				BEGIN
+
+					select
+					lineProd.lp_lineProdId,
+					lineProd.lp_codLineProd,
+					prod.prod_nombre,
+					prod.prod_descrip,
+					mar.mm_nombre
+					from 
+					lp_lineProd as lineProd inner join
+					producto as prod on lineProd.lp_idProd=prod.producto_id inner join
+					mm as mar on prod.marca_id=mar.mm_id where lineProd.lp_estaEli=1
+					order by mm_nombre;
+
+				end;
+
+		/*
+		****************************************** 
+		* obtener entradas por linea de producto
+		******************************************
+		*/
+
+			# obtener entradas por linea de productos [kd_entLine_obte]
+
+				DELIMITER $$
+				create function kd_entLine_obte($kd_lineId int(11),$kd_fechInv date)
+				COMMENT 'obtener entradas por linea de productos'
+				BEGIN
+
+					/* vars */
+
+					/* obte entra por line */
+					select
+					kardx.kd_kardxNro as mov,
+					lineProd.lp_codLineProd as codLine,
+					prod.prod_nombre as prodNom,
+					prod.prod_descrip as prodDes,
+					mar.mm_nombre as marDes,
+					detKardx.kd_detKardxCant as prodCant
+					from
+					kd_detKardx as detKardx inner join
+					kd_kardx as kardx on kardx.kd_kardxId=detKardx.kd_kardxId inner join
+					lp_lineProd as lineProd on detKardx.kd_detKardxProd=lineProd.lp_lineProdId inner join
+					producto as prod on lineProd.lp_idProd=prod.producto_id inner join
+					mm as mar on prod.marca_id=mar.mm_id
+					where 
+					detKardx.kd_detKardxProd=$kd_lineId and 
+					kardx.kd_kardxFech<=$kd_fechInv and
+					kardx.kd_tipMov=1;
+
+				end;
+
+		/*
+		*****************************************
+		* obtener salidas por linea de producto
+		***************************************** 
+		*/
+
+			# obtener salidas de linea de productos [kd_saliEnt_obte]
+
+				DELIMITER $$
+				create function kd_saliEnt_obte()
+				COMMENT 'obtener salidas por linea de productos'
+				BEGIN
+
+					/* vars */
+
+					/* obte sali por line */
+					select
+					kardx.kd_kardxNro as mov,
+					lineProd.lp_codLineProd as codLine,
+					prod.prod_nombre as prodNom,
+					prod.prod_descrip as prodDes,
+					mar.mm_nombre as marDes,
+					detKardx.kd_detKardxCant as prodCant
+					from
+					kd_detKardx as detKardx inner join
+					kd_kardx as kardx on kardx.kd_kardxId=detKardx.kd_kardxId inner join
+					lp_lineProd as lineProd on detKardx.kd_detKardxProd=lineProd.lp_lineProdId inner join
+					producto as prod on lineProd.lp_idProd=prod.producto_id inner join
+					mm as mar on prod.marca_id=mar.mm_id
+					where 
+					detKardx.kd_detKardxProd=$kd_lineId and 
+					kardx.kd_fechCrea<=$kd_fechInv and
+					kardx.kd_tipMov=1;
+
+				end;
+
+		/*
+		*******************************************
+		* obtener movimiento por tipo
+		*******************************************
+		*/
+
+			# obtener movimiento por tipo [kd_movxTip_obte] -> OK
+
+				DELIMITER $$
+				create procedure kd_movxTip_obte($kd_lineId int(11),$kd_fechInv date,$tipMov int(11))
+				COMMENT 'obtener movimiento por tipo'
+				BEGIN
+
+					/*vars*/
+
+					/* obte mov x tip */
+					select
+					kardx.kd_kardxNro as mov,
+					lineProd.lp_codLineProd as codLine,
+					prod.prod_nombre as prodNom,
+					prod.prod_descrip as prodDes,
+					mar.mm_nombre as marDes,
+					detKardx.kd_detKardxCant as prodCant,
+					(select emp_nombre from empresa where empresa_id=kardx.kd_kardxEmp) as emp,
+					(select comp_nro from compras where compras_id=kardx.kd_ewCompId) as ew,
+					kardx.kd_fechCrea as fechCrea
+					from
+					kd_detKardx as detKardx inner join
+					kd_kardx as kardx on kardx.kd_kardxId=detKardx.kd_kardxId inner join
+					lp_lineProd as lineProd on detKardx.kd_detKardxProd=lineProd.lp_lineProdId inner join
+					producto as prod on lineProd.lp_idProd=prod.producto_id inner join
+					mm as mar on prod.marca_id=mar.mm_id
+					where 
+					detKardx.kd_detKardxProd=$kd_lineId and 
+					kardx.kd_fechCrea<=$kd_fechInv and
+					kardx.kd_tipMov=$tipMov;
+
+				end;
+
+		/*
+		******************************************
+		* obtener stock actual 
+		******************************************
+		*/
+
+			# obtener stock actual [kd_stockActu_obte] -> OK
+
+				DELIMITER $$
+				create function kd_stockActu_obte($prodId int(11),$fech date)
+				RETURNS int(11)
+				COMMENT 'obtener stock actual'
+				BEGIN
+
+					/*vars*/
+					declare $stock int(11);
+
+					/* obte stock actu */
+					set $stock=(select count(*) from kd_numSeri where kd_fechIngre<=$fech and kd_prodId=$prodId and kd_estaStockId=1);
+
+					/* return */
+					return $stock;
+
+
+				end;
+
 /*-----------------------------------[*]-----------------------------------------------------------------*/
 
 /*-------------------------------------------------------------------------------------------------------*/
 	# MODULOS
 /*-------------------------------------------------------------------------------------------------------*/
 
-	/*
+	
 
 		NOTES:
 
@@ -8660,30 +8831,47 @@
 /*-------------------------------------------------------------------------------------------------------*/
 
 	-------------------------------
-	// PROYECTO
+		#PROYECTO
 	-------------------------------
 
-		--------------------ESTRUCTURA--------------------------
-		--------------------------------------------------------
 
-		--------------------CONSTANTES--------------------------
-		--------------------------------------------------------
+		# Table Proyecto
 
-		------------------MODIFICACIONES------------------------
-		alter table proyecto
-		add proy_cliId int(11) after empresa_id,
-		add proy_fechAdju date after proy_cliId;
+			--------------------ESTRUCTURA--------------------------
+			--------------------------------------------------------
 
-		alter table proyecto
-		add proy_estaCot int(11) after proy_fechAdju;
+			--------------------CONSTANTES--------------------------
+			--------------------------------------------------------
 
-		alter table proyecto
-		add proy_usuResp int(11) after proy_estaCot;
-		--------------------------------------------------------
+			------------------MODIFICACIONES------------------------
+			alter table proyecto
+			add proy_cliId int(11) after empresa_id,
+			add proy_fechAdju date after proy_cliId;
 
-		-------------------RESTRICCIONES------------------------
-		--------------------------------------------------------
+			alter table proyecto
+			add proy_estaCot int(11) after proy_fechAdju;
 
+			alter table proyecto
+			add proy_usuResp int(11) after proy_estaCot;
+			--------------------------------------------------------
+
+			-------------------RESTRICCIONES------------------------
+			--------------------------------------------------------
+
+		# Table proyecto cotizacion
+
+			create table cot_proye_coti
+			(
+				cot_proyeCotiId int(11) primary key auto_increment not null,
+				proyecto_id int(11), #FK
+				cotizacion_id int(11) #FK
+			);
+
+			#restricciones
+
+			alter table cot_proye_coti
+			add constraint fk2_proyecto_id foreign key (proyecto_id) references proyecto (proyecto_id),
+			add constraint fk2_cotizacion_id foreign key (cotizacion_id) references cotizacion (cotizacion_id);
 
 	---------------------------------------------------------------------------------------------------*/
 
@@ -8710,7 +8898,6 @@
 			return $rowAfect;
 		
 		end;
-
 
 	# listar proyectos  de cotizaciones [cot_proyCoti_list] -> [OK]
 
@@ -8756,7 +8943,6 @@
 			from 
 			cotizacion where bestado=1 and cot_estado=4 and proyecto_id=$proyeId;
 		end;
-
 
 	# listar responsables del area comercial [cot_respComer_listar] -> [OK]
 
@@ -8908,6 +9094,223 @@
 
 			return $rowAfect;
 	    end;
+
+	##########################
+	# Creacion de cotizacion
+	##########################
+
+	# crear cotizacion en proyecto [cot_cotiProye_cre] -> OK
+
+		DELIMITER $$
+		create function cot_cotiProye_cre($idProye int(11),$resp int(11),$emp int(11))
+		RETURNS int(11)
+		COMMENT 'crear cotizacion en proyecto'
+		BEGIN
+
+			/*vars*/
+			declare $rowAfect int(11);
+			declare $correCoti varchar(35);
+			declare $idAfect int(11);
+
+			/*crear cotizacion*/
+			insert into cotizacion (bestado,empresa_id,operador_id,cot_estado_id)
+			values(1,$emp,$resp,4);
+
+			set $idAfect=(select LAST_INSERT_ID());
+			set $correCoti=(select concat("FL-",$idAfect,"-1"));
+
+			/*actualizar correlativo*/
+			update cotizacion set cot_nro=$correCoti where cotizacion_id=$idAfect; 
+
+			/*asignar coti a proyecto*/
+			insert into cot_proye_coti (proyecto_id,cotizacion_id) values ($idProye,$idAfect);
+
+			/* rowAfect */
+			set $rowAfect=(select ROW_COUNT());
+
+			/*retun*/
+			return $rowAfect;
+
+		end;
+
+	# validar creacion de cotizacion [cot_cotiProye_vali] -> OK
+
+		DELIMITER $$
+		create function cot_cotiProye_vali($resp int(11),$proyeId int(11))
+		RETURNS int(11)
+		COMMENT 'validar creacion de cotizacion'
+		BEGIN
+
+			/*vars*/
+			declare $flagVali int(11);
+
+			/*flag vali*/
+			set $flagVali=(select count(*) from proyecto where proy_usuResp=$resp and proyecto_id=$proyeId);
+
+			/*return*/
+			return $flagVali;
+
+		end;
+
+	########################
+	# Eliminar cotizacion
+	########################
+
+	# eliminar cotizacion de proyecto [cot_cotiProye_eli] -> OK
+
+		DELIMITER $$
+		create function cot_cotiProye_eli($proyCotId int(11))
+		RETURNS int(11)
+		COMMENT 'eliminar cotizacion de proyecto'
+		BEGIN
+
+			/*vars*/
+			declare $rowAfect int(11);
+
+			/*eli cotiProye*/
+			delete from cot_proye_coti where cot_proyeCotiId=$proyCotId;
+
+			/*rowAfect*/
+			set $rowAfect=(select ROW_COUNT());
+
+			/*return*/
+			return $rowAfect;
+
+		end;
+
+	# validar eliminar cotizacion [cot_eliCoti_vali] -> OK
+
+		DELIMITER $$
+		create function cot_eliCoti_vali($proyCotId int(11),$resp int(11))
+		RETURNS int(11)
+		COMMENT 'validar eliminar cotizacion'
+		BEGIN
+
+			/*vars*/
+			declare $proyId int(11);
+			declare $flagVali int(11);
+
+			/*proye id*/
+			set $proyId=(select proyecto_id from cot_proye_coti where cot_proyeCotiId=$proyCotId);
+
+			/*flag vali*/
+			set $flagVali=(select count(*) from proyecto where proyecto_id=$proyId and proy_usuResp=$resp);
+
+			/*return*/
+			return $flagVali;
+
+		end;
+
+	######################
+	# Eliminar proyecto
+	######################
+
+	# eliminar proyecto de cotizacion [cot_proye_eli] -> OK
+
+		DELIMITER $$
+		create function cot_proye_eli($proyeId int(11),$resp int(11))
+		RETURNS int(11)
+		COMMENT 'eliminar proyecto de cotizacion'
+		BEGIN
+
+			/*vars*/
+			declare $rowAfect int(11);
+
+			/*eli proye coti*/
+			delete from proyecto where proyecto_id=$proyeId and proy_usuResp=$resp; 
+
+			/*rowAfect*/
+			set $rowAfect=(select ROW_COUNT());
+
+			/*return*/
+			return $rowAfect;
+
+		end;
+
+	# validar eliminar proyecto cotizacion [cot_eliProy_vali] -> OK
+
+		DELIMITER $$
+		create function cot_eliProy_vali($proyId int(11))
+		RETURNS int(11)
+		COMMENT 'validar eliminar proyecto cotizacion'
+		BEGIN
+
+			/*vars*/
+			declare $flagVali int(11);
+
+			/*vali eli proyecto*/
+			set $flagVali=(select count(*) from cot_proye_coti where proyecto_id=$proyId);
+
+			/*return*/
+			return $flagVali;
+
+		end;
+
+	######################
+	# Iniciar FL
+	######################
+
+	# Iniciar FL activas [cot_flActi_ini] -> OK
+
+		DELIMITER $$
+		create procedure cot_flActi_ini()
+		COMMENT 'Iniciar FL activas'
+		BEGIN
+
+			/*vars*/
+
+			/*ini fl acti*/
+			select
+			cotizacion_id as cotId,
+			cot_nro as correCot
+			from cotizacion
+			where 
+			empresa_id=1 and
+			bestado=1 and
+			cot_estado_id=4;
+
+		end;
+
+	##########################
+	# Importar FL a proyecto
+	##########################
+
+	# Importar FL a proyecto [cot_flProye_imp]
+
+		DELIMITER $$
+		create function cot_flProye_imp($cotiId int(11),$resp int(11),$proyId int(11))
+		RETURNS int(11)
+		COMMENT 'Importar FL a proyecto'
+		BEGIN
+
+			/*vars*/
+			declare $flagVali int(11);
+			declare $flagVali2 int(11);
+			declare $rowAfect int(11); 
+
+			/*validar Import*/
+			set $flagVali=(select count(*) from proyecto where 
+							proyecto_id=$proyId and 
+							proy_usuResp=$resp);
+
+			set $flagVali2=(select count(*) from cotizacion where cotizacion_id=$cotiId and 
+							operador_id=$resp);
+
+			/*import FL*/
+			if($flagVali==1 and $flagVali2==1) then
+
+				insert into cot_proye_coti(proyecto_id,cotizacion_id) values($proyId,$cotiId);
+			
+			end if;
+
+			/*row afect*/
+			set $rowAfect=(select ROW_COUNT());
+
+			/*return*/
+			return $rowAfect;
+
+		end;
+
 
 /*----------------------------------[*]------------------------------------------------------------------*/
 
