@@ -8822,7 +8822,6 @@
 
 		PERSISTENCIA:
 
-	*/
 
 /*--------------------------------------------[*]--------------------------------------------------------*/
 
@@ -11245,9 +11244,9 @@
 				nc_obsDes varchar(50)
 			);
 
-	/*** New update 08/01/2015 - CLOSE ***/
+		/*** New update 08/01/2015 - CLOSE ***/
 
-		/* Table Medidas Preventivas [nc_medPreven] */
+			/* Table Medidas Preventivas [nc_medPreven] */
 
 			create table nc_medPreven
 			(
@@ -11262,9 +11261,9 @@
 				alter table nc_medPreven
 				add constraint nc_noConforId_fk4 foreign key (nc_noConforId) references nc_noConfor(nc_noConforId);
 
-	/*** New update 14/01/2015 - CLOSE ***/
+		/*** New update 14/01/2015 - CLOSE ***/
 
-		/* Table Origen de observacion [nc_oriObs] */
+			/* Table Origen de observacion [nc_oriObs] */
 
 			create table nc_oriObs
 			(
@@ -11272,7 +11271,39 @@
 				nc_oriObsDes varchar(150) 
 			);
 
+		/* New update 26/02/2015 - PROD */
 
+			/* Table tratamiento de no conformidades [nc_tratNoConfor] */
+
+				create table nc_tratNoConfor
+				(
+					nc_tratNoConforId int(11) primary key not null auto_increment, #PK
+					nc_noConforId int(11), #FK
+					nc_tipTrat int(11),
+					nc_tratNoConforOpi varchar(200),
+					nc_tratNoConforAuto varchar(1500)
+				);
+
+				/*change*/
+
+				alter table nc_tratNoConfor
+				add nc_tipTrat int(11) after nc_noConforId;
+
+			/* Table tipo de tratamiento [nc_tipTrat] */
+
+				create table nc_tipTrat
+				(
+					nc_tipTrat int(11) primary key not null auto_increment, #FK
+					nc_tipDes varchar(50)
+				);
+
+				/*constantes*/
+					#Revision
+					#Reparacion
+					#Concesion
+					#Permiso de donacion
+					#Desecho
+					#Donacion
 
 	/* PERSISTENCIA */
 
@@ -12212,6 +12243,194 @@
 							return $rowAfect;
 						end;
 
+		/*
+		********************************
+		* Iniciar tipo de tratamientos [nc_tipTrat_ini] - PROD # 
+		********************************
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_tipTrat_ini()
+			COMMENT 'Iniciar tipo de tratamientos'
+			BEGIN
+
+				select
+				nc_tipTrat as tipTrat,
+				nc_tipDes as tipDes
+				from nc_tipTrat;
+
+			end;
+
+
+		/*
+		*******************************
+		* Iniciar autorizaciones [nc_autoTrat_ini] - PROD #
+		*******************************
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_autoTrat_ini()
+			COMMENT 'Iniciar autorizaciones'
+			BEGIN
+
+				/* ing asig */
+				select distinct
+				concat('Ing. ',per.pers_nombres,' ',per.pers_apepat) as nc_ingAsig,
+				trab.trabajador_id as nc_trabId
+				from persona as per,trabajador as trab,contacto as contac
+				where 
+				per.persona_id=trab.persona_id and 
+				(trab.trabajador_id=contac.trabajador_id or trab.persona_id=contac.persona_id) and
+				contac.cont_comercial=1 and 
+				trab.empresa_id=1 and
+				trab.bestado=1 and
+				(trab.trabajador_id!=1 and
+				trab.trabajador_id!=17 and
+				trab.trabajador_id!=58 and
+				trab.trabajador_id!=34 and
+				trab.trabajador_id!=23 and
+				trab.trabajador_id!=39 and
+				trab.trabajador_id!=47 and
+				trab.trabajador_id!=73);
+
+			end;
+
+		/*
+		*******************************
+		* Crear tratamiento [nc_tratNoConfor_crea] - PROD #
+		*******************************
+		*/
+
+			#FUNCTION
+			DELIMITER $$
+			create function nc_tratNoConfor_crea($noConforId int(11),
+												$tiptrat int(11),
+												$tratOpi varchar(200),
+												$tratAuto varchar(1500))
+			RETURNS int(11)
+			COMMENT 'Crear tratamiento'
+			BEGIN
+
+				/* vars */
+				declare $rowAfect int(11);
+
+				/* crear trat no confor */
+				insert into nc_tratNoConfor(nc_noConforId,nc_tipTrat,nc_tratNoConforOpi,nc_tratNoConforAuto)
+				values($noConforId,$tipTrat,$tratOpi,$tratAuto);
+
+				/* row afect */
+				set $rowAfect=(select ROW_COUNT());
+
+				/* return */
+				return $rowAfect;
+
+			end;
+
+		/*
+		*******************************
+		* Editar tratamiento [nc_tratNoConfor_edit] - PROD #
+		*******************************
+		*/
+
+			#FUNCTION
+			DELIMITER $$
+			create function nc_tratNoConfor_edit($tratId int(11),
+												$tratTip int(11),
+												$tratOpi varchar(200),
+												$tratAuto varchar(1500))
+			RETURNS int(11)
+			COMMENT 'Editar tratamiento'
+			BEGIN
+
+				/* vars */
+				declare $rowAfect int(11);
+
+				/* editar trat no confor */
+				update nc_tratNoConfor set
+				nc_tipTrat=$tratTip,
+				nc_tratNoConforOpi=$tratOpi,
+				nc_tratNoConforAuto=$tratAuto
+				where nc_tratNoConforId=$tratId;
+
+				/* row afect */
+				set $rowAfect=(select ROW_COUNT());
+
+				/* return */
+				return $rowAfect;
+
+			end;
+
+		/*
+		*******************************
+		* Eliminar tratamiento [nc_tratNoConfor_eli] - PROD #
+		*******************************
+		*/
+
+			#FUNCTION
+			DELIMITER $$
+			create function nc_tratNoConfor_eli($tratId int(11))
+			RETURNS int(11)
+			COMMENT 'Eliminar tratamiento'
+			BEGIN
+
+				/* vars */
+				declare $rowAfect int(11);
+
+				/* eli trat no confor */
+				delete from nc_tratNoConfor where nc_tratNoConforId=$tratId;
+
+				/* row afect */
+				set $rowAfect=(select ROW_COUNT());
+
+				/*return*/
+				return $rowAfect;
+
+			end;
+
+		/*
+		*******************************************
+		* Iniciar tratamientos no conformidad [nc_tratNoConfor_ini] - PROD #
+		*******************************************
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_tratNoConfor_ini($noConforId int(11))
+			COMMENT 'Iniciar tratamientos no conformidad'
+			BEGIN
+
+				/*vars*/
+				declare $rowAfect int(11);
+
+				/*ini trat no confor*/
+				select *,
+				(select nc_tipDes from nc_tipTrat where nc_tipTrat=tratConfor.nc_tipTrat) as tipDes 
+				from nc_tratNoConfor as tratConfor where nc_noConforId=$noConforId;
+
+			end;
+
+
+		/*
+		**********************************************
+		* Iniciar tratamientos no conformidad por id [nc_tratNoConforxId_ini] - PROD #
+		**********************************************
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_tratNoConforxId_ini($tratId int(11))
+			COMMENT 'Iniciar tratamientos no conformidad por id'
+			BEGIN
+
+				/*ini trat no confor por id*/
+				select *
+				from nc_tratNoConfor 
+				where nc_tratNoConforId=$tratId;
+
+			end;
+
 
 /*-------------------------------------------------------------------------------------------------------*/
 	# MODULO SALUDO CUMPLEAÑOS TRABAJADOR [ct]
@@ -12256,7 +12475,7 @@
 		#FUNCTION
 
 /*----------------------------------------------[*]------------------------------------------------------*/
-
+ 
 /*-------------------------------------------------------------------------------------------------------*/
 	# EJEMPLOS
 /*-------------------------------------------------------------------------------------------------------*/

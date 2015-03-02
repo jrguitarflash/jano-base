@@ -46,8 +46,7 @@
 					$clientes=negocio::getData($sql);			
 
 				break;
-				
-				
+							
 				case 'reclamo_edit':
 
 					// INICIAR TIPO DE OBSERVACION
@@ -1014,8 +1013,7 @@
 						}
 
 					}
-
-			 	
+		 	
 			 	break;
 
 			 	case 'documento_cob':
@@ -1658,7 +1656,6 @@
 					$firephp->log($dataRespComer, 'data:');
 					*/
 					
-
 			 	break;
 
 			 	case 'cs_lisCot':
@@ -1802,7 +1799,6 @@
 
 			 		$sql=sql::scc_seguiOrdPlaz($_GET['id']);
 			 		$data_seguiOrdPlaz=negocio::getData($sql);
-
 
 			 	break;
 
@@ -2232,6 +2228,20 @@
 
 					$sql=sql::nc_oriObs_obte();
 					$dataOri=negocio::getData($sql);
+
+					#New 26/02/2015 - PROD
+
+					desconectar();
+					conectar();
+
+					$sql=sql::nc_tipTrat_ini();
+					$dataTrat=negocio::getData($sql);
+
+					desconectar();
+					conectar();
+
+					$sql=sql::nc_autoTrat_ini();
+					$dataAut=negocio::getData($sql);
 
 				break;
 

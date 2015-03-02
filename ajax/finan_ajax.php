@@ -182,7 +182,7 @@ switch ($_REQUEST['ajax'])
 				if($renoMax==$data['versiReno'])
 				{
 					$propDispo="enabled";
-					$propColor="bgcolor=#EFEFEF";
+					$propColor="bgcolor=#30AD23";
 				}
 				else
 				{
@@ -322,7 +322,7 @@ switch ($_REQUEST['ajax'])
 			if($renoMax==$data['versiReno'])
 			{
 				$propDispo="enabled";
-				$propColor="bgcolor=#EFEFEF";
+				$propColor="bgcolor=#30AD23";
 			}
 			else
 			{

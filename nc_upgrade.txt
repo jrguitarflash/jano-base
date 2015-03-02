@@ -86,10 +86,33 @@ v 1.5
 . actualizando js gesti..........................................ok
 . actualizando js evento filtro.........................ok
 . actualizando reporte exportar no conformidades........................ok
-. actualizando constantes estados...........................
+. actualizando constantes estados...........................ok
+. finalizando upgrade ............................................ok
 
 v 1.6
 
 . iniciando upgrade.................................................ok
 . creando menu graficos.................................ok
-. iniciando vistas......................................... 
+. copiando vistas.........................................ok
+. copiando iframe.....................................................ok
+. copiando libreria jplot.......................................ok
+. actualizando js gesti..............................................ok
+. actualizando json gesti...............................................ok
+. finalizando upgrade............................................ok
+
+v 1.7
+
+. iniciando upgrade.....................................................ok
+. creando modelo de tratamiento y constantes.........................ok
+. añadiendo tab a formulario...............................ok
+. creando formulario de tratamiento.....................................ok
+. creando popup de tratamiento.................................ok
+. comentando input y output de formulario............................ok
+. instanciar ids en formulario.....................................ok
+. creando persistencia de modulo............................ok
+. iniciando constantes de tratamiento nc ......................ok
+. iniciando persistencia crear tratamiento frontend.................................ok
+. iniciando persistencia iniciar tratamientos frontend ......................ok
+. iniciando persistencia iniciar tratamientos por id frontend....................ok
+. iniciando persistencia editar tratamientos por id.................ok
+. finalizando upgrade....................................ok

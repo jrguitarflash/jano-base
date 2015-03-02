@@ -58,8 +58,9 @@
 					<li><a href="#tabs-1">Proyecto</a></li>
 					<li><a href="#tabs-2">Observacion</a></li>
 					<li><a href="#tabs-3">Medidas</a></li>
-					<li><a href="#tabs-4">Adjuntos</a></li>
-					<li><a href="#tabs-5">Resultados</a></li>
+					<li><a href="#tabs-4" >Tratamientos</a></li>
+					<li><a href="#tabs-5">Adjuntos</a></li>
+					<li><a href="#tabs-6">Resultados</a></li>
 				</ul>
 
 				<div id="tabs-1" >
@@ -300,7 +301,47 @@
 
 				</div>
 
+				<!-- new 26/02/2015 - PROD -->
+
 				<div id="tabs-4" >
+
+					<!-- NIVEL DE FORMULARIO -->
+					<span class='nc_level' >Tratamiento no conformidad</span>
+					<!-- [*] -->
+
+					<!-- LINK NUEVO TRATAMIENTO  [#nc_nuevTrat] --> 
+						<a href="#" id="nc_nuevTrat" >Nuevo</a>
+					<!-- [*] -->
+
+					<!-- TABLE TRATAMIENTO NO CONFORMIDADES [#nc_tratNoConfor_tab] -->
+						<table class="list" >
+							<thead>
+								<tr>
+									<td>Item</td>
+									<td>Tipo</td>
+									<td>Comentario</td>
+									<td>Autorizacion</td>
+									<td align='center' >Accion</td>
+								</tr>
+							</thead>
+							<tbody id="nc_tratNoConfor_tab" >
+								<tr>
+									<td>Item</td>
+									<td>Tipo</td>
+									<td>Comentario</td>
+									<td>Autorizacion</td>
+									<td align='center' >
+										<a href="#">Editar</a>
+										<a href="#">Eliminar</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					<!-- [*] -->
+
+				</div>
+
+				<div id="tabs-5" >
 					<span class="nc_level" >Adjuntos</span>
 
 					<form name="nc_adju_frm" id="nc_adju_frm"  enctype="multipart/form-data" >
@@ -351,7 +392,7 @@
 
 				</div>
 
-				<div id="tabs-5" >
+				<div id="tabs-6" >
 
 					<label class="nc_lbl" >Resultados</label>
 
@@ -474,6 +515,49 @@
 
 		<label class="nc_lbl" ></label>
 		<a href="#" class="nc_input" id="nc_savePrev_acci" >Guardar</a>	
+	</div>
+
+	<!-- New update 26/02/2015 - PROD -->
+
+	<div id="nc_tratNoConfor_pop" title="Tratamiento no conformidad" >
+
+		<!-- NIVEL DE FORMULARIO -->
+		<span class='nc_level' >Tratamiento no conformidad</span>
+		<!-- [*] -->
+
+		<!-- OUTPUT N° [#nc_tratItem,#nc_tratId] -->
+		<label class="nc_lbl" >N°:</label>
+		<span id="nc_tratItem" class='nc_input' >---</span>
+		<input type="hidden" id="nc_tratId" value="" >
+		<!-- [*] -->
+
+		<!-- INPUT TIPO DE TRATAMIENTO [#nc_tipTrat] -->
+		<label class="nc_lbl" >Tipo de tratamiento:</label>
+		<select class='nc_input' id="nc_tipTrat" >
+			<?php foreach($dataTrat as $data) { ?>
+			<option value='<?php print $data['tipTrat']; ?>' ><?php print $data['tipDes']; ?></option>
+			<?php } ?>
+		</select>
+		<!-- [*] -->
+
+		<!-- INPUT OPINION/COMENTARIO [#nc_opiTrat] -->
+		<label class="nc_lbl" >Opinion/Comentario:</label>
+		<textarea class='nc_input' id="nc_opiTrat" ></textarea>
+		<!-- [*] -->
+
+		<!-- INPUT AUTORIZACION [#nc_autoTrat] -->
+		<label class="nc_lbl" >Autorizacion:</label>
+		<select class='nc_input' id="nc_autoTrat"  size="7" multiple >
+			<?php foreach($dataAut as $data) { ?>
+			<option value='<?php print $data['nc_trabId']; ?>' ><?php print $data['nc_ingAsig']; ?></option>
+			<?php } ?>
+		</select>
+		<!-- [*] -->
+
+		<!-- BUTTON GUARDAR  [#nc_guarTrat] -->
+		<label class="nc_lbl" ></label>
+		<a href="#" class='nc_input' id="nc_guarTrat" >Guardar</a>
+		<!-- [*] -->
 
 	</div>
 

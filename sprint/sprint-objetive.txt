@@ -1,0 +1,33 @@
+/*
+********************
+* SPRINT OBJETIVE
+********************
+*/
+
+/*
+* actors
+*/
+
+- company
+- supplier
+- customers
+- owners
+- staff
+- stakeholders
+- contacts
+- employers
+- users
+
+26/02/2015
+----------
+
+- generar backup bd produccion y desarrollo -> #OK
+- añadir tratamiento de no conformidad en modulo -> #OK
+
+02/03/2015
+------------
+
+- actualizar repositorio git de la version dev -> # 
+- generar backup bd prod y dev ->
+- elaborar presentacion de modulo operaciones bancarias ->
+- enviar presentacion a (stakeholders) ->

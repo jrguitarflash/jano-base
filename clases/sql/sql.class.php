@@ -4837,7 +4837,6 @@ class sql
 	}
 
 
-
 /*--------------------------------------[*]------------------------------------------------*/
 
 /*-----------------------------------------------------------------------------------------*/
@@ -5329,6 +5328,95 @@ class sql
 				return $sql;
 			}
 
+
+	#New 26/02/2015 - DEV
+
+		/*
+		********************************
+		* Iniciar tipo de tratamientos
+		********************************
+		*/
+
+		public function nc_tipTrat_ini()
+		{
+			$sql="CALL nc_tipTrat_ini()";
+			return $sql;
+		}
+
+		/*
+		*******************************
+		* Iniciar autorizaciones
+		*******************************
+		*/
+
+		public function nc_autoTrat_ini()
+		{
+			$sql="CALL nc_autoTrat_ini()";
+			return $sql;
+		}
+
+		/*
+		*******************************
+		* Crear tratamiento
+		*******************************
+		*/
+
+		public function nc_tratNoConfor_crea($noConforId,$tiptrat,$tratOpi,$tratAuto)
+		{
+			$sql="select nc_tratNoConfor_crea('".$noConforId."',
+												'".$tiptrat."',
+												'".$tratOpi."',
+												'".$tratAuto."') as response";
+			return $sql;
+		}
+
+		/*
+		*******************************************
+		* Iniciar tratamientos no conformidad
+		*******************************************
+		*/
+
+		public function nc_tratNoConfor_ini($noConforId)
+		{
+			$sql="CALL nc_tratNoConfor_ini('".$noConforId."')";
+			return $sql;
+		}
+
+		/*
+		*******************************
+		* Eliminar tratamiento
+		*******************************
+		*/
+
+		public function nc_tratNoConfor_eli($tratId)
+		{
+			$sql="select nc_tratNoConfor_eli('".$tratId."') as response";
+			return $sql;
+		}
+
+		/*
+		**********************************************
+		* Iniciar tratamientos no conformidad por id
+		**********************************************
+		*/
+
+		public function nc_tratNoConforxId_ini($tratId)
+		{
+			$sql="CALL nc_tratNoConforxId_ini('".$tratId."')";
+			return $sql;
+		}
+
+		/*
+		*******************************
+		* Editar tratamiento
+		*******************************
+		*/
+
+		public function nc_tratNoConfor_edit($tratId,$tratTip,$tratOpi,$tratAuto)
+		{
+			$sql="select nc_tratNoConfor_edit('".$tratId."','".$tratTip."','".$tratOpi."','".$tratAuto."') as response";
+			return $sql;
+		}
 
 /*------------------------------------[*]--------------------------------------------------*/
 

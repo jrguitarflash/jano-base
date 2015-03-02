@@ -210,7 +210,58 @@ switch ($_REQUEST['ajax'])
 
 		print $html;
 
-	break; 
+	break;
+
+	//New 27/02/2015 - PROD
+
+	case 'nc_tratNoConfor_ini':
+
+		$noConforId=$_POST['conforId'];
+		$sql=sql::nc_tratNoConfor_ini($noConforId);
+		$dataTrat=negocio::getData($sql);
+		$html="";
+		$ind=1;
+
+		foreach($dataTrat as $data)
+		{
+			//iterar array de autorizacion
+			$cadIng="";
+			$idTrab=explode('|',$data['nc_tratNoConforAuto']);
+			for($i=0;$i<count($idTrab);$i++)
+			{
+				desconectar();
+				conectar();
+
+				$sql=sql::nc_perxId_obte($idTrab[$i]);
+				$ingAuto=negocio::getVal($sql,'response');
+
+				if($i==0)
+				{
+					$cadIng=$ingAuto;
+				}
+				else
+				{
+					$cadIng=$cadIng."<br>".$ingAuto;
+				}				
+			}
+
+			$html.="<tr>
+						<td>".$ind."</td>
+						<td>".$data['tipDes']."</td>
+						<td>".$data['nc_tratNoConforOpi']."</td>
+						<td>".$cadIng."</td>
+						<td align='center' >
+							<a href='Javascript:nc_tratNoConforxId_ini(".$data['nc_tratNoConforId'].",".$ind.")'>Editar</a>
+							<a href='Javascript:nc_tratNoConfor_eli(".$data['nc_tratNoConforId'].")'>Eliminar</a>
+						</td>
+					</tr>";
+
+			$ind++;
+		}
+
+		print $html;
+
+	break;
 
 	default:
 	break;

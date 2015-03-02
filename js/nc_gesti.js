@@ -48,6 +48,10 @@
 				Calendario3('nc_fechPrev');
 				nc_medPrev_obte();
 
+				//New 27/02/2015 - PROD
+
+				nc_tratNoConfor_ini();
+
 			break;
 
 			case 'nc_noConform_lst':
@@ -252,6 +256,33 @@
 			nc_noConforxFil_cont();
 		});
 
+		//new 26/02/2015 - PROD
+
+		$('#nc_nuevTrat').click(function(evento)
+		{
+			if(document.getElementById('nc_id').value==0)
+			{
+				alert("Guardar antes de continuar...!");
+			}
+			else
+			{
+				$('#nc_tratNoConfor_pop').dialog('open');
+
+				//New param reset
+				document.getElementById('nc_tratItem').innerHTML="---";
+				document.getElementById('nc_tratId').value=0;
+				document.getElementById('nc_opiTrat').value="";
+				nc_select_reini('nc_autoTrat');
+			}
+		});
+
+		$('#nc_guarTrat').click(function(evento)
+		{
+
+			nc_tratNoConfor_crea();
+			
+		});
+
 	});
 
 //Functions
@@ -357,6 +388,26 @@
 		//}
 		});
 	});
+
+	/* New 26/02/2015 - PROD */
+
+	$(function()
+	{
+		$( "#nc_tratNoConfor_pop" ).dialog({
+		autoOpen: false,
+		width:920,
+		height:450
+		/*show: {
+		effect: "blind",
+		duration: 1000
+		},
+		hide: {*/
+		/*effect: "explode",*/
+		/*effect: "blind",
+		duration: 1000*/
+		//}
+		});
+	})
 
 //Functions Ajax
 
@@ -597,6 +648,37 @@
 		{
 			//console.log(msg);
 			$("#nc_medPrev_tab").html( msg );
+		});
+		
+		request.fail(function(jqXHR, textStatus) 
+		{
+			alert( "Request failed: " + textStatus );
+		});
+	}
+
+	//New 27/02/2015 - PROD
+
+	function nc_tratNoConfor_ini()
+	{
+		//vars
+		conforId=document.getElementById('nc_id').value;
+		ajax="nc_tratNoConfor_ini";
+
+		//param
+
+		//peticion ajax
+		var request = $.ajax(
+		{
+			url: "ajax/nc_ajax.php",
+			type: "POST",
+			data: {ajax:ajax,conforId:conforId},
+			dataType: "html"
+		});
+		
+		request.done(function(msg) 
+		{
+			//console.log(msg);
+			$("#nc_tratNoConfor_tab").html( msg );
 		});
 		
 		request.fail(function(jqXHR, textStatus) 
@@ -1110,6 +1192,112 @@
 				document.getElementById('nc_prevId').value=medId;
 				document.getElementById('nc_prevDes').value=data[0]['nc_medPrevDes'];
 				document.getElementById('nc_fechPrev').value=data[0]['nc_medPrevFech'];
+			}
+		});
+	}
+
+	//New 26/02/2015 - PROD
+	//New 27/02/2015
+
+	function nc_tratNoConfor_crea()
+	{
+		/*vars*/
+		json="nc_tratNoConfor_crea";
+		noConforId=document.getElementById('nc_id').value;
+		tratTip=kd_obteValComb('nc_tipTrat');
+		tratOpi=document.getElementById('nc_opiTrat').value;
+		tratAuto=nc_multiSelect_obte('nc_autoTrat');
+		tratId=document.getElementById('nc_tratId').value;
+
+		//alert(tratTip);
+
+		//evaluar tipo json
+		json=gd_petiJson_ele(tratId,"nc_tratNoConfor_crea","nc_tratNoConfor_edit");
+
+		/*param*/
+		param="json="+json;
+		param+="&noConforId="+noConforId;
+		param+="&tratTip="+tratTip;
+		param+="&tratOpi="+tratOpi;
+		param+="&tratAuto="+tratAuto;
+		param+="&tratId="+tratId;
+
+		/*peticion json*/
+		$.getJSON('json/nc_json.php?'+param,{format: "json"}, function(data) 
+		{
+			if(data[0]>0)
+			{
+				$(".elem-gd").notify("tratamiento añadido correctamente","success");
+				nc_tratNoConfor_ini();	
+			}
+			else
+			{	
+				$(".elem-gd").notify("tratamiento no añadido","error");
+			}			
+		});
+	}
+
+	function nc_tratNoConfor_eli(id)
+	{
+		/*vars*/
+		tratId=id;
+		json="nc_tratNoConfor_eli";
+
+		/*param*/
+		param="json="+json;
+		param+="&tratId="+tratId;
+
+		if(confirm("¿ Confirma eliminar tratamiento ?"))
+		{
+
+			/*peticion json*/
+			$.getJSON('json/nc_json.php?'+param,{format: "json"}, function(data) 
+			{
+				if(data[0]>0)
+				{
+					$(".elem-gd").notify("tratamiento eliminado correctamente","success");
+					nc_tratNoConfor_ini();
+				}
+				else
+				{
+					$(".elem-gd").notify("tratamiento no eliminado","error");
+				}
+			});
+
+		}
+	}
+
+	function nc_tratNoConforxId_ini(id,item)
+	{
+		/*open popup*/
+		$('#nc_tratNoConfor_pop').dialog('open');
+
+		/*vars*/
+		tratId=id;
+		item=item;
+		json="nc_tratNoConforxId_ini";
+
+		/*param*/
+		param="tratId="+tratId;
+		param+="&json="+json;
+
+		/*peticion json*/
+		$.getJSON('json/nc_json.php?'+param,{format: "json"}, function(data) 
+		{
+			console.log(data);
+			if(data.length>0)
+			{
+				document.getElementById('nc_tratItem').innerHTML=item;
+				document.getElementById('nc_tratId').value=tratId;
+				np_iniSelect(data[0]['nc_tipTrat'],'nc_tipTrat');
+				document.getElementById('nc_opiTrat').value=data[0]['nc_tratNoConforOpi'];
+
+				//ingenieros multiples
+				var ingAsig=data[0]['nc_tratNoConforAuto'];
+				dataAsig=ingAsig.split("|");
+				nc_select_reini('nc_autoTrat');
+				np_iniSelectMul(dataAsig,'nc_autoTrat');
+
 			}
 		});
 	}

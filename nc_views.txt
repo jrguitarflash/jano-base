@@ -28,7 +28,7 @@
 
 	/* library jplot */
 
-		1. libJquery/jplot/
+		1. libJquery/jplot/ -> OK
 
 /**************
 	Report

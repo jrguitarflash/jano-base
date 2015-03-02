@@ -264,7 +264,7 @@ switch ($_REQUEST['json'])
 
 	break;
 
-	//New 23/02/2015
+	//New 23/02/2015 - PROD
 
 	case 'nc_grafTip':
 
@@ -434,6 +434,63 @@ switch ($_REQUEST['json'])
 
 
 		print json_encode($arrIterar);
+
+	break;
+
+	//New 26/02/2015 - PROD
+	//New 27/02/2015
+
+	case 'nc_tratNoConfor_crea':
+
+		$noConforId=$_GET['noConforId'];
+		$tipTrat=$_GET['tratTip'];
+		$tratOpi=$_GET['tratOpi'];
+		$tratAuto=$_GET['tratAuto'];
+		$sql=sql::nc_tratNoConfor_crea($noConforId,$tipTrat,$tratOpi,$tratAuto);
+		$filAfect=negocio::getVal($sql,'response');
+
+		$data=Array();
+		$data[0]=$filAfect;
+
+		print json_encode($data);
+
+	break;
+
+	case 'nc_tratNoConfor_eli':
+
+		$sql=sql::nc_tratNoConfor_eli($_GET['tratId']);
+		$filAfect=negocio::getVal($sql,'response');
+
+		$data=Array();
+		$data[0]=$filAfect;
+
+		print json_encode($data);
+
+	break;
+
+	case 'nc_tratNoConforxId_ini':
+
+		$tratId=$_GET['tratId'];
+		$sql=sql::nc_tratNoConforxId_ini($tratId);
+		$dataTrat=negocio::getData($sql);
+
+		print json_encode($dataTrat);
+
+	break;
+
+	case 'nc_tratNoConfor_edit':
+
+		$tratId=$_GET['tratId'];
+		$tratTip=$_GET['tratTip'];
+		$tratOpi=$_GET['tratOpi'];
+		$tratAuto=$_GET['tratAuto'];
+		$sql=sql::nc_tratNoConfor_edit($tratId,$tratTip,$tratOpi,$tratAuto);
+		$filAfect=negocio::getVal($sql,'response');
+
+		$data=Array();
+		$data[0]=$filAfect;
+
+		print json_encode($data);
 
 	break;
 
