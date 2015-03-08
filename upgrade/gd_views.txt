@@ -1,0 +1,147 @@
+views
+-----
+
+	view:1
+	name:lista gestiones de documentos admin
+	alias:gd_listGestAdmin
+	description: visualiza todas las gestiones 
+				 creadas por los usuarios 
+	actions: 
+			 - crear ruta
+			 - crear gestion
+			 = actualizar gestion
+			 = eliminar gestion
+	filter:
+			 - fecha
+			 - estado
+	medida:
+
+			 - cantidad pendientes/finalizadas
+
+	design: OK
+	functional:
+
+
+	------------------------------------
+
+	view:2
+	name:lista gestiones de documentos user
+	alias:gd_listGestUser
+	description: visualiza solo sus gestiones
+				 creadas
+	actions: - crear gestion
+			 = actualizar gestion
+			 = eliminar gestion
+
+	filter:
+			 - fecha
+			 - estado
+	medida:
+
+			 - cantidad pendientes/finalizadas
+
+	design: OK
+	functional: 
+
+	-------------------------------------
+
+	view:3
+	name:ficha gestiones de documentos admin
+	alias:gd_fichGestAdmin
+	description: ficha para crear y editar gestion
+				 de documentos
+	actions: - crear gestion
+			 = editar gestion
+			 - volver gestion
+
+	design: OK
+	functional:
+
+	----------------------------------------
+
+	view:4
+	name:ficha gestiones de documentos user
+	alias:gd_fichGestUser
+	description: ficha para crear y editar gestion
+				 de documentos
+	actions: - crear gestion
+			 = editar gestion
+			 - volver gestion
+
+	design: OK
+	functional:
+
+
+	--------------------------------------
+
+	view:5
+	name: lista de rutas responsable
+	alias: gd_listRutResp
+	description: visualizar las rutas que se le asignaron
+	actions: - ver ruta
+	filter:
+			- fecha
+			- estados
+	medida:
+			- cantidad asignadas/concretadas
+
+	design: OK
+	functional:
+
+	--------------------------------------
+
+	view:6
+	name: lista de rutas admin
+	alias: gd_listRutAdmin
+	description: visualizar todas las rutas
+	actions: - asignar responsable
+			 - concretar ruta
+			 - marcar ruta
+			 = eliminar ruta
+	filter:
+		- fecha
+		- estados
+	medida:
+		- cantidad asignadas/concretadas
+
+	design: OK
+	function:
+
+	--------------------------------------
+
+	view:7
+	name: mapa de ruta responsable 
+	alias: gd_showRutResp
+	description: muestra mapa de ruta asignada al responsable
+				 sin la opcion de modificar
+	actions: - volver ruta
+
+	design: OK
+	functional:
+
+	--------------------------------------
+
+	view:8
+	name: mapa de ruta admin 
+	alias: gd_showRutAdmin
+	description: muestra el mapa de ruta seleccionada por el admin
+				 con disponibilidad total y opcion a modificar
+	actions: - marcar ruta
+	         - volver ruta
+
+	design: OK
+	functional:
+
+	------------------------------------------
+
+	view:9
+	name: ficha de ruta
+	alias gd_fichRutAdmin
+	description: ficha para crear y editar
+				 las rutas
+	actions: - crear ruta
+			 - voler ruta
+	design: OK
+	functional:
+
+	-----------------------------------------------

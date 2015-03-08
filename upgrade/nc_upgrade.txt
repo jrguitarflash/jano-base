@@ -1,0 +1,118 @@
+/*******************************
+UPGRADE MODULO NO CONFORMIDADES
+*******************************/
+
+v 1.0
+
+. iniciando upgrade........OK
+. creando menus y dando permisos.......OK
+. creando modelo de datos y restricciones.......OK
+. creando constantes en modelo.......OK
+. creando persistencia del modulo......OK
+. creando vistas........OK
+. actualizando estilos.........OK
+. actualizando peticiones persistencia......OK
+. actualizando controlador........OK
+. creando js gestionador..........OK
+. creando json gestionaodr....................OK
+. creando ajax gestionador...................OK
+. creando iframe gestionador...................OK
+. actualizando ruta de adjuntos.................OK
+. creando recurso reporte detallado...............OK
+. creando recurso reporte porcentual..............OK
+. creando utils php..................OK
+. creando utils js...................OK
+. creando libreria notifiJs............OK
+. finalizando upgrade..........OK
+
+v 1.1
+
+. iniciando upgrade..................ok
+. modificando menu y permisos..................ok
+. actualizando form de la vista..................ok
+. actualizando controlador superior.................ok
+. actualizando modelo de datos..................ok
+. actulizando ajax gestionador....................ok
+. actualizando js gestionador....................ok
+. actualizando persistencia.....................ok
+. actualizando vista lista.....................ok
+. actualizando persistencia filtro.....................ok
+. modificacion reporte de observacion..................ok
+. actualizando reporte porcentajes.....................ok
+. finalizando upgrade..................................ok
+
+v 1.2
+
+. iniciando upgrade..........................ok
+. actualizando views.......................ok
+. actualizando js gesti.........................ok
+. actualizando css................................ok
+. creando modelo de datos medida preventiva........................ok
+. creando persistencia .................................ok
+. actualizando calls y select de sql capa.....................ok
+. actualizando json gesti......................................ok
+. actualizando ajax gesti....................................ok
+. actualizando titulos de views.......................ok
+. finalizando upgrade.......................................ok
+
+v 1.3
+
+. iniciando upgrade............................ok
+. actualizando file reporte no conformidad................ok
+. finalizando upgrade..................................ok
+
+v 1.4
+
+. iniciando upgrade................................ok
+. creando view reporte.........................................ok
+. actualizando view ....................................ok
+. actualizando persistencia..................................ok
+. actualizando calls,select en sql.................................ok
+. finalizando upgrade..................................................ok
+
+v 1.5
+
+. iniciando upgrade......................................ok
+. actualizando view origen....................................ok
+. creando modelo origen...................................ok
+. actualizando calls,select en sql capa.......................ok
+. actualizando controlador superior................................ok
+. actualizando js gesti create,update origen..........................................ok
+. actualizando js iniciar origen......................ok
+. actualizando view tab no conformidades........................ok
+. actualizando persistencia......................ok
+. actualizando capa sql..........................ok
+. actualizando ajax gesti................................ok
+. actualizando js gesti..........................................ok
+. actualizando js evento filtro.........................ok
+. actualizando reporte exportar no conformidades........................ok
+. actualizando constantes estados...........................ok
+. finalizando upgrade ............................................ok
+
+v 1.6
+
+. iniciando upgrade.................................................ok
+. creando menu graficos.................................ok
+. copiando vistas.........................................ok
+. copiando iframe.....................................................ok
+. copiando libreria jplot.......................................ok
+. actualizando js gesti..............................................ok
+. actualizando json gesti...............................................ok
+. finalizando upgrade............................................ok
+
+v 1.7
+
+. iniciando upgrade.....................................................ok
+. creando modelo de tratamiento y constantes.........................ok
+. añadiendo tab a formulario...............................ok
+. creando formulario de tratamiento.....................................ok
+. creando popup de tratamiento.................................ok
+. comentando input y output de formulario............................ok
+. instanciar ids en formulario.....................................ok
+. creando persistencia de modulo............................ok
+. iniciando constantes de tratamiento nc ......................ok
+. iniciando persistencia crear tratamiento frontend.................................ok
+. iniciando persistencia iniciar tratamientos frontend ......................ok
+. iniciando persistencia iniciar tratamientos por id frontend....................ok
+. iniciando persistencia editar tratamientos por id.................ok
+. finalizando upgrade....................................ok

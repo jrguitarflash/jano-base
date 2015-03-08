@@ -1,0 +1,27 @@
+/*--------------------*/
+	#Views
+/*--------------------*/
+
+	/* filtar movimiento por serie */
+
+		1. kd_movxSeri_fil.php -> OK
+
+	/* reporte inventario por item */
+
+		2. kd_repInv.php ->
+
+/*---------------------*/
+	#Files Reports
+/*---------------------*/
+
+	/* reporte inventario de movimientos */
+
+		1. reporte/kd_repInvMov.php ->
+
+/*-------------------*/
+	#Files New
+/*------------------*/
+
+/*------------------*/
+	#Files Changes
+/*------------------*/

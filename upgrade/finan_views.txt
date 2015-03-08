@@ -1,0 +1,63 @@
+/*
+* requiments
+*/
+	- operacion bancaria con respecto al proyecto
+	- detalle operaciones bancarias
+	- adjuntos de operaciones bancarias
+/*
+* views
+*/
+
+	//lista de operaciones
+
+		finan_lstOpe.php [OK]
+
+	//formulario de operaciones
+ 
+		finan_frmOpe.php [OK]
+
+/*
+* themes
+*/
+
+	//theme operaciones bancarias
+
+		finan_opeBanca.html [OK]
+
+/*
+* iframe
+*/
+
+	iframe/finan_iframe.php
+
+/*
+* reports
+*/
+
+/*
+* change files
+*/
+
+	controller up
+
+		clases/controlador/controladorSup.class.php [OK]
+
+	utils
+
+		utils_gesti.js
+
+/*
+* new files
+*/
+
+	//gestionador js
+
+		js/finan_gesti.js [OK]
+
+	//json file
+
+		finan_json.php [OK]
+
+	// ajax file
+
+		finan_ajax.php [OK]

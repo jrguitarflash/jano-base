@@ -12693,6 +12693,17 @@
 	SET SESSION group_concat_max_len = 100000;
 	SET GLOBAL group_concat_max_len=100000;
 
+	/*Ejemplo: evaluar renovaciones nulls */
+
+	select 
+	finan_correOpe,
+	group_concat(if(isnull(finan_versiReno),'',concat(finan_versiReno))) as ver,
+	group_concat(finan_correOpe,if(isnull(finan_versiReno),'',concat('-',finan_versiReno))) as correVer 
+	from finan_opeBanca where 
+	((isnull(finan_estaVenci) or finan_estaVenci=0) or 
+	( isnull(finan_estaEntre) or finan_estaEntre=0)) and
+	cc_centCostId=63 group by cc_centCostId;
+
 /*---------------------------------------------[*]-------------------------------------------------------*/
 				
 				

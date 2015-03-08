@@ -1,0 +1,30 @@
+/******************
+	# Views
+*******************/
+
+	/* listar visitas de ingenieros */
+
+		1. vi_visiIng_lst.php -> OK
+		2. visita_reporte.php -> OK
+		3. historial_visita.php -> OK
+
+/******************
+	# Files News
+*******************/
+
+	/* json carga php */
+
+		1. json/vi_json.php -> OK
+
+	/* ajax carga php */
+
+		1. ajax/vi_ajax.php -> OK
+
+/*******************
+	# Files Changes
+********************/
+
+	1. js/gestionador.js
+	2. clases/controlador/controladorSup.class.php
+	3. clases/controlador/controladorInf.class.php
+	4. clases/sql/sql.class.php

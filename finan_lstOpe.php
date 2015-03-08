@@ -76,6 +76,7 @@
 					<td>Cliente</td>
 					<td>Fecha de recepcion</td>
 					<td align="center" >N° Operaciones</td>
+					<!--<td>Pendientes</td>-->
 					<td>Estado</td>
 					<td align="center" >Accion</td>
 				</tr>

@@ -1,0 +1,19 @@
+/*--------------------------------*/
+	# UPGRADE MODULO COTIZACION
+/*--------------------------------*/
+
+	v 1.0
+
+	v 1.1
+
+	v 1.2
+
+	v 1.3
+
+		.Inicializando upgrade..........[OK]
+		.Creando persistencia..............[OK]
+		.actualizando call,select sql.......[OK]
+		.actualizando json gesti...................[OK]
+		.actualizando sistema.js gesti...............[OK]
+		.actualizando view popup....................[OK]
+		.finalized...................................[OK]
