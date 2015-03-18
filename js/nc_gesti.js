@@ -52,6 +52,20 @@
 
 				nc_tratNoConfor_ini();
 
+				//New 11/03/2015 - PROD
+				//New 12/03/2015
+				//New 13/03/2015
+
+				nc_numSeriProd_ini();
+				nc_cliProdNc_ini();
+				Calendario3('nc_fechProd');
+				nc_provProdNc_ini();
+				nc_tratTipProd_ini();
+				nc_acciEje_ini();
+				nc_autoNc_ini();
+				nc_formxTip_camb();
+				nc_prodNoConfor_list();
+
 			break;
 
 			case 'nc_noConform_lst':
@@ -283,12 +297,59 @@
 			
 		});
 
+		//New 10/03/2015 - PROD
+		//New 11/03/2015
+		//New 12/03/2015
+
+		$('#nc_nuevProdNc').click(function(evento)
+		{
+			if(document.getElementById('nc_id').value>0)
+			{
+				$('#nc_prodNoConfor_pop').dialog('open');
+
+				//reiniciar item
+				document.getElementById('nc_itemProdNc').innerHTML="----";
+				document.getElementById('nc_prodNcId').value=0;
+
+				//limpiar form
+				nc_tratProd_limp();
+			}
+			else
+			{
+				alert("Guardar observacion antes de continuar");
+			}
+		});
+
+		$('#nc_seriDes').change(function(evento)
+		{
+
+			nc_serixProd_obte();
+		});
+
+		$('#nc_seriDes').keyup(function(evento)
+		{
+
+			nc_serixProd_obte();
+		});
+
+		$('#nc_prodNc_agre').click(function(evento)
+		{
+			console.log("iniciando parametros de producto no conforme....!");
+			nc_prodNc_guar();
+		});
+
+		$('#nc_tipxForm').click(function(evento)
+		{
+			nc_formxTip_camb();
+		});
+
 	});
 
 //Functions
 
 	function nc_editConfor_link(id)
 	{
+
 		url="index.php";
 		param="menu_id=154&menu=nc_noConform_frm&id="+id;
 		gd_direPagParam(url,param);
@@ -296,6 +357,7 @@
 
 	function np_iniSelect_obj(val,id)
 	{
+
 		np_iniSelect(val,id);
 	}
 
@@ -329,6 +391,52 @@
 		url="reporte/nc_repDet.php";
 		param="id="+id;
 		np_geneRep(url,param);
+	}
+
+	//New 13/03/2015 - PROD
+	//New 16/03/2015
+
+	function nc_formxTip_camb()
+	{
+		//evaluar form activo
+		insId=document.getElementById('nc_tipxForm');
+		id=insId.options[insId.selectedIndex].value;
+
+		if(id==1)
+		{
+			document.getElementById('nc_tipConfor_d').style.display="block";
+			document.getElementById('nc_tipProdNc_d').style.display="none";
+		}
+		else
+		{
+			document.getElementById('nc_tipProdNc_d').style.display="block";
+			document.getElementById('nc_tipConfor_d').style.display="none";
+		}
+	}
+
+	function nc_tratProd_limp()
+	{
+		//limpiando tratamiento producto
+		document.getElementById('nc_seriDes').value="";
+		document.getElementById('nc_seriId').value="";
+		document.getElementById('nc_prodDes').value="";
+		document.getElementById('nc_prodId').value="";
+		document.getElementById('nc_prodCant').value="";
+		document.getElementById('nc_fechProd').value="";
+		document.getElementById('nc_cliDes').value="";
+		document.getElementById('nc_cliId').value="";
+		document.getElementById('nc_provDes').value="";
+		document.getElementById('nc_provId').value="";
+		document.getElementById('nc_desProdNc').value="";
+		document.getElementById('nc_ProdCorrec').value="";
+		document.getElementById('nc_tratOtro').value="";
+		document.getElementById('nc_regisPor').innerHTML="----";
+
+		insForm1=document.nc_proNoConfor_form.nc_tratProd;
+		nc_radi_limp(insForm1);
+
+		insForm2=document.nc_proNoConfor_form.nc_ejeAcci;
+		nc_radi_limp(insForm2);
 	}
 
 //Functions UI
@@ -397,6 +505,26 @@
 		autoOpen: false,
 		width:920,
 		height:450
+		/*show: {
+		effect: "blind",
+		duration: 1000
+		},
+		hide: {*/
+		/*effect: "explode",*/
+		/*effect: "blind",
+		duration: 1000*/
+		//}
+		});
+	})
+
+	/* New 10/03/2015 - PROD */
+
+	$(function()
+	{
+		$( "#nc_prodNoConfor_pop" ).dialog({
+		autoOpen: false,
+		width:920,
+		height:750
 		/*show: {
 		effect: "blind",
 		duration: 1000
@@ -687,10 +815,127 @@
 		});
 	}
 
+	//New 12/03/2015 - PROD
+	//New 13/03/2015
+
+	function nc_tratTipProd_ini()
+	{
+		//vars
+		ajax="nc_tratTipProd_ini";
+
+		//param
+
+		//peticion ajax
+		var request = $.ajax(
+		{
+			url: "ajax/nc_ajax.php",
+			type: "POST",
+			data: {ajax:ajax},
+			dataType: "html"
+		});
+		
+		request.done(function(msg) 
+		{
+			//console.log(msg);
+			$("#nc_tipTratProd_list").html( msg );
+		});
+		
+		request.fail(function(jqXHR, textStatus) 
+		{
+			alert( "Request failed: " + textStatus );
+		});
+	}
+
+	function nc_acciEje_ini()
+	{
+		//vars
+		ajax="nc_acciEje_ini";
+
+		//params
+
+		//peticion ajax
+		var request = $.ajax(
+		{
+			url: "ajax/nc_ajax.php",
+			type: "POST",
+			data: {ajax:ajax},
+			dataType: "html"
+		});
+		
+		request.done(function(msg) 
+		{
+			//console.log(msg);
+			$("#nc_acciEje_list").html( msg );
+		});
+		
+		request.fail(function(jqXHR, textStatus) 
+		{
+			alert( "Request failed: " + textStatus );
+		});
+	}
+
+	function nc_autoNc_ini()
+	{
+		//vars
+		ajax="nc_autoNc_ini";
+
+		//param
+
+		//peticion ajax
+		var request = $.ajax(
+		{
+			url: "ajax/nc_ajax.php",
+			type: "POST",
+			data: {ajax:ajax},
+			dataType: "html"
+		});
+		
+		request.done(function(msg) 
+		{
+			//console.log(msg);
+			$("#nc_autoPor").html( msg );
+		});
+		
+		request.fail(function(jqXHR, textStatus) 
+		{
+			alert( "Request failed: " + textStatus );
+		});
+	}
+
+	function nc_prodNoConfor_list()
+	{
+		//vars
+		ajax="nc_prodNoConfor_list";
+		conforId=document.getElementById('nc_id').value;
+
+		//peticion ajax
+		var request = $.ajax(
+		{
+			url: "ajax/nc_ajax.php",
+			type: "POST",
+			data: {ajax:ajax,conforId:conforId},
+			dataType: "html"
+		});
+		
+		request.done(function(msg) 
+		{
+			//console.log(msg);
+			$("#nc_prodNoConfor_tab").html( msg );
+		});
+		
+		request.fail(function(jqXHR, textStatus) 
+		{
+			alert( "Request failed: " + textStatus );
+		});
+	}
+
+
+
 //Functions Json
 
 	function nc_centCost_obte()
 	{
+
 		scc_dataComp_ini("nc_centCost_obte","nc_json","nc_ccId","nc_ccDes");
 	}
 
@@ -710,6 +955,7 @@
 		tipConfor=kd_obteValComb('nc_tipConfor');
 		medPrev=document.getElementById('nc_medPrev').value;
 		obsId=kd_obteValComb('nc_obsPrin');
+		tipObsFrm=kd_obteValComb('nc_tipxForm');
 
 		//new update 14/01/2014 - CLOSE
 		oriObs=kd_obteValComb('nc_oriObs');
@@ -734,6 +980,7 @@
 		param+="&medPrev="+medPrev;
 		param+="&obsId="+obsId;
 		param+="&oriObs="+oriObs;
+		param+="&tipObsFrm="+tipObsFrm;
 
 		console.log(param);
 
@@ -856,6 +1103,7 @@
 					estaConfor=data[i]['nc_estaConforId'];
 					medPrev=data[i]['nc_medPrev'];
 					obsId=data[i]['nc_obsId'];
+					tipObsFrm=data[i]['nc_tipObsFrm'];
 
 					/* New update 14/01/2015 - CLOSE */
 					oriObs=data[i]['nc_oriObs'];
@@ -871,6 +1119,12 @@
 
 					/* New update 14/01/2015 - CLOSE */					
 					np_iniSelect(oriObs,'nc_oriObs');
+
+					//New update 17/03/2015
+					np_iniSelect(tipObsFrm,'nc_tipxForm');
+
+					//ini tip form
+					nc_formxTip_camb();
 
 				}
 				
@@ -1298,6 +1552,208 @@
 				nc_select_reini('nc_autoTrat');
 				np_iniSelectMul(dataAsig,'nc_autoTrat');
 
+			}
+		});
+	}
+
+	//New 11/03/2015 - PROD
+	//New 13/03/2015
+
+	function nc_numSeriProd_ini()
+	{
+
+		scc_dataComp_ini("nc_numSeriProd_ini","nc_json","nc_seriId","nc_seriDes");
+	}
+
+	function nc_serixProd_obte()
+	{
+		/* vars */
+		seriId=document.getElementById('nc_seriId').value;
+		json="nc_serixProd_obte";
+
+		/* param */
+		param="json="+json;
+		param+="&seriId="+seriId;
+
+		/* peticion json */
+		$.getJSON('json/nc_json.php?'+param,{format: "json"}, function(data) 
+		{
+
+			console.log(data);
+
+			if(data.length>0)
+			{
+				document.getElementById('nc_prodDes').value=data[0]['prodDes'] + " - " + data[0]['prodMar'];
+				document.getElementById('nc_prodId').value=data[0]['prodId'];
+			}
+
+		});
+	}
+
+	function nc_cliProdNc_ini()
+	{
+
+		scc_dataComp_ini("nc_cliProdNc_ini","nc_json","nc_cliId","nc_cliDes");	
+	}
+
+	function nc_provProdNc_ini()
+	{
+
+		scc_dataComp_ini("nc_provProdNc_ini","nc_json","nc_provId","nc_provDes");	
+	}
+
+	function nc_prodNc_guar()
+	{
+
+		//vars prod no conforme
+		tratProdId=document.getElementById('nc_prodNcId').value;
+		noConforId=document.getElementById('nc_id').value;
+
+		//json="nc_prodNc_guar";
+		json=gd_petiJson_ele(tratProdId,"nc_prodNc_guar","nc_prodNc_actu");
+
+		seri=document.getElementById('nc_seriId').value;
+		prod=document.getElementById('nc_prodId').value;
+		cant=document.getElementById('nc_prodCant').value;
+		fech=document.getElementById('nc_fechProd').value;
+		cli=document.getElementById('nc_cliId').value;
+		prov=document.getElementById('nc_provId').value;
+		des=document.getElementById('nc_desProdNc').value;
+		correc=document.getElementById('nc_ProdCorrec').value;
+
+		insForm=document.nc_proNoConfor_form.nc_tratProd;
+		tratProd=nc_valRad_cap(insForm);
+		
+		otroDes=document.getElementById('nc_tratOtro').value;
+		
+		insForm2=document.nc_proNoConfor_form.nc_ejeAcci;
+		ejeAcci=nc_valRad_cap(insForm2);
+		
+		regPor="";
+		autoPor=kd_obteValComb('nc_autoPor');
+
+		//test
+		/*
+			console.log("seri:"+seri);
+			console.log("prod:"+prod);
+			console.log("cant:"+cant);
+			console.log("fech:"+fech);
+			console.log("cli:"+cli);
+			console.log("prov:"+prov);
+			console.log("des:"+des);
+			console.log("correc:"+correc);
+			console.log("tratProd:"+tratProd);
+			console.log("otroDes:"+otroDes);
+			console.log("ejeAcci:"+ejeAcci);
+			console.log("regPor:-----");
+			console.log("autoPor:"+autoPor);
+		*/
+		
+		//params
+		param="seri="+seri;
+		param+="&prod="+prod;
+		param+="&cant="+cant;
+		param+="&fech="+fech;
+		param+="&cli="+cli;
+		param+="&prov="+prov;
+		param+="&des="+des;
+		param+="&correc="+correc;
+		param+="&tratProd="+tratProd;
+		param+="&otroDes="+otroDes;
+		param+="&ejeAcci="+ejeAcci;
+		param+="&regPor="+regPor;
+		param+="&autoPor="+autoPor;
+		param+="&tratProdId="+tratProdId;
+		param+="&noConforId="+noConforId;
+		param+="&json="+json;
+
+		//peticion ajax
+		$.getJSON('json/nc_json.php?'+param,{format: "json"}, function(data) 
+		{
+			console.log(data[0]);
+			if(data[0]>0)
+			{
+				$(".elem-gd").notify("Producto no conforme guardado correctamente...!","success");
+				nc_prodNoConfor_list();
+			}
+			else
+			{
+				$(".elem-gd").notify("Producto no conforme no añadido...!","error");	
+			}
+		});
+	}
+
+	function nc_prodNcxId_ini(id,item)
+	{
+		//open popup
+		$('#nc_prodNoConfor_pop').dialog('open');
+
+		//ini item y val
+		document.getElementById('nc_itemProdNc').innerHTML=item;
+		document.getElementById('nc_prodNcId').value=id;
+
+		//vars
+		prodNcId=id;
+		json="nc_prodNcxId_ini";
+
+		//param
+		param="json="+json;
+		param+="&prodNcId="+prodNcId;
+
+		$.getJSON('json/nc_json.php?'+param,{format: "json"}, function(data) 
+		{
+			if(data.length>0)
+			{
+				document.getElementById('nc_seriDes').value=data[0]['seriDes'];
+				document.getElementById('nc_seriId').value=data[0]['nc_seriId'];
+
+				document.getElementById('nc_prodDes').value=data[0]['prodDes'];
+				document.getElementById('nc_prodId').value=data[0]['nc_prodId'];
+
+				document.getElementById('nc_prodCant').value=data[0]['nc_prodCant'];
+				document.getElementById('nc_fechProd').value=data[0]['nc_prodFech'];
+
+				document.getElementById('nc_cliDes').value=data[0]['cli'];
+				document.getElementById('nc_cliId').value=data[0]['nc_cliId'];
+
+				document.getElementById('nc_provDes').value=data[0]['prov'];
+				document.getElementById('nc_provId').value=data[0]['nc_provId'];
+
+				document.getElementById('nc_desProdNc').value=data[0]['nc_prodDes'];
+				document.getElementById('nc_ProdCorrec').value=data[0]['nc_prodCorrec'];
+
+				document.getElementById('nc_tratOtro').value=data[0]['nc_prodNcOtro'];
+
+				insForm=document.nc_proNoConfor_form.nc_tratProd;
+				insForm2=document.nc_proNoConfor_form.nc_ejeAcci;
+				nc_radEle_ini(insForm,data[0]['nc_tipTratProdId']);
+				nc_radEle_ini(insForm2,data[0]['nc_ejeAcciCorrecId']);
+
+				document.getElementById('nc_regisPor').innerHTML=data[0]['regPor'];
+
+				np_iniSelect(data[0]['nc_autoPor'],'nc_autoPor');
+			}
+		});
+	}
+
+	function nc_tratProd_eli(id)
+	{
+		console.log("eliminando producto no conforme:"+id);
+
+		//vars
+		tratProdId=id;
+		json="nc_tratProd_eli";
+
+		//param
+		param="tratProdId="+tratProdId;
+		param+="&json="+json;
+
+		$.getJSON('json/nc_json.php?'+param,{format: "json"}, function(data) 
+		{
+			if(data[0]>0)
+			{
+				$(".elem-gd").notify("Producto no conforme eliminado correctamente...!","success");
+				nc_prodNoConfor_list();
 			}
 		});
 	}

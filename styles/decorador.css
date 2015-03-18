@@ -2217,6 +2217,80 @@
 		background-color: white;
 	}
 
+	/* new 10/03/2015 - PROD */
+	/* new 11/03/2015 */
+	/* new 13/03/2015 */
 
+	#nc_prodNoConfor_pop
+	{
+		background-color: white;
+	}
+
+	#nc_prodDes
+	{
+		width:320px;
+		background-color: silver;
+	}
+
+	#nc_provDes
+	{
+		width:320px;
+		background-color: silver;
+	}
+
+	#nc_cliDes
+	{
+		width:320px;
+		background-color: silver;
+	}
+
+	#nc_seriDes
+	{
+		background-color: #BF0E1E;
+	}
+
+	#nc_tipProdNc_d
+	{
+		float: left;
+		width: 100%;
+	}
+
+	/* new 10/03/2015 - DEV */
+	/* new 11/03/2015 */
+	/* new 13/03/2015 */
+
+	#nc_prodNoConfor_pop
+	{
+		background-color: white;
+	}
+
+	#nc_prodDes
+	{
+		width:320px;
+		background-color: silver;
+	}
+
+	#nc_provDes
+	{
+		width:320px;
+		background-color: silver;
+	}
+
+	#nc_cliDes
+	{
+		width:320px;
+		background-color: silver;
+	}
+
+	#nc_seriDes
+	{
+		background-color: #BF0E1E;
+	}
+
+	#nc_tipProdNc_d
+	{
+		float: left;
+		width: 100%;
+	}
 
 /*-------------------------[*]-------------------------------------------*/

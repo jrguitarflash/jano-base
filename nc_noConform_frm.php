@@ -135,107 +135,156 @@
 				</div>
 
 				<div id="tabs-2" >
-					<span class="nc_level" >Observacion</span>
 
-					<label class="nc_lbl" >Observacion</label>
 
-					<!-- INPUT OBSERVACION -->
-						<select class="nc_input" id="nc_obsPrin" >
-							<?php foreach($dataObs as $data) { ?>
-							<option value="<?php print $data['nc_obsId']; ?>" ><?php print $data['nc_obsDes']; ?></option>
-							<?php } ?>
+						<!-- Tipo de no conformidad  -->
+						
+						<label class="nc_lbl" 1>Tipo</label>
+
+						<select class="nc_input" id="nc_tipxForm" >
+							<option value="1" >no conformidad</option>
+							<option value="2" >producto no conforme</option>
 						</select>
-					<!-- [*] -->
 
-					<!--New update 14/01/2015  - CLOSE -->
+						<!-- [*] -->
 
-					<label class="nc_lbl" >Origen</label>
+					<div id="nc_tipConfor_d" >
 
-					<!-- INPUT ORIGEN -->
-						<select class='nc_input' id="nc_oriObs" >
-							<?php foreach($dataOri as $data){ ?>
-								<option value="<?php print $data['oriId']; ?>" ><?php print $data['oriDes']; ?></option>
-							<?php } ?>
-						</select>
-					<!-- [*] -->
+						<!-- Form Tipo no Conformidad -->
 
-					<label class="nc_lbl" id="nc_tipObs_lbl" >Tipo no conformidad</label>
+						<span class="nc_level" >Observacion</span>
 
-					<!-- INPUT TIPO CONFORMIDAD -->
-						<select class="nc_input" id="nc_tipConfor" >
-							<?php foreach($dataTipConf as $data) { ?>
-								<option value="<?php print $data['nc_tipConfVal']; ?>" ><?php print $data['nc_tipConfDes']; ?></option>
-							<?php } ?>
-						</select>
-					<!-- [*] -->	
+						<label class="nc_lbl" >Observacion</label>
 
-					<label class="nc_lbl" >Deteccion</label>
+						<!-- INPUT OBSERVACION -->
+							<select class="nc_input" id="nc_obsPrin" >
+								<?php foreach($dataObs as $data) { ?>
+								<option value="<?php print $data['nc_obsId']; ?>" ><?php print $data['nc_obsDes']; ?></option>
+								<?php } ?>
+							</select>
+						<!-- [*] -->
 
-					<!-- INPUT DETECCION -->
-						<select class="nc_input" id="nc_detecDes" >
-							<?php foreach($dataDetec as $data) { ?>
-								<option value="<?php print $data['nc_detecVal']; ?>" ><?php print $data['nc_detecDes']; ?></option>
-							<?php } ?>
-						</select>
-					<!-- [*] -->
+						<!--New update 14/01/2015  - CLOSE -->
 
-					<label class="nc_lbl">Proceso</label>
+						<label class="nc_lbl" >Origen</label>
 
-					<!-- INPUT PROCESO -->
-						<select class="nc_input" id="nc_proce" >
-							<?php foreach($dataProc as $data) { ?>
-								<option value="<?php print $data['nc_proceVal']; ?>" ><?php print $data['nc_proceDes']; ?></option>
-							<?php } ?>
-						</select>
-					<!-- [*] -->
+						<!-- INPUT ORIGEN -->
+							<select class='nc_input' id="nc_oriObs" >
+								<?php foreach($dataOri as $data){ ?>
+									<option value="<?php print $data['oriId']; ?>" ><?php print $data['oriDes']; ?></option>
+								<?php } ?>
+							</select>
+						<!-- [*] -->
 
-					<label class="nc_lbl">Tipo de observacion</label>
+						<label class="nc_lbl" id="nc_tipObs_lbl" >Tipo no conformidad</label>
 
-					<!-- INPUT OBSERVACION -->
-						<select class="nc_input" id="nc_obs" >
-							<?php foreach($dataTipObs as $data) { ?>
-							<option value="<?php print $data['nc_obsVal']; ?>" ><?php print $data['nc_obsDes']; ?></option>
-							<?php } ?>
-						</select>
-					<!-- [*] -->	
+						<!-- INPUT TIPO CONFORMIDAD -->
+							<select class="nc_input" id="nc_tipConfor" >
+								<?php foreach($dataTipConf as $data) { ?>
+									<option value="<?php print $data['nc_tipConfVal']; ?>" ><?php print $data['nc_tipConfDes']; ?></option>
+								<?php } ?>
+							</select>
+						<!-- [*] -->	
 
-					<label class="nc_lbl" >Estado</label>
+						<label class="nc_lbl" >Deteccion</label>
 
-					<!-- INPUT ESTADO CONFORMIDAD -->
-						<select class="nc_input" id="nc_estaConfor" >
-							<?php foreach($dataEstaConfor as $data) { ?>
-								<option value="<?php print $data['nc_estaConforVal']; ?>" ><?php print $data['nc_estaConforDes']; ?></option>
-							<?php } ?>
-						</select>
-					<!-- [*] -->
+						<!-- INPUT DETECCION -->
+							<select class="nc_input" id="nc_detecDes" >
+								<?php foreach($dataDetec as $data) { ?>
+									<option value="<?php print $data['nc_detecVal']; ?>" ><?php print $data['nc_detecDes']; ?></option>
+								<?php } ?>
+							</select>
+						<!-- [*] -->
 
-					<label class="nc_lbl" >Fecha de recepcion</label>
-					
-					<!-- INPUT FECHA RECEPCION -->
-						<span class="nc_input" >
-							<input type="text"  id="nc_fechRecep" >
-						</span>
-					<!-- [*] -->
+						<label class="nc_lbl">Proceso</label>
 
-					<label class="nc_lbl" >Descripcion</label>
+						<!-- INPUT PROCESO -->
+							<select class="nc_input" id="nc_proce" >
+								<?php foreach($dataProc as $data) { ?>
+									<option value="<?php print $data['nc_proceVal']; ?>" ><?php print $data['nc_proceDes']; ?></option>
+								<?php } ?>
+							</select>
+						<!-- [*] -->
 
-					<!-- INPUT DESCRIPCION -->
-					<textarea class="nc_input" id="nc_desConfor" ></textarea>
-					<!-- [*] -->
+						<label class="nc_lbl">Tipo de observacion</label>
 
-					<label class="nc_lbl" >Respuesta inmediata</label>
+						<!-- INPUT OBSERVACION -->
+							<select class="nc_input" id="nc_obs" >
+								<?php foreach($dataTipObs as $data) { ?>
+								<option value="<?php print $data['nc_obsVal']; ?>" ><?php print $data['nc_obsDes']; ?></option>
+								<?php } ?>
+							</select>
+						<!-- [*] -->	
 
-					<!-- INPUT RESPUESTA INMEDIATA  -->
-					<textarea class="nc_input" id="nc_respInme" ></textarea>
-					<!-- [*] -->
+						<label class="nc_lbl" >Estado</label>
 
-					<label class="nc_lbl" >Fecha cierre</label>
+						<!-- INPUT ESTADO CONFORMIDAD -->
+							<select class="nc_input" id="nc_estaConfor" >
+								<?php foreach($dataEstaConfor as $data) { ?>
+									<option value="<?php print $data['nc_estaConforVal']; ?>" ><?php print $data['nc_estaConforDes']; ?></option>
+								<?php } ?>
+							</select>
+						<!-- [*] -->
 
-					<!-- INPUT FECHA CIERRE -->
-						<span class="nc_input" >
-							<input type="text" id="nc_fechCie" >
-						</span>
-					<!-- [*] -->			
+						<label class="nc_lbl" >Fecha de recepcion</label>
+						
+						<!-- INPUT FECHA RECEPCION -->
+							<span class="nc_input" >
+								<input type="text"  id="nc_fechRecep" >
+							</span>
+						<!-- [*] -->
+
+						<label class="nc_lbl" >Descripcion</label>
+
+						<!-- INPUT DESCRIPCION -->
+						<textarea class="nc_input" id="nc_desConfor" ></textarea>
+						<!-- [*] -->
+
+						<label class="nc_lbl" >Respuesta inmediata</label>
+
+						<!-- INPUT RESPUESTA INMEDIATA  -->
+						<textarea class="nc_input" id="nc_respInme" ></textarea>
+						<!-- [*] -->
+
+						<label class="nc_lbl" >Fecha cierre</label>
+
+						<!-- INPUT FECHA CIERRE -->
+							<span class="nc_input" >
+								<input type="text" id="nc_fechCie" >
+							</span>
+						<!-- [*] -->
+
+					</div>
+
+					<div id="nc_tipProdNc_d" >
+
+						<!-- Form Tipo Producto no conforme -->
+
+						<span class="nc_level" >Producto no conforme</span>
+
+						<a href="#" id="nc_nuevProdNc" class="nc_lbl" >Nuevo</a>
+
+						<table class='list' >
+							<thead>
+								<tr>
+									<td>Item</td>
+									<td>Serie</td>
+									<td>Producto</td>
+									<td>Cantidad</td>
+									<td>Fecha</td>
+									<td>Cliente</td>
+									<td>Proveedor</td>
+									<td>Descripcion</td>
+									<td>Correcion</td>
+									<td>Accion</td>
+								</tr>
+							</thead>
+							<tbody id="nc_prodNoConfor_tab" >
+							</tbody>
+						</table>
+
+					</div>
+
 				</div>
 
 				<div id="tabs-3" >
@@ -558,6 +607,81 @@
 		<label class="nc_lbl" ></label>
 		<a href="#" class='nc_input' id="nc_guarTrat" >Guardar</a>
 		<!-- [*] -->
+
+	</div>
+
+	<!-- New update 10/03/2015 - PROD -->
+
+	<div id="nc_prodNoConfor_pop" title="producto no conforme" >
+
+		<form name="nc_proNoConfor_form" id="nc_proNoConfor_form" >
+
+		<label class="nc_lbl" >N°</label>
+		<span class="nc_input" id="nc_itemProdNc" >-----</span>
+		<input type="hidden" id="nc_prodNcId" >
+
+		<label class="nc_lbl" >Serie</label>
+		<input class="nc_input" id="nc_seriDes" type="text" >
+		<input class="nc_input" id="nc_seriId"  type="hidden" >
+
+		<label class="nc_lbl" >Producto</label>
+		<input class="nc_input" id="nc_prodDes" type="text" >
+		<input class="nc_input" id="nc_prodId" type="hidden" >
+
+		<label class="nc_lbl" >Cantidad</label>
+		<input class="nc_input" id="nc_prodCant" >
+
+		<label class="nc_lbl" >Fecha</label>
+		<span class="nc_input" ><input id="nc_fechProd" type="text" ></span>
+
+		<label class="nc_lbl" >Cliente</label>
+		<input class="nc_input" id="nc_cliDes" type="text" >
+		<input class="nc_input" id="nc_cliId" type="hidden" >
+
+		<label class="nc_lbl" >Proveedor</label>
+		<input class="nc_input" id="nc_provDes" type="text" >
+		<input class="nc_input" id="nc_provId" type="hidden" >
+
+		<label class="nc_lbl" >Descripcion</label>
+		<textarea class="nc_input" id="nc_desProdNc" ></textarea>
+
+		<label class="nc_lbl" >Correccion</label>
+		<textarea class="nc_input" id="nc_ProdCorrec" ></textarea>
+
+		<label class="nc_lbl" >Tratamiento de producto</label>
+		<ul class="nc_input" id="nc_tipTratProd_list" >
+			<!--
+			<li><input type="radio" id="nc_tratProd" name="nc_tratProd[]" value="1" >Devolucion</li>
+			<li><input type="radio" id="nc_tratProd" name="nc_tratProd[]" value="2" >Permiso de desviacion</li>
+			<li><input type="radio" id="nc_tratProd" name="nc_tratProd[]" value="3" >Reproceso</li>
+			<li><input type="radio" id="nc_tratProd" name="nc_tratProd[]" value="4" >Otros</li>
+			-->
+		</ul>
+
+		<label class="nc_lbl" >Otros</label>
+		<textarea class="nc_input" id="nc_tratOtro" ></textarea>
+
+		<label class="nc_lbl" >Ejecutar acciones correctivas</label>
+		<input type="radio" id="nc_ejeAcci" name="nc_ejeAcci[]" style="display:none" value="0" >
+		<ul class="nc_input" id="nc_acciEje_list" >
+			<!--
+			<li><input type="radio" id="nc_ejeAcci" name="nc_ejeAcci[]" >Si</li>
+			<li><input type="radio" id="nc_ejeAcci" name="nc_ejeAcci[]" >No</li>
+			-->
+		</ul>
+
+		<label class="nc_lbl" >Registrado por</label>
+		<span class="nc_input" id="nc_regisPor" >-----</span>
+
+		<label class="nc_lbl" >Autorizado por</label>
+		<select class="nc_input" id="nc_autoPor" >
+			<option></option>
+		</select>
+
+		<label class="nc_lbl" ></label>
+		<input class="nc_input" id="nc_prodNc_agre" type="button" value="Guardar" >
+
+		</form>
 
 	</div>
 

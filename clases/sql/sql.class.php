@@ -5159,7 +5159,8 @@ class sql
 											$tipConfor,
 											$medPrev,
 											$obsId,
-											$oriObs)
+											$oriObs,
+											$tipObsFrm)
 			{
 				$sql="select nc_noConfor_cre('".$centId."',
 											'".$detecId."',
@@ -5173,7 +5174,8 @@ class sql
 											'".$tipConfor."',
 											'".$medPrev."',
 											'".$obsId."',
-											'".$oriObs."') as response";
+											'".$oriObs."',
+											'".$tipObsFrm."') as response";
 				return $sql;
 			}
 
@@ -5244,7 +5246,8 @@ class sql
 											 $fechCie,
 											 $medPrev,
 											 $obsId,
-											 $oriObs)
+											 $oriObs,
+											 $tipObsFrm)
 			{
 				$sql="select nc_noConfor_edit('".$conforId."',
 											 '".$centId."',
@@ -5259,7 +5262,8 @@ class sql
 											 '".$fechCie."',
 											 '".$medPrev."',
 											 '".$obsId."',
-											 '".$oriObs."') as response";
+											 '".$oriObs."',
+											 '".$tipObsFrm."') as response";
 				return $sql;
 			}
 
@@ -5329,7 +5333,7 @@ class sql
 			}
 
 
-	#New 26/02/2015 - DEV
+	#New 26/02/2015 - PROD
 
 		/*
 		********************************
@@ -5415,6 +5419,206 @@ class sql
 		public function nc_tratNoConfor_edit($tratId,$tratTip,$tratOpi,$tratAuto)
 		{
 			$sql="select nc_tratNoConfor_edit('".$tratId."','".$tratTip."','".$tratOpi."','".$tratAuto."') as response";
+			return $sql;
+		}
+
+	#New 11/03/2015 - PROD
+
+		/*
+		*-----------------------------------------
+		* Iniciar numeros de serie de productos #
+		*-----------------------------------------
+		*/
+
+		public function nc_numSeriProd_ini()
+		{
+			$sql="CALL nc_numSeriProd_ini()";
+			return $sql;
+		}
+
+		/*
+		*-----------------------------
+		* Obtener producto por serie #
+		*------------------------------
+		*/
+
+		public function nc_serixProd_obte($seriId)
+		{
+			$sql="CALL nc_serixProd_obte('".$seriId."')";
+			return $sql;
+		}
+
+		/*
+		*----------------------------------------
+		* Iniciar cliente productos no conforme #
+		*----------------------------------------
+		*/
+
+		public function nc_cliProdNc_ini()
+		{
+			$sql="CALL nc_cliProdNc_ini()";
+			return $sql;
+		}
+
+		/*
+		*----------------------------------------
+		* Iniciar proveedor productos no conforme #
+		*----------------------------------------
+		*/
+
+		public function nc_provProdNc_ini()
+		{
+			$sql="CALL nc_provProdNc_ini()";
+			return $sql;
+		}
+
+		/*
+		*----------------------------------------
+		* Iniciar tipo tratamiento de productos #
+		*----------------------------------------
+		*/
+
+		public function nc_tratTipProd_ini()
+		{
+			$sql="CALL nc_tratTipProd_ini()";
+			return $sql;
+		}
+
+		/*
+		*----------------------------------------------
+		* Iniciar acciones a ejecutar  #
+		*-----------------------------------------------
+		*/
+
+		public function nc_acciEje_ini()
+		{
+			$sql="CALL nc_acciEje_ini()";
+			return $sql;
+		}
+
+		/*
+		*----------------------------------------------
+		* Iniciar autorizaciones producto no conforme  #
+		*------------------------------------------------
+		*/
+
+		public function nc_autoNc_ini()
+		{
+			$sql="CALL nc_autoNc_ini()";
+			return $sql;
+		}
+
+		/*
+		*----------------------------------------------
+		* guardar producto no conforme #
+		*----------------------------------------------
+		*/
+
+		public function nc_prodNc_guar($seri,
+										$prod,
+										$cant,
+										$fech,
+										$cli,
+										$prov,
+										$des,
+										$correc,
+										$tratProd,
+										$ejeAcci,
+										$regPor,
+										$autoPor,
+										$noConforId,
+										$ncOtro)
+		{
+			$sql="select nc_prodNc_guar('".$seri."',
+										'".$prod."',
+										'".$cant."',
+										'".$fech."',
+										'".$cli."',
+										'".$prov."',
+										'".$des."',
+										'".$correc."',
+										'".$tratProd."',
+										'".$ejeAcci."',
+										'".$regPor."',
+										'".$autoPor."',
+										'".$noConforId."',
+										'".$ncOtro."') as response";
+			return $sql;
+		}
+
+		/*
+		*---------------------------------------------
+		* listar producto no conforme #
+		*----------------------------------------------
+		*/
+
+		public function nc_prodNoConfor_list($conforId)
+		{
+			$sql="CALL nc_prodNoConfor_list('".$conforId."')";
+			return $sql;
+		}
+
+		/*
+		*--------------------------------------------
+		* iniciar producto no conforme por id #
+		*--------------------------------------------
+		*/
+
+		public function nc_prodNcxId_ini($prodNcId)
+		{
+			$sql="CALL nc_prodNcxId_ini('".$prodNcId."')";
+			return $sql;
+		}
+
+		/*
+		*----------------------------------------------
+		* actualizar producto no conforme por id #
+		*----------------------------------------------
+		*/
+
+		public function nc_prodNc_actu($seri,
+										$prod,
+										$cant,
+										$fech,
+										$cli,
+										$prov,
+										$des,
+										$correc,
+										$tratProd,
+										$ejeAcci,
+										$regPor,
+										$autoPor,
+										$noConforId,
+										$ncOtro,
+										$prodNcId)
+		{
+			$sql="select nc_prodNc_actu('".$seri."',
+								 '".$prod."',
+								 '".$cant."',
+								 '".$fech."',
+								 '".$cli."',
+								 '".$prov."',
+								 '".$des."',
+								 '".$correc."',
+								'".$tratProd."',
+								'".$ejeAcci."',
+								'".$regPor."',
+								'".$autoPor."',
+								'".$noConforId."',
+								'".$ncOtro."',
+								'".$prodNcId."') as response";
+			return $sql;
+		}
+
+		/*
+		*------------------------------------------------
+		* eliminar tratamiento de productos por id
+		*------------------------------------------------
+		*/
+
+		public function nc_tratProd_eli($tratProdId)
+		{
+			$sql="select nc_tratProd_eli('".$tratProdId."') as response";
 			return $sql;
 		}
 

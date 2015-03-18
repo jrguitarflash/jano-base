@@ -9,6 +9,7 @@ require("../clases/negocio/negocio.class.php");
 require("../clases/sql/sql.class.php");
 require("../utils_func.php");
 
+
 switch ($_REQUEST['json']) 
 {
 
@@ -35,7 +36,8 @@ switch ($_REQUEST['json'])
 									$_GET['tipConfor'],
 									$_GET['medPrev'],
 									$_GET['obsId'],
-									$_GET['oriObs']);
+									$_GET['oriObs'],
+									$_GET['tipObsFrm']);
 
 		$conforAfect=negocio::getVal($sql,'response');
 
@@ -93,7 +95,8 @@ switch ($_REQUEST['json'])
 									 $_GET['fechCie'],
 									 $_GET['medPrev'],
 									 $_GET['obsId'],
-									 $_GET['oriObs']);
+									 $_GET['oriObs'],
+									 $_GET['tipObsFrm']);
 
 		$conforAfect=negocio::getVal($sql,'response');
 
@@ -485,6 +488,139 @@ switch ($_REQUEST['json'])
 		$tratOpi=$_GET['tratOpi'];
 		$tratAuto=$_GET['tratAuto'];
 		$sql=sql::nc_tratNoConfor_edit($tratId,$tratTip,$tratOpi,$tratAuto);
+		$filAfect=negocio::getVal($sql,'response');
+
+		$data=Array();
+		$data[0]=$filAfect;
+
+		print json_encode($data);
+
+	break;
+
+	//New 11/03/2015 - PROD
+
+	case 'nc_numSeriProd_ini':
+
+		$sql=sql::nc_numSeriProd_ini();
+		$dataSeri=negocio::getData($sql);
+
+		print json_encode($dataSeri);
+
+	break;
+
+	case 'nc_serixProd_obte':
+
+		$seriId=$_GET['seriId'];
+		$sql=sql::nc_serixProd_obte($seriId);
+		$dataProd=negocio::getData($sql);
+
+		print json_encode($dataProd);
+
+	break;
+
+	case 'nc_cliProdNc_ini':
+
+		$sql=sql::nc_cliProdNc_ini();
+		$dataCli=negocio::getData($sql);
+
+		print json_encode($dataCli);
+
+	break;
+
+	case 'nc_provProdNc_ini':
+
+		$sql=sql::nc_provProdNc_ini();
+		$dataProv=negocio::getData($sql);
+
+		print json_encode($dataProv);
+
+	break;
+
+	case 'nc_prodNc_guar':
+
+		session_start();
+
+		$sql=sql::nc_prodNc_guar($_GET['seri'],
+								$_GET['prod'],
+								$_GET['cant'],
+								$_GET['fech'],
+								$_GET['cli'],
+								$_GET['prov'],
+								$_GET['des'],
+								$_GET['correc'],
+								$_GET['tratProd'],
+								$_GET['ejeAcci'],
+								$_SESSION['SIS'][2],
+								$_GET['autoPor'],
+								$_GET['noConforId'],
+								$_GET['otroDes']);
+
+		$filAfect=negocio::getVal($sql,'response');
+		
+		$data=Array();
+		$data[0]=$filAfect;
+
+		print json_encode($data);
+
+	break;
+
+	case 'nc_prodNcxId_ini':
+
+		$prodNcId=$_GET['prodNcId'];
+		$sql=sql::nc_prodNcxId_ini($prodNcId);
+		$dataProdNc=negocio::getData($sql);
+
+		print json_encode($dataProdNc);
+
+	break;
+
+	case 'nc_prodNc_actu':
+
+		$seri=$_GET['seri'];
+		$prod=$_GET['prod'];
+		$cant=$_GET['cant'];
+		$fech=$_GET['fech'];
+		$cli=$_GET['cli'];
+		$prov=$_GET['prov'];
+		$des=$_GET['des'];
+		$correc=$_GET['correc'];
+		$tratProd=$_GET['tratProd'];
+		$ejeAcci=$_GET['ejeAcci'];
+		$regPor=$_GET['regPor'];
+		$autoPor=$_GET['autoPor'];
+		$noConforId=$_GET['noConforId'];
+		$ncOtro=$_GET['otroDes'];
+		$prodNcId=$_GET['tratProdId'];
+
+		$sql=sql::nc_prodNc_actu($seri,
+								$prod,
+								$cant,
+								$fech,
+								$cli,
+								$prov,
+								$des,
+								$correc,
+								$tratProd,
+								$ejeAcci,
+								$regPor,
+								$autoPor,
+								$noConforId,
+								$ncOtro,
+								$prodNcId);
+
+		$filAfect=negocio::getVal($sql,'response');
+
+		$data=Array();
+		$data[0]=$filAfect;
+
+		print json_encode($data);
+
+	break;
+
+	case 'nc_tratProd_eli':
+
+		$tratProdId=$_GET['tratProdId'];
+		$sql=sql::nc_tratProd_eli($tratProdId);
 		$filAfect=negocio::getVal($sql,'response');
 
 		$data=Array();

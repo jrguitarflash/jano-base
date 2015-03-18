@@ -116,3 +116,18 @@ v 1.7
 . iniciando persistencia iniciar tratamientos por id frontend....................ok
 . iniciando persistencia editar tratamientos por id.................ok
 . finalizando upgrade....................................ok
+
+v 1.8
+
+. iniciando upgrade...................................................ok
+. creacion de modelo tratamiento de productos..........................ok
+. actualizando vista de formulario..........................................ok
+. estilos css nuevos del modulo.....................................................ok
+. actualizando popup y eventos...................................................ok
+. actualizando persistencia del modulo..............................................ok
+. actualizando capa sql.....................................................ok
+. actualizando json y ajax.........................................................ok
+. actualizando function,function ajax,function json en js....................................ok
+. actualizando gesti json,ajax...............................................ok
+. actualizando utils js.............................................................ok
+. finalizando upgrade.......................ok

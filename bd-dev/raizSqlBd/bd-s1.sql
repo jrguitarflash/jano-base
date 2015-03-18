@@ -494,7 +494,6 @@
 			/*U*/
 			/*D*/
 
-
 		# FUNCTION - CRUD
 
 			/*C*/
@@ -11077,7 +11076,8 @@
 				nc_fechCie date,
 				nc_medPrev text,
 				nc_obsId int(11),
-				nc_oriObs varchar(50)
+				nc_oriObs varchar(50),
+				nc_tipObsFrm int(11)
 			);
 
 			#Restricciones
@@ -11100,6 +11100,11 @@
 
 				alter table nc_noConfor
 				add nc_oriObs varchar(50) after nc_obsId;
+
+				#New update 17/03/2014 - CLOSE
+
+				alter table nc_noConfor
+				add nc_tipObsFrm int(11) after nc_oriObs;
 
 		/* Table Deteccion [nc_detec] */
 
@@ -11304,6 +11309,79 @@
 					#Permiso de donacion
 					#Desecho
 					#Donacion
+
+		/* New update 10/03/2015 - PROD */
+
+			/* Table tratamiento del producto [nc_tratProd] */
+			create table nc_tratProd
+			(
+				nc_tratProdId int(11) primary key not null auto_increment, #PK
+				nc_noConforId int(11), #FK
+				nc_prodId int(11), #FK
+				nc_seriId int(11), #FK
+				nc_prodCant int(11),
+				nc_prodFech date,
+				nc_cliId int(11),
+				nc_provId int(11),
+				nc_prodDes varchar(200),
+				nc_prodCorrec varchar(200),
+				nc_prodNcOtro varchar(200),
+				nc_tipTratProdId int(11), #FK
+				nc_ejeAcciCorrecId int(11), #FK
+				nc_regPor int(11),
+				nc_autoPor int(11)
+			);
+
+				/* modificacion */
+				alter table nc_tratProd
+				add nc_seriId int(11) after nc_prodId;
+
+				alter table nc_tratProd
+				add nc_regPor int(11) after nc_ejeAcciCorrecId,
+				add nc_autoPor int(11) after nc_regPor;
+
+				alter table nc_tratProd
+				add nc_prodNcOtro varchar(200) after nc_prodCorrec;
+
+			/* Table tipo tratamiento del producto [nc_tipTratProd] */
+			create table nc_tipTratProd
+			(
+				nc_tipTratProdId int(11) primary key null auto_increment, #PK
+				nc_tipTratProdDes varchar(50)
+			);
+
+			/* constantes 
+
+				devolucion
+				permiso de desviacion
+				reproceso
+				otros
+			*/
+
+			/* Table ejecutar acciones correctivas [nc_ejeAcciCorrec] */
+			create table nc_ejeAcciCorrec
+			(
+				nc_ejeAcciCorrecId int(11) primary key not null auto_increment, #PK
+				nc_ejeAcciCorrecDes varchar(50)
+			);
+
+			/* constantes 
+				si
+				no
+			*/
+
+			/* Table tipo observacion form [nc_tipObsFrm] */
+
+			create table nc_tipObsFrm
+			(
+				nc_tipObsFrmId int(11) auto_increment not null primary key,
+				nc_tipObsFrmDes varchar(200)	
+			);
+
+			/* constantes
+				no conformidad
+				producto no conforme 
+			*/
 
 	/* PERSISTENCIA */
 
@@ -11722,7 +11800,8 @@
 						$fechCie date,
 						$tipConfor int(11),
 						$medPrev text,
-						$obsId int(11)),
+						$obsId int(11),
+						$tipObsFrm int(11)),
 
 					RETURNS int(11)
 					COMMENT 'crear no conformidad'
@@ -11747,7 +11826,8 @@
 												nc_respInme,
 												nc_fechCie,
 												nc_medprev,
-												nc_obsId)
+												nc_obsId,
+												nc_tipObsFrm)
 						values($centId,
 							   $detecId,
 							   $procId,
@@ -11759,7 +11839,8 @@
 							   $respInme,
 							   $fechCie,
 							   $medPrev,
-							   $obsId);
+							   $obsId,
+							   $tipObsFrm);
 
 
 						/* row afect */
@@ -12049,7 +12130,7 @@
 													$fechCie date,
 													$medPrev text,
 													$obsId int(11)
-													)
+													$tipObsFrm int(11))
 					RETURNS int(11)
 					COMMENT 'actualizar no conformidad por id'
 					BEGIN
@@ -12069,7 +12150,8 @@
 						`nc_respInme`=$respInme,
 						`nc_fechCie`=$fechCie,
 						`nc_medPrev`=$medPrev,
-						`nc_obsId`=$obsId WHERE nc_noConforId=$conforId;
+						`nc_obsId`=$obsId,
+						nc_tipObsFrm=$tipObsFrm WHERE nc_noConforId=$conforId;
 
 						/*row afect*/
 						set $rowAfect=(select ROW_COUNT());
@@ -12431,6 +12513,477 @@
 
 			end;
 
+
+		/* New 10/03/2015 */
+		/* New 11/03/2015 */
+
+		/*
+		***********************************************
+		* Iniciar productos de linea [nc_prodLine_ini] - ! #
+		***********************************************
+		*/
+
+			# PROCEDURE
+			DELIMITER $$
+			create procedure nc_prodLine_ini()
+			COMMENT 'Iniciar productos de linea'
+			BEGIN
+
+				/*ini prod line*/
+				select
+				lp.lp_lineProdId as lineId,
+				prod.prod_nombre as proNom,
+				prod.prod_descrip as des,
+				mar.mm_nombre as mar
+				from
+				lp_lineProd as lp, 
+				producto as prod,
+				mm as mar
+				where
+				lp.lp_idProd=prod.producto_id and
+				prod.marca_id=mar.mm_id and
+				lp.lp_estaEli=1;
+
+			end;
+
+		/*
+		**********************************************
+		* Iniciar clientes en productos no confor [nc_cliProdNc_ini] - ! #
+		**********************************************
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_cliProdNc_ini()
+			COMMENT 'Iniciar clientes en productos no confor'
+			BEGIN
+
+				/* ini cli prod no confor */
+				select
+				emp.emp_nombre as empDes
+				from empresa as emp
+
+			end;
+
+		/*
+		*------------------------------------------------------------
+		* Iniciar numeros de serie de productos [nc_numSeriProd_ini] - PROD #
+		*------------------------------------------------------------
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_numSeriProd_ini()
+			COMMENT 'Iniciar numeros de serie de productos'
+			BEGIN
+
+				/* ini num seri */
+				select
+				numSeri.kd_numSeri as nc_seriDes,
+				numSeri.kd_numSeriId as nc_seriId
+				from
+				kd_numSeri as numSeri;
+
+			end;
+
+		/*
+		*------------------------------------------------
+		* Obtener producto por serie [nc_serixProd_obte] - PROD #
+		*------------------------------------------------
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_serixProd_obte($seriId int(11))
+			COMMENT 'Obtener producto por serie'
+			BEGIN
+
+				/* obte prod x seri */
+				select
+				prod.prod_descrip as prodDes,
+				prod.producto_id as prodId,
+				mar.mm_nombre as prodMar
+				from
+				kd_numSeri as numSeri,
+				lp_lineProd as lp,
+				producto as prod,
+				mm as mar
+				where
+				numSeri.kd_numSeriId=$seriId and
+				numSeri.kd_prodId=lp.lp_lineProdId and
+				lp.lp_idProd=prod.producto_id and
+				prod.marca_id=mar.mm_id and
+				lp.lp_estaEli=1;
+
+			end;
+
+		/*
+		*-------------------------------------------------
+		* Iniciar cliente productos no conforme [nc_cliProdNc_ini] - PROD #
+		*-------------------------------------------------
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_cliProdNc_ini()
+			COMMENT 'Iniciar cliente productos no conforme'
+			BEGIN
+
+				/* ini cli */
+				select
+				emp.emp_nombre as nc_cliDes,
+				emp.empresa_id as nc_cliId
+				from 
+				empresa as emp,
+				anfi_empresa as anf
+				where
+				emp.empresa_id=anf.empresa_id and
+				anf.empresa_id_padre=1 and
+				anf.emp_perfil_id=1 and
+				emp.bestado=1;
+
+			end;
+
+
+		/*
+		*-------------------------------------------------
+		* Iniciar proveedor productos no conforme [nc_provProdNc_ini] - PROD #
+		*-------------------------------------------------
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_provProdNc_ini()
+			COMMENT 'Iniciar proveedor productos no conforme'
+			BEGIN
+
+				/* ini prov */
+				select
+				emp.emp_nombre as nc_provDes,
+				emp.empresa_id as nc_provId
+				from 
+				empresa as emp,
+				anfi_empresa as anf
+				where
+				emp.empresa_id=anf.empresa_id and
+				anf.empresa_id_padre=1 and
+				anf.emp_perfil_id=2 and
+				emp.bestado=1;
+
+			end;
+
+
+		/*
+		*---------------------------------------------------
+		* Iniciar tipo tratamiento de productos [nc_tratTipProd_ini] - PROD #
+		*---------------------------------------------------
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_tratTipProd_ini()
+			COMMENT 'Iniciar tipo tratamiento de productos'
+			BEGIN
+
+				/* ini tipo trat */
+				select
+				nc_tipTratProdId as tratProdId,
+				nc_tipTratProdDes as tratProdDes
+				from
+				nc_tipTratProd;
+
+			end;
+
+		/*
+		*----------------------------------------------
+		* Iniciar acciones a ejecutar [nc_acciEje_ini] - PROD #
+		*-----------------------------------------------
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_acciEje_ini()
+			COMMENT 'Iniciar acciones a ejecutar'
+			BEGIN
+
+				/* ini acci eje */
+				select
+				nc_ejeAcciCorrecId as acciCorrecId,
+				nc_ejeAcciCorrecDes as acciCorreDes
+				from
+				nc_ejeAcciCorrec;
+
+			end;
+
+		/*
+		*----------------------------------------------
+		* Iniciar autorizaciones producto no conforme [nc_autoNc_ini] - PROD #
+		*------------------------------------------------
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_autoNc_ini()
+			COMMENT 'Iniciar autorizaciones producto no conforme'
+			BEGIN
+
+				/* ini auto prod nc*/
+				select distinct
+				concat('Ing. ',per.pers_nombres,' ',per.pers_apepat) as nc_ingAsig,
+				trab.trabajador_id as nc_trabId
+				from persona as per,trabajador as trab,contacto as contac
+				where 
+				per.persona_id=trab.persona_id and 
+				(trab.trabajador_id=contac.trabajador_id or trab.persona_id=contac.persona_id) and
+				contac.cont_comercial=1 and 
+				trab.empresa_id=1 and
+				trab.bestado=1 and
+				(trab.trabajador_id!=1 and
+				trab.trabajador_id!=17 and
+				trab.trabajador_id!=58 and
+				trab.trabajador_id!=34 and
+				trab.trabajador_id!=23 and
+				trab.trabajador_id!=39 and
+				trab.trabajador_id!=47 and
+				trab.trabajador_id!=73);
+
+			end;
+
+		/*
+		*----------------------------------------------
+		* guardar producto no conforme [nc_prodNc_guar] - PROD #
+		*----------------------------------------------
+		*/
+
+			#FUNCTION
+			DELIMITER $$
+			create function nc_prodNc_guar($seri int(11),
+											$prod int(11),
+											$cant int(11),
+											$fech date,
+											$cli int(11),
+											$prov int(11),
+											$des varchar(200),
+											$correc varchar(200),
+											$tratProd int(11),
+											$ejeAcci int(11),
+											$regPor int(11),
+											$autoPor int(11),
+											$noConforId int(11),
+											$ncOtro varchar(200))
+			RETURNS int(11)
+			COMMENT 'guardar producto no conforme'
+			BEGIN
+
+				/* vars */
+				declare $rowAfect int(11);
+
+				/* guar prod nc */
+				insert into nc_tratProd(nc_seriId,
+										 nc_prodId,
+										 nc_prodCant,
+										 nc_prodFech,
+										 nc_cliId,
+										 nc_provId,
+										 nc_prodDes,
+										 nc_prodCorrec,
+										 nc_prodNcOtro,
+										 nc_tipTratProdId,
+										 nc_ejeAcciCorrecId,
+										 nc_regPor,
+										 nc_autoPor,
+										 nc_noConforId) values ($seri,
+																$prod,
+																$cant,
+																$fech,
+																$cli,
+																$prov,
+																$des,
+																$correc,
+																$ncOtro,
+																$tratProd,
+																$ejeAcci,
+																$regPor,
+																$autoPor,
+																$noConforId);
+
+				/* row afect */
+				set $rowAfect=(select ROW_COUNT());
+
+				/* return */
+				return $rowAfect;
+
+			end;
+
+		/*
+		*---------------------------------------------
+		* listar producto no conforme [nc_prodNoConfor_list] - PROD #
+		*----------------------------------------------
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_prodNoConfor_list($conforId int(11))
+			COMMENT 'listar producto no conforme'
+			BEGIN
+
+				/* list prod no confor */
+				select
+					nc_tratProdId as tratProdId,
+					(select kd_numSeri from kd_numSeri where kd_numSeriId=tratProd.nc_seriId) as seri,
+					(select concat(prod.prod_descrip,'-',mar.mm_nombre) from
+					producto as prod,
+					mm as mar 
+					where 
+					prod.producto_id=tratProd.nc_prodId and
+					prod.marca_id=mar.mm_id) as prod,
+					nc_prodCant as cant,
+					nc_prodFech as fech,
+					(select emp_nombre from empresa where empresa_id=tratProd.nc_cliId) as cli,
+					(select emp_nombre from empresa where empresa_id=tratProd.nc_provId) as prov,
+					nc_prodDes as des,
+					nc_prodCorrec as correc
+					from nc_tratProd as tratProd
+					where nc_noConforId=$conforId;
+
+			end;
+
+		/*
+		*--------------------------------------------
+		* iniciar producto no conforme por id [nc_prodNcxId_ini] - PROD #
+		*--------------------------------------------
+		*/
+
+			#PROCEDURE
+			DELIMITER $$
+			create procedure nc_prodNcxId_ini($prodNcId int(11))
+			COMMENT 'iniciar producto no conforme por id'
+			BEGIN
+
+				/* ini prod por id */
+				select
+				*,
+				(select kd_numSeri from kd_numSeri where kd_numSeriId=tratProd.nc_seriId) as seriDes,
+				(select concat(prod.prod_descrip,'-',mar.mm_nombre) 
+				from 
+				producto as prod,
+				mm as mar
+				where 
+				prod.producto_id=tratProd.nc_prodId and
+				prod.marca_id=mar.mm_id) as prodDes,
+				(select emp_nombre from empresa where empresa_id=tratProd.nc_cliId) as cli,
+				(select emp_nombre from empresa where empresa_id=tratProd.nc_provId) as prov,
+				(select concat(pers_nombres,' ',pers_apepat) 
+					from persona as per,trabajador as trab 
+				 	where 
+				 	trab.trabajador_id=tratProd.nc_regPor and
+				 	trab.persona_id=per.persona_id
+				 ) as regPor
+				from nc_tratProd as tratProd
+				where nc_tratProdId=$prodNcId;
+
+			end;
+
+		/*
+		*----------------------------------------------
+		* actualizar producto no conforme por id [nc_prodNc_actu] - PROD #
+		*----------------------------------------------
+		*/
+
+			DELIMITER $$
+			create function nc_prodNc_actu($seri int(11),
+											$prod int(11),
+											$cant int(11),
+											$fech date,
+											$cli int(11),
+											$prov int(11),
+											$des varchar(200),
+											$correc varchar(200),
+											$tratProd int(11),
+											$ejeAcci int(11),
+											$regPor int(11),
+											$autoPor int(11),
+											$noConforId int(11),
+											$ncOtro varchar(200),
+											$prodNcId int(11))
+			RETURNS int(11)
+			COMMENT 'actualizar producto no conforme por id'
+			BEGIN
+
+				/*vars*/
+				declare $rowAfect int(11);
+
+				/*actu prod no confor*/
+				update nc_tratProd set
+					nc_seriId=$seri,
+					 nc_prodId=$prod,
+					 nc_prodCant=$cant,
+					 nc_prodFech=$fech,
+					 nc_cliId=$cli,
+					 nc_provId=$prov,
+					 nc_prodDes=$des,
+					 nc_prodCorrec=$correc,
+					 nc_prodNcOtro=$ncOtro,
+					 nc_tipTratProdId=$tratProd,
+					 nc_ejeAcciCorrecId=$ejeAcci,
+					 nc_regPor=nc_regPor,
+					 nc_autoPor=$autoPor,
+					 nc_noConforId=$noConforId
+					 where 
+					 nc_tratProdId=$prodNcId;
+
+				/*rowAfect*/
+				set $rowAfect=(select ROW_COUNT());
+
+				/*return*/
+				return $rowAfect;
+
+			end;
+
+		/*
+		*------------------------------------------------
+		* eliminar tratamiento de productos por id [nc_tratProd_eli] - PROD #
+		*------------------------------------------------
+		*/
+
+			DELIMITER $$
+			create function nc_tratProd_eli($tratProdId int(11))
+			RETURNS int(11)
+			COMMENT 'eliminar tratamiento de productos por id'
+			BEGIN
+
+				/* vars */
+				declare $rowAfect int(11);
+
+				/* eli trat prod */
+				delete from nc_tratProd where nc_tratProdId=$tratProdId;
+
+				/* rowAfect */
+				set $rowAfect=(select ROW_COUNT());
+
+				/* return */
+				return $rowAfect;
+
+			end;
+
+		/*
+		*---------------------------------------------
+		* iniciar tipo de observacion formulario [nc_tipObsFrm_ini] - DEV #
+		*----------------------------------------------
+		*/
+
+			DELIMITER $$
+			create procedure nc_tipObsFrm_ini()
+			COMMENT 'iniciar tipo de observacion formulario'
+			BEGIN
+
+				/* ini tip obs form */
+				select 
+				nc_tipObsFrmId as obsFrmId,
+				nc_tipObsFrmDes as obsFrmDes 
+				from nc_tipObsFrm;
+
+			end;
 
 /*-------------------------------------------------------------------------------------------------------*/
 	# MODULO SALUDO CUMPLEAÑOS TRABAJADOR [ct]

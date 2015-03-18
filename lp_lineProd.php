@@ -63,6 +63,7 @@
 			<option value="3" >RMA</option>
 			<option value="4" >OF. Central</option>
 			<option value="5" >Reservas</option>
+			<option value="6" >Lurin</option>
 		</select>
 
 	</div>

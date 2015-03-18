@@ -201,11 +201,16 @@
 	   function scc_dataComp_ini(jsonFlag,jsonPeti,valId,valDes)
 	   {
 
-	   		availableTags2=[];
+	   		//availableTags2=[];
 
 			param="json="+jsonFlag;
 			$.getJSON('json/'+jsonPeti+'.php?'+param,{format: "json"}, function(data) 
 			{
+				 availableTags2=[];
+
+				 console.log("iniciando data de autocomplete...!");
+				 console.log(data);
+
 				 for(i=0;i<data.length;i++)
 				 {
 					availableTags2.push({key:data[i][valId],value:data[i][valDes]});
@@ -273,6 +278,48 @@
 	   			insSelect.options[i].selected=false;
 	   		}
 	   }
+
+	   // capturar valor radio elegido - PROD
+	   function nc_valRad_cap(insForm)
+	   {
+	   		ins=insForm;
+	   		val=0;
+
+	   		for(i=0;i<ins.length;i++)
+	   		{
+	   			if(ins[i].checked)
+	   			{
+	   				val=ins[i].value;
+	   			}
+	   		}
+
+	   		return val;
+	   }
+
+	   // iniciar radio elegido - PROD
+	   function nc_radEle_ini(insForm,val)
+	   {
+	   		ins=insForm;
+
+	   		for(i=0;i<ins.length;i++)
+	   		{
+	   			if(insForm[i].value==val)
+	   			{
+	   				insForm[i].checked=true;
+	   			}
+	   		}
+	   }
+
+	   // limpiar radios - PROD
+	   function nc_radi_limp(insForm)
+	   {
+	   		for(i=0;i<insForm.length;i++)
+	   		{
+	   			insForm[i].checked=false;
+	   		}
+	   } 
+
+
 
 	/*-------------------------[*]----------------------------------*/
 

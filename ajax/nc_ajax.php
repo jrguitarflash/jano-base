@@ -263,6 +263,85 @@ switch ($_REQUEST['ajax'])
 
 	break;
 
+	//New 12/03/2015 - PROD
+
+	case 'nc_tratTipProd_ini':
+
+		$sql=sql::nc_tratTipProd_ini();
+		$dataTipTrat=negocio::getData($sql);
+		$html="";
+
+		foreach($dataTipTrat as $data)
+		{
+			$html.="<li><input type='radio' id='nc_tratProd' name='nc_tratProd[]' value='".$data['tratProdId']."' >".$data['tratProdDes']."</li>";
+		}
+
+		print $html;
+
+	break;
+
+	case 'nc_acciEje_ini':
+
+		$sql=sql::nc_acciEje_ini();
+		$dataAcciEje=negocio::getData($sql);
+		$html="";
+
+		foreach($dataAcciEje as $data)
+		{
+			$html.="<li><input type='radio' id='nc_ejeAcci' name='nc_ejeAcci[]' value='".$data['acciCorrecId']."' >".$data['acciCorreDes']."</li>";
+		}
+
+		print $html;
+
+	break;
+
+	case 'nc_autoNc_ini':
+
+		$sql=sql::nc_autoNc_ini();
+		$dataAuto=negocio::getData($sql);
+		$html="";
+
+		foreach($dataAuto as $data)
+		{
+			$html.="<option value='".$data['nc_trabId']."' >".$data['nc_ingAsig']."</option>";
+		}
+
+		print $html;
+
+	break;
+
+	case 'nc_prodNoConfor_list':
+
+		$sql=sql::nc_prodNoConfor_list($_POST['conforId']);
+		$dataNoConfor=negocio::getData($sql);
+		$html="";
+		$ind=1;
+
+		foreach($dataNoConfor as $data)
+		{
+			$html.="<tr>
+					<td>".$ind."</td>
+					<td>".$data['seri']."</td>
+					<td>".$data['prod']."</td>
+					<td>".$data['cant']."</td>
+					<td>".$data['fech']."</td>
+					<td>".$data['cli']."</td>
+					<td>".$data['prov']."</td>
+					<td>".$data['des']."</td>
+					<td>".$data['correc']."</td>
+					<td>
+						<a href='Javascript:nc_prodNcxId_ini(".$data['tratProdId'].",".$ind.")' >Editar</a> |
+						<a href='Javascript:nc_tratProd_eli(".$data['tratProdId'].")' >Eliminar</a>
+					</td>
+				  </tr>";
+
+			$ind++;
+		}
+
+		print $html;
+
+	break;
+
 	default:
 	break;
 }

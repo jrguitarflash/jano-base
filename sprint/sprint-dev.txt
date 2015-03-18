@@ -610,7 +610,42 @@
 			*/
 
 				- tab tratamientos de no conformidades
-				- tipo de tratamiento, opinion y responsables	
+				- tipo de tratamiento, opinion y responsables
+
+			/*
+			* sprint #13(task-list) - 12/03/2015 (modulo no conformidad)
+									  13/03/2015
+			*/	
+
+				- [OK] filtrar producto por nunmero de serie 
+				- [OK] iniciar cliente y proveedor 
+				*			
+				- [OK] iniciar radio tratamientos y accciones
+				- [OK] iniciar autorizaciones
+				*
+				- [OK] testear parametros de ingreso producto no conforme
+				- [OK] persistencia ingreso de producto no conforme
+				*
+				- [OK] visualizacion de formulario por tipo
+				- [OK] listado de producto no conforme por observacion
+
+			/*
+			* sprint #16(task-list) - 16/03/2015 (modulo no conformidad )
+			*/ 
+
+			/*
+			* sprint #14(task-list) - 17/03/2015 (modulo no conformidad)
+			*/
+
+				- [OK] tipo de observacion por formulario
+
+			/*
+			* sprint #15(task-list) - 18/03/2015 (modulo no conformidad)
+			*/
+
+				- [OK] nuevo productos no conformes
+				- [OK] filtro de productos no conforme por numero de serie
+				- [OK] filtro de formulario por tipo de observacion
 
 	/*
 	*---------------------------------------------------------------------------------------
